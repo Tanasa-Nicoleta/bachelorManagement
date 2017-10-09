@@ -9,7 +9,7 @@ namespace BusinessLayer
 
         public virtual DbSet<Comment> Comments { get; set; }
 
-        public virtual DbSet<Consultation> Consultations { get; set; }
+        public virtual DbSet<Consultation> Consultations { get; set; } 
 
         public virtual DbSet<File> Files { get; set; }
 

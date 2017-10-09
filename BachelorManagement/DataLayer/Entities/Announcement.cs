@@ -7,6 +7,8 @@ namespace DataLayer.Entities
     {
         public string Ttile { get; set; }
         public string Content { get; set; }
+        public int TeacherId { get; set; }
+
         public DateTime Date { get; set; }
         public Teacher Teacher { get; set; }
         public int Id { get; set; }

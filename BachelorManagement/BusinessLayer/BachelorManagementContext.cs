@@ -9,7 +9,7 @@ namespace BusinessLayer
 
         public virtual DbSet<Comment> Comments { get; set; }
 
-        public virtual DbSet<Consultation> Consultations { get; set; } 
+        public virtual DbSet<Consultation> Consultations { get; set; }
 
         public virtual DbSet<File> Files { get; set; }
 
@@ -32,11 +32,6 @@ namespace BusinessLayer
         public virtual DbSet<User> Users { get; set; }
 
         public virtual DbSet<Year> Years { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {   
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=BachelorManagement;Trusted_Connection=True;");
-        }
 
     }
 }

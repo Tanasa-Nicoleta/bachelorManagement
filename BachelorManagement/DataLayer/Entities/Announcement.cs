@@ -5,7 +5,7 @@ namespace DataLayer.Entities
 {
     public class Announcement : IEntityBase
     {
-        public string Ttile { get; set; }
+        public string Title { get; set; }
         public string Content { get; set; }
         public int TeacherId { get; set; }
 

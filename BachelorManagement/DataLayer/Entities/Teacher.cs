@@ -9,6 +9,7 @@ namespace DataLayer.Entities
         public string LastName { get; set; }
         public string Email { get; set; }
         public int NumberOfStudents { get; set; }
+        public int ConsultationId { get; set; } 
         public Consultation Consultation { get; set; }
         public ICollection<Student> Students { get; set; }
         public ICollection<Session> Sessions { get; set; }

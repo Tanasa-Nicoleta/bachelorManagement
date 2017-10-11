@@ -5,6 +5,10 @@ namespace BusinessLayer
 {
     public class BachelorManagementContext: DbContext
     {
+        public BachelorManagementContext(DbContextOptions<BachelorManagementContext> options) : base(options)
+        {
+        }
+
         public DbSet<Announcement> Announcements { get; set; }
 
         public virtual DbSet<Comment> Comments { get; set; }

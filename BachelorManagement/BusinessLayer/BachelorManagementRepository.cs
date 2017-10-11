@@ -1,11 +1,12 @@
 ﻿using System.Linq;
 using DataLayer.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace BusinessLayer
 {
     public class BachelorManagementRepository<T>: IBachelorManagementRepository<T> where T : class, IEntityBase, new()
     {
-        private readonly BachelorManagementContext _context = new BachelorManagementContext();
+        private readonly BachelorManagementContext _context = new BachelorManagementContext(options: new DbContextOptions<BachelorManagementContext>());
 
         public void Add(T entity)
         {

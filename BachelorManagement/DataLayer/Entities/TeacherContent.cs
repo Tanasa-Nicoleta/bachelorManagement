@@ -6,7 +6,6 @@ namespace DataLayer.Entities
     {
         public string Content { get; set; }
         public int CommentId { get; set; }
-        public int TeacherId { get; set; }
         public Comment Comment { get; set; }
         public Teacher Teacher { get; set; }
         public int Id { get; set; }

@@ -17,11 +17,33 @@ namespace BusinessLayer
                 return;
             }
 
+            var teachers = new[]
+            {
+                new Teacher
+                {
+                    Email = "vlad.simion@info.uaic.ro",
+                    FirstName = "Vlad",
+                    LastName = "Simion",
+                    NumberOfStudents = 10
+                },
+                new Teacher
+                {
+                    Email = "simona.petrescu@info.uaic.ro",
+                    FirstName = "Simona",
+                    LastName = "Petrescu",
+                    NumberOfStudents = 10
+                }
+            };
+            foreach (var teacher in teachers)
+            {
+                context.Teachers.Add(teacher);
+            }
+            context.SaveChanges();
+
             var announcements = new[]
             {
                 new Announcement
                 {
-                    Id = 1,
                     TeacherId = 1,
                     Title = "First",
                     Content = "First announcement",
@@ -29,7 +51,6 @@ namespace BusinessLayer
                 },
                 new Announcement
                 {
-                    Id = 1,
                     TeacherId = 2,
                     Title = "Second",
                     Content = "Second announcement",
@@ -42,26 +63,58 @@ namespace BusinessLayer
             }
             context.SaveChanges();
 
+            var students = new[]
+            {
+                new Student
+                {
+                    Email = "ana.florea@info.uaic.ro",
+                    FirstName = "Ana",
+                    LastName = "Florea",
+                    SerialNumber = "31090104SL161234",
+                    StartYear = "2016",
+                    TeacherId = 1
+                },
+                new Student
+                {
+                    Email = "mihai.ursache@info.uaic.ro",
+                    FirstName = "Mihai",
+                    LastName = "Ursache",
+                    SerialNumber = "31090104SL141235",
+                    StartYear = "2014",
+                    TeacherId = 1
+                },
+                new Student
+                {
+                    Email = "george.leu@info.uaic.ro",
+                    FirstName = "George",
+                    LastName = "Leu",
+                    SerialNumber = "31090104SL151234",
+                    StartYear = "2015",
+                    TeacherId = 2
+                }
+            };
+            foreach (var student in students)
+            {
+                context.Students.Add(student);
+            }
+            context.SaveChanges();
+
             var comments = new[]
             {
                 new Comment
                 {
-                    Id = 1,
                     StudentId = 1
                 },
                 new Comment
                 {
-                    Id = 2,
                     StudentId = 2
                 },
                 new Comment
                 {
-                    Id = 3,
                     StudentId = 1
                 },
                 new Comment
                 {
-                    Id = 4,
                     StudentId = 2
                 }
             };
@@ -75,7 +128,6 @@ namespace BusinessLayer
             {
                 new Consultation
                 {
-                    Id = 1,
                     Day = WeekDays.Monday,
                     Interval = "09:00 - 11:00",
                     TeacherId = 1
@@ -83,7 +135,6 @@ namespace BusinessLayer
 
                 new Consultation
                 {
-                    Id = 2,
                     Day = WeekDays.Thursday,
                     Interval = "10:00 - 12:00",
                     TeacherId = 2
@@ -99,7 +150,6 @@ namespace BusinessLayer
             {
                 new Mean
                 {
-                    Id = 1,
                     StudentId = 1,
                     FirstSemester = 8.20,
                     SecondSemester = 9.00,
@@ -107,7 +157,6 @@ namespace BusinessLayer
                 },
                 new Mean
                 {
-                    Id = 3,
                     StudentId = 2,
                     FirstSemester = 6.00,
                     SecondSemester = 6.20,
@@ -115,7 +164,6 @@ namespace BusinessLayer
                 },
                 new Mean
                 {
-                    Id = 3,
                     StudentId = 3,
                     FirstSemester = 9.20,
                     SecondSemester = 9.00,
@@ -134,12 +182,10 @@ namespace BusinessLayer
             {
                 new Session
                 {
-                    Id = 1,
                     TeacherId = 1
                 },
                 new Session
                 {
-                    Id = 2,
                     TeacherId = 2
                 }
             };
@@ -148,62 +194,17 @@ namespace BusinessLayer
                 context.Sessions.Add(session);
             }
             context.SaveChanges();
-
-            var students = new[]
-            {
-                new Student
-                {
-                    Id = 1,
-                    Email = "ana.florea@info.uaic.ro",
-                    FirstName = "Ana",
-                    LastName = "Florea",
-                    MeanId = 1,
-                    SerialNumber = "31090104SL161234",
-                    StartYear = "2016",
-                    TeacherId = 1
-                },
-                new Student
-                {
-                    Id = 1,
-                    Email = "mihai.ursache@info.uaic.ro",
-                    FirstName = "Mihai",
-                    LastName = "Ursache",
-                    MeanId = 2,
-                    SerialNumber = "31090104SL141235",
-                    StartYear = "2014",
-                    TeacherId = 1
-                },
-                new Student
-                {
-                    Id = 1,
-                    Email = "george.leu@info.uaic.ro",
-                    FirstName = "George",
-                    LastName = "Leu",
-                    MeanId = 3,
-                    SerialNumber = "31090104SL151234",
-                    StartYear = "2015",
-                    TeacherId = 2
-                }
-            };
-            foreach (var student in students)
-            {
-                context.Students.Add(student);
-            }
-            context.SaveChanges();
+            
 
             var studentContents = new[]
             {
                 new StudentContent
                 {
-                    Id = 1,
-                    StudentId = 1,
                     CommentId = 1,
                     Content = "Good job!"
                 },
                 new StudentContent
                 {
-                    Id = 2,
-                    StudentId = 2,
                     CommentId = 2,
                     Content = "Great job!"
                 }
@@ -214,47 +215,15 @@ namespace BusinessLayer
             }
             context.SaveChanges();
 
-            var teachers = new[]
-            {
-                new Teacher
-                {
-                    Id = 1,
-                    Email = "vlad.simion@info.uaic.ro",
-                    FirstName = "Vlad",
-                    LastName = "Simion",
-                    NumberOfStudents = 10,
-                    ConsultationId = 1
-                },
-                new Teacher
-                {
-                    Id = 2,
-                    Email = "simona.petrescu@info.uaic.ro",
-                    FirstName = "Simona",
-                    LastName = "Petrescu",
-                    NumberOfStudents = 10,
-                    ConsultationId = 2
-                }
-            };
-            foreach (var teacher in teachers)
-            {
-                context.Teachers.Add(teacher);
-            }
-            context.SaveChanges();
-
-
             var teacherContents = new[]
             {
                 new TeacherContent
                 {
-                    Id = 1,
-                    TeacherId = 1,
                     CommentId = 3,
                     Content = "Good job!"
                 },
                 new TeacherContent
                 {
-                    Id = 2,
-                    TeacherId = 2,
                     CommentId = 4,
                     Content = "Great job!"
                 }
@@ -269,21 +238,18 @@ namespace BusinessLayer
             {
                 new User
                 {
-                    Id = 1,
                     Email = "ana.florea@info.uaic.ro",
                     Password = "Ana123!",
                     UserType = UserType.Student
                 },
                 new User
                 {
-                    Id = 1,
                     Email = "mihai.ursache@info.uaic.ro",
                     Password = "Mihai123!",
                     UserType = UserType.Student
                 },
                 new User
                 {
-                    Id = 1,
                     Email = "george.leu@info.uaic.ro",
                     Password = "George123!",
                     UserType = UserType.Student
@@ -291,14 +257,12 @@ namespace BusinessLayer
 
                 new User
                 {
-                    Id = 1,
                     Email = "vlad.simion@info.uaic.ro",
                     Password = "Vlad123!",
                     UserType = UserType.Teacher
                 },
                 new User
                 {
-                    Id = 1,
                     Email = "simona.petrescu@info.uaic.ro",
                     Password = "Simona123!",
                     UserType = UserType.Teacher
@@ -314,7 +278,6 @@ namespace BusinessLayer
             {
                 new Year
                 {
-                    Id = 1,
                     YearValue = "2018",
                     SpringSession = true,
                     SummerSession = true,
@@ -323,7 +286,6 @@ namespace BusinessLayer
 
                 new Year
                 {
-                    Id = 1,
                     YearValue = "2018",
                     SpringSession = true,
                     SummerSession = true,

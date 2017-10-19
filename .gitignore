@@ -4,3 +4,4 @@ BachelorManagement/BusinessLayer/bin/
 BachelorManagement/BusinessLayer/obj/
 BachelorManagement/ApiLayer/bin/
 BachelorManagement/ApiLayer/obj/
+.sonarqube/

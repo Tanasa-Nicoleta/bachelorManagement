@@ -2,10 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { LoginLayoutComponent } from './login-components/login-layout/login-layout.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginLayoutComponent
   ],
   imports: [
     BrowserModule

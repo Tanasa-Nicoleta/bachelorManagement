@@ -1,0 +1,13 @@
+.bg-image {
+    margin: 0px;
+    background: url("https://i.imgur.com/RLacS2w.jpg");
+    background-attachment: fixed;  
+    background-repeat: no-repeat;    
+    height: 100%;
+    width: 100%; 
+
+    background-size: 100%;  /* General */  
+    -webkit-background-size: cover; /* WebKit*/
+    -moz-background-size: cover;    /* Mozilla*/
+    -o-background-size: cover;      /* Opera*/
+}

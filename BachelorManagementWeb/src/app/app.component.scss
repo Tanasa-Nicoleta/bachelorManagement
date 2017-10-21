@@ -1,5 +1,8 @@
-.layout-container {
-    min-width: calc(100%);
+$content-container-bg-color: rgba(222, 218, 191, 0.7);
+$text-color: rgb(94,64,56);
+
+.layoutContainer {
+    min-width: 100%;
     width: 100%;
     min-height: 700px;
     height: auto;
@@ -8,15 +11,19 @@
     background-size: cover;
 }
 
-.content-container{
-    margin-top: calc(10%);
-    background-color: rgba(222, 218, 191, 0.7);
-    width: calc(50%);
+.contentContainer{
+    margin-top: 7%;
+    background-color: $content-container-bg-color;
+    width: 75%;
     height: auto;
     vertical-align: middle;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+}
+
+.textColor{
+    color: $text-color;
 }
 
 @media (min-width: 1281px) {

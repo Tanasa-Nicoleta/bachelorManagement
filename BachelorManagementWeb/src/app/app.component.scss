@@ -5,12 +5,20 @@
     height: auto;
     margin: 0px;
     background: url("https://i.imgur.com/RLacS2w.jpg") no-repeat center center fixed;
-    background-size: 100%;  /* General */  
-    -webkit-background-size: cover; /* WebKit*/
-    -moz-background-size: cover;    /* Mozilla*/
-    -o-background-size: cover;      /* Opera*/
+    background-size: cover;
 }
-    
+
+.content-container{
+    margin-top: calc(10%);
+    background-color: rgba(222, 218, 191, 0.7);
+    width: calc(50%);
+    height: auto;
+    vertical-align: middle;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
 @media (min-width: 1281px) {
      
 }

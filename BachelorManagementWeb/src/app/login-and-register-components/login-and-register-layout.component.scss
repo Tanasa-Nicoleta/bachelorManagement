@@ -9,17 +9,17 @@ $input-border-color-error: rgba(94, 64, 56, 0);
     text-align: center;
 }
 
-.welcomeToApp, .logIn, .email, .password, .rememberMe, .forgotPassword{
+.welcomeToAppTitle, .welcomeToAppSubtitle, .email, .password, .rememberMe, .forgotPassword{
     font-family: $text-font;
     color: $text-color;
 }
 
-.welcomeToApp{
+.welcomeToAppTitle{
     padding: 40px 0px 30px ;
     font-size: 35px;
 }
 
-.logIn{
+.welcomeToAppSubtitle{
     padding-bottom: 30px;
     font-size: 25px;
 }
@@ -73,7 +73,7 @@ input{
     float: right;
 }
   
-#logInButtonRectangle {
+#submitButtonRectangle {
     margin: 30px 0px 50px;
     width: 30%;
     height: 38px;
@@ -85,7 +85,7 @@ input{
     }
 }
   
-#logInButton {
+#submitButtonText {
     padding: 0px 15px;
     font-family: $text-font;
     font-size: 20px;

@@ -3,13 +3,13 @@ $text-font: 'Lucida Sans';
 $text-color: rgb(94, 64, 56);
 $input-border-color-default: rgba(94, 64, 56, 0.4);
 $input-border-color-focus: rgba(94, 64, 56, 0.9);
-$input-border-color-error: rgba(94, 64, 56, 0);
+$input-border-color-error: rgba(94, 64, 56, 0); // change color accordingly
 
-.contentContainerLoginAlign{
+.contentContainerAlign{
     text-align: center;
 }
 
-.welcomeToAppTitle, .welcomeToAppSubtitle, .email, .password, .rememberMe, .forgotPassword{
+.welcomeToAppTitle, .welcomeToAppSubtitle, .email, .password, .rememberMe, .forgotPassword, .register{
     font-family: $text-font;
     color: $text-color;
 }
@@ -72,16 +72,19 @@ input{
 .forgotPassword{
     float: right;
 }
+
+.submitButton{
+    margin: 30px 0px 50px;
+}
   
 #submitButtonRectangle {
-    margin: 30px 0px 50px;
     width: 30%;
     height: 38px;
     background-color: $content-container-bg-color;
     border: solid 1px $input-border-color-default;
     cursor: pointer;
     &:disabled{
-      background-color: black; //change color when appropriate
+      background-color: black; //change color accordingly
     }
 }
   
@@ -92,4 +95,9 @@ input{
     text-align: center;
     color: $text-color;
     cursor: pointer;
+}
+
+.register{
+    width: 30%;
+    font-size: 12px;
 }

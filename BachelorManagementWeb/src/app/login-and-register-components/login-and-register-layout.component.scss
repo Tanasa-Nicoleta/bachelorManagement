@@ -5,7 +5,7 @@ $input-border-color-default: rgba(94, 64, 56, 0.4);
 $input-border-color-focus: rgba(94, 64, 56, 0.9);
 $input-border-color-error: rgba(94, 64, 56, 0); // change color accordingly
 
-.contentContainerAlign{
+.contentContainer{
     text-align: center;
 }
 
@@ -29,11 +29,6 @@ $input-border-color-error: rgba(94, 64, 56, 0); // change color accordingly
     font-size: 20px;
 }
 
-.rememberMe, .forgotPassword{
-    padding: 5px;
-    font-size: 10px;
-}
-
 input{
     padding: 0px 15px;
     width: 30%;
@@ -53,6 +48,7 @@ input{
   }
 
 .rememberAndForgot{
+    align-self: center;
     width: 30%;
     height: 38px;
 }

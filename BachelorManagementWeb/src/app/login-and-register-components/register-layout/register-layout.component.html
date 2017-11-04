@@ -22,7 +22,7 @@
                 Password
             </div>
 
-            <input name="SubmitPass" type="password" placeholder="**********" id="passwordInput" required>
+            <input #SubmitPass name="SubmitPass" type="password" placeholder="**********" id="passwordInput" (keyup)="validatePass($event.target);" required>
         </div>
 
         <div>
@@ -30,9 +30,12 @@
                 Confirm Password
             </div>
 
-            <input name="ConfirmPass" type="password" placeholder="**********" id="confirmPasswordInput" required>
+            <input #ConfirmPass name="ConfirmPass" type="password" placeholder="**********" id="confirmPasswordInput" (keyup)="validatePass($event.target); confirmPass($event.target,SubmitPass.value);" required>
         </div>
 
+        <div id="error" *ngIf="!(!SubmitPass.valid && SubmitPass.dirty) && matchError">
+            ! Passwords don't match
+        </div>
 
         <div class="submitButton">
             <button type="submit" id="submitButtonRectangle">

@@ -33,12 +33,12 @@
             <input #ConfirmPass name="ConfirmPass" type="password" placeholder="**********" id="confirmPasswordInput" (keyup)="validatePass($event.target); confirmPass($event.target,SubmitPass.value);" required>
         </div>
 
-        <div id="error" *ngIf="!(!SubmitPass.valid && SubmitPass.dirty) && matchError">
+        <div id="error" *ngIf="matchError">
             ! Passwords don't match
         </div>
 
         <div class="submitButton">
-            <button type="submit" id="submitButtonRectangle">
+            <button type="submit" id="submitButtonRectangle" [disabled]="(!SubmitPass.valid && SubmitPass.dirty) || matchError">
                 <div id="submitButtonText">Register</div>
         </button>
         </div>

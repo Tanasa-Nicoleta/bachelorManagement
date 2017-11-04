@@ -8,7 +8,6 @@ import { Component } from '@angular/core';
 
 export class RegisterLayoutComponent {
 
-  private faulted = false;
   private invalidError = false;
   private matchError = false;
 
@@ -46,6 +45,7 @@ export class RegisterLayoutComponent {
       return false;
     }
     else {
+      this.matchError = false;
       this.DeleteError();
       return true;
     }

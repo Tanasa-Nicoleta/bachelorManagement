@@ -23,7 +23,7 @@
                                 Password
                         </div>
 
-                        <input name="SubmitPass" type="password" placeholder="**********" id="passwordInput" required>
+                        <input name="SubmitPass" type="password" placeholder="**********" id="passwordInput" (keyup)="validatePass($event.target);" required>
                 </div>
 
                 <div class="rememberAndForgot">

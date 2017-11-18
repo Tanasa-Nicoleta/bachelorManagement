@@ -1,11 +1,9 @@
 ﻿using BusinessLayer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace ApiLayer
 {
@@ -16,20 +14,20 @@ namespace ApiLayer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<BachelorManagementContext>(options =>
-                options.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=BachelorManagement;Trusted_Connection=True;"));
+                options.UseSqlServer(
+                    @"Server=(localdb)\mssqllocaldb;Database=BachelorManagement;Trusted_Connection=True;"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, BachelorManagementContext context)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory,
+            BachelorManagementContext context)
         {
             BachelorManagementInitializeDb.Initialize(context);
 
             loggerFactory.AddConsole();
 
             if (env.IsDevelopment())
-            {
                 app.UseDeveloperExceptionPage();
-            }
         }
     }
 }

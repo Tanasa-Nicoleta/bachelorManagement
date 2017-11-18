@@ -8,7 +8,7 @@ namespace DataLayer.Entities
         public bool SpringSession { get; set; }
         public bool SummerSession { get; set; }
         public int SessionId { get; set; }
-        public Session Session { get; set; }    
+        public Session Session { get; set; }
         public int Id { get; set; }
     }
 }

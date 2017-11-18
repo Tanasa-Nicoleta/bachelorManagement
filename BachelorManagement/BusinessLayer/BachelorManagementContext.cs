@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BusinessLayer
 {
-    public class BachelorManagementContext: DbContext
+    public class BachelorManagementContext : DbContext
     {
         public BachelorManagementContext(DbContextOptions<BachelorManagementContext> options) : base(options)
         {
@@ -36,6 +36,5 @@ namespace BusinessLayer
         public virtual DbSet<User> Users { get; set; }
 
         public virtual DbSet<Year> Years { get; set; }
-
     }
 }

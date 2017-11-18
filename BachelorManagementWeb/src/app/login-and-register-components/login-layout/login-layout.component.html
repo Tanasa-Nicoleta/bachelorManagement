@@ -14,7 +14,7 @@
                                 Email
                         </div>
 
-                        <input name="SubmitEmail" type="text" placeholder="lastName.firstName@info.uaic.ro" id="emailInput" pattern="^.+\b@info\.uaic\.ro\b$"
+                        <input #SubmitEmail name="SubmitEmail" type="text" placeholder="lastName.firstName@info.uaic.ro" id="emailInput" pattern="^.+\b@info\.uaic\.ro\b$"
                                 required>
                 </div>
 
@@ -23,7 +23,7 @@
                                 Password
                         </div>
 
-                        <input name="SubmitPass" type="password" placeholder="**********" id="passwordInput" (keyup)="validatePass($event.target);" required>
+                        <input #SubmitPass name="SubmitPass" type="password" placeholder="**********" id="passwordInput" (keyup)="validatePass($event.target);" required>
                 </div>
 
                 <div id="error" *ngIf="invalidError">
@@ -35,7 +35,7 @@
                         <div class="forgotPassword"> <a> Forgot password?</a></div>
                 </div>
 
-                <button type="submit" id="submitButtonRectangle">
+                <button type="submit" id="submitButtonRectangle" (click)="submit(SubmitEmail.value,SubmitPass.value);">
                         <div id="submitButtonText">Log In
                                 
                         </div>

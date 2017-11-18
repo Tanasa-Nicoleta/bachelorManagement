@@ -13,9 +13,7 @@ namespace BusinessLayer
             context.Database.EnsureCreated();
 
             if (context.Users.Any())
-            {
                 return;
-            }
 
             var teachers = new[]
             {
@@ -35,9 +33,7 @@ namespace BusinessLayer
                 }
             };
             foreach (var teacher in teachers)
-            {
                 context.Teachers.Add(teacher);
-            }
             context.SaveChanges();
 
             var announcements = new[]
@@ -58,9 +54,7 @@ namespace BusinessLayer
                 }
             };
             foreach (var announcement in announcements)
-            {
                 context.Announcements.Add(announcement);
-            }
             context.SaveChanges();
 
             var students = new[]
@@ -94,9 +88,7 @@ namespace BusinessLayer
                 }
             };
             foreach (var student in students)
-            {
                 context.Students.Add(student);
-            }
             context.SaveChanges();
 
             var comments = new[]
@@ -119,9 +111,7 @@ namespace BusinessLayer
                 }
             };
             foreach (var comment in comments)
-            {
                 context.Comments.Add(comment);
-            }
             context.SaveChanges();
 
             var consultations = new[]
@@ -141,9 +131,7 @@ namespace BusinessLayer
                 }
             };
             foreach (var consultation in consultations)
-            {
                 context.Consultations.Add(consultation);
-            }
             context.SaveChanges();
 
             var means = new[]
@@ -173,9 +161,7 @@ namespace BusinessLayer
                 }
             };
             foreach (var mean in means)
-            {
                 context.Means.Add(mean);
-            }
             context.SaveChanges();
 
             var sessions = new[]
@@ -190,11 +176,9 @@ namespace BusinessLayer
                 }
             };
             foreach (var session in sessions)
-            {
                 context.Sessions.Add(session);
-            }
             context.SaveChanges();
-            
+
 
             var studentContents = new[]
             {
@@ -210,9 +194,7 @@ namespace BusinessLayer
                 }
             };
             foreach (var studentContent in studentContents)
-            {
                 context.StudentContents.Add(studentContent);
-            }
             context.SaveChanges();
 
             var teacherContents = new[]
@@ -229,9 +211,7 @@ namespace BusinessLayer
                 }
             };
             foreach (var teacherContent in teacherContents)
-            {
                 context.TeacherContents.Add(teacherContent);
-            }
             context.SaveChanges();
 
             var users = new[]
@@ -269,9 +249,7 @@ namespace BusinessLayer
                 }
             };
             foreach (var user in users)
-            {
                 context.Users.Add(user);
-            }
             context.SaveChanges();
 
             var years = new[]
@@ -293,9 +271,7 @@ namespace BusinessLayer
                 }
             };
             foreach (var year in years)
-            {
                 context.Years.Add(year);
-            }
             context.SaveChanges();
         }
     }

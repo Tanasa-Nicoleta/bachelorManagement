@@ -15,7 +15,8 @@ namespace ApiLayer.Controllers
             AccountService = accountService;
         }
 
-        // POST: api/Account
+        [HttpPost]
+        [Route("api/Login")]
         public HttpResponseMessage Post([FromBody]AccountDTO accountDTO)
         {
             if (!ModelState.IsValid)

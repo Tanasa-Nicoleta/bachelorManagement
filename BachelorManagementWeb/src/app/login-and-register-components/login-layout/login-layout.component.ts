@@ -22,12 +22,15 @@ export class LoginLayoutComponent {
   constructor(private http: HttpClient, private router: Router){}
 
   public submit(email: string, pass: string) {
+    
     this.body = {
       Username: email,
       Password: pass
     };
 
-    const resp = this.http.post('http://localhost:64251/api/Account', this.body, { observe: 'response' });
+    const resp = this.http.post('http://localhost:64251/api/Login', this.body, { observe: 'response' });
+
+    console.log(this.body.Username, this.body.Password);
 
     resp.subscribe(
         data => {
@@ -37,7 +40,7 @@ export class LoginLayoutComponent {
         }
       },
       err => {
-        console.log("Login error + error", err.status)
+        console.log("Login error + error", err.status )
         if (err.status === 400)
           this.invalidError = true;
       }

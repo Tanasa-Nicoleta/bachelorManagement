@@ -40,7 +40,7 @@ export class LoginLayoutComponent {
         }
       },
       err => {
-        console.log("Login error + error", err.status )
+        console.log("Login error + error", err.status)
         if (err.status === 400)
           this.invalidError = true;
       }

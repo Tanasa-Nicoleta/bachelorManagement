@@ -17,7 +17,8 @@ namespace ApiLayer
                 options.UseSqlServer(
                     @"Server=(localdb)\mssqllocaldb;Database=BachelorManagement;Trusted_Connection=True;"));
 
-            services.AddCors(options => {
+            services.AddCors(options =>
+            {
                 options.AddPolicy("CorsPolicy",
                     builder => builder.AllowAnyOrigin()
                         .AllowAnyMethod()

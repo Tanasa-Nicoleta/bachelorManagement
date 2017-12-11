@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using BusinessLayer.Contracts;
 using BusinessLayer.Interfaces;
-using DataLayer.Interfaces;
+using Interfaces;
 
 namespace BusinessLayer.Services
 {

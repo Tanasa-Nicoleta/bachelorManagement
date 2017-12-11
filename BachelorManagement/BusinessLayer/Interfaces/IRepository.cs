@@ -1,7 +1,6 @@
-﻿using BusinessLayer.Interfaces;
-using System.Linq;
+﻿using System.Linq;
 
-namespace DataLayer.Interfaces
+namespace BusinessLayer.Interfaces
 {
     public interface IRepository<T> where T : class, IEntityBase, new()
     {

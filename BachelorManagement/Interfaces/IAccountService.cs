@@ -1,4 +1,4 @@
-﻿namespace BusinessLayer.Interfaces
+﻿namespace Interfaces
 {
     public interface IAccountService
     {

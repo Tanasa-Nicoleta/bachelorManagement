@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using BusinessLayer.Interfaces;
-using DataLayer.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataLayer.Repositories

@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using System.Net.Http;
 using ApiLayer.Models;
-using BusinessLayer.Interfaces;
+using Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiLayer.Controllers

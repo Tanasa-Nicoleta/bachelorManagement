@@ -1,5 +1,5 @@
 ﻿using DataLayer.Enums;
-using DataLayer.Interfaces;
+using BusinessLayer.Interfaces;
 
 namespace DataLayer.Entities
 {

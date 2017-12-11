@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using DataLayer.Interfaces;
+using BusinessLayer.Interfaces;
 
 namespace DataLayer.Entities
 {

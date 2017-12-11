@@ -1,7 +1,6 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
+using BusinessLayer.Contracts;
 using BusinessLayer.Interfaces;
-using DataLayer.Entities;
 using DataLayer.Interfaces;
 
 namespace BusinessLayer.Services

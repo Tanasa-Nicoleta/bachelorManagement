@@ -1,10 +1,9 @@
 ﻿using System.Linq;
 using BusinessLayer.Interfaces;
-using DataLayer;
 using DataLayer.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace BusinessLayer.Repositories
+namespace DataLayer.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class, IEntityBase, new()
     {

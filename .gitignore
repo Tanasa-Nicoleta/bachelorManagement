@@ -16,3 +16,4 @@ BachelorManagement/BachelorManagement.sln
 BachelorManagement/ApiLayer/ApiLayer.csproj
 BachelorManagement/BusinessLayer/BusinessLayer.csproj
 BachelorManagement/DataLayer/DataLayer.csproj
+BachelorManagementWeb/package-lock.json

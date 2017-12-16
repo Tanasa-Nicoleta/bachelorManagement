@@ -19,3 +19,6 @@ BachelorManagement/BachelorManagement.ApiLayer.Test/obj/
 BachelorManagement/BachelorManagement.BusinessLayer.Test/obj/BachelorManagement.BusinessLayer.Test.csproj.nuget.g.props
 BachelorManagement/BachelorManagement.BusinessLayer.Test/obj/
 BachelorManagement/BachelorManagement.DataLayer.Test/obj/
+BachelorManagement/BachelorManagement.ApiLayer.Test/bin/
+BachelorManagement/BachelorManagement.BusinessLayer.Test/bin/
+BachelorManagement/BachelorManagement.DataLayer.Test/bin/

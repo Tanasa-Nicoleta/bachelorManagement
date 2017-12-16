@@ -2,7 +2,7 @@
 
 namespace BachelorManagement.ApiLayer.Models
 {
-    public class AccountDTO
+    public class AccountDto
     {
         [Required]
         [EmailAddress]

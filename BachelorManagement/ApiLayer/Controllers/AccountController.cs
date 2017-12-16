@@ -17,7 +17,7 @@ namespace BachelorManagement.ApiLayer.Controllers
 
         [HttpPost]
         [Route("api/Login")]
-        public HttpResponseMessage Post([FromBody]AccountDTO accountDto)
+        public HttpResponseMessage Post([FromBody]AccountDto accountDto)
         {
             if (!ModelState.IsValid)
                 return new HttpResponseMessage(HttpStatusCode.BadRequest);

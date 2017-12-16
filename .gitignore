@@ -15,3 +15,7 @@ BachelorManagementWeb/package-lock.json
 BachelorManagement/BachelorManagement.BusinessLayer.Test/obj/Debug/
 BachelorManagement/BachelorManagement.ApiLayer.Test/obj/Debug/
 BachelorManagement/BachelorManagement.DataLayer.Test/obj/Debug/
+BachelorManagement/BachelorManagement.ApiLayer.Test/obj/
+BachelorManagement/BachelorManagement.BusinessLayer.Test/obj/BachelorManagement.BusinessLayer.Test.csproj.nuget.g.props
+BachelorManagement/BachelorManagement.BusinessLayer.Test/obj/
+BachelorManagement/BachelorManagement.DataLayer.Test/obj/

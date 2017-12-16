@@ -33,7 +33,7 @@ export class LoginLayoutComponent {
     console.log(this.body.Username, this.body.Password);
 
     resp.subscribe(
-        data => {
+      data => {
         console.log(data);
         if (data.status === 200) {        
           this.router.navigateByUrl('/register');

@@ -1,22 +1,8 @@
-﻿using System.Threading.Tasks;
-using DataLayer;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
 
-namespace ApiLayer.Controllers
+namespace BachelorManagement.ApiLayer.Controllers
 {
     public class StudentController : Controller
     {
-        private readonly BachelorManagementContext _context;
-
-        public StudentController(BachelorManagementContext context)
-        {
-            _context = context;
-        }
-
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Students.ToListAsync());
-        }
     }
 }

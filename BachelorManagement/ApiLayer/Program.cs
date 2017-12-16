@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using Microsoft.AspNetCore.Hosting;
 
-namespace ApiLayer
+namespace BachelorManagement.ApiLayer
 {
     public class Program
     {

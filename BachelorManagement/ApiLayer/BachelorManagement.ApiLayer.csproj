@@ -23,9 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BusinessLayer\BusinessLayer.csproj" />
-    <ProjectReference Include="..\DataLayer\DataLayer.csproj" />
-    <ProjectReference Include="..\Interfaces\Interfaces.csproj" />
+    <ProjectReference Include="..\BachelorManagement.Interfaces\BachelorManagement.Interfaces.csproj" />
+    <ProjectReference Include="..\BusinessLayer\BachelorManagement.BusinessLayer.csproj" />
+    <ProjectReference Include="..\DataLayer\BachelorManagement.DataLayer.csproj" />
   </ItemGroup>
 
 </Project>

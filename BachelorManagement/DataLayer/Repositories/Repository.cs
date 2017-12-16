@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using BusinessLayer.Interfaces;
+using BachelorManagement.BusinessLayer.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace DataLayer.Repositories
+namespace BachelorManagement.DataLayer.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class, IEntityBase, new()
     {

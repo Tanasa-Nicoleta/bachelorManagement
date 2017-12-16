@@ -1,6 +1,6 @@
-﻿using DataLayer.Entities;
+﻿using BachelorManagement.DataLayer.Entities;
 
-namespace DataLayer.Repositories
+namespace BachelorManagement.DataLayer.Repositories
 {
     public class UserRepository : Repository<User>
     {

@@ -1,7 +1,7 @@
-﻿using DataLayer.Entities;
+﻿using BachelorManagement.DataLayer.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace DataLayer
+namespace BachelorManagement.DataLayer
 {
     public class BachelorManagementContext : DbContext
     {

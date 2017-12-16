@@ -1,6 +1,6 @@
-﻿using BusinessLayer.Interfaces;
+﻿using BachelorManagement.BusinessLayer.Interfaces;
 
-namespace DataLayer.Entities
+namespace BachelorManagement.DataLayer.Entities
 {
     public class StudentContent : IEntityBase
     {

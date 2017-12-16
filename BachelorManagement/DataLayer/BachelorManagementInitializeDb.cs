@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
-using DataLayer.Entities;
-using DataLayer.Enums;
+using BachelorManagement.DataLayer.Entities;
+using BachelorManagement.DataLayer.Enums;
 
-namespace DataLayer
+namespace BachelorManagement.DataLayer
 {
     public class BachelorManagementInitializeDb
     {

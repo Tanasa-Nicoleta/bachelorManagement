@@ -1,10 +1,10 @@
 ﻿using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
-using BusinessLayer.Services;
-using DataLayer.Repositories;
+using BachelorManagement.BusinessLayer.Services;
+using BachelorManagement.DataLayer.Repositories;
 
-namespace ApiLayer.IoContainer
+namespace BachelorManagement.ApiLayer.IoContainer
 {
     public static class AutofacConfig
     {

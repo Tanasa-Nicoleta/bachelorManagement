@@ -1,6 +1,6 @@
-﻿using BusinessLayer.Interfaces;
+﻿using BachelorManagement.BusinessLayer.Interfaces;
 
-namespace BusinessLayer.Contracts
+namespace BachelorManagement.BusinessLayer.Contracts
 {
     public class User: IEntityBase
     {

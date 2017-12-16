@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ApiLayer.Models
+namespace BachelorManagement.ApiLayer.Models
 {
     public class AccountDTO
     {

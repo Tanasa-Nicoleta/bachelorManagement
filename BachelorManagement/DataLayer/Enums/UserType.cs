@@ -1,4 +1,4 @@
-﻿namespace DataLayer.Enums
+﻿namespace BachelorManagement.DataLayer.Enums
 {
     public enum UserType
     {

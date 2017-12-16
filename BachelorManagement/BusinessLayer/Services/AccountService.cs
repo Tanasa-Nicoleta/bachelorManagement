@@ -1,9 +1,9 @@
 ﻿using System.Linq;
-using BusinessLayer.Contracts;
-using BusinessLayer.Interfaces;
-using Interfaces;
+using BachelorManagement.BusinessLayer.Contracts;
+using BachelorManagement.BusinessLayer.Interfaces;
+using BachelorManagement.Interfaces;
 
-namespace BusinessLayer.Services
+namespace BachelorManagement.BusinessLayer.Services
 {
     public class AccountService: IAccountService
     {

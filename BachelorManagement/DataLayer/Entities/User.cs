@@ -1,7 +1,7 @@
-﻿using BusinessLayer.Interfaces;
-using DataLayer.Enums;
+﻿using BachelorManagement.BusinessLayer.Interfaces;
+using BachelorManagement.DataLayer.Enums;
 
-namespace DataLayer.Entities
+namespace BachelorManagement.DataLayer.Entities
 {
     public class User : IEntityBase
     {

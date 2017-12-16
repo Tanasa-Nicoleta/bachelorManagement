@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BusinessLayer\BusinessLayer.csproj" />
+    <ProjectReference Include="..\BusinessLayer\BachelorManagement.BusinessLayer.csproj" />
   </ItemGroup>
 
 </Project>

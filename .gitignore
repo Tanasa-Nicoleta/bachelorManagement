@@ -12,3 +12,6 @@ BachelorManagement/.vs/BachelorManagement/v15/sqlite3/
 BachelorManagement/Interfaces/bin/
 BachelorManagement/Interfaces/obj/
 BachelorManagementWeb/package-lock.json
+BachelorManagement/BachelorManagement.BusinessLayer.Test/obj/Debug/
+BachelorManagement/BachelorManagement.ApiLayer.Test/obj/Debug/
+BachelorManagement/BachelorManagement.DataLayer.Test/obj/Debug/

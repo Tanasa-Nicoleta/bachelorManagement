@@ -1,12 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
+
 import { LoginLayoutComponent } from './login-and-register-components/login-layout/login-layout.component';
 import { RegisterLayoutComponent } from './login-and-register-components/register-layout/register-layout.component';
-import { HttpClientModule } from '@angular/common/http';
-
 
 const appName = 'Bachelor Degree Management'
 
@@ -19,6 +19,7 @@ const appName = 'Bachelor Degree Management'
   imports: [
     BrowserModule,
     HttpClientModule,
+    NgbModule.forRoot(),
     RouterModule.forRoot([
       { path: 'login', component: LoginLayoutComponent, pathMatch: 'full', data: { title: appName + 'Login' } },
       { path: 'register', component: RegisterLayoutComponent, pathMatch: 'full', data: { title: appName + 'Register' } },

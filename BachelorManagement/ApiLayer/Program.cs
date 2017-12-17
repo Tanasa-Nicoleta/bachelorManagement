@@ -1,5 +1,9 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using BachelorManagement.DataLayer;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace BachelorManagement.ApiLayer
 {

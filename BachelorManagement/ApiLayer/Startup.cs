@@ -40,5 +40,7 @@ namespace BachelorManagement.ApiLayer
 
             app.UseCors("CorsPolicy");
         }
+
+
     }
 }

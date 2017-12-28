@@ -68,7 +68,8 @@ $information-tablet: "only screen and (max-width : $tablet-break)";
     } 
 }
 
-div > a{
+div > a{    
+    font-weight: normal;
     text-decoration: none;
     color: $text-color;
 }

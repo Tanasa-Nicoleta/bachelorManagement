@@ -50,6 +50,9 @@ table{
 
 .mdl-button{
     color: $text-color;
+    &:active{
+        font-weight: bold;
+    }
 }
 
 .transition, p, ul li {

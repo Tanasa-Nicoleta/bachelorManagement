@@ -13,6 +13,7 @@ export class StudentRegisterToTeacherLayoutComponent {
 
     //api  call for the teachers list
     multiple: boolean;
+    optionText: string = "Apply";
 
     teacherList: Array<Teacher>;
     teacher1: Teacher;
@@ -51,6 +52,10 @@ export class StudentRegisterToTeacherLayoutComponent {
         this.teacher2.Themes = [this.theme3];
 
         this.teacherList = [this.teacher1, this.teacher2];
+    }
+
+    changeContent(){
+        this.optionText = "Applied";
     }
 
 

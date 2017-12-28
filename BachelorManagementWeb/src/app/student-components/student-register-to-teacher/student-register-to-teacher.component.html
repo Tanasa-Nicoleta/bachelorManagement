@@ -41,7 +41,8 @@
                         </td>
                         <td class="columnContent">{{teacher.NoOfAvailableSpots + " / " + teacher.NoOfSpots}}</td>
                         <td class="columnContent">
-                            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">Apply</button>
+                            <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" 
+                            (click)="changeContent()">{{optionText}}</button>
                         </td>
                     </tr>                   
                 </tbody>

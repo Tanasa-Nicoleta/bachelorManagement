@@ -20,23 +20,83 @@ $input-border-color-focus: rgba(94, 64, 56, 0.9);
     font-family: $text-font;
     color: $text-color;
     font-weight: normal;
-    font-size: $text-size-header-table;
 }
 
 .columnTitle, .columnContent{
     padding: 0.5% 1%;
-    width: 20%;
+    //width: 20%;
+}
+
+.numberColumn{
+    width: 10%;
 }
 
 .table, td, th{   
     text-align: center; 
-    border:solid $input-border-color-default 1px;
 }
 
 th{
     font-size: $text-size-header-table;
 }
 
+td{
+    font-size: $text-size-content-table;
+}
+
 table{
     height: 100%;
+    margin: 0%;
+}
+
+.mdl-button{
+    color: $text-color;
+}
+
+.transition, p, ul li {
+    transition: all 0.25s ease-in-out;
+}
+
+h2{
+    font-size: $text-size-content-table;
+    margin: 0%;
+}
+
+p{
+    color: $text-color;
+    font-size: $text-size-content-table - 2;
+    position: relative;
+    overflow: hidden;
+    opacity: 1;
+    transform: translate(0, 0);
+    margin: 0%;
+}
+  
+ul{
+    list-style: none;
+    perspective: 900;
+    padding: 0;
+    margin: 0;
+}
+
+ul li{
+    position: relative;
+    padding: 0;
+    margin: 0;
+}
+
+ul li input[type=checkbox] {
+    position: absolute;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+    margin: 0%;
+}
+
+ul li input[type=checkbox]:checked ~ p {
+    margin: 0;
+    max-height: 0;
+    opacity: 0;
+    transform: translate(0, 50%);
 }

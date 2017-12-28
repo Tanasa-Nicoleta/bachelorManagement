@@ -9,5 +9,6 @@ export class Teacher {
     NoOfSpots: number;
     NoOfAvailableSpots: number;
     ThemeTitles: string;
-    Themes: Array<Bachelor>
+    Themes: Array<Bachelor>;
+    Discipline: string;
 }

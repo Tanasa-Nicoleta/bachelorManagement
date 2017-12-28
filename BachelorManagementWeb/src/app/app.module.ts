@@ -9,7 +9,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { StudentHeaderComponent } from './student-components/student-header/student-header.component';
 import { StudentRegisterToTeacherLayoutComponent } from './student-components/student-register-to-teacher/student-register-to-teacher.component';
 
-
 const appName = 'Bachelor Degree Management'
 
 @NgModule({
@@ -30,7 +29,7 @@ const appName = 'Bachelor Degree Management'
       { path: 'studentRegisterToTeacher', component: StudentRegisterToTeacherLayoutComponent, pathMatch: 'full', data: { title: appName + 'Register' } },
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: '**', redirectTo: 'login', pathMatch: 'full' }
-    ])
+    ]),        
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,8 +1,26 @@
 <div class="layoutContainer">
-    <student-header>        
+    <student-header>
     </student-header>
-   
+
     <div class="contentContainer">
-        some content
+        <div class="mdl-cell mdl-cell--12-col">
+            <table class="table">
+                <thead>
+                    <th class="columnTitle"> Number </th>
+                    <th class="columnTitle"> Name </th>                   
+                    <th class="columnTitle"> Available / Total number of spots </th>                    
+                    <th class="columnTitle"> Option  </th> 
+                </thead>
+                <tbody>
+                    <tr *ngFor="let entry of teacherList; let i = index;">
+                        <td class="columnContent">{{i + 1}}</td>
+                        <td class="columnContent">{{entry.FirstName + " " + entry.LastName}}</td>
+                        <td class="columnContent">{{entry.NoOfAvailableSpots + " / " + entry.NoOfSpots}}</td>
+                        <td class="columnContent"> btn </td>
+                    </tr>
+                </tbody>
+            </table>
+            <h2 *ngIf="teacherList.length == 0" class="no-data-to-display">No data to display</h2>
+        </div>
     </div>
 </div>

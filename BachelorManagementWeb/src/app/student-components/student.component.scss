@@ -1,3 +1,42 @@
+$content-container-bg-color: rgba(222, 218, 191, 0.7);
+$text-font: 'Lucida Sans';
+$text-color: rgba(94, 64, 56, 1);
+$text-size-header-table: 18px;
+$text-size-content-table: 14px;
+$phone-break: 640px;
+$tablet-break: 1008px;
+$information-phone: "only screen and (max-width : $phone-break)";
+$information-tablet: "only screen and (max-width : $tablet-break)";
+$input-border-color-default: rgba(94, 64, 56, 0.4);
+$input-border-color-focus: rgba(94, 64, 56, 0.9);
+
 .contentContainer{
     width: 95%;
+    margin: 10% 0%;
+}
+
+.no-data-to-display, .columnTitle, .columnContent{
+    text-align: center;
+    font-family: $text-font;
+    color: $text-color;
+    font-weight: normal;
+    font-size: $text-size-header-table;
+}
+
+.columnTitle, .columnContent{
+    padding: 0.5% 1%;
+    width: 20%;
+}
+
+.table, td, th{   
+    text-align: center; 
+    border:solid $input-border-color-default 1px;
+}
+
+th{
+    font-size: $text-size-header-table;
+}
+
+table{
+    height: 100%;
 }

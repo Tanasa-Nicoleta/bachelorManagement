@@ -1,3 +1,5 @@
+import { Bachelor } from "./bachelor-degree-description.model";
+
 export class Teacher {
     constructor() { }
     Id: number;
@@ -6,4 +8,6 @@ export class Teacher {
     Email: string;
     NoOfSpots: number;
     NoOfAvailableSpots: number;
+    ThemeTitles: string;
+    Themes: Array<Bachelor>
 }

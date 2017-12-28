@@ -1,5 +1,12 @@
 $content-container-bg-color: rgba(222, 218, 191, 0.7);
-$text-color: rgb(94,64,56);
+$text-font: 'Lucida Sans';
+$text-color: rgba(94, 64, 56, 1);
+$text-size-header-title: 16px;
+$text-size-header: 14px;
+$phone-break: 640px;
+$tablet-break: 1008px;
+$information-phone: "only screen and (max-width : $phone-break)";
+$information-tablet: "only screen and (max-width : $tablet-break)";
 
 .layoutContainer {
     min-width: 100%;
@@ -21,31 +28,47 @@ $text-color: rgb(94,64,56);
     transform: translateX(-50%);
 }
 
-.textColor{
+.header{    
+    padding: 3% 2%;
+    width: 100%;  
+    height: 5%; 
+    color: $text-color;
+    font-family: $text-font;    
+    background-color: $content-container-bg-color;
+    @media #{$information-tablet}{        
+        height: 5%; // check this when intergrating with another component
+    }
+    @media #{$information-phone} {        
+        height: 5%; // same here (upArrow)
+    }
+}
+
+.header > .header-title{
+    font-size: $text-size-header-title;
+    float: left;
+    @media #{$information-tablet}{        
+        font-size: $text-size-header-title - 2;
+        padding: 1% 2%;
+    }
+    @media #{$information-phone} {        
+        font-size: $text-size-header-title - 4;
+        padding: 1% 2%;
+    }
+}
+
+.logout, .username{    
+    font-size: $text-size-header;
+    padding-right: 3%; 
+    float: right;
+    @media #{$information-tablet}{        
+        font-size: $text-size-header - 2;
+    }
+    @media #{$information-phone} {        
+        font-size: $text-size-header - 4;
+    } 
+}
+
+div > a{
+    text-decoration: none;
     color: $text-color;
 }
-
-@media (min-width: 1281px) {
-     
-}
-  
-@media (min-width: 1025px) and (max-width: 1280px) {
-    
-}
-  
-@media (min-width: 768px) and (max-width: 1024px) {
-    
-}
- 
-  
-@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-    
-}
-
-@media (min-width: 481px) and (max-width: 767px) {
-    
-}
-  
-@media (max-width: 480px) {
-   
-} 

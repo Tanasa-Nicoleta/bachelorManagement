@@ -11,7 +11,7 @@ $input-color-disabled: rgba(73, 56, 52, 0.4);
     align-items: center;
 }
 
-.welcomeToAppTitle, .welcomeToAppSubtitle, .email, .password, .rememberMe, .forgotPassword, .register, #error{
+.welcomeToAppTitle, .welcomeToAppSubtitle, .email, .password, .forgotPassword, .register, #error{
     font-family: $text-font;
     color: $text-color;
 }
@@ -55,27 +55,25 @@ input{
     }
   }
 
-.rememberAndForgot{
-    align-self: center;
-    width: 30%;
-    height: 38px;
+.forgotPassword{
+    padding: 10px;
 }
 
-.rememberMe, .forgotPassword {
-    display: inline;
-    padding: 0px;
+.register{
+    padding: 10px;
+    font-size: 12px;
+}
+
+
+.forgotPassword > a, .register > a{
     font-family: $text-font;
     font-size: 12px;
     color: $text-color;
-    display: inline-flex;
-  }
-
-.rememberMe{
-    float: left;
-}
-
-.forgotPassword{
-    float: right;
+    text-decoration: none;
+    text-underline-position: none;
+    &:hover{
+        font-weight: bold;
+    }
 }
 
 .submitButton{
@@ -100,11 +98,6 @@ input{
     text-align: center;
     color: $text-color;
     cursor: pointer;
-}
-
-.register{
-    width: 30%;
-    font-size: 12px;
 }
 
 #error{

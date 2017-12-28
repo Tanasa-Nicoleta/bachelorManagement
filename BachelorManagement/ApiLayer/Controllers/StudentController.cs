@@ -1,8 +1,8 @@
-﻿using System.Web.Http;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace BachelorManagement.ApiLayer.Controllers
 {
-    public class StudentController : ApiController
+    public class StudentController : Controller
     {
     }
 }

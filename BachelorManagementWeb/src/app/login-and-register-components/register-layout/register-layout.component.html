@@ -25,6 +25,10 @@
             <input #SubmitPass name="SubmitPass" type="password" placeholder="**********" id="passwordInput" (keyup)="validatePass($event.target);" required>
         </div>
 
+        <div id="error" *ngIf="invalidError">
+                ! Use at least 6 characters, one upper case, one digit and one special character
+        </div>        
+
         <div>
             <div class="password">
                 Confirm Password

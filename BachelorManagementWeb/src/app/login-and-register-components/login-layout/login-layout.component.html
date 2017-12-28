@@ -14,8 +14,8 @@
                                 Email
                         </div>
 
-                        <input #SubmitEmail name="SubmitEmail" type="text" placeholder="lastName.firstName@info.uaic.ro" id="emailInput" pattern="^.+\b@info\.uaic\.ro\b$"
-                                required>
+                        <input #SubmitEmail name="SubmitEmail" (ngModel)="body.Username" type="text" placeholder="lastName.firstName@info.uaic.ro" 
+                        id="emailInput" pattern="1" required>
                 </div>
 
                 <div>
@@ -23,7 +23,7 @@
                                 Password
                         </div>
 
-                        <input #SubmitPass name="SubmitPass" type="password" placeholder="**********" id="passwordInput" (keyup)="validatePass($event.target);" required>
+                        <input #SubmitPass name="SubmitPass" type="password" placeholder="**********" id="passwordInput" required>
                 </div>
                 
                 <div class="forgotPassword"> 
@@ -31,14 +31,14 @@
                 </div>
                 
 
-                <button type="submit" id="submitButtonRectangle" (click)="submit(SubmitEmail.value,SubmitPass.value);">
+                <button type="submit" id="submitButtonRectangle" (click)="submit(SubmitEmail.value,SubmitPass.value);" [disabled]="(!SubmitEmail.valid && SubmitEmail.dirty)">
                         <div id="submitButtonText">Log In
                                 
                         </div>
                 </button>
 
                 <div class="register">
-                        If you don't have an account you can register <a href="/register"> here!</a>
+                        If you don't have an account you can register <a [routerLink]="['/register']"> here!</a>
                 </div>
 
         </div>

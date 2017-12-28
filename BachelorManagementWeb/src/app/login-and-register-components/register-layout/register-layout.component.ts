@@ -45,7 +45,6 @@ export class RegisterLayoutComponent {
       return false;
     }
     else {
-      this.matchError = false;
       this.DeleteError();
       return true;
     }

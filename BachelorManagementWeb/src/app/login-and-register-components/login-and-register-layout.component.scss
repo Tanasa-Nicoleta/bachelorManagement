@@ -17,14 +17,13 @@ $information-tablet: "only screen and (max-width : $tablet-break)";
 
 .welcomeToAppTitle, .welcomeToAppSubtitle, .email, .password, .forgotPassword, .register, #error{
     font-family: $text-font;
-    color: $text-color;
-    
+    color: $text-color;    
     @media #{$information-tablet}{
         color: green;
-      }
-      @media #{$information-phone} {
+    }
+    @media #{$information-phone} {
         color: pink;
-      }
+    }
 }
 
 .welcomeToAppTitle{
@@ -64,6 +63,12 @@ input{
     &.ng-invalid.ng-dirty {
       border: solid 1.5px $input-border-color-error;
     }
+    @media #{$information-tablet}{
+        width: 45%;
+    }
+    @media #{$information-phone} {
+        width: 70%;
+    }
   }
 
 .forgotPassword{
@@ -100,6 +105,12 @@ input{
     cursor: pointer;
     &:disabled{
       background-color: $input-color-disabled;
+    }
+    @media #{$information-tablet}{
+        width: 45%;
+    }
+    @media #{$information-phone} {
+        width: 70%;
     }
 }
   

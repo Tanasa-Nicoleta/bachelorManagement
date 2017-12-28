@@ -1,4 +1,4 @@
-import { Bachelor } from "./bachelor-degree-description.model";
+import { Bachelor } from "./bachelor-degree.model";
 
 export class Teacher {
     constructor() { }

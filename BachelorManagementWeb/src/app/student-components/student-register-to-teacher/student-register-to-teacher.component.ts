@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Teacher } from '../../models/teacher.model';
-import { Bachelor } from '../../models/bachelor-degree-description.model';
+import { Bachelor } from '../../models/bachelor-degree.model';
 
 @Component({
   selector: 'student-register-to-teacher-layout',

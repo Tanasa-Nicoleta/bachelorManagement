@@ -33,7 +33,7 @@ export class StudentRegisterToTeacherLayoutComponent {
         
         this.theme3 = new Bachelor();
         this.theme3.Title = "Theme3";
-        this.theme3.Description = "Description3";
+        this.theme3.Description = "Description3 and other random text just for the text to align";
 
         this.teacher1 = new Teacher();
         this.teacher1.FirstName = "Ana";

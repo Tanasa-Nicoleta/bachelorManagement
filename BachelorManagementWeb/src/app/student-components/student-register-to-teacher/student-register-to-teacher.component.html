@@ -41,10 +41,11 @@
                         </td>
                         <td class="columnContent">{{teacher.NoOfAvailableSpots + " / " + teacher.NoOfSpots}}</td>
                         <td class="columnContent">
-                            <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" 
-                            (click)="changeContent()">{{optionText}}</button>
+                            <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                                {{optionText}}
+                            </button>
                         </td>
-                    </tr>                   
+                    </tr>
                 </tbody>
             </table>
             <h2 *ngIf="teacherList.length == 0" class="no-data-to-display">No data to display</h2>

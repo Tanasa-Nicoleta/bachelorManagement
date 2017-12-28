@@ -50,9 +50,10 @@ table{
 
 .mdl-button{
     color: $text-color;
-    &:active{
-        font-weight: bold;
-    }
+}
+
+.mdl-js-ripple-effect{
+    background-color: $content-container-bg-color;
 }
 
 .transition, p, ul li {

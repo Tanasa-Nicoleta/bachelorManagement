@@ -5,6 +5,10 @@ $input-border-color-default: rgba(94, 64, 56, 0.4);
 $input-border-color-focus: rgba(94, 64, 56, 0.9);
 $input-border-color-error: rgba(224, 9, 9, 0.95);
 $input-color-disabled: rgba(73, 56, 52, 0.4); 
+$phone-break: 640px;
+$tablet-break: 1008px;
+$information-phone: "only screen and (max-width : $phone-break)";
+$information-tablet: "only screen and (max-width : $tablet-break)";
 
 .contentContainer{
     text-align: center;
@@ -14,6 +18,13 @@ $input-color-disabled: rgba(73, 56, 52, 0.4);
 .welcomeToAppTitle, .welcomeToAppSubtitle, .email, .password, .forgotPassword, .register, #error{
     font-family: $text-font;
     color: $text-color;
+    
+    @media #{$information-tablet}{
+        color: green;
+      }
+      @media #{$information-phone} {
+        color: pink;
+      }
 }
 
 .welcomeToAppTitle{
@@ -73,6 +84,7 @@ input{
     text-underline-position: none;
     &:hover{
         font-weight: bold;
+        cursor: pointer;
     }
 }
 

@@ -1,0 +1,52 @@
+$content-container-bg-color: rgba(222, 218, 191, 0.9)
+;$text-font: 'Lucida Sans';
+$text-color: rgba(94, 64, 56, 1);
+$text-size-header: 16px;
+$phone-break: 640px;
+$tablet-break: 1008px;
+$information-phone: "only screen and (max-width : $phone-break)";
+$information-tablet: "only screen and (max-width : $tablet-break)";
+$input-border-color-default: rgba(94, 64, 56, 0.4);
+
+.teacherDetailsRow{
+    padding: 1.5% 0%;
+    font-size: $text-size-header;
+    font-family: $text-font;
+    color: $text-color;
+}
+
+.mdl-textfield__input{
+    width: 200%;
+    padding: 0% 5%;
+    font-family: $text-font;
+    color: $text-color;
+    font-size: $text-size-header - 2;
+}
+
+.mdl-button{
+    float: right;
+    margin: 0% 10%;  
+}
+
+.studentDetailsRowTitle{  
+    font-family: $text-font;  
+    padding: 1.5% 0%;
+    font-size: $text-size-header;
+    font-weight: normal;
+    text-align: center;
+    color: $text-color;
+}
+
+.numberOfstudents{
+    background-color: $content-container-bg-color;  
+    border: solid $input-border-color-default 1px;
+    color: $text-color;
+    font-family: $text-font;
+    font-size: $text-size-header;
+    margin: 0% 5%;
+    padding-left: 2%;
+    &:focus{
+        
+        outline:0;
+    }
+}

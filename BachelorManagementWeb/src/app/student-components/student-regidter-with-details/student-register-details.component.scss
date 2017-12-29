@@ -44,7 +44,6 @@ $input-border-color-default: rgba(94, 64, 56, 0.4);
 
 .studentDetailsRowTitle{
     font-weight: normal;
-    font-size: $text-size-header;
     text-align: center;
 }
 
@@ -54,6 +53,9 @@ $input-border-color-default: rgba(94, 64, 56, 0.4);
     font-family: $text-font;
     color: $text-color;
     font-size: $text-size-header - 2;
+    &:focus{
+        outline: 0;
+    }
 }
 
 .contentContainer{

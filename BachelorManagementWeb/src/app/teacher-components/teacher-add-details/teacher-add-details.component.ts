@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
 
 
 export class TeacherAddDetailsComponent {
-
+    maxNumberOfStudents: number = 15;
 }

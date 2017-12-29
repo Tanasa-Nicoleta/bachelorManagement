@@ -59,6 +59,7 @@ input{
     border: solid 1px $input-border-color-default;
     &:focus {
       border: solid 1px $input-border-color-focus;
+      outline: 0;
     }
     &.ng-invalid.ng-dirty {
       border: solid 1.5px $input-border-color-error;
@@ -105,6 +106,9 @@ input{
     cursor: pointer;
     &:disabled{
       background-color: $input-color-disabled;
+    }
+    &:focus{
+        outline: 0;
     }
     @media #{$information-tablet}{
         width: 45%;

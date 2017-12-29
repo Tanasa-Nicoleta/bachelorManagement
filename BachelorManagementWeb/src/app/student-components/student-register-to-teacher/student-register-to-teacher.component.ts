@@ -54,14 +54,9 @@ export class StudentRegisterToTeacherLayoutComponent {
         this.teacherList = [this.teacher1, this.teacher2];
     }
 
-    changeContent(){
-        this.optionText = "Applied";
+    applyToTeacher(teacherFirstName: string, teacherLastName: string){
+        console.log(teacherFirstName + " " + teacherLastName);
+        //effectve aplly to a teacher
+        //take caare so a student only applies to a teacher once
     }
-
-
 }
-  
-
-// 'Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack',
-// 'Charlotte', 'Theodore', 'Isla', 'Oliver', 'Isabella', 'Jasper',
-// 'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'

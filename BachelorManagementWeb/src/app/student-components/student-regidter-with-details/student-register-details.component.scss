@@ -1,0 +1,36 @@
+$content-container-bg-color: rgba(222, 218, 191, 0.9)
+;$text-font: 'Lucida Sans';
+$text-color: rgba(94, 64, 56, 1);
+$text-size-header-title: 24px;
+$text-size-header: 16px;
+$phone-break: 640px;
+$tablet-break: 1008px;
+$information-phone: "only screen and (max-width : $phone-break)";
+$information-tablet: "only screen and (max-width : $tablet-break)";
+$input-border-color-default: rgba(94, 64, 56, 0.4);
+
+.teacherDetails, .studentDetails{   
+    background-color: $content-container-bg-color;
+    font-family: $text-font;
+    color: $text-color;
+    size: $text-size-header-title;
+    padding: 4% 2%;        
+    margin: 2% 2%;
+    border: solid $input-border-color-default 1px;
+    @media #{$information-tablet}{        
+        margin: 5% 2%; // check this when intergrating with another component
+    }
+    @media #{$information-phone} {        
+        margin: 3% 1%; // same here (upArrow)
+    }
+}
+
+.studentDetails{
+    width: 60%; 
+    float: right;  
+}
+
+.teacherDetails{    
+    width: 30%; 
+    float: left;
+}

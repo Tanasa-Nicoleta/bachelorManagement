@@ -8,7 +8,6 @@ $tablet-break: 1008px;
 $information-phone: "only screen and (max-width : $phone-break)";
 $information-tablet: "only screen and (max-width : $tablet-break)";
 $input-border-color-default: rgba(94, 64, 56, 0.4);
-$input-border-color-focus: rgba(94, 64, 56, 0.9);
 
 .contentContainer{
     width: 95%;
@@ -103,4 +102,9 @@ ul li input[type=checkbox]:checked ~ p {
     max-height: 0;
     opacity: 0;
     transform: translate(0, 50%);
+}
+
+.teacherDetails{
+    width: 30%;
+    float: left;
 }

@@ -7,6 +7,7 @@ $phone-break: 640px;
 $tablet-break: 1008px;
 $information-phone: "only screen and (max-width : $phone-break)";
 $information-tablet: "only screen and (max-width : $tablet-break)";
+$input-border-color-default: rgba(94, 64, 56, 0.4);
 
 .layoutContainer {
     min-width: 100%;
@@ -26,6 +27,7 @@ $information-tablet: "only screen and (max-width : $tablet-break)";
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+    border: solid $input-border-color-default 1px;
 }
 
 .header{    
@@ -34,7 +36,8 @@ $information-tablet: "only screen and (max-width : $tablet-break)";
     height: 5%; 
     color: $text-color;
     font-family: $text-font;    
-    background-color: $content-container-bg-color;
+    background-color: $content-container-bg-color;    
+    border-bottom: solid $input-border-color-default 1px;
     @media #{$information-tablet}{        
         height: 5%; // check this when intergrating with another component
     }

@@ -11,10 +11,9 @@ import { Bachelor } from '../../models/bachelor-degree.model';
 
 export class StudentRegisterToTeacherLayoutComponent {
 
-    //api  call for the teachers list
-    multiple: boolean;
     optionText: string = "Apply";
 
+    //api  call for the teachers list
     teacherList: Array<Teacher>;
     teacher1: Teacher;
     teacher2: Teacher;

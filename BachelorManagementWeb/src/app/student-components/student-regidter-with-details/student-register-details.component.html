@@ -1,8 +1,22 @@
 <div class="layoutContainer">
-        <student-header>
-                <!-- it goes out when taken care with router outlet -->
-        </student-header> 
+    <student-header>
+        <!-- it goes out when taken care with router outlet -->
+    </student-header>
 
+    <div class="contentContainer">
+    <div class="teacherDetails"> 
+        <div>{{teacher1.FirstName}} {{teacher1.LastName}} </div>
+        <div>{{teacher1.Discipline}}</div>
+        <div *ngFor=" let teacherTheme of teacher1.Themes">
+                            <h2>{{teacherTheme.Title}}</h2>
+                            <p>{{teacherTheme.Description}}</p>
+        </div>
+    </div>
+    
+    <div class="studentDetails"> 
+                <div>There you have details</div>
+            
+    </div>
+    </div>
 
-        
 </div>

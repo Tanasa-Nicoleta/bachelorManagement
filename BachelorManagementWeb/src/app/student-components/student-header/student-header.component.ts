@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['../../app.component.scss']
 })
 
-export class StudentHeaderComponent {
+export class StudentHeaderComponent {  
+  Username: string = "someone@info.uaic.ro";
 }

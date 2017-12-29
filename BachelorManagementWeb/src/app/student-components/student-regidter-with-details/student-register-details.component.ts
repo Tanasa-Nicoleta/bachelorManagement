@@ -54,4 +54,9 @@ export class StudentRegisterToTeacherDetailsLayoutComponent {
 
         this.teacherList = [this.teacher1, this.teacher2];
     }
+
+    applyToTeacherWithDetails(title: string, description: string, achievement: string){
+        console.log(title + " " + description + " " + achievement);
+        //api call for applying to a teacher
+    }
 }

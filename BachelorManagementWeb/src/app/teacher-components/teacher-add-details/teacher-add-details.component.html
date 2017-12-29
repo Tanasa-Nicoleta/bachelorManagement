@@ -6,12 +6,17 @@
     </student-header>
 
     <div class="contentContainer">        
-            <div class="studentDetailsRowTitle">Details</div>
+            <div class="teacherDetailsRowTitle">Details</div>
             <div>
                 <span class="teacherDetailsRow">Number of students per session: </span>                
                 <span  class="mdl-textfield mdl-js-textfield">
                     <input class="numberOfstudents" type="number" min="0" max="{{maxNumberOfStudents}}" placeholder="0" required>
                 </span>
+            </div>
+            <div>
+                <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                    {{buttonText}}
+                </button>
             </div>
     </div>
 

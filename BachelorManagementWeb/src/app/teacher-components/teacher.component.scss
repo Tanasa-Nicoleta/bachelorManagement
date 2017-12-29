@@ -9,7 +9,7 @@ $information-tablet: "only screen and (max-width : $tablet-break)";
 $input-border-color-default: rgba(94, 64, 56, 0.4);
 
 .teacherDetailsRow{
-    padding: 1.5% 0%;
+    padding: 1.5% 2% 1.5% 5%;
     font-size: $text-size-header;
     font-family: $text-font;
     color: $text-color;
@@ -24,11 +24,11 @@ $input-border-color-default: rgba(94, 64, 56, 0.4);
 }
 
 .mdl-button{
-    float: right;
-    margin: 0% 10%;  
+    float: left;
+    margin: 2% 10%;  
 }
 
-.studentDetailsRowTitle{  
+.teacherDetailsRowTitle{  
     font-family: $text-font;  
     padding: 1.5% 0%;
     font-size: $text-size-header;

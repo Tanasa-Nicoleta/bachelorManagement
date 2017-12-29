@@ -56,7 +56,6 @@ export class StudentRegisterToTeacherLayoutComponent {
 
     applyToTeacher(teacherFirstName: string, teacherLastName: string){
         console.log(teacherFirstName + " " + teacherLastName);
-        //effectve aplly to a teacher
-        //take caare so a student only applies to a teacher once
+        //send those to the next file
     }
 }

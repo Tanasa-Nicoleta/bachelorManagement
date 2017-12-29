@@ -3,13 +3,13 @@ import { Teacher } from '../../models/teacher.model';
 import { Bachelor } from '../../models/bachelor-degree.model';
 
 @Component({
-  selector: 'student-register-to-teacher-layout',
+  selector: 'student-register-to-teacher',
   templateUrl: './student-register-to-teacher.component.html',
   styleUrls: ['../../app.component.scss', '../student.component.scss']
 })
 
 
-export class StudentRegisterToTeacherLayoutComponent {
+export class StudentRegisterToTeacherComponent {
 
     optionText: string = "Next step";
 

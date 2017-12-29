@@ -7,8 +7,9 @@ import { LoginLayoutComponent } from './login-and-register-components/login-layo
 import { RegisterLayoutComponent } from './login-and-register-components/register-layout/register-layout.component';
 import { HttpClientModule } from '@angular/common/http';
 import { StudentHeaderComponent } from './student-components/student-header/student-header.component';
-import { StudentRegisterToTeacherLayoutComponent } from './student-components/student-register-to-teacher/student-register-to-teacher.component';
-import { StudentRegisterToTeacherDetailsLayoutComponent } from './student-components/student-regidter-with-details/student-register-details.component';
+import { StudentRegisterToTeacherComponent } from './student-components/student-register-to-teacher/student-register-to-teacher.component';
+import { StudentRegisterToTeacherDetailsComponent } from './student-components/student-regidter-with-details/student-register-details.component';
+import { TeacherAddDetailsComponent } from './teacher-components/teacher-add-details/teacher-add-details.component';
 
 const appName = 'Bachelor Degree Management'
 
@@ -18,8 +19,9 @@ const appName = 'Bachelor Degree Management'
     LoginLayoutComponent,
     RegisterLayoutComponent,
     StudentHeaderComponent,
-    StudentRegisterToTeacherLayoutComponent,
-    StudentRegisterToTeacherDetailsLayoutComponent    
+    StudentRegisterToTeacherComponent,
+    StudentRegisterToTeacherDetailsComponent,
+    TeacherAddDetailsComponent      
   ],
   imports: [
     BrowserModule,
@@ -28,8 +30,9 @@ const appName = 'Bachelor Degree Management'
       { path: 'login', component: LoginLayoutComponent, pathMatch: 'full', data: { title: appName + 'Login' } },
       { path: 'register', component: RegisterLayoutComponent, pathMatch: 'full', data: { title: appName + 'Register' } },      
       { path: 'studentHeader', component: StudentHeaderComponent, pathMatch: 'full', data: { title: appName + 'Register' } }, // delete when tested
-      { path: 'studentRegisterToTeacher', component: StudentRegisterToTeacherLayoutComponent, pathMatch: 'full', data: { title: appName + 'Register' } },      
-      { path: 'studentRegisterToTeacherDetails', component: StudentRegisterToTeacherDetailsLayoutComponent, pathMatch: 'full', data: { title: appName + 'Register' } },
+      { path: 'studentRegisterToTeacher', component: StudentRegisterToTeacherComponent, pathMatch: 'full', data: { title: appName + 'Register' } },      
+      { path: 'studentRegisterToTeacherDetails', component: StudentRegisterToTeacherDetailsComponent, pathMatch: 'full', data: { title: appName + 'Register' } },
+      { path: 'teacherAddDetails', component: TeacherAddDetailsComponent, pathMatch: 'full', data: { title: appName + 'Register' } },
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: '**', redirectTo: 'login', pathMatch: 'full' }
     ]),        

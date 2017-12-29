@@ -3,13 +3,13 @@ import { Teacher } from '../../models/teacher.model';
 import { Bachelor } from '../../models/bachelor-degree.model';
 
 @Component({
-  selector: 'student-register-details-layout',
+  selector: 'student-register-details',
   templateUrl: './student-register-details.component.html',
   styleUrls: ['../../app.component.scss', '../student.component.scss', './student-register-details.component.scss']
 })
 
 
-export class StudentRegisterToTeacherDetailsLayoutComponent {
+export class StudentRegisterToTeacherDetailsComponent {
 
     buttonText: string = "Subimt";
 

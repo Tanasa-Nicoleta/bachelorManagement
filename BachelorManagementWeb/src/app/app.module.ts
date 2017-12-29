@@ -10,6 +10,8 @@ import { StudentHeaderComponent } from './student-components/student-header/stud
 import { StudentRegisterToTeacherComponent } from './student-components/student-register-to-teacher/student-register-to-teacher.component';
 import { StudentRegisterToTeacherDetailsComponent } from './student-components/student-regidter-with-details/student-register-details.component';
 import { TeacherAddDetailsComponent } from './teacher-components/teacher-add-details/teacher-add-details.component';
+import { TeacherWallComponent } from './teacher-components/teacher-wall/teacher-wall.component';
+import { TeacherEditWallComponent } from './teacher-components/teacher-edit-wall/teacher-edit-wall.component';
 
 const appName = 'Bachelor Degree Management'
 
@@ -21,7 +23,9 @@ const appName = 'Bachelor Degree Management'
     StudentHeaderComponent,
     StudentRegisterToTeacherComponent,
     StudentRegisterToTeacherDetailsComponent,
-    TeacherAddDetailsComponent      
+    TeacherAddDetailsComponent,
+    TeacherWallComponent,
+    TeacherEditWallComponent     
   ],
   imports: [
     BrowserModule,
@@ -33,6 +37,8 @@ const appName = 'Bachelor Degree Management'
       { path: 'studentRegisterToTeacher', component: StudentRegisterToTeacherComponent, pathMatch: 'full', data: { title: appName + 'Register' } },      
       { path: 'studentRegisterToTeacherDetails', component: StudentRegisterToTeacherDetailsComponent, pathMatch: 'full', data: { title: appName + 'Register' } },
       { path: 'teacherAddDetails', component: TeacherAddDetailsComponent, pathMatch: 'full', data: { title: appName + 'Register' } },
+      { path: 'teacherWall', component: TeacherWallComponent, pathMatch: 'full', data: { title: appName + 'Register' } },
+      { path: 'teacherEditWall', component: TeacherEditWallComponent, pathMatch: 'full', data: { title: appName + 'Register' } },
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: '**', redirectTo: 'login', pathMatch: 'full' }
     ]),        

@@ -21,7 +21,7 @@
                 <tbody>
                     <tr *ngFor="let teacher of teacherList; let i = index;">
                         <td class="columnContent">{{i + 1}}</td>
-                        <td class="columnContent">{{teacher.FirstName + " " + teacher.LastName}}</td>
+                        <td class="columnContent">{{teacher.Grade + " " + teacher.FirstName + " " + teacher.LastName}}</td>
                         <td class="columnContent">{{teacher.Discipline}}</td>
                         <td class="columnContent">
                             <table>

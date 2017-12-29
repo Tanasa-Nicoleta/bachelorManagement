@@ -1,7 +1,6 @@
 $content-container-bg-color: rgba(222, 218, 191, 0.9)
 ;$text-font: 'Lucida Sans';
 $text-color: rgba(94, 64, 56, 1);
-$text-size-header-title: 24px;
 $text-size-header: 16px;
 $phone-break: 640px;
 $tablet-break: 1008px;
@@ -13,7 +12,6 @@ $input-border-color-default: rgba(94, 64, 56, 0.4);
     background-color: $content-container-bg-color;
     font-family: $text-font;
     color: $text-color;
-    size: $text-size-header-title;
     padding: 4% 2%;        
     margin: 2% 2%;
     border: solid $input-border-color-default 1px;
@@ -33,4 +31,30 @@ $input-border-color-default: rgba(94, 64, 56, 0.4);
 .teacherDetails{    
     width: 30%; 
     float: left;
+}
+
+.teacherDetailRow, .studentDetailsRow, .studentDetailsRowTitle{
+    padding: 1.5% 0%;
+    font-size: $text-size-header;
+}
+
+.teacherDetailRowSecondary{
+    font-size: $text-size-header - 4;    
+}
+
+.studentDetailsRowTitle{
+    font-weight: normal;
+    font-size: $text-size-header;
+    text-align: center;
+}
+
+.mdl-textfield__input{
+    padding: 0% 5%;
+    font-family: $text-font;
+    color: $text-color;
+    font-size: $text-size-header - 2;
+}
+
+.contentContainer{
+    margin: 5% 0%;
 }

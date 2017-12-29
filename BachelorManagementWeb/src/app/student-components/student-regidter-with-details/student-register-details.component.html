@@ -1,22 +1,40 @@
+<script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
 <div class="layoutContainer">
     <student-header>
         <!-- it goes out when taken care with router outlet -->
     </student-header>
 
     <div class="contentContainer">
-    <div class="teacherDetails"> 
-        <div>{{teacher1.FirstName}} {{teacher1.LastName}} </div>
-        <div>{{teacher1.Discipline}}</div>
-        <div *ngFor=" let teacherTheme of teacher1.Themes">
-                            <h2>{{teacherTheme.Title}}</h2>
-                            <p>{{teacherTheme.Description}}</p>
+        <div class="teacherDetails">
+            <div class="teacherDetailRow">{{teacher1.Grade}} {{teacher1.FirstName}} {{teacher1.LastName}} </div>
+            <div class="teacherDetailRow">{{teacher1.Discipline}}</div>
+            <div *ngFor=" let teacherTheme of teacher1.Themes" class="teacherDetailRow">
+                <p class="teacherDetailRow">{{teacherTheme.Title}}</p>
+                <p class="teacherDetailRowSecondary">{{teacherTheme.Description}}</p>
+            </div>
         </div>
-    </div>
-    
-    <div class="studentDetails"> 
-                <div>There you have details</div>
-            
-    </div>
-    </div>
 
-</div>
+        <div class="studentDetails">
+            <div class="studentDetailsRowTitle">Details about your idea</div>
+            <div>
+                <span class="studentDetailsRow">Title:</span>
+                <span class="mdl-textfield mdl-js-textfield studentDetailsRowSecondary">
+                    <input class="mdl-textfield__input" type="text" id="sample1" placeholder="The title of your degree">
+                </span>
+            </div>
+            <div>
+                <span class="studentDetailsRow">Description:</span>
+                <span class="mdl-textfield mdl-js-textfield studentDetailsRowSecondary">
+                    <input class="mdl-textfield__input" type="text" id="sample1" placeholder="A brief description about your idea">
+                </span>
+                <div>
+                    <span class="studentDetailsRow">Personal achievements:</span>
+                    <span class="mdl-textfield mdl-js-textfield studentDetailsRowSecondary">
+                        <input class="mdl-textfield__input" type="text" id="sample1" placeholder="Desc">
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    </div>

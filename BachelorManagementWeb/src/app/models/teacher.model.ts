@@ -11,4 +11,5 @@ export class Teacher {
     ThemeTitles: string;
     Themes: Array<Bachelor>;
     Discipline: string;
+    Grade: string;
 }

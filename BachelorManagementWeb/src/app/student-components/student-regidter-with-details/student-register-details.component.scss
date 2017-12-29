@@ -49,6 +49,7 @@ $input-border-color-default: rgba(94, 64, 56, 0.4);
 }
 
 .mdl-textfield__input{
+    width: 200%;
     padding: 0% 5%;
     font-family: $text-font;
     color: $text-color;
@@ -57,4 +58,9 @@ $input-border-color-default: rgba(94, 64, 56, 0.4);
 
 .contentContainer{
     margin: 5% 0%;
+}
+
+.mdl-button{
+    float: right;
+    margin: 0% 10%;  
 }

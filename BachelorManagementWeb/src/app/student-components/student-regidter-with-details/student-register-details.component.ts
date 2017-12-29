@@ -11,6 +11,8 @@ import { Bachelor } from '../../models/bachelor-degree.model';
 
 export class StudentRegisterToTeacherDetailsLayoutComponent {
 
+    buttonText: string = "Subimt";
+
     //api  call for the teachers list
     teacherList: Array<Teacher>;
     teacher1: Teacher;

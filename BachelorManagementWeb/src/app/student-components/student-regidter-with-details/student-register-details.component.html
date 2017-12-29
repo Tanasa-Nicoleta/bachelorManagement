@@ -30,9 +30,15 @@
                 </span>
                 <div>
                     <span class="studentDetailsRow">Personal achievements:</span>
-                    <span class="mdl-textfield mdl-js-textfield studentDetailsRowSecondary">
+                    <span class="mdl-textfield mdl-js-textfield  studentDetailsRowSecondary">
                         <input class="mdl-textfield__input" type="text" id="sample1" placeholder="Desc">
                     </span>
+                </div>
+                <div>
+                        <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" 
+                        (click)="applyToTeacher(teacher.FirstName, teacher.LastName)" [routerLink]="['/login']">
+                            {{buttonText}}
+                        </button>
                 </div>
             </div>
         </div>

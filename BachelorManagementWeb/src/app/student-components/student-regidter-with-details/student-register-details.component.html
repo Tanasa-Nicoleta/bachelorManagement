@@ -24,10 +24,12 @@
                 </span>
             </div>
             <div>
-                <span class="studentDetailsRow">Description:</span>
-                <span class="mdl-textfield mdl-js-textfield studentDetailsRowSecondary">
-                    <input #Description class="mdl-textfield__input" type="text" placeholder="A brief description about your idea">
-                </span>
+                <div>
+                    <span class="studentDetailsRow">Description:</span>
+                    <span class="mdl-textfield mdl-js-textfield studentDetailsRowSecondary">
+                        <input #Description class="mdl-textfield__input" type="text" placeholder="A brief description about your idea">
+                    </span>
+                </div>
                 <div>
                     <span class="studentDetailsRow">Personal achievements:</span>
                     <span class="mdl-textfield mdl-js-textfield  studentDetailsRowSecondary">
@@ -35,10 +37,10 @@
                     </span>
                 </div>
                 <div>
-                        <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" 
-                        (click)="applyToTeacherWithDetails(Title.value, Description.value, Achievement.value)" [routerLink]="['/login']">
-                            {{buttonText}}
-                        </button>
+                    <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" (click)="applyToTeacherWithDetails(Title.value, Description.value, Achievement.value)"
+                        [routerLink]="['/login']">
+                        {{buttonText}}
+                    </button>
                 </div>
             </div>
         </div>

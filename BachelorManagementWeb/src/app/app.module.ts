@@ -8,7 +8,7 @@ import { RegisterLayoutComponent } from './login-and-register-components/registe
 import { HttpClientModule } from '@angular/common/http';
 import { StudentHeaderComponent } from './student-components/student-header/student-header.component';
 import { StudentRegisterToTeacherComponent } from './student-components/student-register-to-teacher/student-register-to-teacher.component';
-import { StudentRegisterToTeacherDetailsComponent } from './student-components/student-regidter-with-details/student-register-details.component';
+import { StudentRegisterToTeacherDetailsComponent } from './student-components/student-register-with-details/student-register-details.component';
 import { TeacherAddDetailsComponent } from './teacher-components/teacher-add-details/teacher-add-details.component';
 import { TeacherWallComponent } from './teacher-components/teacher-wall/teacher-wall.component';
 import { TeacherEditWallComponent } from './teacher-components/teacher-edit-wall/teacher-edit-wall.component';

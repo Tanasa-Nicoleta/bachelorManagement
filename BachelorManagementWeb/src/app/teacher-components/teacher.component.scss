@@ -55,10 +55,41 @@ $input-border-color-default: rgba(94, 64, 56, 0.4);
 .mdl-button{
     color: $text-color;
     float: right;
-    margin: 2% 2%;  
-    
+    margin: 2% 2%;      
 }
 
 .mdl-js-ripple-effect{
     background-color: $content-container-bg-color;
+}
+
+.meetingDetails, .studentDetails{   
+    background-color: $content-container-bg-color;
+    font-family: $text-font;
+    color: $text-color;
+    padding: 4% 2%;        
+    margin: 2% 2%;
+    border: solid $input-border-color-default 1px;
+    @media #{$information-tablet}{        
+        margin: 5% 2%; // check this when intergrating with another component
+    }
+    @media #{$information-phone} {        
+        margin: 3% 1%; // same here (upArrow)
+    }
+}
+
+.studentDetails{
+    width: 60%; 
+    float: right;  
+}
+
+.meetingDetails{    
+    width: 30%; 
+    float: left;
+}
+
+.requestButton{
+    margin: 5% 0%;
+}
+.meetingRequested{
+    margin-top: 15%;
 }

@@ -39,12 +39,8 @@ export class RegisterLayoutComponent {
       this.matchError = true;
       return false;
     }
-    if (!this.isValidPassword(password.value)) {      
-      password.classList.add('invalidPass');
-      this.matchError = true;
-      return false;
-    }
     else {
+      password.classList.remove('invalidPass');
       this.DeleteError();
       return true;
     }

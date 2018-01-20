@@ -34,7 +34,7 @@
                 Confirm Password
             </div>
 
-            <input #ConfirmPass name="ConfirmPass" type="password" placeholder="**********" id="confirmPasswordInput" (keyup)="validatePass($event.target); confirmPass($event.target,SubmitPass.value);" required>
+            <input #ConfirmPass name="ConfirmPass" type="password" placeholder="**********" id="confirmPasswordInput" (keyup)="confirmPass($event.target,SubmitPass.value);" required>
         </div>
 
         <div id="error" *ngIf="matchError">

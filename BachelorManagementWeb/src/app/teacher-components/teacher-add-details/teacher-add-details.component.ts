@@ -9,5 +9,6 @@ import { Component } from '@angular/core';
 
 export class TeacherAddDetailsComponent {
     maxNumberOfStudents: number = 15;
-    buttonText: string = "Add a theme";
+    saveButtonText: string = "Save details";
+    addThemeButtonText: string = "Add a theme";
 }

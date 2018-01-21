@@ -15,11 +15,9 @@
                 <div>
                     Available day and hour: {{availableDay}}, {{availableHours}}
                 </div>
-                <div>
-                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect requestButton" (click)="requestMetting()">
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect requestButton" (click)="requestMetting()">
                         {{requestAMeetingButton}}
-                    </button>
-                </div>
+                </button>
                 <div *ngIf="meetingRequest" class="meetingRequested">
                     Meeting request status: {{meetingRequestStatus}}
                 </div>

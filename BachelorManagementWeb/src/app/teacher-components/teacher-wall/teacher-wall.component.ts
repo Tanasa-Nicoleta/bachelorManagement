@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { MeetingRequestStatus } from '../../models/meetingRequestStatus.model';
+import { MeetingRequestStatus } from '../../models/meeting-request-status.model';
+import { DayOfWeek } from '../../models/day-of-week.model';
+import { DateClass } from '../../models/date.model';
 
 @Component({
   selector: 'teacher-wall',
@@ -9,10 +11,12 @@ import { MeetingRequestStatus } from '../../models/meetingRequestStatus.model';
 
 export class TeacherWallComponent {
   teacherName: string = "Teacher Name"; // to be taken from api
-  availableDayAndHour: [string, string] = ["Monday", "12:00"];
+  availableDay: string = DayOfWeek[0];
+  upcomingDeadlineDay: DateClass =  new DateClass(1, 3, 2018, "14:00");
+  availableHours: string = "12:00";
   requestAMeetingButton: string = "Request a meeting";
   meetingRequest: boolean = false;
-  meetingResuestStatus: MeetingRequestStatus = MeetingRequestStatus.Pending;
+  meetingRequestStatus: string = MeetingRequestStatus[0];
 
   requestMetting(){
     if(this.meetingRequest){

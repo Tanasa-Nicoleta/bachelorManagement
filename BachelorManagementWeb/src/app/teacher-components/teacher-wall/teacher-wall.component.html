@@ -10,18 +10,40 @@
             {{teacherName}}
         </div>
 
-        <div class="meetingDetails">
-            <div>
-                Available day and hour: {{availableDayAndHour}}
+        <div class = "left-side">
+            <div class="availabilityDetails">
+                <div>
+                    Available day and hour: {{availableDay}}, {{availableHours}}
+                </div>
+                <div>
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect requestButton" (click)="requestMetting()">
+                        {{requestAMeetingButton}}
+                    </button>
+                </div>
+                <div *ngIf="meetingRequest" class="meetingRequested">
+                    Meeting request status: {{meetingRequestStatus}}
+                </div>
             </div>
-            <div>
-                <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect requestButton" (click)="requestMetting()">
-                    {{requestAMeetingButton}}
-                </button>
-            </div>
-            <div *ngIf="meetingRequest" class="meetingRequested">
-                Meeting request status: Pending
+
+            <div class="deadineDetails">
+                <div>
+                    Upcoming deadline: {{upcomingDeadlineDay.day}}-{{upcomingDeadlineDay.month}}-{{upcomingDeadlineDay.year}}, {{upcomingDeadlineDay.hour}}
+                </div>
             </div>
         </div>
+
+        <div class="wall">
+            <div>
+                Here the comments and observations of the teacher will be shown.
+            </div>
+            <div>
+                Here the comments and observations of the teacher will be shown.
+            </div>
+            <div>
+                Here the comments and observations of the teacher will be shown.
+            </div>
+        </div>
+
+
     </div>
 </div>

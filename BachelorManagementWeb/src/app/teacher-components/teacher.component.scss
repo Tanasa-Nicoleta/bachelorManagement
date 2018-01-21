@@ -62,12 +62,12 @@ $input-border-color-default: rgba(94, 64, 56, 0.4);
     background-color: $content-container-bg-color;
 }
 
-.meetingDetails, .studentDetails{   
+.availabilityDetails, .deadineDetails, .wall{   
     background-color: $content-container-bg-color;
     font-family: $text-font;
     color: $text-color;
     padding: 4% 2%;        
-    margin: 2% 2%;
+    margin: 0% 2%;
     border: solid $input-border-color-default 1px;
     @media #{$information-tablet}{        
         margin: 5% 2%; // check this when intergrating with another component
@@ -77,19 +77,25 @@ $input-border-color-default: rgba(94, 64, 56, 0.4);
     }
 }
 
-.studentDetails{
-    width: 60%; 
-    float: right;  
-}
-
-.meetingDetails{    
+.left-side{    
     width: 30%; 
     float: left;
+}
+
+.wall{
+    width: 60%;
+    float: right;
+    margin-top: 0%;
 }
 
 .requestButton{
     margin: 5% 0%;
 }
+
 .meetingRequested{
     margin-top: 15%;
+}
+
+.deadineDetails{
+    margin: 10% 2%;
 }

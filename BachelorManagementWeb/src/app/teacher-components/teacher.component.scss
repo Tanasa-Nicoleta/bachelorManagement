@@ -92,5 +92,9 @@ $input-border-color-default: rgba(94, 64, 56, 0.4);
 
 .obsTimestamp{
     float: right;
-    font-size: $text-size-header - 6;
+    font-size: $text-size-header - 8;
+}
+
+.obsContent{    
+    font-size: $text-size-header - 4;
 }

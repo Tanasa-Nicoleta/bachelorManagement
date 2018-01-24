@@ -12,7 +12,7 @@ $input-border-color-default: rgba(94, 64, 56, 0.4);
 .layoutContainer {
     min-width: 100%;
     width: 100%;
-    min-height: 800px;
+    min-height: 1000px; // see if you can make it dynamically
     height: auto;
     margin: 0px;
     background: url("https://i.imgur.com/RLacS2w.jpg") no-repeat center center fixed;

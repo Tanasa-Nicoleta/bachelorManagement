@@ -1,6 +1,8 @@
 <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+
 <div class="layoutContainer">
+
     <student-header>
         <!-- check if another is needed -->
     </student-header>
@@ -31,7 +33,10 @@
         </div>
 
         <div *ngFor="let teacherOb of teacherObs" class="wall">
-            <span>
+            <div>
+                {{teacherName}}
+            </div>
+            <span class="obsContent">
                 {{teacherOb.observation}}
             </span>
             <span class="obsTimestamp">

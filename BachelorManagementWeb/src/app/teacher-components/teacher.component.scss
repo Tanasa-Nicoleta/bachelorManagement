@@ -78,6 +78,8 @@ $input-border-color-default: rgba(94, 64, 56, 0.4);
     width: 60%;
     float: right;
     margin-top: 0%;
+    margin-bottom: 2%;
+    padding: 2%;
 }
 
 .requestButton{
@@ -86,4 +88,9 @@ $input-border-color-default: rgba(94, 64, 56, 0.4);
 
 .deadineDetails{
     margin: 10% 2%;
+}
+
+.obsTimestamp{
+    float: right;
+    font-size: $text-size-header - 6;
 }

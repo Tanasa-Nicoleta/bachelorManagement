@@ -10,13 +10,13 @@
             {{teacherName}}
         </div>
 
-        <div class = "left-side">
+        <div class="left-side">
             <div class="availabilityDetails">
                 <div>
                     Available day and hour: {{availableDay}}, {{availableHours}}
                 </div>
                 <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect requestButton" (click)="requestMetting()">
-                        {{requestAMeetingButton}}
+                    {{requestAMeetingButton}}
                 </button>
                 <div *ngIf="meetingRequest" class="meetingRequested">
                     Meeting request status: {{meetingRequestStatus}}
@@ -30,16 +30,13 @@
             </div>
         </div>
 
-        <div class="wall">
-            <div>
-                Here the comments and observations of the teacher will be shown.
-            </div>
-            <div>
-                Here the comments and observations of the teacher will be shown.
-            </div>
-            <div>
-                Here the comments and observations of the teacher will be shown.
-            </div>
+        <div *ngFor="let teacherOb of teacherObs" class="wall">
+            <span>
+                {{teacherOb.observation}}
+            </span>
+            <span class="obsTimestamp">
+                [{{teacherOb.timestamp.day}}-{{teacherOb.timestamp.month}}-{{teacherOb.timestamp.year}}, {{teacherOb.timestamp.hour}}]
+            </span>
         </div>
 
 

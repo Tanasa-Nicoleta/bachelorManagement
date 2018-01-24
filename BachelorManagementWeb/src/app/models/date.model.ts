@@ -1,3 +1,5 @@
+import { Month } from "./month.model";
+
 export class DateClass{
     constructor(day, month, year, hour){
         this.day = day;
@@ -6,7 +8,7 @@ export class DateClass{
         this.hour = hour;
     }
     day: number;
-    month: number;
+    month: Month;
     year: number;
     hour: string;
 }

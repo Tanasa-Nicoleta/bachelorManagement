@@ -26,7 +26,7 @@ $input-border-color-default: rgba(94, 64, 56, 0.4);
 .teacherDetailsRowTitle{  
     font-family: $text-font;  
     padding: 1.5% 0%;
-    font-size: $text-size-header;
+    font-size: $text-size-header + 2;
     font-weight: normal;
     text-align: center;
     color: $text-color;
@@ -90,11 +90,30 @@ $input-border-color-default: rgba(94, 64, 56, 0.4);
     margin: 10% 2%;
 }
 
-.obsTimestamp{
+.obsTimestamp, .commentTimestamp{
     float: right;
+}
+
+.obsTimestamp{
     font-size: $text-size-header - 8;
 }
 
+.commentTimestamp{
+    font-size: $text-size-header - 8;
+}
+
+
 .obsContent{    
+    font-size: $text-size-header - 2;
+}
+
+.comment{    
     font-size: $text-size-header - 4;
+    border: $input-border-color-default solid 1px;
+    padding: 1% 1% 1% 1%;
+    margin: 1% 0% 1% 1%;
+}
+
+.commentContent{
+    font-size: $text-size-header - 6;
 }

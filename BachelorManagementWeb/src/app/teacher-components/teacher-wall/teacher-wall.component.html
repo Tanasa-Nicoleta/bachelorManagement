@@ -32,7 +32,7 @@
             </div>
         </div>
 
-        <div *ngFor="let teacherOb of teacherObs" [attr.data-index]="i" class="wall">
+        <div *ngFor="let teacherOb of teacherObs" class="wall">
             <div>
                 {{teacherName}}
             </div>
@@ -40,11 +40,19 @@
                 {{teacherOb[0].observation}}
             </span>
             <span class="obsTimestamp">
-                [{{teacherOb[0].timestamp.day}}-{{teacherOb[0].timestamp.month}}-{{teacherOb[0].timestamp.year}}, {{teacherOb[0].timestamp.hour}}]
+                {{teacherOb[0].timestamp.day}}-{{teacherOb[0].timestamp.month}}-{{teacherOb[0].timestamp.year}}, {{teacherOb[0].timestamp.hour}}
             </span>
-            <div *ngIf="teacherOb[1][0] != null"> 
-                <div *ngFor="let comment of teacherOb[1]; let i = index;">
-                {{teacherOb[1][i].name}} {{teacherOb[1][i].content}} {{teacherOb[1][i].timestamp.day}} {{teacherOb[1][i].timestamp.month}} {{teacherOb[1][i].timestamp.year}} {{teacherOb[1][i].timestamp.hour}}
+            <div *ngIf="teacherOb[1][0] != null">
+                <div *ngFor="let comment of teacherOb[1]; let i = index;" class="comment">
+                    <div>
+                        {{teacherOb[1][i].name}}
+                    </div>
+                    <span class="commentContent">
+                        {{teacherOb[1][i].content}}
+                    </span>
+                    <span class="commentTimestamp">
+                        {{teacherOb[1][i].timestamp.day}}-{{teacherOb[1][i].timestamp.month}}-{{teacherOb[1][i].timestamp.year}}, {{teacherOb[1][i].timestamp.hour}}
+                    </span>
                 </div>
             </div>
         </div>

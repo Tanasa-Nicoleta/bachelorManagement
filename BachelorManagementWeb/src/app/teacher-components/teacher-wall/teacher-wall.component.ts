@@ -25,23 +25,25 @@ export class TeacherWallComponent {
   meetingRequest: boolean = false;
   meetingRequestStatus: string = MeetingRequestStatus[0];
 
+  addCommentButton: string = "Add a comment";
+
   teacherObs: [[TeacherObservation, [Comment | null]]] = [
     [new TeacherObservation("Hello everybody! Welcome to my page.", new DateClass(1, Month[1], 2018, "12:00")),
       [new Comment(this.studentName, "Hello! Thank you!", new DateClass(1, Month[1], 2018, "12:00")),
       new Comment(this.studentName, "Hello! Thank you, mister " + this.teacherName + "!", new DateClass(20, Month[1], 2018, "14:40"))]],
     [new TeacherObservation("Good morning! I want to see your papers soon.", new DateClass(20, Month[1], 2018, "14:40")),
       [new Comment(this.studentName, "Hello! Thank you, mister " + this.teacherName + "!", new DateClass(20, Month[1], 2018, "14:40"))]],
-    // [new TeacherObservation("Hello! Any updates?", new DateClass(21, Month[1], 2018, "12:00")),
-    //   [null]],
-    // [new TeacherObservation("Is anybody having a problem?", new DateClass(22, Month[1], 2018, "19:35")),
-    //   [null]],
-    // [new TeacherObservation("I  have some news for you!" +
-    //   "I'm not available to see you in person in the next two weeks because of some personal problems." +
-    //   "I would be available on this platform so if you got ay questions plese shoot. :)",
-    //   new DateClass(25, Month[1], 2018, "21:30")),
-    //   [null]],
-    // [new TeacherObservation("Good morning! I want to see your updated papers on Monday.", new DateClass(29, Month[1], 2018, "12:28")),
-    //   [null]]
+    [new TeacherObservation("Hello! Any updates?", new DateClass(21, Month[1], 2018, "12:00")),
+      [null]],
+    [new TeacherObservation("Is anybody having a problem?", new DateClass(22, Month[1], 2018, "19:35")),
+      [null]],
+    [new TeacherObservation("I  have some news for you!" +
+      "I'm not available to see you in person in the next two weeks because of some personal problems." +
+      "I would be available on this platform so if you got ay questions plese shoot. :)",
+      new DateClass(25, Month[1], 2018, "21:30")),
+      [null]],
+    [new TeacherObservation("Good morning! I want to see your updated papers on Monday.", new DateClass(29, Month[1], 2018, "12:28")),
+      [null]]
   ];
 
 
@@ -59,5 +61,9 @@ export class TeacherWallComponent {
     else {
       this.requestAMeetingButton = "Request a meeting";
     }
+  }
+
+  addComment(){
+    
   }
 }

@@ -121,5 +121,10 @@ $input-border-color-default: rgba(94, 64, 56, 0.4);
 .addCommentButton{
     float: right;
     margin: 0%;  
+    margin-top: 0.5%;
     font-size: $text-size-header - 6;
+    &:focus{   
+        color: yellow;     
+        outline:0;
+    }
 }

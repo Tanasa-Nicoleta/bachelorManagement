@@ -22,17 +22,9 @@ export class StudentRegisterToTeacherComponent {
     theme3: Bachelor;
 
     ngOnInit(){
-        this.theme1 = new Bachelor();
-        this.theme1.Title = "Theme1";
-        this.theme1.Description = "Description1 for Theme1";
-        
-        this.theme2 = new Bachelor();
-        this.theme2.Title = "Theme2";
-        this.theme2.Description = "Description2 for Theme 2 and some random extra text";
-        
-        this.theme3 = new Bachelor();
-        this.theme3.Title = "Theme3";
-        this.theme3.Description = "Description3 and other random text just for the text to align";
+        this.theme1 = new Bachelor("Theme1", "Description1 for Theme1");        
+        this.theme2 = new Bachelor("Theme2", "Description2 for Theme 2 and some random extra text");        
+        this.theme3 = new Bachelor("Theme3", "Description3 and other random text just for the text to align");
 
         this.teacher1 = new Teacher();
         this.teacher1.Grade = "Prof."

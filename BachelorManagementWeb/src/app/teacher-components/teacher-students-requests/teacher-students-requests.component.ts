@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Student } from '../../models/student.model';
+import { Bachelor } from '../../models/bachelor-degree.model';
 
 @Component({
   selector: 'teacher-students-requests',
@@ -8,4 +10,8 @@ import { Component } from '@angular/core';
 
 
 export class TeacherStudentsRequestsComponent {
+  requests: [[Student]] = [[new Student("Ana", "Maria", "A.M@info.uaic.ro",
+    [new Bachelor("Title1", "Descripiton1"),
+    new Bachelor("Title2", "Descripiton2")])]]
+
 }

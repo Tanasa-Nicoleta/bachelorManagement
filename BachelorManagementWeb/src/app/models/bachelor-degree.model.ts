@@ -1,5 +1,8 @@
 export class Bachelor {
-    constructor() { }
+    constructor(title, description) {
+        this.Title = title;
+        this.Description = description;
+     }
     Id: number;
     Title: string;
     Description: string;

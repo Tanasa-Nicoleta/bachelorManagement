@@ -67,8 +67,8 @@ export class TeacherWallComponent {
     }
   }
 
-  addComment(){
-
+  addComment(comment: any){
+    console.log(comment);
   }
 
   showAllComments(teacherObservation: [TeacherObservation, [Comment | null], boolean]){

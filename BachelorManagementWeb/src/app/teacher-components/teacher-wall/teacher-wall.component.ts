@@ -67,8 +67,15 @@ export class TeacherWallComponent {
     }
   }
 
-  addComment(comment: any){
-    console.log(comment);
+  addComment(commentContent: string, teacherObservation: [TeacherObservation, [Comment | null], boolean]){
+     
+    let d = new Date();
+    let comment = new Comment(teacherObservation[1][0].name, commentContent, new DateClass(d.getDate(), Month[d.getMonth()], d.getFullYear(), d.getHours() + ":" + d.getMinutes()));
+    this.teacherObs.forEach(teacherOb => {
+      if(teacherOb[0] == teacherObservation[0]){
+        teacherOb[1].push(comment);
+      }
+    });
   }
 
   showAllComments(teacherObservation: [TeacherObservation, [Comment | null], boolean]){

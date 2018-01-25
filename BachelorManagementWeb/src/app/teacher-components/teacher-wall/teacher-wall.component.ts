@@ -25,8 +25,6 @@ export class TeacherWallComponent {
   meetingRequest: boolean = false;
   meetingRequestStatus: string = MeetingRequestStatus[0];
 
-  addCommentButton: string = "Add comment";
-
   teacherObs: [[TeacherObservation, [Comment | null]]] = [
     [new TeacherObservation("Hello everybody! Welcome to my page.", new DateClass(1, Month[1], 2018, "12:00")),
       [new Comment(this.studentName, "Hello! Thank you!", new DateClass(1, Month[1], 2018, "12:00")),

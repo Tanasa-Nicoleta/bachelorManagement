@@ -123,8 +123,11 @@ $input-border-color-default: rgba(94, 64, 56, 0.4);
     margin: 0%;  
     margin-top: 0.5%;
     font-size: $text-size-header - 6;
-    &:focus{   
-        color: yellow;     
+    &:focus{      
         outline:0;
     }
+}
+
+.studentDetailsRowSecondary{
+    width: 30%;
 }

@@ -111,25 +111,22 @@ $input-border-color-default: rgba(94, 64, 56, 0.4);
     font-size: $text-size-header - 4;
     border: $input-border-color-default solid 1px;
     padding: 1% 1% 1% 1%;
-    margin: 1% 0% 1% 1%;
+    margin: 2.5% 0% 1% 1%;
 }
 
 .commentContent{
     font-size: $text-size-header - 6;
 }
 
-.addCommentButton{
-    float: right;
+.addCommentRow{
+    width: 30%;
     margin: 0%;  
     margin-top: 0.5%;
     font-size: $text-size-header - 6;
-    &:focus{      
+    &:active{      
         outline:0;
+        font-size: $text-size-header - 10;
     }
-}
-
-.studentDetailsRowSecondary{
-    width: 30%;
 }
 
 .showComments{

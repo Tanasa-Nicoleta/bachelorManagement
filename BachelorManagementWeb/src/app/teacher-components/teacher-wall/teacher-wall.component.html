@@ -44,7 +44,12 @@
             </span>
             <div>
                 <div *ngIf="teacherOb[1][0] != null" class="showComments" (click)="showAllComments(teacherOb)">
-                    Show comments
+                    <div *ngIf="teacherOb[2] == false"> 
+                        {{showCommentsButton}} 
+                    </div>
+                    <div *ngIf="teacherOb[2] == true"> 
+                            {{hideCommentsButton}} 
+                    </div>
                 </div>
             </div>
             <div *ngIf="teacherOb[2] == true">
@@ -63,7 +68,7 @@
                 </div>
             </div>
             <div>
-                <span class="mdl-textfield mdl-js-textfield studentDetailsRowSecondary">
+                <span class="mdl-textfield mdl-js-textfield addCommentRow">
                     <input #Comment class="mdl-textfield__input" type="text" placeholder="Your comment here.">
                 </span>
             </div>

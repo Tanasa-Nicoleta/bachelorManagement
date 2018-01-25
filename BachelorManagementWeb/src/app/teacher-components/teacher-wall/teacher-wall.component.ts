@@ -24,6 +24,9 @@ export class TeacherWallComponent {
   requestAMeetingButton: string = "Request a meeting";
   meetingRequest: boolean = false;
   meetingRequestStatus: string = MeetingRequestStatus[0];
+
+  hideCommentsButton: string = "Hide comments";
+  showCommentsButton: string = "Show comments";
   showComments: boolean = false;
 
   teacherObs: [[TeacherObservation, [Comment | null], boolean]] = [

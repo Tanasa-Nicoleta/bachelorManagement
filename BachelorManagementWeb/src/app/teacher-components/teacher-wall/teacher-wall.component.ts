@@ -69,8 +69,12 @@ export class TeacherWallComponent {
 
   addComment(commentContent: string, teacherObservation: [TeacherObservation, [Comment | null], boolean]){
      
-    let d = new Date();
-    let comment = new Comment(teacherObservation[1][0].name, commentContent, new DateClass(d.getDate(), Month[d.getMonth()], d.getFullYear(), d.getHours() + ":" + d.getMinutes()));
+    let datetime = new Date();
+    let minutes = (datetime.getMinutes() +"").length == 2 ? datetime.getMinutes() : "0" + datetime.getMinutes();
+    let hour = datetime.getHours() + ":" + minutes;
+    let comment = new Comment(teacherObservation[1][0].name, 
+      commentContent, 
+      new DateClass(datetime.getDate(), Month[datetime.getMonth()], datetime.getFullYear(), hour));
     this.teacherObs.forEach(teacherOb => {
       if(teacherOb[0] == teacherObservation[0]){
         teacherOb[1].push(comment);

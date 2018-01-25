@@ -42,17 +42,24 @@
             <span class="obsTimestamp">
                 {{teacherOb[0].timestamp.day}}-{{teacherOb[0].timestamp.month}}-{{teacherOb[0].timestamp.year}}, {{teacherOb[0].timestamp.hour}}
             </span>
-            <div *ngIf="teacherOb[1][0] != null">
-                <div *ngFor="let comment of teacherOb[1]; let i = index;" class="comment">
-                    <div>
-                        {{teacherOb[1][i].name}}
+            <div>
+                <div *ngIf="teacherOb[1][0] != null" class="showComments" (click)="showAllComments(teacherOb)">
+                    Show comments
+                </div>
+            </div>
+            <div *ngIf="teacherOb[2] == true">
+                <div *ngIf="teacherOb[1][0] != null">
+                    <div *ngFor="let comment of teacherOb[1]; let i = index;" class="comment">
+                        <div>
+                            {{teacherOb[1][i].name}}
+                        </div>
+                        <span class="commentContent">
+                            {{teacherOb[1][i].content}}
+                        </span>
+                        <span class="commentTimestamp">
+                            {{teacherOb[1][i].timestamp.day}}-{{teacherOb[1][i].timestamp.month}}-{{teacherOb[1][i].timestamp.year}}, {{teacherOb[1][i].timestamp.hour}}
+                        </span>
                     </div>
-                    <span class="commentContent">
-                        {{teacherOb[1][i].content}}
-                    </span>
-                    <span class="commentTimestamp">
-                        {{teacherOb[1][i].timestamp.day}}-{{teacherOb[1][i].timestamp.month}}-{{teacherOb[1][i].timestamp.year}}, {{teacherOb[1][i].timestamp.hour}}
-                    </span>
                 </div>
             </div>
             <div>
@@ -60,6 +67,7 @@
                     <input #Comment class="mdl-textfield__input" type="text" placeholder="Your comment here.">
                 </span>
             </div>
+
         </div>
 
 

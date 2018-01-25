@@ -24,24 +24,27 @@ export class TeacherWallComponent {
   requestAMeetingButton: string = "Request a meeting";
   meetingRequest: boolean = false;
   meetingRequestStatus: string = MeetingRequestStatus[0];
+  showComments: boolean = false;
 
-  teacherObs: [[TeacherObservation, [Comment | null]]] = [
+  teacherObs: [[TeacherObservation, [Comment | null], boolean]] = [
     [new TeacherObservation("Hello everybody! Welcome to my page.", new DateClass(1, Month[1], 2018, "12:00")),
       [new Comment(this.studentName, "Hello! Thank you!", new DateClass(1, Month[1], 2018, "12:00")),
-      new Comment(this.studentName, "Hello! Thank you, mister " + this.teacherName + "!", new DateClass(20, Month[1], 2018, "14:40"))]],
+      new Comment(this.studentName, "Hello! Thank you, mister " + this.teacherName + "!", new DateClass(20, Month[1], 2018, "14:40"))],
+      this.showComments],
     [new TeacherObservation("Good morning! I want to see your papers soon.", new DateClass(20, Month[1], 2018, "14:40")),
-      [new Comment(this.studentName, "Hello! Thank you, mister " + this.teacherName + "!", new DateClass(20, Month[1], 2018, "14:40"))]],
+      [new Comment(this.studentName, "Hello! Thank you, mister " + this.teacherName + "!", new DateClass(20, Month[1], 2018, "14:40"))],
+      this.showComments],
     [new TeacherObservation("Hello! Any updates?", new DateClass(21, Month[1], 2018, "12:00")),
-      [null]],
+      [null], this.showComments],
     [new TeacherObservation("Is anybody having a problem?", new DateClass(22, Month[1], 2018, "19:35")),
-      [null]],
+      [null], this.showComments],
     [new TeacherObservation("I  have some news for you!" +
       "I'm not available to see you in person in the next two weeks because of some personal problems." +
       "I would be available on this platform so if you got ay questions plese shoot. :)",
       new DateClass(25, Month[1], 2018, "21:30")),
-      [null]],
+      [null], this.showComments],
     [new TeacherObservation("Good morning! I want to see your updated papers on Monday.", new DateClass(29, Month[1], 2018, "12:28")),
-      [null]]
+      [null], this.showComments]
   ];
 
 
@@ -63,5 +66,13 @@ export class TeacherWallComponent {
 
   addComment(){
 
+  }
+
+  showAllComments(teacherObservation: [TeacherObservation, [Comment | null], boolean]){
+    this.teacherObs.forEach(teacherOb => {
+      if(teacherOb[0] == teacherObservation[0]){
+        teacherOb[2]= teacherOb[2] == true ? false : true;
+      }
+    });
   }
 }

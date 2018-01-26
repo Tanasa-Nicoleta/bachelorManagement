@@ -166,6 +166,7 @@ td{
 }
 
 table{
+    border: $input-border-color-default solid 1px;
     height: 100%;
     margin: 0%;
 }
@@ -211,18 +212,20 @@ h2{
 }
 
 .content{    
+    margin-top: 20%;
     border: solid $input-border-color-default 1px;
     background-color: $content-container-bg-color;
+    min-height: 100px;
 }
 
 .sidebar{
     margin: 10% 0% 10% 3%;
-    width: 10%;
+    width: 8%;
     float: left;
 }
 
 .contentDetails{
     margin: 10% 0.5% 10% 2%;
-    width: 80%;
+    width: 85%;
     float: right;
 }

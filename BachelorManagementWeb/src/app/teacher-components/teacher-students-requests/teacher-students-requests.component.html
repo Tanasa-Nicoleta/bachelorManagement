@@ -6,6 +6,14 @@
     </student-header>
 
     <div class="contentContainer">
+        <div>
+            <div>
+                Number of spots: {{numberOfSpots}}
+            </div>
+            <div>
+                Number of available spots: {{numberOfAvailableSpots}}
+            </div>
+        </div>        
         <div class="mdl-cell mdl-cell--12-col">
             <table class="table">
                 <thead>
@@ -23,13 +31,16 @@
                         <td class="columnContent">{{student[1].Description}}</td>
                         <td class="columnContent">
                             <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect acceptRequestButton" 
-                            (click)="acceptStudent()">
+                            *ngIf="student[2] == false" (click)="acceptStudent(student[0])">
                                 {{acceptStudentsRequest}}
                             </button>
                             <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect denyRequestButton" 
-                            (click)="denyStudent()">
+                            *ngIf="student[2] == false" (click)="denyStudent()">
                                 {{denyStudentsRequest}}
                             </button>
+                            <div *ngIf="student[2] == true">
+                                Accepted
+                            </div>
                         </td>
                     </tr>
                 </tbody>

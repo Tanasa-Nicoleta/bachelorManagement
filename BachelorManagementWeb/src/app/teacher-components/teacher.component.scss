@@ -183,10 +183,6 @@ h2{
     margin: 0%;
 }
 
-.contentContainer{
-    width: 90%;
-}
-
 .numberColumn{
     width: 3%;
 }
@@ -214,6 +210,19 @@ h2{
     margin: 2% 0% 1% 1.5%;
 }
 
-.teacherSidebar{
-    width: 25%;
+.content{    
+    border: solid $input-border-color-default 1px;
+    background-color: $content-container-bg-color;
+}
+
+.sidebar{
+    margin: 10% 0% 10% 3%;
+    width: 10%;
+    float: left;
+}
+
+.contentDetails{
+    margin: 10% 0.5% 10% 2%;
+    width: 80%;
+    float: right;
 }

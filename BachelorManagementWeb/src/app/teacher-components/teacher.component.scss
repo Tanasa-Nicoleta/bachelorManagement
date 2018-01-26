@@ -144,14 +144,8 @@ $text-size-content-table: 14px;
     font-weight: normal;
 }
 
-
 .columnTitle, .columnContent{
-    padding: 0.5% 1%;
-}
-
-
-.numberColumn{
-    width: 10%;
+    padding: 2% 1%;
 }
 
 .table, td, th{   
@@ -184,3 +178,26 @@ h2{
     margin: 0%;
 }
 
+.contentContainer{
+    width: 90%;
+}
+
+.numberColumn{
+    width: 3%;
+}
+
+.nameColumn, .optionColumn{
+    width: 15%;
+}
+
+.achievementColumn{
+    width: 30%;
+}
+
+.acceptRequestButton{
+    width: 50%;
+}
+
+.denyRequestButton{
+    width: 30%;
+}

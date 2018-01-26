@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Student } from '../../models/student.model';
 import { Bachelor } from '../../models/bachelor-degree.model';
+import { Achievement } from '../../models/achievement.model';
 
 @Component({
   selector: 'teacher-students-requests',
@@ -10,7 +11,17 @@ import { Bachelor } from '../../models/bachelor-degree.model';
 
 
 export class TeacherStudentsRequestsComponent {
-  requests: [[Student]] = [[new Student("Ana", "Maria", "A.M@info.uaic.ro",
-    [new Bachelor("Title1", "Descripiton1"),
-    new Bachelor("Title2", "Descripiton2")])]]
+   studentList: [[Student, Achievement]] = [[new Student("Ana", "Maria", "A.M@info.uaic.ro",
+     new Bachelor("Title1", "Descripiton1")), new Achievement("My achievement")]]
+
+    acceptStudentsRequest: string = "Accept request";
+    denyStudentsRequest: string = "Deny request";
+
+    acceptStudent(){
+
+    }
+
+    denyStudent(){
+
+    }
 }

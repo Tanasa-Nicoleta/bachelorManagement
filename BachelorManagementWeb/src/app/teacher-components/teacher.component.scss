@@ -7,6 +7,8 @@ $tablet-break: 1008px;
 $information-phone: "only screen and (max-width : $phone-break)";
 $information-tablet: "only screen and (max-width : $tablet-break)";
 $input-border-color-default: rgba(94, 64, 56, 0.4);
+$text-size-header-table: 18px;
+$text-size-content-table: 14px;
 
 .teacherDetailsRow{
     padding: 1.5% 2% 1.5% 5%;
@@ -134,3 +136,51 @@ $input-border-color-default: rgba(94, 64, 56, 0.4);
     font-size: $text-size-header - 6;
     cursor: pointer;
 }
+
+.no-data-to-display, .columnTitle, .columnContent{
+    text-align: center;
+    font-family: $text-font;
+    color: $text-color;
+    font-weight: normal;
+}
+
+
+.columnTitle, .columnContent{
+    padding: 0.5% 1%;
+}
+
+
+.numberColumn{
+    width: 10%;
+}
+
+.table, td, th{   
+    text-align: center; 
+}
+
+th{
+    font-size: $text-size-header-table;
+}
+
+td{
+    font-size: $text-size-content-table;
+}
+
+table{
+    height: 100%;
+    margin: 0%;
+}
+
+.mdl-button{
+    color: $text-color;
+}
+
+.mdl-js-ripple-effect{
+    background-color: $content-container-bg-color;
+}
+
+h2{
+    font-size: $text-size-content-table;
+    margin: 0%;
+}
+

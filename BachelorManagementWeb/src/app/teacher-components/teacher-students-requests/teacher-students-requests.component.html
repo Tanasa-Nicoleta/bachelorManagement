@@ -5,8 +5,37 @@
         <!-- too see if it needs to be another -->
     </student-header>
 
-    <div class="contentContainer">        
-            
+    <div class="contentContainer">
+        <div class="mdl-cell mdl-cell--12-col">
+            <table class="table">
+                <thead>
+                    <th class="columnTitle numberColumn"> Number </th>
+                    <th class="columnTitle"> Name </th>
+                    <th class="columnTitle"> Themes </th>
+                    <th class="columnTitle"> Achievements </th>
+                    <th class="columnTitle"> Option </th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let student of studentList; let i = index;">
+                        <td class="columnContent">{{i + 1}}</td>
+                        <td class="columnContent">{{student[0].FirstName + " " + student[0].LastName}}</td>
+                        <td class="columnContent">{{student[0].Theme.Title}}: {{student[0].Theme.Description}}</td>
+                        <td class="columnContent">{{student[1].Description}}</td>
+                        <td class="columnContent">
+                            <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" 
+                            (click)="acceptStudent()">
+                                {{acceptStudentsRequest}}
+                            </button>
+                            <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" 
+                            (click)="denyStudent()">
+                                {{denyStudentsRequest}}
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <h2 *ngIf="studentList.length == 0" class="no-data-to-display">No data to display</h2>
+        </div>
     </div>
 
 </div>

@@ -26,25 +26,10 @@ export class StudentRegisterToTeacherDetailsComponent {
         
         this.theme1 = new Bachelor("Theme1", "Description1 for Theme1");        
         this.theme2 = new Bachelor("Theme2", "Description2 for Theme 2 and some random extra text");        
-        this.theme3 = new Bachelor("Theme3", "Description3 and other random text just for the text to align");        
-
-        this.teacher1 = new Teacher();
-        this.teacher1.Grade = "Prof."
-        this.teacher1.FirstName = "Ana";
-        this.teacher1.LastName = "Maria";
-        this.teacher1.Discipline = "Discipline1";
-        this.teacher1.NoOfSpots = 3;
-        this.teacher1.NoOfAvailableSpots = 2;
-        this.teacher1.Themes = [this.theme1, this.theme2];
-
-        this.teacher2 = new Teacher();
-        this.teacher1.Grade = "Prof. Doctor"
-        this.teacher2.FirstName = "Ioana";
-        this.teacher2.LastName = "Pascu";
-        this.teacher2.Discipline = "Discipline2";
-        this.teacher2.NoOfSpots = 12;
-        this.teacher2.NoOfAvailableSpots = 11;
-        this.teacher2.Themes = [this.theme3];
+        this.theme3 = new Bachelor("Theme3", "Description3 and other random text just for the text to align"); 
+        
+        this.teacher1 = new Teacher("Ana", "Maria", "", 3, 2, "", [this.theme1, this.theme2], "Discipline1", "Prof");
+        this.teacher2 = new Teacher("Ioana", "Pascu", "", 12, 11, "", [this.theme3], "Discipline2", "Prof Doctor");
 
         this.teacherList = [this.teacher1, this.teacher2];
     }

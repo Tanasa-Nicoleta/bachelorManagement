@@ -13,5 +13,4 @@ export class TeacherStudentsRequestsComponent {
   requests: [[Student]] = [[new Student("Ana", "Maria", "A.M@info.uaic.ro",
     [new Bachelor("Title1", "Descripiton1"),
     new Bachelor("Title2", "Descripiton2")])]]
-
 }

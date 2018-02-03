@@ -1,28 +1,24 @@
-﻿using System.Web.Http;
+﻿using BachelorManagement.ApiLayer.Models;
 using BachelorManagement.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BachelorManagement.ApiLayer.Controllers
 {
-    [RoutePrefix("api")]
+    [Route("api")]
     public class AccountController : Controller
     {
         private readonly IAccountService _accountService;
 
-        public AccountController()
+        [HttpPost("login")]
+        public IActionResult Login(AccountDto accountDto)
         {
-        }
-        [Microsoft.AspNetCore.Mvc.HttpGet]
-        [Microsoft.AspNetCore.Mvc.Route("login")]
-        public string Get()
-        {
-            //if (!ModelState.IsValid)
-            //    return ResponseMessage(Request.CreateResponse(HttpStatusCode.BadRequest));
+            if (!ModelState.IsValid)
+                return BadRequest();
 
-            //if (!_accountService.CheckIfAccountExists(accountDto.Username, accountDto.Password))
-            //    return ResponseMessage(Request.CreateResponse(HttpStatusCode.BadRequest));
+            if (!_accountService.CheckIfAccountExists(accountDto.Username, accountDto.Password))
+                return BadRequest();
 
-            return "OK";
+            return Ok();
 
         }
     }

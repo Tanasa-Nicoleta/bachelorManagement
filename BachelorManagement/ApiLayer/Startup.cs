@@ -26,7 +26,7 @@ namespace BachelorManagement.ApiLayer
                         .AllowCredentials());
             });
 
-            services.AddMvc().AddWebApiConventions();
+            services.AddMvc();
         }
         
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,14 +38,17 @@ namespace BachelorManagement.ApiLayer
             loggerFactory.AddConsole();
 
             if (env.IsDevelopment())
+            {
                 app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandler();
+            }
+
+            app.UseMvc();
 
             app.UseCors("CorsPolicy");
-
-            app.UseMvc(routes =>
-            {
-                routes.MapWebApiRoute("DefaultApi", "api/{controller}/{id?}");
-            });
         }
 
 

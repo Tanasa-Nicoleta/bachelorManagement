@@ -1,7 +1,7 @@
 ﻿using BachelorManagement.ApiLayer.Models;
 using BachelorManagement.BusinessLayer.Contracts;
-using BachelorManagement.BusinessLayer.Interfaces;
 using BachelorManagement.BusinessLayer.Services;
+using BachelorManagement.DataLayer;
 using BachelorManagement.DataLayer.Repositories;
 using BachelorManagement.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -11,13 +11,12 @@ namespace BachelorManagement.ApiLayer.Controllers
     [Route("api")]
     public class AccountController : Controller
     {
-        private IRepository<User> _repository;
         private readonly IAccountService _accountService;
 
         public AccountController()
         {
-            _repository = new Repository<User>();
-            _accountService = new AccountService(_repository);
+            var repository = new Repository<User>();
+            _accountService = new AccountService(repository);
         }
 
         [HttpPost("login")]

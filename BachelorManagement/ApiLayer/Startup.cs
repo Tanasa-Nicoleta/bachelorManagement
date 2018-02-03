@@ -46,9 +46,10 @@ namespace BachelorManagement.ApiLayer
                 app.UseExceptionHandler();
             }
 
+            app.UseCors("CorsPolicy");
+
             app.UseMvc();
 
-            app.UseCors("CorsPolicy");
         }
 
 

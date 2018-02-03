@@ -6,7 +6,7 @@ namespace BachelorManagement.ApiLayer.Models
     {
         [Required]
         [EmailAddress]
-        [RegularExpression(@".+\b@info\.uaic\.com\b$")]
+        [RegularExpression(@".+\b@info\.uaic\.ro\b$")]
         [MinLength(12)]
         [MaxLength(61)]
         public string Username { get; set; }

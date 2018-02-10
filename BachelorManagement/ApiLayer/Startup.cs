@@ -1,4 +1,7 @@
-﻿using BachelorManagement.DataLayer;
+﻿using BachelorManagement.BusinessLayer.Interfaces;
+using BachelorManagement.DataLayer;
+using BachelorManagement.DataLayer.Entities;
+using BachelorManagement.DataLayer.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -13,9 +16,6 @@ namespace BachelorManagement.ApiLayer
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<BachelorManagementContext>(options =>
-                options.UseSqlServer(
-                    @"Server=(localdb)\mssqllocaldb;Database=BachelorManagement;Trusted_Connection=True;"));
 
             services.AddCors(options =>
             {
@@ -27,6 +27,12 @@ namespace BachelorManagement.ApiLayer
             });
 
             services.AddMvc();
+
+            services.AddDbContext<BachelorManagementContext>(options =>
+                options.UseSqlServer(
+                    @"Server=(localdb)\mssqllocaldb;Database=BachelorManagement;Trusted_Connection=True;"));
+
+            services.AddScoped<IRepository<User>, UserRepository>();
         }
         
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

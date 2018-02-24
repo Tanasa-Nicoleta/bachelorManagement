@@ -208,24 +208,42 @@ h2{
     color: $text-color;
     font-family: $text-font;
     font-size: $text-size-header;
-    margin: 2% 0% 1% 1.5%;
 }
 
-.content{    
-    margin-top: 20%;
+.content{
     border: solid $input-border-color-default 1px;
     background-color: $content-container-bg-color;
     min-height: 100px;
 }
 
-.sidebar{
-    margin: 10% 0% 10% 3%;
-    width: 8%;
-    float: left;
+.bordered{    
+    border: solid $input-border-color-default 1px;
 }
 
 .contentDetails{
-    margin: 10% 0.5% 10% 2%;
-    width: 85%;
+    margin: 2%;
+    width: 93%;
     float: right;
+}
+
+.sidebar{
+    margin: 3%;
+    width: 20%;
+    float: left;
+}
+
+.studentDetails{
+    width: 100%;
+}
+
+.sidebar_border{
+    width: 15%;
+    float: left;
+    margin: 1% 0% 1% 1%;
+}
+
+.content_border{
+    float: right;
+    margin: 1% 1% 1% 0%;
+    width: 82%;
 }

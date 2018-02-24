@@ -6,14 +6,15 @@
         <!-- too see if it needs to be another -->
     </student-header>
 
-    <div class="content">
-        <div class="content sidebar">
-            <teacher-sidebar>
 
-            </teacher-sidebar>
+    <div class="content contentDetails">
+        
+        <div class="bordered sidebar_border">
+                <teacher-sidebar>
+                </teacher-sidebar>
         </div>
-
-        <div class="content contentDetails">
+        
+        <div class="bordered content_border">            
             <div class="spots">
                 <div>
                     Number of spots: {{numberOfSpots}}
@@ -22,6 +23,8 @@
                     Number of available spots: {{numberOfAvailableSpots}}
                 </div>
             </div>
+            
+            <div class="studentDetails">
             <div class="mdl-cell mdl-cell--12-col">
                 <table class="table">
                     <thead>
@@ -38,16 +41,23 @@
                             <td class="columnContent">{{student[0].Theme.Title}}: {{student[0].Theme.Description}}</td>
                             <td class="columnContent">{{student[1].Description}}</td>
                             <td class="columnContent">
-                                <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect acceptRequestButton" *ngIf="student[2] == false"
+                                <button type="radio" 
+                                class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect acceptRequestButton" 
+                                *ngIf="student[2] == false && student[3] == false"
                                     (click)="acceptStudent(student[0])">
                                     {{acceptStudentsRequest}}
                                 </button>
-                                <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect denyRequestButton" *ngIf="student[2] == false"
-                                    (click)="denyStudent()">
+                                <button type="radio" 
+                                class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect denyRequestButton" 
+                                *ngIf="student[2] == false && student[3] == false"
+                                    (click)="denyStudent(student[0])">
                                     {{denyStudentsRequest}}
                                 </button>
                                 <div *ngIf="student[2] == true">
                                     Accepted
+                                </div>
+                                <div *ngIf="student[3] == true">
+                                    Denied
                                 </div>
                             </td>
                         </tr>
@@ -56,6 +66,7 @@
                 <h2 *ngIf="studentList.length == 0" class="no-data-to-display">No data to display</h2>
             </div>
         </div>
-
+            
+        </div>
     </div>
 </div>

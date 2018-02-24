@@ -219,6 +219,7 @@ h2{
 
 .bordered{    
     border: solid $input-border-color-default 1px;
+    min-height: 100%;
 }
 
 .contentDetails{
@@ -247,4 +248,13 @@ h2{
     float: right;
     margin: 1% 1% 1% 0%;
     width: 82%;
+}
+
+.sidebar_content{
+    cursor: pointer;
+    color: $text-color;
+    font-family: $text-font;
+    font-size: $text-size-header;
+    margin: 10% 5%;
+    outline: none;
 }

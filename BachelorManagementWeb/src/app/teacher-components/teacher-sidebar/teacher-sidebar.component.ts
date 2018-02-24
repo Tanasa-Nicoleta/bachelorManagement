@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MenuItem } from '../../models/menu-items';
 
 @Component({
   selector: 'teacher-sidebar',
@@ -7,5 +8,9 @@ import { Component } from '@angular/core';
 })
 
 export class TeacherSidebarComponent {
-    menuItems: [string] = ["Home", "Students Requests", "Your Wall"];
+  menuItems: MenuItem[] = [
+    new MenuItem("Home", "/login"), 
+    new MenuItem("Students Requests", "/register"), 
+    new MenuItem("Your Wall", "/teacherEditWall")
+  ];
 }

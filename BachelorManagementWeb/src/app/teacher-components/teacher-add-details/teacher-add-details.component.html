@@ -5,29 +5,41 @@
         <!-- too see if it needs to be another -->
     </student-header>
 
-    <div class="contentContainer">        
-            <div class="teacherDetailsRowTitle">Details</div>
-            <div>
-                <span class="teacherDetailsRow">Number of students per session: </span>                
-                <span  class="mdl-textfield mdl-js-textfield">
-                    <input class="numberOfstudents" type="number" min="0" max="{{maxNumberOfStudents}}" placeholder="0" required>
-                </span>
-            </div>
-            <div>
-                    <span class="teacherDetailsRow">Requirements:</span>
-                    <span class="mdl-textfield mdl-js-textfield studentDetailsRowSecondary">
-                        <input #Description class="mdl-textfield__input" type="text" placeholder="A list of achievements that you would like the students to have.">
-                    </span>
+    <div class="contentContainer">
+        <div class="teacherDetailsRowTitle">Details</div>
+        <div>
+            <span class="teacherDetailsRow">Number of students per session: </span>
+            <span class="mdl-textfield mdl-js-textfield">
+                <input class="numberOfstudents" type="number" min="0" max="{{maxNumberOfStudents}}" placeholder="0" required>
+            </span>
+        </div>
+        <div>
+            <span class="teacherDetailsRow">Requirements:</span>
+            <span class="mdl-textfield mdl-js-textfield">
+                <input #Description class="mdl-textfield__input" type="text" placeholder="Achievements that you would like the students to have.">
+            </span>
+        </div>
+        <div>
+            <span class="teacherDetailsRow">Themes:</span>
+        </div>
+        <div *ngIf="teacherThemes[1][0] != null || teacherThemes[1][1] != null">
+            <div *ngFor="let teacherTheme of teacherThemes[1]; let i = index;" class="teacherTheme">
+                <div class="teacherTheme">
+                    {{teacherTheme}}
                 </div>
-            <div>
-                <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-                    {{saveButtonText}}
-                </button>
-                <!-- create this page -->
-                <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-                    {{addThemeButtonText}}
-                </button>
             </div>
+        </div>
+        <div>
+            <span class="mdl-textfield mdl-js-textfield teacherAddTheme">
+                <input #TeacherTheme class="mdl-textfield__input" type="text" placeholder="Themes that you would like to work along with the students."
+                    (keydown.enter)="addComment(TeacherTheme.value)">
+            </span>
+        </div>
+        <div>
+            <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                {{saveButtonText}}
+            </button>
+        </div>
     </div>
 
 </div>

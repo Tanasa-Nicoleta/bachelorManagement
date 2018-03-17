@@ -15,6 +15,7 @@
                     <th class="columnTitle"> Name </th>
                     <th class="columnTitle"> Discipline </th>
                     <th class="columnTitle"> Themes </th>
+                    <th class="columnTitle"> Requirements </th>
                     <th class="columnTitle"> Available / Total number of spots </th>
                     <th class="columnTitle"> Option </th>
                 </thead>
@@ -40,6 +41,7 @@
                                 </tr>
                             </table>
                         </td>
+                        <td class="columnContent">{{teacher.Requirement}}</td>
                         <td class="columnContent">{{teacher.NoOfAvailableSpots + " / " + teacher.NoOfSpots}}</td>
                         <td class="columnContent">
                             <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" 

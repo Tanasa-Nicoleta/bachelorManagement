@@ -1,7 +1,7 @@
 import { Bachelor } from "./bachelor-degree.model";
 
 export class Teacher {
-    constructor(firstName, lastName, email, noOfSpots, noOfAvailableSpots, themeTitles, themes, discipline, grade) { 
+    constructor(firstName, lastName, email, noOfSpots, noOfAvailableSpots, themeTitles, themes, discipline, grade, requirement) { 
         this.FirstName = firstName;
         this.LastName = lastName;
         this.Email = email;
@@ -11,7 +11,7 @@ export class Teacher {
         this.Themes = themes;
         this.Discipline = discipline
         this.Grade = grade;
-
+        this.Requirement = requirement;
     }
     Id: number;
     FirstName: string;
@@ -23,4 +23,5 @@ export class Teacher {
     Themes: Array<Bachelor>;
     Discipline: string;
     Grade: string;
+    Requirement: string;
 }

@@ -6,8 +6,12 @@ namespace BachelorManagement.DataLayer.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class, IEntityBase, new()
     {
-        private readonly BachelorManagementContext _context =
-            new BachelorManagementContext(new DbContextOptions<BachelorManagementContext>());
+        private readonly BachelorManagementContext _context;
+
+        public Repository()
+        {
+            _context = new BachelorManagementContext(new DbContextOptions<BachelorManagementContext>());
+        }
 
         public void Add(T entity)
         {

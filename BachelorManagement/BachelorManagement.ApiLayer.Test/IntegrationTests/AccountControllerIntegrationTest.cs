@@ -34,9 +34,9 @@ namespace BachelorManagement.ApiLayer.Test.IntegrationTests
         public void OneTimeSetUp()
         {
 
-            _accountDto = new AccountDto();
-            _userRepository =new Repository<User>();
-            _accountService = new AccountService(_userRepository);
+            //_accountDto = new AccountDto();
+            //_userRepository =new Repository<User>();
+            //_accountService = new AccountService(_userRepository);
         }
 
         [SetUp]

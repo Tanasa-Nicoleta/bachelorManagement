@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MenuItem } from '../../models/menu-items';
 
 @Component({
   selector: 'register-layout',
@@ -10,6 +11,9 @@ export class RegisterLayoutComponent {
 
   private invalidError = false;
   private matchError = false;
+  menuItems: [MenuItem] = [
+    new MenuItem("Register", "/studentRegisterToTeacher")
+  ];
 
   passRegex: RegExp = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=!*()\-_{}\\ |:;\,<>?`~\[\]\.\'])(?=\S+$).{6,32}$/;
 

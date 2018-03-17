@@ -43,7 +43,7 @@
 
         <div class="submitButton">
             <button type="submit" id="submitButtonRectangle" [disabled]="(!SubmitPass.valid && SubmitPass.dirty) || matchError">
-                <div id="submitButtonText">Register</div>
+                <div id="submitButtonText" [routerLink]=[menuItems[0].Path]>{{menuItems[0].Name}}</div>
         </button>
         </div>
 

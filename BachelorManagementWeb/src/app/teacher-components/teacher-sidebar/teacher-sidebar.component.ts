@@ -11,6 +11,6 @@ export class TeacherSidebarComponent {
   menuItems: MenuItem[] = [
     new MenuItem("Home", "/teacherWall"), 
     new MenuItem("Students Requests", "/teacherStudentsRequests"), 
-    new MenuItem("Your Wall", "/teacherEditWall")
+    new MenuItem("Your Wall", "/teacherWall")
   ];
 }

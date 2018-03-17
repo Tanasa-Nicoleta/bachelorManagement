@@ -142,15 +142,16 @@ $text-size-content-table: 14px;
     font-family: $text-font;
     color: $text-color;
     font-weight: normal;
+    font-size: $text-size-header - 2;
 }
 
 .columnTitle{
-    padding: 2% 1%;
+    padding: 1% 0%;
 }
 
 .columnContent{
-    padding: 0.5% 1%;
-    font-size: $text-size-header;
+    padding: 0.5% 0%;
+    font-size: $text-size-header - 4;
 }
 
 .table, td, th{   
@@ -184,20 +185,19 @@ h2{
     margin: 0%;
 }
 
-.numberColumn{
-    width: 3%;
-}
-
-.nameColumn, .optionColumn{
+.nameColumn {
     width: 15%;
 }
 
+.optionColumn{
+    width: 25%;
+}
 .achievementColumn{
     width: 30%;
 }
 
 .acceptRequestButton{
-    width: 50%;
+    width: 30%;
 }
 
 .denyRequestButton{

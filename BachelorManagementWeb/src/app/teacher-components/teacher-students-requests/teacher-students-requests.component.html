@@ -30,7 +30,6 @@
             <div class="mdl-cell mdl-cell--12-col">
                 <table class="table">
                     <thead>
-                        <th class="columnTitle numberColumn"> Number </th>
                         <th class="columnTitle nameColumn"> Name </th>
                         <th class="columnTitle"> Themes </th>
                         <th class="columnTitle achievementColumn"> Achievements </th>
@@ -38,7 +37,6 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let student of studentList; let i = index;">
-                            <td class="columnContent">{{i + 1}}</td>
                             <td class="columnContent">{{student[0].FirstName + " " + student[0].LastName}}</td>
                             <td class="columnContent">{{student[0].Theme.Title}}: {{student[0].Theme.Description}}</td>
                             <td class="columnContent">{{student[1].Description}}</td>

@@ -9,6 +9,7 @@ import { Teacher } from '../../models/teacher.model';
 
 
 export class TeacherAddDetailsComponent {
+  commentValue: string;
   maxNumberOfStudents: number = 15;
   saveButtonText: string = "Save details";
   addThemeText: string = "Add a theme";
@@ -18,9 +19,8 @@ export class TeacherAddDetailsComponent {
   ]
 
   addComment(themeContent: string) {
-    console.log(this.teacherThemes[1]);
     this.teacherThemes[1].push(themeContent);
-    console.log(this.teacherThemes[1]);
+    this.commentValue = ' ';
   };
 }
 

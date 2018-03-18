@@ -104,7 +104,6 @@ $text-size-content-table: 14px;
     font-size: $text-size-header - 8;
 }
 
-
 .obsContent{    
     font-size: $text-size-header - 2;
 }
@@ -192,6 +191,7 @@ h2{
 .optionColumn{
     width: 25%;
 }
+
 .achievementColumn{
     width: 30%;
 }
@@ -217,31 +217,14 @@ h2{
     min-height: 100px;
 }
 
-.bordered{    
-    border: solid $input-border-color-default 1px;
-    min-height: 100%;
-}
-
 .contentDetails{
     margin: 2%;
     width: 93%;
     float: right;
 }
 
-.sidebar{
-    margin: 3%;
-    width: 20%;
-    float: left;
-}
-
 .studentDetails{
     width: 100%;
-}
-
-.sidebar_border{
-    width: 15%;
-    float: left;
-    margin: 1% 0% 1% 1%;
 }
 
 .content_border{
@@ -249,16 +232,6 @@ h2{
     margin: 1% 1% 1% 0%;
     width: 82%;
 }
-
-.sidebar_content{
-    cursor: pointer;
-    color: $text-color;
-    font-family: $text-font;
-    font-size: $text-size-header;
-    margin: 10% 5%;
-    outline: none;
-}
-
 
 .teacherTheme{
     font-size: $text-size-header - 2;

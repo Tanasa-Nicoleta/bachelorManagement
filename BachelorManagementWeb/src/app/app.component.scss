@@ -24,7 +24,7 @@ $input-border-color-default: rgba(94, 64, 56, 0.4);
 .contentContainer{
     margin-top: 7%;
     background-color: $content-container-bg-color;
-    width: 75%;
+    width: 80%;
     height: auto;
     position: absolute;
     left: 50%;
@@ -82,17 +82,42 @@ div > a{
 .primaryText, .secondaryText{
     font-family: $text-font;
     color: $text-color;
-    text-align: center;
 }
 
 .primaryText{    
     font-size: $text-size-header-title + 10;
-    margin-top: 15%;
+    margin-top: 5%;
     margin-bottom: 1%;
 }
 
 .secondaryText{
     font-size: $text-size-header  + 5;
     margin-top: 1%;
-    margin-bottom: 15%;
+    margin-bottom: 10%;
+}
+
+.welcomeAndErrorContainer{
+    text-align: center;
+    margin-left: 10%;
+    width: 80%;
+}
+
+.sidebar_content{
+    cursor: pointer;
+    color: $text-color;
+    font-family: $text-font;
+    font-size: $text-size-header;
+    margin: 1% 5%;
+    outline: none;
+}
+
+.sidebar_border{
+    width: 15%;
+    float: left;
+    margin: 1% 0% 1% 1%;
+}
+
+.bordered{    
+    border: solid $input-border-color-default 1px;
+    min-height: 100%;
 }

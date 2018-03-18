@@ -14,6 +14,8 @@ import { TeacherAddDetailsComponent } from './teacher-components/teacher-add-det
 import { TeacherWallComponent } from './teacher-components/teacher-wall/teacher-wall.component';
 import { TeacherStudentsRequestsComponent } from './teacher-components/teacher-students-requests/teacher-students-requests.component';
 import { TeacherSidebarComponent } from './teacher-components/teacher-sidebar/teacher-sidebar.component';
+import { ErrorComponent } from './error/error.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 const appName = 'Bachelor Degree Management'
 
@@ -28,7 +30,9 @@ const appName = 'Bachelor Degree Management'
     TeacherAddDetailsComponent,
     TeacherWallComponent,
     TeacherStudentsRequestsComponent,
-    TeacherSidebarComponent 
+    TeacherSidebarComponent ,
+    ErrorComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
@@ -44,6 +48,8 @@ const appName = 'Bachelor Degree Management'
       { path: 'teacherWall', component: TeacherWallComponent, pathMatch: 'full', data: { title: appName + 'Register' } },
       { path: 'teacherStudentsRequests', component: TeacherStudentsRequestsComponent, pathMatch: 'full', data: { title: appName + 'Register' } },
       { path: 'teacherSidebar', component: TeacherSidebarComponent, pathMatch: 'full', data: { title: appName + 'Register' } },
+      { path: 'error', component: ErrorComponent, pathMatch: 'full', data: { title: appName + 'Register' } },
+      { path: 'welcome', component: WelcomeComponent, pathMatch: 'full', data: { title: appName + 'Register' } },
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: '**', redirectTo: 'login', pathMatch: 'full' }
     ]),        

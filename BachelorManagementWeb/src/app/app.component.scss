@@ -78,3 +78,21 @@ div > a{
     text-decoration: none;
     color: $text-color;
 }
+
+.primaryText, .secondaryText{
+    font-family: $text-font;
+    color: $text-color;
+    text-align: center;
+}
+
+.primaryText{    
+    font-size: $text-size-header-title + 10;
+    margin-top: 15%;
+    margin-bottom: 1%;
+}
+
+.secondaryText{
+    font-size: $text-size-header  + 5;
+    margin-top: 1%;
+    margin-bottom: 15%;
+}

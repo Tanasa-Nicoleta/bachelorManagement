@@ -1,0 +1,34 @@
+<div class="layoutContainer">
+    <student-header>
+        <!-- too see if it needs to be another -->
+    </student-header>
+
+    <div class="contentContainer">
+        <div class="secondaryText centerContainer">
+            Version Control System Details
+        </div>
+
+        <div class="secondaryText">
+            Repos:
+        </div>
+        <div>
+            {{userData[0].name}}
+        </div>
+        <div>
+            {{userData[0].url}}
+        </div>
+        <div class="secondaryText">
+            Languages
+        </div>
+        <div *ngFor="let language of languagesArray">
+            {{language.name}}: {{language.size}}
+        </div>
+        <div class="secondaryText">
+            Commits
+        </div>
+        <div *ngFor="let commit of commitData">
+            {{commit.commit.message}}
+        </div>
+    </div>
+
+</div>

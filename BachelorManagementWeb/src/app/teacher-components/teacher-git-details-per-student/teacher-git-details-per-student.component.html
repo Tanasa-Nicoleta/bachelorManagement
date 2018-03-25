@@ -8,26 +8,27 @@
             Version Control System Details
         </div>
 
-        <div class="secondaryText">
+        <div class="subtitle">
             Repos:
         </div>
         <div>
-            {{userData[0].name}}
+            Repository name: {{userData[0].name}}
         </div>
         <div>
-            {{userData[0].url}}
+            Repository url: {{userData[0].html_url}}
         </div>
-        <div class="secondaryText">
+        <div class="subtitle">
             Languages
         </div>
         <div *ngFor="let language of languagesArray">
             {{language.name}}: {{language.size}}
         </div>
-        <div class="secondaryText">
+        <div class="subtitle">
             Commits
         </div>
-        <div *ngFor="let commit of commitData">
-            {{commit.commit.message}}
+        <div *ngFor="let commit of commitsArray;">
+
+                    {{commit.date}} : {{commit.message}}
         </div>
     </div>
 

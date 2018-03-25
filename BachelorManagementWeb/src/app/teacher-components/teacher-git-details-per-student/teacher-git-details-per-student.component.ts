@@ -3,6 +3,7 @@ import { Teacher } from '../../models/teacher.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { logging } from 'selenium-webdriver';
 import { Language } from '../../models/language.model';
+import { Commit } from '../../models/commit.model';
 
 @Component({
   selector: 'teacher-git-details-per-student',
@@ -17,11 +18,11 @@ export class TeacherGitDetailsPerStudentComponent implements OnInit {
 
   userData: any;
   languagesData: any;
-  commitData: any;
+  commitsData: any;
   errorData: any;
 
   languagesArray: Language[] = [];
-  commitsArray: number[] = []
+  commitsArray: Commit[] = []
 
   constructor(private http: HttpClient) { }
 
@@ -59,9 +60,8 @@ export class TeacherGitDetailsPerStudentComponent implements OnInit {
     var resp = this.http.get('https://api.github.com/repos/' + this.gitUserName + '/' + this.gitProjectName + '/commits ');
   resp.subscribe(
     data => {
-      this.commitData = data;
-      console.log(this.commitData);
-      //this.iterateForCommits();
+      this.commitsData = data;
+      this.iterateForCommits();
     },
     err => {
       this.errorData = err;
@@ -77,7 +77,14 @@ export class TeacherGitDetailsPerStudentComponent implements OnInit {
   }
 
   iterateForCommits(){
-   
+    for (var key in this.commitsData) {
+      if (this.commitsData.hasOwnProperty(key)) {
+        this.commitsArray.push(new Commit(this.commitsData.commit.commit, this.commitsData.commit.author.date));
+      }
+    }
+  }
+
+  convertDate(date: Date){
   }
 
 }

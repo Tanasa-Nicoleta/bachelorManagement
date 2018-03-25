@@ -98,7 +98,9 @@ div > a{
 
 .centerContainer{
     text-align: center;
+    margin-top: 3%;
     margin-left: 10%;
+    margin-bottom: 5%;
     width: 80%;
 }
 
@@ -120,4 +122,11 @@ div > a{
 .bordered{    
     border: solid $input-border-color-default 1px;
     min-height: 100%;
+}
+
+.subtitle{
+    font-family: $text-font;
+    color: $text-color;    
+    font-size: $text-size-header  + 3;
+    margin: 1% 0% 1% 1%;
 }

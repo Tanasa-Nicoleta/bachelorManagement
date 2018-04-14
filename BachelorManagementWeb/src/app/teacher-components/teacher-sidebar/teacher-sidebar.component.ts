@@ -12,6 +12,6 @@ export class TeacherSidebarComponent {
     new MenuItem("Home", "/welcome"), 
     new MenuItem("Students Requests", "/teacherStudentsRequests"), 
     new MenuItem("Wall", "/teacherWall"), 
-    new MenuItem("Profile", "")
+    new MenuItem("Profile", "/profile")
   ];
 }

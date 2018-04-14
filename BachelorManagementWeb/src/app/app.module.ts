@@ -17,6 +17,7 @@ import { TeacherSidebarComponent } from './teacher-components/teacher-sidebar/te
 import { ErrorComponent } from './error/error.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import {TeacherGitDetailsPerStudentComponent} from './teacher-components/teacher-git-details-per-student/teacher-git-details-per-student.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const appName = 'Bachelor Degree Management'
 
@@ -34,7 +35,8 @@ const appName = 'Bachelor Degree Management'
     TeacherSidebarComponent ,
     ErrorComponent,
     WelcomeComponent,
-    TeacherGitDetailsPerStudentComponent
+    TeacherGitDetailsPerStudentComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +55,7 @@ const appName = 'Bachelor Degree Management'
       { path: 'error', component: ErrorComponent, pathMatch: 'full', data: { title: appName + 'Register' } },
       { path: 'welcome', component: WelcomeComponent, pathMatch: 'full', data: { title: appName + 'Register' } },
       { path: 'gitDetails', component: TeacherGitDetailsPerStudentComponent, pathMatch: 'full', data: { title: appName + 'Register' } },
+      { path: 'profile', component: ProfileComponent, pathMatch: 'full', data: { title: appName + 'Register' } },
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: '**', redirectTo: 'login', pathMatch: 'full' }
     ]),        

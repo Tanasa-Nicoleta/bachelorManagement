@@ -12,7 +12,7 @@ export class RegisterLayoutComponent {
   private invalidError = false;
   private matchError = false;
   menuItems: [MenuItem] = [
-    new MenuItem("Register", "/studentRegisterToTeacher")
+    new MenuItem("Register", "/welcome")
   ];
 
   passRegex: RegExp = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=!*()\-_{}\\ |:;\,<>?`~\[\]\.\'])(?=\S+$).{6,32}$/;

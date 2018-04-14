@@ -30,6 +30,13 @@
                     Upcoming deadline: {{upcomingDeadlineDay.day}}-{{upcomingDeadlineDay.month}}-{{upcomingDeadlineDay.year}}, {{upcomingDeadlineDay.hour}}
                 </div>
             </div>
+
+            <div class="bordered sidebar_border_studentRequest">
+                <div class="sidebar_content">
+                    <teacher-sidebar>
+                    </teacher-sidebar>
+                </div>
+            </div>
         </div>
 
         <div *ngFor="let teacherOb of teacherObs" class="wall">
@@ -44,11 +51,11 @@
             </span>
             <div>
                 <div *ngIf="teacherOb[1][0] != null" class="showComments" (click)="showAllComments(teacherOb)">
-                    <div *ngIf="teacherOb[2] == false"> 
-                        {{showCommentsButton}} 
+                    <div *ngIf="teacherOb[2] == false">
+                        {{showCommentsButton}}
                     </div>
-                    <div *ngIf="teacherOb[2] == true"> 
-                            {{hideCommentsButton}} 
+                    <div *ngIf="teacherOb[2] == true">
+                        {{hideCommentsButton}}
                     </div>
                 </div>
             </div>

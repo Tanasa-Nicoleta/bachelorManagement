@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Autofac" Version="4.6.2" />
     <PackageReference Include="Autofac.WebApi" Version="3.1.0" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.1.1" />
@@ -30,6 +26,10 @@
     <ProjectReference Include="..\BachelorManagement.Interfaces\BachelorManagement.Interfaces.csproj" />
     <ProjectReference Include="..\BusinessLayer\BachelorManagement.BusinessLayer.csproj" />
     <ProjectReference Include="..\DataLayer\BachelorManagement.DataLayer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 </Project>

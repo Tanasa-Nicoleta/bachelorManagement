@@ -6,4 +6,3 @@ D:\licenta\project\BachelorManagement\BachelorManagement.Interfaces\obj\Debug\ne
 D:\licenta\project\BachelorManagement\BachelorManagement.Interfaces\obj\Debug\netcoreapp2.0\BachelorManagement.Interfaces.AssemblyInfo.cs
 D:\licenta\project\BachelorManagement\BachelorManagement.Interfaces\obj\Debug\netcoreapp2.0\BachelorManagement.Interfaces.dll
 D:\licenta\project\BachelorManagement\BachelorManagement.Interfaces\obj\Debug\netcoreapp2.0\BachelorManagement.Interfaces.pdb
-D:\licenta\project\BachelorManagement\BachelorManagement.Interfaces\obj\Debug\netcoreapp2.0\BachelorManagement.Interfaces.csprojResolveAssemblyReference.cache

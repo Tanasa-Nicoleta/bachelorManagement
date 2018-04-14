@@ -1,4 +1,4 @@
-export enum MeetingRequestStatus{
+export enum MeetingRequestStatus {
     Pending,
     Accepted,
     Declined

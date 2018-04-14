@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { MenuItem } from '../../models/menu-items';
+import { TitleService } from '../../services/title.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'login-layout',
@@ -12,18 +14,23 @@ import { MenuItem } from '../../models/menu-items';
 export class LoginLayoutComponent {
 
   private invalidError = false;
+
   menuItems: [MenuItem] = [
-    new MenuItem("Login", "/welcome")
-  ];
+    new MenuItem("Login", "/welcome")];
+
   body: {
     Username: string;
     Password: string;
   };
 
-  constructor(private http: HttpClient, private router: Router){}
+  titleService: TitleService;
+
+  constructor(private http: HttpClient, private router: Router, private title: Title) {
+    this.titleService = new TitleService(title);
+    this.titleService.setTitle("BDMApp Login");
+  }
 
   public submit(email: string, pass: string) {
-    
     this.body = {
       Username: email,
       Password: pass
@@ -31,12 +38,10 @@ export class LoginLayoutComponent {
 
     const resp = this.http.post('http://localhost:64251/api/Login', this.body, { observe: 'response' });
 
-    console.log(this.body.Username, this.body.Password);
-
     resp.subscribe(
       data => {
         console.log(data);
-        if (data.status === 200) {        
+        if (data.status === 200) {
           this.router.navigateByUrl('/register');
         }
       },
@@ -48,5 +53,5 @@ export class LoginLayoutComponent {
     );
 
   }
-  
+
 }

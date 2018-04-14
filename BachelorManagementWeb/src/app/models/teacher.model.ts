@@ -1,7 +1,7 @@
 import { Bachelor } from "./bachelor-degree.model";
 
 export class Teacher {
-    constructor(firstName, lastName, email, noOfSpots, noOfAvailableSpots, themeTitles, themes, discipline, grade, requirement) { 
+    constructor(firstName, lastName, email, noOfSpots, noOfAvailableSpots, themeTitles, themes, discipline, grade, requirement) {
         this.FirstName = firstName;
         this.LastName = lastName;
         this.Email = email;

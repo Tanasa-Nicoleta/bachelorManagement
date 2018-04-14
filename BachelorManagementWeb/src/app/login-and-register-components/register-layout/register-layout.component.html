@@ -22,19 +22,21 @@
                 Password
             </div>
 
-            <input #SubmitPass name="SubmitPass" type="password" placeholder="**********" id="passwordInput" (keyup)="validatePass($event.target);" required>
+            <input #SubmitPass name="SubmitPass" type="password" placeholder="**********" id="passwordInput" (keyup)="validatePass($event.target);"
+                required>
         </div>
 
         <div id="error" *ngIf="invalidError">
-                ! Use at least 6 characters, one upper case, one digit and one special character
-        </div>        
+            ! Use at least 6 characters, one upper case, one digit and one special character
+        </div>
 
         <div>
             <div class="password">
                 Confirm Password
             </div>
 
-            <input #ConfirmPass name="ConfirmPass" type="password" placeholder="**********" id="confirmPasswordInput" (keyup)="confirmPass($event.target,SubmitPass.value);" required>
+            <input #ConfirmPass name="ConfirmPass" type="password" placeholder="**********" id="confirmPasswordInput" (keyup)="confirmPass($event.target,SubmitPass.value);"
+                required>
         </div>
 
         <div id="error" *ngIf="matchError">
@@ -44,11 +46,14 @@
         <div class="submitButton">
             <button type="submit" id="submitButtonRectangle" [disabled]="(!SubmitPass.valid && SubmitPass.dirty) || matchError">
                 <div id="submitButtonText" [routerLink]=[menuItems[0].Path]>{{menuItems[0].Name}}</div>
-        </button>        
+            </button>
         </div>
-        
+
         <div class="register">
-            If you already have an account you can login <a [routerLink]="['/login']"> <b>here!</b></a>
+            If you already have an account you can login
+            <a [routerLink]="['/login']">
+                <b>here!</b>
+            </a>
         </div>
 
     </div>

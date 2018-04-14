@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { MenuItem } from '../../models/menu-items';
+import { TitleService } from '../../services/title.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'register-layout',
@@ -11,9 +13,17 @@ export class RegisterLayoutComponent {
 
   private invalidError = false;
   private matchError = false;
+  
   menuItems: [MenuItem] = [
     new MenuItem("Register", "/welcome")
   ];
+
+  titleService: TitleService;
+
+  constructor(private title: Title) {
+    this.titleService = new TitleService(title);
+    this.titleService.setTitle("BDMApp Register");
+  }
 
   passRegex: RegExp = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=!*()\-_{}\\ |:;\,<>?`~\[\]\.\'])(?=\S+$).{6,32}$/;
 
@@ -38,7 +48,7 @@ export class RegisterLayoutComponent {
   }
 
   public confirmPass(password: HTMLInputElement, Password: string) {
-    if (password.value !== Password){     
+    if (password.value !== Password) {
       password.classList.add('invalidPass');
       this.matchError = true;
       return false;

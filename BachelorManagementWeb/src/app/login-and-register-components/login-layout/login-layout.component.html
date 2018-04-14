@@ -14,8 +14,8 @@
                                 Email
                         </div>
 
-                        <input #SubmitEmail name="SubmitEmail" (ngModel)="body.Username" type="text" placeholder="lastName.firstName@info.uaic.ro" 
-                        id="emailInput" pattern="1" required>
+                        <input #SubmitEmail name="SubmitEmail" (ngModel)="body.Username" type="text" placeholder="lastName.firstName@info.uaic.ro"
+                                id="emailInput" pattern="1" required>
                 </div>
 
                 <div>
@@ -25,20 +25,23 @@
 
                         <input #SubmitPass name="SubmitPass" type="password" placeholder="**********" id="passwordInput" required>
                 </div>
-                
-                <div class="forgotPassword"> 
+
+                <div class="forgotPassword">
                         <a> Forgot password?</a>
                 </div>
-                
+
 
                 <button type="submit" id="submitButtonRectangle" (click)="submit(SubmitEmail.value,SubmitPass.value);" [disabled]="(!SubmitEmail.valid && SubmitEmail.dirty)">
-                        <div id="submitButtonText"  [routerLink]=[menuItems[0].Path]>{{menuItems[0].Name}}
-                                
+                        <div id="submitButtonText" [routerLink]=[menuItems[0].Path]>{{menuItems[0].Name}}
+
                         </div>
                 </button>
 
                 <div class="register">
-                        If you don't have an account you can register <a [routerLink]="['/register']"> <b>here!</b></a>
+                        If you don't have an account you can register
+                        <a [routerLink]="['/register']">
+                                <b>here!</b>
+                        </a>
                 </div>
 
         </div>

@@ -4,8 +4,8 @@
 
 <div class="layoutContainer">
     <student-header>
-            <!-- it goes out when taken care with router outlet -->
-    </student-header> 
+        <!-- it goes out when taken care with router outlet -->
+    </student-header>
 
     <div class="contentContainer">
         <div class="mdl-cell mdl-cell--12-col">
@@ -44,8 +44,8 @@
                         <td class="columnContent">{{teacher.Requirement}}</td>
                         <td class="columnContent">{{teacher.NoOfAvailableSpots + " / " + teacher.NoOfSpots}}</td>
                         <td class="columnContent">
-                            <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" 
-                            (click)="applyToTeacher(teacher.FirstName, teacher.LastName)" [routerLink]="['/studentRegisterToTeacherDetails']">
+                            <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" (click)="applyToTeacher(teacher.FirstName, teacher.LastName)"
+                                [routerLink]="['/studentRegisterToTeacherDetails']">
                                 {{optionText}}
                             </button>
                         </td>

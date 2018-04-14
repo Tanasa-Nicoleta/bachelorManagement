@@ -1,5 +1,5 @@
-export class Commit{
-    constructor(message, date){
+export class Commit {
+    constructor(message, date) {
         this.message = message;
         this.date = date;
     }

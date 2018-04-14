@@ -6,10 +6,10 @@ export class Student {
         this.LastName = lastName;
         this.Email = email;
         this.Theme = theme
-     }
+    }
     Id: number;
     FirstName: string;
     LastName: string;
-    Email: string;    
+    Email: string;
     Theme: Bachelor
 }

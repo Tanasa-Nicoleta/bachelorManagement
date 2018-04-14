@@ -5,6 +5,8 @@ import { DateClass } from '../../models/date.model';
 import { TeacherObservation } from '../../models/teacher-observation.model';
 import { Month } from '../../models/month.model';
 import { Comment } from '../../models/comment.model';
+import { TitleService } from '../../services/title.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'teacher-wall',
@@ -31,25 +33,31 @@ export class TeacherWallComponent {
 
   teacherObs: [[TeacherObservation, [Comment | null], boolean]] = [
     [new TeacherObservation("Hello everybody! Welcome to my page.", new DateClass(1, Month[1], 2018, "12:00")),
-      [new Comment(this.studentName, "Hello! Thank you!", new DateClass(1, Month[1], 2018, "12:00")),
-      new Comment(this.studentName, "Hello! Thank you, mister " + this.teacherName + "!", new DateClass(20, Month[1], 2018, "14:40"))],
-      this.showComments],
+    [new Comment(this.studentName, "Hello! Thank you!", new DateClass(1, Month[1], 2018, "12:00")),
+    new Comment(this.studentName, "Hello! Thank you, mister " + this.teacherName + "!", new DateClass(20, Month[1], 2018, "14:40"))],
+    this.showComments],
     [new TeacherObservation("Good morning! I want to see your papers soon.", new DateClass(20, Month[1], 2018, "14:40")),
-      [new Comment(this.studentName, "Hello! Thank you, mister " + this.teacherName + "!", new DateClass(20, Month[1], 2018, "14:40"))],
-      this.showComments],
+    [new Comment(this.studentName, "Hello! Thank you, mister " + this.teacherName + "!", new DateClass(20, Month[1], 2018, "14:40"))],
+    this.showComments],
     [new TeacherObservation("Hello! Any updates?", new DateClass(21, Month[1], 2018, "12:00")),
-      [null], this.showComments],
+    [null], this.showComments],
     [new TeacherObservation("Is anybody having a problem?", new DateClass(22, Month[1], 2018, "19:35")),
-      [null], this.showComments],
+    [null], this.showComments],
     [new TeacherObservation("I  have some news for you!" +
       "I'm not available to see you in person in the next two weeks because of some personal problems." +
       "I would be available on this platform so if you got ay questions plese shoot. :)",
       new DateClass(25, Month[1], 2018, "21:30")),
-      [null], this.showComments],
+    [null], this.showComments],
     [new TeacherObservation("Good morning! I want to see your updated papers on Monday.", new DateClass(29, Month[1], 2018, "12:28")),
-      [null], this.showComments]
+    [null], this.showComments]
   ];
 
+  titleService: TitleService;
+
+  constructor(private title: Title) {
+    this.titleService = new TitleService(title);
+    this.titleService.setTitle("BDMApp Teacher Wall");
+  }
 
   requestMetting() {
     if (this.meetingRequest) {
@@ -67,25 +75,26 @@ export class TeacherWallComponent {
     }
   }
 
-  addComment(commentContent: string, teacherObservation: [TeacherObservation, [Comment | null], boolean]){
-     
+  addComment(commentContent: string, teacherObservation: [TeacherObservation, [Comment | null], boolean]) {
+
     let datetime = new Date();
-    let minutes = (datetime.getMinutes() +"").length == 2 ? datetime.getMinutes() : "0" + datetime.getMinutes();
+    let minutes = (datetime.getMinutes() + "").length == 2 ? datetime.getMinutes() : "0" + datetime.getMinutes();
     let hour = datetime.getHours() + ":" + minutes;
-    let comment = new Comment(teacherObservation[1][0].name, 
-      commentContent, 
+    let comment = new Comment(teacherObservation[1][0].name,
+      commentContent,
       new DateClass(datetime.getDate(), Month[datetime.getMonth()], datetime.getFullYear(), hour));
+      
     this.teacherObs.forEach(teacherOb => {
-      if(teacherOb[0] == teacherObservation[0]){
+      if (teacherOb[0] == teacherObservation[0]) {
         teacherOb[1].push(comment);
       }
     });
   }
 
-  showAllComments(teacherObservation: [TeacherObservation, [Comment | null], boolean]){
+  showAllComments(teacherObservation: [TeacherObservation, [Comment | null], boolean]) {
     this.teacherObs.forEach(teacherOb => {
-      if(teacherOb[0] == teacherObservation[0]){
-        teacherOb[2]= teacherOb[2] == true ? false : true;
+      if (teacherOb[0] == teacherObservation[0]) {
+        teacherOb[2] = teacherOb[2] == true ? false : true;
       }
     });
   }

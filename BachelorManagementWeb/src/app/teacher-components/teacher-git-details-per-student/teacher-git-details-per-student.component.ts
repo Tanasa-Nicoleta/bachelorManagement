@@ -4,6 +4,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { logging } from 'selenium-webdriver';
 import { Language } from '../../models/language.model';
 import { Commit } from '../../models/commit.model';
+import { TitleService } from '../../services/title.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'teacher-git-details-per-student',
@@ -24,7 +26,12 @@ export class TeacherGitDetailsPerStudentComponent implements OnInit {
   languagesArray: Language[] = [];
   commitsArray: Commit[] = []
 
-  constructor(private http: HttpClient) { }
+  titleService: TitleService;
+
+  constructor(private http: HttpClient, private title: Title) {
+    this.titleService = new TitleService(title);
+    this.titleService.setTitle("BDMApp Teacher Details Per Student");
+  }
 
   ngOnInit() {
     this.getRepositoryData();
@@ -46,6 +53,7 @@ export class TeacherGitDetailsPerStudentComponent implements OnInit {
 
   getLanguagesData() {
     var resp = this.http.get('https://api.github.com/repos/' + this.gitUserName + '/' + this.gitProjectName + '/languages ');
+
     resp.subscribe(
       data => {
         this.languagesData = data;
@@ -56,16 +64,17 @@ export class TeacherGitDetailsPerStudentComponent implements OnInit {
       });
   }
 
-  getCommitData(){
+  getCommitData() {
     var resp = this.http.get('https://api.github.com/repos/' + this.gitUserName + '/' + this.gitProjectName + '/commits ');
-  resp.subscribe(
-    data => {
-      this.commitsData = data;
-      this.iterateForCommits();
-    },
-    err => {
-      this.errorData = err;
-    });
+    
+    resp.subscribe(
+      data => {
+        this.commitsData = data;
+        this.iterateForCommits();
+      },
+      err => {
+        this.errorData = err;
+      });
   }
 
   iterateForLanguages() {
@@ -76,15 +85,12 @@ export class TeacherGitDetailsPerStudentComponent implements OnInit {
     }
   }
 
-  iterateForCommits(){
+  iterateForCommits() {
     for (var key in this.commitsData) {
       if (this.commitsData.hasOwnProperty(key)) {
         this.commitsArray.push(new Commit(this.commitsData.commit.commit, this.commitsData.commit.author.date));
       }
     }
-  }
-
-  convertDate(date: Date){
   }
 
 }

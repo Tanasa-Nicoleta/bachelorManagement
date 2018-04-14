@@ -16,11 +16,9 @@ import { TeacherStudentsRequestsComponent } from './teacher-components/teacher-s
 import { TeacherSidebarComponent } from './teacher-components/teacher-sidebar/teacher-sidebar.component';
 import { ErrorComponent } from './error/error.component';
 import { WelcomeComponent } from './welcome/welcome.component';
-import {TeacherGitDetailsPerStudentComponent} from './teacher-components/teacher-git-details-per-student/teacher-git-details-per-student.component';
+import { TeacherGitDetailsPerStudentComponent } from './teacher-components/teacher-git-details-per-student/teacher-git-details-per-student.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ForgotPasswordComponent } from './login-and-register-components/forgot-password/forgot-password.component';
-
-const appName = 'Bachelor Degree Management'
 
 @NgModule({
   declarations: [
@@ -33,7 +31,7 @@ const appName = 'Bachelor Degree Management'
     TeacherAddDetailsComponent,
     TeacherWallComponent,
     TeacherStudentsRequestsComponent,
-    TeacherSidebarComponent ,
+    TeacherSidebarComponent,
     ErrorComponent,
     WelcomeComponent,
     TeacherGitDetailsPerStudentComponent,
@@ -45,26 +43,25 @@ const appName = 'Bachelor Degree Management'
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot([
-      { path: 'login', component: LoginLayoutComponent, pathMatch: 'full', data: { title: appName + 'Login' } },
-      { path: 'register', component: RegisterLayoutComponent, pathMatch: 'full', data: { title: appName + 'Register' } },      
-      { path: 'studentHeader', component: StudentHeaderComponent, pathMatch: 'full', data: { title: appName + 'Register' } }, // delete when tested
-      { path: 'studentRegisterToTeacher', component: StudentRegisterToTeacherComponent, pathMatch: 'full', data: { title: appName + 'Register' } },      
-      { path: 'studentRegisterToTeacherDetails', component: StudentRegisterToTeacherDetailsComponent, pathMatch: 'full', data: { title: appName + 'Register' } },
-      { path: 'teacherAddDetails', component: TeacherAddDetailsComponent, pathMatch: 'full', data: { title: appName + 'Register' } },
-      { path: 'teacherWall', component: TeacherWallComponent, pathMatch: 'full', data: { title: appName + 'Register' } },
-      { path: 'teacherStudentsRequests', component: TeacherStudentsRequestsComponent, pathMatch: 'full', data: { title: appName + 'Register' } },
-      { path: 'teacherSidebar', component: TeacherSidebarComponent, pathMatch: 'full', data: { title: appName + 'Register' } },
-      { path: 'error', component: ErrorComponent, pathMatch: 'full', data: { title: appName + 'Register' } },
-      { path: 'welcome', component: WelcomeComponent, pathMatch: 'full', data: { title: appName + 'Register' } },
-      { path: 'gitDetails', component: TeacherGitDetailsPerStudentComponent, pathMatch: 'full', data: { title: appName + 'Register' } },
-      { path: 'profile', component: ProfileComponent, pathMatch: 'full', data: { title: appName + 'Register' } },
-      { path: 'forgotPassword', component: ForgotPasswordComponent, pathMatch: 'full', data: { title: appName + 'Register' } },
+      { path: 'login', component: LoginLayoutComponent, pathMatch: 'full' },
+      { path: 'register', component: RegisterLayoutComponent, pathMatch: 'full' },
+      { path: 'studentRegisterToTeacher', component: StudentRegisterToTeacherComponent, pathMatch: 'full' },
+      { path: 'studentRegisterToTeacherDetails', component: StudentRegisterToTeacherDetailsComponent, pathMatch: 'full' },
+      { path: 'teacherAddDetails', component: TeacherAddDetailsComponent, pathMatch: 'full' },
+      { path: 'teacherWall', component: TeacherWallComponent, pathMatch: 'full' },
+      { path: 'teacherStudentsRequests', component: TeacherStudentsRequestsComponent, pathMatch: 'full' },
+      { path: 'teacherSidebar', component: TeacherSidebarComponent, pathMatch: 'full' },
+      { path: 'error', component: ErrorComponent, pathMatch: 'full' },
+      { path: 'welcome', component: WelcomeComponent, pathMatch: 'full' },
+      { path: 'gitDetails', component: TeacherGitDetailsPerStudentComponent, pathMatch: 'full' },
+      { path: 'profile', component: ProfileComponent, pathMatch: 'full' },
+      { path: 'forgotPassword', component: ForgotPasswordComponent, pathMatch: 'full' },
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: '**', redirectTo: 'login', pathMatch: 'full' }
-    ]),        
+    ]),
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
+export class AppModule {
 }

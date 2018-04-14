@@ -1,6 +1,6 @@
-export class Achievement{
+export class Achievement {
     constructor(description) {
-     this.Description = description   
+        this.Description = description
     }
     Description: string;
 }

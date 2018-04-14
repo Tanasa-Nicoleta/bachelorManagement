@@ -139,3 +139,5 @@ input{
 .smallerForgotText{    
     font-size: 15px;
 }
+
+*:focus {outline-color:$content-container-bg-color}

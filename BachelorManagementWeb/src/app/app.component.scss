@@ -135,5 +135,7 @@ div > a{
     font-family: $text-font;
     color: $text-color;    
     font-size: $text-size-header;
-    margin: 1% 5%;
+    margin: 1% 20%;
 }
+
+*:focus {outline-color:$content-container-bg-color}

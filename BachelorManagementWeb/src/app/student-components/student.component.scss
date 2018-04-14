@@ -103,3 +103,5 @@ ul li input[type=checkbox]:checked ~ p {
     opacity: 0;
     transform: translate(0, 50%);
 }
+
+*:focus {outline-color:$content-container-bg-color}

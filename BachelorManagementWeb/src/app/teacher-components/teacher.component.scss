@@ -255,3 +255,5 @@ h2{
     font-family: $text-font;
     color: $text-color;
 }
+
+*:focus {outline-color:$content-container-bg-color}

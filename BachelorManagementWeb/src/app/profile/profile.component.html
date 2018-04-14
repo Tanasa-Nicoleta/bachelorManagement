@@ -1,10 +1,19 @@
 <div class="layoutContainer">
-        <student-header>
-    
-        </student-header>
-        <div class="contentContainer">
+    <student-header>
+
+    </student-header>
+    <div class="contentContainer">
+
+        <div class="bordered sidebar_border">
+            <div class="sidebar_content">
+                <teacher-sidebar>
+                </teacher-sidebar>
+            </div>
+        </div>
+        
+        <div>
             <div class="profileDetails">
-               <b>First Name:</b> {{userFirstName}}
+                <b>First Name:</b> {{userFirstName}}
             </div>
             <div class="profileDetails">
                 <b>Last Name:</b> {{userLastName}}
@@ -14,3 +23,4 @@
             </div>
         </div>
     </div>
+</div>

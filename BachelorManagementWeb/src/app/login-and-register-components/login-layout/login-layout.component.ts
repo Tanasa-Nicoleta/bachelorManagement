@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { MenuItem } from '../../models/menu-items';
 
 @Component({
   selector: 'login-layout',
@@ -11,7 +12,9 @@ import { Router } from '@angular/router';
 export class LoginLayoutComponent {
 
   private invalidError = false;
- 
+  menuItems: [MenuItem] = [
+    new MenuItem("Login", "/welcome")
+  ];
   body: {
     Username: string;
     Password: string;

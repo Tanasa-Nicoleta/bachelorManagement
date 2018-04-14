@@ -118,7 +118,7 @@ input{
     }
 }
   
-#submitButtonText {
+#submitButtonText, #submitButtonForgotPasswordText {
     padding: 0px 15px;
     font-family: $text-font;
     font-size: 20px;
@@ -130,4 +130,12 @@ input{
 #error{
     font-size: 10px;
     padding-top: 10px;
+}
+
+.forgotPasswordPage{
+    margin: 2%;
+}
+
+.smallerForgotText{    
+    font-size: 15px;
 }

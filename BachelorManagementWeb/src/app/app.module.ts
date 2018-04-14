@@ -18,6 +18,7 @@ import { ErrorComponent } from './error/error.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import {TeacherGitDetailsPerStudentComponent} from './teacher-components/teacher-git-details-per-student/teacher-git-details-per-student.component';
 import { ProfileComponent } from './profile/profile.component';
+import { ForgotPasswordComponent } from './login-and-register-components/forgot-password/forgot-password.component';
 
 const appName = 'Bachelor Degree Management'
 
@@ -36,7 +37,8 @@ const appName = 'Bachelor Degree Management'
     ErrorComponent,
     WelcomeComponent,
     TeacherGitDetailsPerStudentComponent,
-    ProfileComponent
+    ProfileComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +58,7 @@ const appName = 'Bachelor Degree Management'
       { path: 'welcome', component: WelcomeComponent, pathMatch: 'full', data: { title: appName + 'Register' } },
       { path: 'gitDetails', component: TeacherGitDetailsPerStudentComponent, pathMatch: 'full', data: { title: appName + 'Register' } },
       { path: 'profile', component: ProfileComponent, pathMatch: 'full', data: { title: appName + 'Register' } },
+      { path: 'forgotPassword', component: ForgotPasswordComponent, pathMatch: 'full', data: { title: appName + 'Register' } },
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: '**', redirectTo: 'login', pathMatch: 'full' }
     ]),        

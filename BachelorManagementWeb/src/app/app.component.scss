@@ -9,16 +9,17 @@ $information-phone: "only screen and (max-width : $phone-break)";
 $information-tablet: "only screen and (max-width : $tablet-break)";
 $input-border-color-default: rgba(94, 64, 56, 0.4);
 
-.layoutContainer {
-    min-width: 100%;
-    width: 100%;
-    min-height: 1000px; // see if you can make it dynamically
-    height: auto;
-    margin: 0px;
-    background: url("https://i.imgur.com/RLacS2w.jpg") no-repeat center center fixed;
+
+.layoutContainer {   
+    //background-image: url("https://i.imgur.com/RLacS2w.jpg") no-repeat center center fixed;
     //https://i.imgur.com/RLacS2w.jpg 
     //https://i.imgur.com/mbk0ETO.jpg -- all  white
-    background-size: cover;
+    width:100%;
+    height:100vh;
+    background: url("https://i.imgur.com/RLacS2w.jpg") no-repeat center center fixed; 
+    background-position: center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;    
 }
 
 .contentContainer{
@@ -63,7 +64,7 @@ $input-border-color-default: rgba(94, 64, 56, 0.4);
 
 .logout, .username{    
     font-size: $text-size-header;
-    padding-right: 3%; 
+    margin-right: 3%; 
     float: right;
     @media #{$information-tablet}{        
         font-size: $text-size-header - 2;

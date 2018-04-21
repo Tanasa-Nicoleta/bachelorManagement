@@ -31,12 +31,12 @@
         </div>
         <div>
             <span class="mdl-textfield mdl-js-textfield teacherAddTheme">
-                <input #TeacherTheme class="mdl-textfield__input" type="text" placeholder="A list of themes that you would like to work along with the students."
+                <input #TeacherTheme class="mdl-textfield__input" type="text" placeholder="Theme - Description format, please!"
                     [(ngModel)]="commentValue" (keydown.enter)="addComment(TeacherTheme.value)">
             </span>
         </div>
         <div>
-            <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+            <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" [routerLink]="['/studentRegisterToTeacher']">
                 {{saveButtonText}}
             </button>
         </div>

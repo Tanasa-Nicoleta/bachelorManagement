@@ -261,7 +261,7 @@ namespace BachelorManagement.DataLayer.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("BachelorManagement.DataLayer.Entities.Year", b =>

@@ -15,9 +15,6 @@ export class LoginLayoutComponent {
 
   private invalidError = false;
 
-  menuItems: [MenuItem] = [
-    new MenuItem("Login", "/welcome")];
-
   body: {
     Username: string;
     Password: string;
@@ -36,19 +33,14 @@ export class LoginLayoutComponent {
       Password: pass
     };
 
-    const resp = this.http.post('http://localhost:64251/api/Login', this.body, { observe: 'response' });
+    const resp = this.http.post('http://localhost:64250/api/account/login', this.body, { observe: 'response' });
 
-    resp.subscribe(
+    resp.subscribe(      
       data => {
-        console.log(data);
-        if (data.status === 200) {
+        console.log("Succes");
+        if (data.status == 200) {
           this.router.navigateByUrl('/register');
         }
-      },
-      err => {
-        console.log("Login error + error", err.status)
-        if (err.status === 400)
-          this.invalidError = true;
       }
     );
 

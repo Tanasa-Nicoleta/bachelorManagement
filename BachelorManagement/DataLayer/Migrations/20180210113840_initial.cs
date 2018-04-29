@@ -1,7 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using System;
-using System.Collections.Generic;
 
 namespace BachelorManagement.DataLayer.Migrations
 {
@@ -10,420 +9,428 @@ namespace BachelorManagement.DataLayer.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Teachers",
-                columns: table => new
+                "Teachers",
+                table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NumberOfStudents = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>("int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy",
+                            SqlServerValueGenerationStrategy.IdentityColumn),
+                    Email = table.Column<string>("nvarchar(max)", nullable: true),
+                    FirstName = table.Column<string>("nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>("nvarchar(max)", nullable: true),
+                    NumberOfStudents = table.Column<int>("int", nullable: false)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Teachers", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Teachers", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
+                "User",
+                table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<int>("int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy",
+                            SqlServerValueGenerationStrategy.IdentityColumn),
+                    Email = table.Column<string>("nvarchar(max)", nullable: true),
+                    Password = table.Column<string>("nvarchar(max)", nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Users", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "Announcements",
-                columns: table => new
+                "Announcements",
+                table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TeacherId = table.Column<int>(type: "int", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<int>("int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy",
+                            SqlServerValueGenerationStrategy.IdentityColumn),
+                    Content = table.Column<string>("nvarchar(max)", nullable: true),
+                    Date = table.Column<DateTime>("datetime2", nullable: false),
+                    TeacherId = table.Column<int>("int", nullable: false),
+                    Title = table.Column<string>("nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Announcements", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Announcements_Teachers_TeacherId",
-                        column: x => x.TeacherId,
-                        principalTable: "Teachers",
-                        principalColumn: "Id",
+                        "FK_Announcements_Teachers_TeacherId",
+                        x => x.TeacherId,
+                        "Teachers",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Consultations",
-                columns: table => new
+                "Consultations",
+                table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Day = table.Column<int>(type: "int", nullable: false),
-                    Interval = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TeacherId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>("int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy",
+                            SqlServerValueGenerationStrategy.IdentityColumn),
+                    Day = table.Column<int>("int", nullable: false),
+                    Interval = table.Column<string>("nvarchar(max)", nullable: true),
+                    TeacherId = table.Column<int>("int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Consultations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Consultations_Teachers_TeacherId",
-                        column: x => x.TeacherId,
-                        principalTable: "Teachers",
-                        principalColumn: "Id",
+                        "FK_Consultations_Teachers_TeacherId",
+                        x => x.TeacherId,
+                        "Teachers",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Sessions",
-                columns: table => new
+                "Sessions",
+                table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    TeacherId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>("int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy",
+                            SqlServerValueGenerationStrategy.IdentityColumn),
+                    TeacherId = table.Column<int>("int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Sessions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Sessions_Teachers_TeacherId",
-                        column: x => x.TeacherId,
-                        principalTable: "Teachers",
-                        principalColumn: "Id",
+                        "FK_Sessions_Teachers_TeacherId",
+                        x => x.TeacherId,
+                        "Teachers",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Students",
-                columns: table => new
+                "Students",
+                table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SerialNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StartYear = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TeacherId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>("int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy",
+                            SqlServerValueGenerationStrategy.IdentityColumn),
+                    Email = table.Column<string>("nvarchar(max)", nullable: true),
+                    FirstName = table.Column<string>("nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>("nvarchar(max)", nullable: true),
+                    SerialNumber = table.Column<string>("nvarchar(max)", nullable: true),
+                    StartYear = table.Column<string>("nvarchar(max)", nullable: true),
+                    TeacherId = table.Column<int>("int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Students", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Students_Teachers_TeacherId",
-                        column: x => x.TeacherId,
-                        principalTable: "Teachers",
-                        principalColumn: "Id",
+                        "FK_Students_Teachers_TeacherId",
+                        x => x.TeacherId,
+                        "Teachers",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Years",
-                columns: table => new
+                "Years",
+                table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    SessionId = table.Column<int>(type: "int", nullable: false),
-                    SpringSession = table.Column<bool>(type: "bit", nullable: false),
-                    SummerSession = table.Column<bool>(type: "bit", nullable: false),
-                    YearValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<int>("int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy",
+                            SqlServerValueGenerationStrategy.IdentityColumn),
+                    SessionId = table.Column<int>("int", nullable: false),
+                    SpringSession = table.Column<bool>("bit", nullable: false),
+                    SummerSession = table.Column<bool>("bit", nullable: false),
+                    YearValue = table.Column<string>("nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Years", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Years_Sessions_SessionId",
-                        column: x => x.SessionId,
-                        principalTable: "Sessions",
-                        principalColumn: "Id",
+                        "FK_Years_Sessions_SessionId",
+                        x => x.SessionId,
+                        "Sessions",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Comments",
-                columns: table => new
+                "Comments",
+                table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    StudentId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>("int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy",
+                            SqlServerValueGenerationStrategy.IdentityColumn),
+                    StudentId = table.Column<int>("int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Comments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Comments_Students_StudentId",
-                        column: x => x.StudentId,
-                        principalTable: "Students",
-                        principalColumn: "Id",
+                        "FK_Comments_Students_StudentId",
+                        x => x.StudentId,
+                        "Students",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Files",
-                columns: table => new
+                "Files",
+                table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StudentId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>("int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy",
+                            SqlServerValueGenerationStrategy.IdentityColumn),
+                    Description = table.Column<string>("nvarchar(max)", nullable: true),
+                    Name = table.Column<string>("nvarchar(max)", nullable: true),
+                    StudentId = table.Column<int>("int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Files", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Files_Students_StudentId",
-                        column: x => x.StudentId,
-                        principalTable: "Students",
-                        principalColumn: "Id",
+                        "FK_Files_Students_StudentId",
+                        x => x.StudentId,
+                        "Students",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Means",
-                columns: table => new
+                "Means",
+                table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    FifthSemester = table.Column<double>(type: "float", nullable: false),
-                    FirstSemester = table.Column<double>(type: "float", nullable: false),
-                    FourthSemester = table.Column<double>(type: "float", nullable: false),
-                    SecondSemester = table.Column<double>(type: "float", nullable: false),
-                    SixthSemester = table.Column<double>(type: "float", nullable: false),
-                    StudentId = table.Column<int>(type: "int", nullable: false),
-                    ThirdSemester = table.Column<double>(type: "float", nullable: false)
+                    Id = table.Column<int>("int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy",
+                            SqlServerValueGenerationStrategy.IdentityColumn),
+                    FifthSemester = table.Column<double>("float", nullable: false),
+                    FirstSemester = table.Column<double>("float", nullable: false),
+                    FourthSemester = table.Column<double>("float", nullable: false),
+                    SecondSemester = table.Column<double>("float", nullable: false),
+                    SixthSemester = table.Column<double>("float", nullable: false),
+                    StudentId = table.Column<int>("int", nullable: false),
+                    ThirdSemester = table.Column<double>("float", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Means", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Means_Students_StudentId",
-                        column: x => x.StudentId,
-                        principalTable: "Students",
-                        principalColumn: "Id",
+                        "FK_Means_Students_StudentId",
+                        x => x.StudentId,
+                        "Students",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "StudentContents",
-                columns: table => new
+                "StudentContents",
+                table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CommentId = table.Column<int>(type: "int", nullable: false),
-                    Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StudentId = table.Column<int>(type: "int", nullable: true)
+                    Id = table.Column<int>("int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy",
+                            SqlServerValueGenerationStrategy.IdentityColumn),
+                    CommentId = table.Column<int>("int", nullable: false),
+                    Content = table.Column<string>("nvarchar(max)", nullable: true),
+                    StudentId = table.Column<int>("int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_StudentContents", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_StudentContents_Comments_CommentId",
-                        column: x => x.CommentId,
-                        principalTable: "Comments",
-                        principalColumn: "Id",
+                        "FK_StudentContents_Comments_CommentId",
+                        x => x.CommentId,
+                        "Comments",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_StudentContents_Students_StudentId",
-                        column: x => x.StudentId,
-                        principalTable: "Students",
-                        principalColumn: "Id",
+                        "FK_StudentContents_Students_StudentId",
+                        x => x.StudentId,
+                        "Students",
+                        "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "TeacherContents",
-                columns: table => new
+                "TeacherContents",
+                table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CommentId = table.Column<int>(type: "int", nullable: false),
-                    Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TeacherId = table.Column<int>(type: "int", nullable: true)
+                    Id = table.Column<int>("int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy",
+                            SqlServerValueGenerationStrategy.IdentityColumn),
+                    CommentId = table.Column<int>("int", nullable: false),
+                    Content = table.Column<string>("nvarchar(max)", nullable: true),
+                    TeacherId = table.Column<int>("int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TeacherContents", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TeacherContents_Comments_CommentId",
-                        column: x => x.CommentId,
-                        principalTable: "Comments",
-                        principalColumn: "Id",
+                        "FK_TeacherContents_Comments_CommentId",
+                        x => x.CommentId,
+                        "Comments",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TeacherContents_Teachers_TeacherId",
-                        column: x => x.TeacherId,
-                        principalTable: "Teachers",
-                        principalColumn: "Id",
+                        "FK_TeacherContents_Teachers_TeacherId",
+                        x => x.TeacherId,
+                        "Teachers",
+                        "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "FileContents",
-                columns: table => new
+                "FileContents",
+                table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Content = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
-                    FileId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>("int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy",
+                            SqlServerValueGenerationStrategy.IdentityColumn),
+                    Content = table.Column<byte[]>("varbinary(max)", nullable: true),
+                    FileId = table.Column<int>("int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_FileContents", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_FileContents_Files_FileId",
-                        column: x => x.FileId,
-                        principalTable: "Files",
-                        principalColumn: "Id",
+                        "FK_FileContents_Files_FileId",
+                        x => x.FileId,
+                        "Files",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Grades",
-                columns: table => new
+                "Grades",
+                table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    FileId = table.Column<int>(type: "int", nullable: false),
-                    GradeValue = table.Column<double>(type: "float", nullable: false)
+                    Id = table.Column<int>("int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy",
+                            SqlServerValueGenerationStrategy.IdentityColumn),
+                    FileId = table.Column<int>("int", nullable: false),
+                    GradeValue = table.Column<double>("float", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Grades", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Grades_Files_FileId",
-                        column: x => x.FileId,
-                        principalTable: "Files",
-                        principalColumn: "Id",
+                        "FK_Grades_Files_FileId",
+                        x => x.FileId,
+                        "Files",
+                        "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Announcements_TeacherId",
-                table: "Announcements",
-                column: "TeacherId");
+                "IX_Announcements_TeacherId",
+                "Announcements",
+                "TeacherId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comments_StudentId",
-                table: "Comments",
-                column: "StudentId");
+                "IX_Comments_StudentId",
+                "Comments",
+                "StudentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Consultations_TeacherId",
-                table: "Consultations",
-                column: "TeacherId",
+                "IX_Consultations_TeacherId",
+                "Consultations",
+                "TeacherId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_FileContents_FileId",
-                table: "FileContents",
-                column: "FileId",
+                "IX_FileContents_FileId",
+                "FileContents",
+                "FileId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Files_StudentId",
-                table: "Files",
-                column: "StudentId",
+                "IX_Files_StudentId",
+                "Files",
+                "StudentId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Grades_FileId",
-                table: "Grades",
-                column: "FileId");
+                "IX_Grades_FileId",
+                "Grades",
+                "FileId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Means_StudentId",
-                table: "Means",
-                column: "StudentId",
+                "IX_Means_StudentId",
+                "Means",
+                "StudentId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Sessions_TeacherId",
-                table: "Sessions",
-                column: "TeacherId");
+                "IX_Sessions_TeacherId",
+                "Sessions",
+                "TeacherId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_StudentContents_CommentId",
-                table: "StudentContents",
-                column: "CommentId");
+                "IX_StudentContents_CommentId",
+                "StudentContents",
+                "CommentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_StudentContents_StudentId",
-                table: "StudentContents",
-                column: "StudentId");
+                "IX_StudentContents_StudentId",
+                "StudentContents",
+                "StudentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Students_TeacherId",
-                table: "Students",
-                column: "TeacherId");
+                "IX_Students_TeacherId",
+                "Students",
+                "TeacherId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TeacherContents_CommentId",
-                table: "TeacherContents",
-                column: "CommentId");
+                "IX_TeacherContents_CommentId",
+                "TeacherContents",
+                "CommentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TeacherContents_TeacherId",
-                table: "TeacherContents",
-                column: "TeacherId");
+                "IX_TeacherContents_TeacherId",
+                "TeacherContents",
+                "TeacherId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Years_SessionId",
-                table: "Years",
-                column: "SessionId");
+                "IX_Years_SessionId",
+                "Years",
+                "SessionId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Announcements");
+                "Announcements");
 
             migrationBuilder.DropTable(
-                name: "Consultations");
+                "Consultations");
 
             migrationBuilder.DropTable(
-                name: "FileContents");
+                "FileContents");
 
             migrationBuilder.DropTable(
-                name: "Grades");
+                "Grades");
 
             migrationBuilder.DropTable(
-                name: "Means");
+                "Means");
 
             migrationBuilder.DropTable(
-                name: "StudentContents");
+                "StudentContents");
 
             migrationBuilder.DropTable(
-                name: "TeacherContents");
+                "TeacherContents");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                "User");
 
             migrationBuilder.DropTable(
-                name: "Years");
+                "Years");
 
             migrationBuilder.DropTable(
-                name: "Files");
+                "Files");
 
             migrationBuilder.DropTable(
-                name: "Comments");
+                "Comments");
 
             migrationBuilder.DropTable(
-                name: "Sessions");
+                "Sessions");
 
             migrationBuilder.DropTable(
-                name: "Students");
+                "Students");
 
             migrationBuilder.DropTable(
-                name: "Teachers");
+                "Teachers");
         }
     }
 }

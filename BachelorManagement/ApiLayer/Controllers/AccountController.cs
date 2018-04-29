@@ -1,11 +1,10 @@
 ﻿using BachelorManagement.ApiLayer.Models;
-using BachelorManagement.DataLayer;
 using BachelorManagement.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BachelorManagement.ApiLayer.Controllers
 {
-    [Route("api")]
+    [Route("api/[controller]")]
     public class AccountController : Controller
     {
         private readonly IAccountService _accountService;
@@ -13,6 +12,13 @@ namespace BachelorManagement.ApiLayer.Controllers
         public AccountController(IAccountService accountService)
         {
             _accountService = accountService;
+        }
+
+        // GET api/values
+        [HttpGet]
+        public string Get()
+        {
+            return "true";
         }
 
         [HttpPost("login")]
@@ -25,7 +31,6 @@ namespace BachelorManagement.ApiLayer.Controllers
                 return BadRequest();
 
             return Ok();
-
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using BachelorManagement.BusinessLayer.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace BachelorManagement.DataLayer.Repositories

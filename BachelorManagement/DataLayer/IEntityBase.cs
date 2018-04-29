@@ -1,4 +1,4 @@
-﻿namespace BachelorManagement.BusinessLayer.Interfaces
+﻿namespace BachelorManagement.DataLayer
 {
     public interface IEntityBase
     {

@@ -1,5 +1,4 @@
-﻿using BachelorManagement.BusinessLayer.Interfaces;
-using BachelorManagement.DataLayer.Enums;
+﻿using BachelorManagement.DataLayer.Enums;
 
 namespace BachelorManagement.DataLayer.Entities
 {

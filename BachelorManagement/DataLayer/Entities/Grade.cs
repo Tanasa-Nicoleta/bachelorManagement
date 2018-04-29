@@ -1,6 +1,4 @@
-﻿using BachelorManagement.BusinessLayer.Interfaces;
-
-namespace BachelorManagement.DataLayer.Entities
+﻿namespace BachelorManagement.DataLayer.Entities
 {
     public class Grade : IEntityBase
     {

@@ -1,14 +1,30 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+    "signature": "b2c5d6bd443637b172e8d0fc6607c54773976bdd"
   },
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v2.0": {
       "BachelorManagement.Interfaces/1.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection": "2.1.0-preview2-final"
+        },
         "runtime": {
           "BachelorManagement.Interfaces.dll": {}
+        }
+      },
+      "Microsoft.Extensions.DependencyInjection/2.1.0-preview2-final": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "2.1.0-preview2-final"
+        },
+        "runtime": {
+          "lib/netcoreapp2.0/Microsoft.Extensions.DependencyInjection.dll": {}
+        }
+      },
+      "Microsoft.Extensions.DependencyInjection.Abstractions/2.1.0-preview2-final": {
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {}
         }
       }
     }
@@ -18,6 +34,20 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "Microsoft.Extensions.DependencyInjection/2.1.0-preview2-final": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-okSE2qZruxFu1hBEfUphjn83XNgXjKtX4DXqAv0L5ikz/WSjWO0YPEgPoBujFrfU2OcDcN65Do3s4+3RgKAMjw==",
+      "path": "microsoft.extensions.dependencyinjection/2.1.0-preview2-final",
+      "hashPath": "microsoft.extensions.dependencyinjection.2.1.0-preview2-final.nupkg.sha512"
+    },
+    "Microsoft.Extensions.DependencyInjection.Abstractions/2.1.0-preview2-final": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-WhODNx1ADg/b91RkErgWkJ6OzdC8E/n/HOXAIRyYTVapvKiUnLtj128FaL+vaBWpByKqTzwKef3wfvtwckOyjA==",
+      "path": "microsoft.extensions.dependencyinjection.abstractions/2.1.0-preview2-final",
+      "hashPath": "microsoft.extensions.dependencyinjection.abstractions.2.1.0-preview2-final.nupkg.sha512"
     }
   }
 }

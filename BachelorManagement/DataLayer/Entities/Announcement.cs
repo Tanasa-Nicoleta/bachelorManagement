@@ -1,5 +1,4 @@
 ﻿using System;
-using BachelorManagement.BusinessLayer.Interfaces;
 
 namespace BachelorManagement.DataLayer.Entities
 {

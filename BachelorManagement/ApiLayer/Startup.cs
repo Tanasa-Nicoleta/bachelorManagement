@@ -1,7 +1,7 @@
-﻿using BachelorManagement.BusinessLayer.Interfaces;
+﻿using BachelorManagement.BusinessLayer.Services;
 using BachelorManagement.DataLayer;
-using BachelorManagement.DataLayer.Entities;
 using BachelorManagement.DataLayer.Repositories;
+using BachelorManagement.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +16,6 @@ namespace BachelorManagement.ApiLayer
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
@@ -28,13 +27,14 @@ namespace BachelorManagement.ApiLayer
 
             services.AddMvc();
 
-            services.AddDbContext<BachelorManagementContext>(options =>
-                options.UseSqlServer(
-                    @"Server=(localdb)\mssqllocaldb;Database=BachelorManagement;Trusted_Connection=True;"));
+            services.AddEntityFrameworkSqlServer().AddDbContext<BachelorManagementContext>();
+            services.AddScoped(p => new DbContext(p.GetService<DbContextOptions<BachelorManagementContext>>()));
 
-            services.AddScoped<IRepository<User>, UserRepository>();
+            services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         }
-        
+
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory,
             BachelorManagementContext context)
@@ -44,20 +44,13 @@ namespace BachelorManagement.ApiLayer
             loggerFactory.AddConsole();
 
             if (env.IsDevelopment())
-            {
                 app.UseDeveloperExceptionPage();
-            }
             else
-            {
                 app.UseExceptionHandler();
-            }
 
             app.UseCors("CorsPolicy");
 
-            app.UseMvc();
-
+            app.UseMvcWithDefaultRoute();
         }
-
-
     }
 }

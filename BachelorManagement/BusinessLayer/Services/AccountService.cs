@@ -1,11 +1,11 @@
 ﻿using System.Linq;
-using BachelorManagement.BusinessLayer.Contracts;
-using BachelorManagement.BusinessLayer.Interfaces;
+using BachelorManagement.DataLayer;
+using BachelorManagement.DataLayer.Entities;
 using BachelorManagement.Interfaces;
 
 namespace BachelorManagement.BusinessLayer.Services
 {
-    public class AccountService: IAccountService
+    public class AccountService : IAccountService
     {
         private readonly IRepository<User> _userRepository;
 

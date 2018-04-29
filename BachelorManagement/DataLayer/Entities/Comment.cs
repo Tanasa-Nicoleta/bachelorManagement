@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using BachelorManagement.BusinessLayer.Interfaces;
 
 namespace BachelorManagement.DataLayer.Entities
 {

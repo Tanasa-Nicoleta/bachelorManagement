@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace BachelorManagement.BusinessLayer.Interfaces
+namespace BachelorManagement.DataLayer
 {
     public interface IRepository<T> where T : class, IEntityBase, new()
     {

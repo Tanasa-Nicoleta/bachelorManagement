@@ -33,14 +33,18 @@ export class LoginLayoutComponent {
       Password: pass
     };
 
-    const resp = this.http.post('http://localhost:64250/api/account/login', this.body, { observe: 'response' });
+    const resp = this.http.post('http://localhost:64250/api/account/login', this.body, {responseType: 'text'});
 
     resp.subscribe(      
       data => {
         console.log("Succes");
-        if (data.status == 200) {
-          this.router.navigateByUrl('/register');
-        }
+        this.router.navigateByUrl('/welcome');        
+      },
+      err => {
+        console.log("Error");
+        console.log(err)
+        if (err.status == 400)
+          this.invalidError = true;
       }
     );
 

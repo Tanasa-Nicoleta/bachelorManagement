@@ -14,7 +14,6 @@ namespace BachelorManagement.ApiLayer.Controllers
             _accountService = accountService;
         }
 
-        // GET api/values
         [HttpGet]
         public string Get()
         {
@@ -40,7 +39,7 @@ namespace BachelorManagement.ApiLayer.Controllers
                 return BadRequest();
 
             if (_accountService.CheckIfUserNameExists(accountDto.Username))
-                return  BadRequest("Username exists");
+                return BadRequest("Username exists");
 
             if (!_accountService.AddNewUser(accountDto.Username, accountDto.Password))
                 return BadRequest();

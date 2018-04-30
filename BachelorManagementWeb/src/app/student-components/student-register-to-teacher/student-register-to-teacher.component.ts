@@ -30,6 +30,8 @@ export class StudentRegisterToTeacherComponent {
     }
     
     ngOnInit() {
+        
+    console.log("local: ", localStorage);
         this.theme1 = new Bachelor("Theme1", "Description1 for Theme1");
         this.theme2 = new Bachelor("Theme2", "Description2 for Theme 2 and some random extra text");
         this.theme3 = new Bachelor("Theme3", "Description3 and other random text just for the text to align");

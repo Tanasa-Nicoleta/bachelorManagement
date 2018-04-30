@@ -31,6 +31,7 @@ namespace BachelorManagement.ApiLayer
             services.AddScoped(p => new DbContext(p.GetService<DbContextOptions<BachelorManagementContext>>()));
 
             services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<ITeacherService, TeacherService>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         }
 

@@ -37,9 +37,11 @@ namespace BachelorManagement.DataLayer
 
         public virtual DbSet<Year> Years { get; set; }
 
+        public virtual DbSet<BachelorTheme> BachelorThemes { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var cn = @"Server=(localdb)\mssqllocaldb;Database=BachelorManagement;Trusted_Connection=True;";
+            var cn = @"Server=(localdb)\mssqllocaldb;Database=BachelorDegreeManagement;Trusted_Connection=True;";
             optionsBuilder.UseSqlServer(cn);
 
             base.OnConfiguring(optionsBuilder);

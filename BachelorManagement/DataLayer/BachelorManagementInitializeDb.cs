@@ -14,6 +14,19 @@ namespace BachelorManagement.DataLayer
             if (context.Users.Any())
                 return;
 
+            var themes = new[]
+            {
+                new BachelorTheme
+                {
+                    Description = "VladDescription",
+                    TeacherId = 1,
+                    Title = "VladTitle"
+                }
+            };
+            foreach (var theme in themes)
+                context.BachelorThemes.Add(theme);
+            context.SaveChanges();
+
             var teachers = new[]
             {
                 new Teacher
@@ -21,7 +34,9 @@ namespace BachelorManagement.DataLayer
                     Email = "vlad.simion@info.uaic.ro",
                     FirstName = "Vlad",
                     LastName = "Simion",
-                    NumberOfStudents = 10
+                    NumberOfStudents = 10,
+                    Themes = themes
+
                 },
                 new Teacher
                 {

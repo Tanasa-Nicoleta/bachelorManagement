@@ -10,7 +10,6 @@
         public int TeacherId { get; set; }
         public Mean Mean { get; set; }
         public Teacher Teacher { get; set; }
-        public File File { get; set; }
         public int Id { get; set; }
     }
 }

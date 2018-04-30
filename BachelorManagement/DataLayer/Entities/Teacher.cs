@@ -11,7 +11,6 @@ namespace BachelorManagement.DataLayer.Entities
         public Consultation Consultation { get; set; }
         public ICollection<Student> Students { get; set; }
         public ICollection<Session> Sessions { get; set; }
-        public ICollection<Announcement> Announcements { get; set; }
         public string Discipline { get; set; }
         public ICollection<BachelorTheme> Themes { get; set; }
         public int Id { get; set; }

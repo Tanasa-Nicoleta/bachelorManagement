@@ -50,27 +50,7 @@ namespace BachelorManagement.DataLayer
                 context.Teachers.Add(teacher);
             context.SaveChanges();
 
-            var announcements = new[]
-            {
-                new Announcement
-                {
-                    TeacherId = 1,
-                    Title = "First",
-                    Content = "First announcement",
-                    Date = DateTime.Now
-                },
-                new Announcement
-                {
-                    TeacherId = 2,
-                    Title = "Second",
-                    Content = "Second announcement",
-                    Date = DateTime.Now
-                }
-            };
-            foreach (var announcement in announcements)
-                context.Announcements.Add(announcement);
-            context.SaveChanges();
-
+           
             var students = new[]
             {
                 new Student
@@ -193,40 +173,6 @@ namespace BachelorManagement.DataLayer
                 context.Sessions.Add(session);
             context.SaveChanges();
 
-
-            var studentContents = new[]
-            {
-                new StudentContent
-                {
-                    CommentId = 1,
-                    Content = "Good job!"
-                },
-                new StudentContent
-                {
-                    CommentId = 2,
-                    Content = "Great job!"
-                }
-            };
-            foreach (var studentContent in studentContents)
-                context.StudentContents.Add(studentContent);
-            context.SaveChanges();
-
-            var teacherContents = new[]
-            {
-                new TeacherContent
-                {
-                    CommentId = 3,
-                    Content = "Good job!"
-                },
-                new TeacherContent
-                {
-                    CommentId = 4,
-                    Content = "Great job!"
-                }
-            };
-            foreach (var teacherContent in teacherContents)
-                context.TeacherContents.Add(teacherContent);
-            context.SaveChanges();
 
             var users = new[]
             {

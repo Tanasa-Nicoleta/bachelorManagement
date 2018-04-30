@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { MenuItem } from '../../models/menu-items';
 import { TitleService } from '../../services/title.service';
 import { Title } from '@angular/platform-browser';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'register-layout',
@@ -12,7 +14,13 @@ import { Title } from '@angular/platform-browser';
 export class RegisterLayoutComponent {
 
   private invalidError = false;
+  private alreadyExistingAccount = false;
   private matchError = false;
+
+  body: {
+    Username: string;
+    Password: string;
+  };
   
   menuItems: [MenuItem] = [
     new MenuItem("Register", "/welcome")
@@ -20,7 +28,7 @@ export class RegisterLayoutComponent {
 
   titleService: TitleService;
 
-  constructor(private title: Title) {
+  constructor(private http: HttpClient, private router: Router, private title: Title) {
     this.titleService = new TitleService(title);
     this.titleService.setTitle("BDMApp Register");
   }
@@ -58,5 +66,27 @@ export class RegisterLayoutComponent {
       this.DeleteError();
       return true;
     }
+  }
+
+  public submit(email: string, pass: string) {
+    this.body = {
+      Username: email,
+      Password: pass
+    };
+
+    const resp = this.http.post('http://localhost:64250/api/account/register', this.body, {observe: 'response'});
+
+    resp.subscribe(      
+      data => {
+        this.router.navigateByUrl('/welcome');        
+      },
+      err => {
+        if (err.status == 400)
+          if(err.error == "Username exists"){
+            this.alreadyExistingAccount = true;
+          }
+      }
+    );
+
   }
 }

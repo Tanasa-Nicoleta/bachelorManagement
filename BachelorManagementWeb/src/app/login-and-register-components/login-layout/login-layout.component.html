@@ -31,6 +31,10 @@
                 </div>
 
 
+                <div *ngIf="invalidError" class="invalidCredentials">
+                        Invalid email or password!
+                </div>
+
                 <button type="submit" id="submitButtonRectangle" (click)="submit(SubmitEmail.value,SubmitPass.value);" [disabled]="(!SubmitEmail.valid && SubmitEmail.dirty)">
                         <div id="submitButtonText">Login
 

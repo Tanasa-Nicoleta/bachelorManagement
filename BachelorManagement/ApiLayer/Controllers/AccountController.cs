@@ -32,5 +32,20 @@ namespace BachelorManagement.ApiLayer.Controllers
 
             return Ok();
         }
+
+        [HttpPost("register")]
+        public IActionResult Register([FromBody] AccountDto accountDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            if (_accountService.CheckIfUserNameExists(accountDto.Username))
+                return  BadRequest("Username exists");
+
+            if (!_accountService.AddNewUser(accountDto.Username, accountDto.Password))
+                return BadRequest();
+
+            return NoContent();
+        }
     }
 }

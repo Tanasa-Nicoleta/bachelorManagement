@@ -13,7 +13,7 @@
                 Email
             </div>
 
-            <input name="SubmitEmail" type="text" placeholder="lastName.firstName@info.uaic.ro" id="emailInput" pattern="^.+\b@info\.uaic\.ro\b$"
+            <input #SubmitEmail name="SubmitEmail" type="text" placeholder="lastName.firstName@info.uaic.ro" id="emailInput" pattern="^.+\b@info\.uaic\.ro\b$"
                 required>
         </div>
 
@@ -43,11 +43,14 @@
             ! Passwords don't match
         </div>
 
-        <div class="submitButton">
-            <button type="submit" id="submitButtonRectangle" [disabled]="(!SubmitPass.valid && SubmitPass.dirty) || matchError">
-                <div id="submitButtonText" [routerLink]=[menuItems[0].Path]>{{menuItems[0].Name}}</div>
-            </button>
+        <div *ngIf="alreadyExistingAccount" class="invalidCredentials">
+            This email address is already registered!
         </div>
+
+        <button type="submit" id="submitButtonRectangle" [disabled]="(!SubmitPass.valid && SubmitPass.dirty) || matchError" (click)="submit(SubmitEmail.value,SubmitPass.value);">
+            <div id="submitButtonText">{{menuItems[0].Name}}</div>
+        </button>
+
 
         <div class="register">
             If you already have an account you can login

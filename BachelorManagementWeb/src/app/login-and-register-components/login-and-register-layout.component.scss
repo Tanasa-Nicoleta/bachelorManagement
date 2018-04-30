@@ -15,7 +15,7 @@ $information-tablet: "only screen and (max-width : $tablet-break)";
     align-items: center;
 }
 
-.welcomeToAppTitle, .welcomeToAppSubtitle, .email, .password, .forgotPassword, .register, #error{
+.welcomeToAppTitle, .welcomeToAppSubtitle, .email, .password, .forgotPassword, .register, #error,  .invalidCredentials{
     font-family: $text-font;
     color: $text-color;    
     @media #{$information-tablet}{
@@ -39,6 +39,11 @@ $information-tablet: "only screen and (max-width : $tablet-break)";
 .email, .password{
     padding: 8px 0px;
     font-size: 20px;
+}
+
+.invalidCredentials{    
+    padding: 5px 0px;
+    font-size: 15px;
 }
 
 #passwordInput, #confirmPasswordInput{
@@ -93,10 +98,6 @@ input{
         cursor: pointer;
     }
 }
-
-.submitButton{
-    margin: 30px 0px 10px;
-}
   
 #submitButtonRectangle {
     width: 30%;
@@ -104,6 +105,7 @@ input{
     background-color: $content-container-bg-color;
     border: solid 1px $input-border-color-default;
     cursor: pointer;
+    margin: 1.5% 0%; 
     &:disabled{
       background-color: $input-color-disabled;
     }

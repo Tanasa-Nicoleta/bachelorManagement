@@ -34,8 +34,8 @@ namespace BachelorManagement.DataLayer
                     Email = "vlad.simion@info.uaic.ro",
                     FirstName = "Vlad",
                     LastName = "Simion",
-                    NumberOfStudents = 10,
-                    Themes = themes
+                    NumberOfSpots = 10,
+                    BachelorThemes = themes
 
                 },
                 new Teacher
@@ -43,7 +43,7 @@ namespace BachelorManagement.DataLayer
                     Email = "simona.petrescu@info.uaic.ro",
                     FirstName = "Simona",
                     LastName = "Petrescu",
-                    NumberOfStudents = 10
+                    NumberOfSpots = 10
                 }
             };
             foreach (var teacher in teachers)

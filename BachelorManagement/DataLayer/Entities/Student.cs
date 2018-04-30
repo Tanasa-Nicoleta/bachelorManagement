@@ -1,4 +1,6 @@
-﻿namespace BachelorManagement.DataLayer.Entities
+﻿using System.Collections.Generic;
+
+namespace BachelorManagement.DataLayer.Entities
 {
     public class Student : IEntityBase
     {
@@ -11,5 +13,9 @@
         public Mean Mean { get; set; }
         public Teacher Teacher { get; set; }
         public int Id { get; set; }
+        public string Achievements { get; set; }    
+        public MeetingRequest MeetingRequest { get; set; }
+        public BachelorTheme BachelorTheme { get; set; }
+        public ICollection<Comment> Comments { get; set; }
     }
 }

@@ -241,7 +241,7 @@ namespace BachelorManagement.DataLayer.Migrations
 
                     b.Property<string>("LastName");
 
-                    b.Property<int>("NumberOfStudents");
+                    b.Property<int>("NumberOfSpots");
 
                     b.HasKey("Id");
 

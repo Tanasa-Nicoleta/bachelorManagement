@@ -31,7 +31,7 @@ namespace BachelorManagement.BusinessLayer.Services
         {
             var teacher = _teacherRepository.GetAll().FirstOrDefault(t =>
                 string.Equals(t.Email.ToLower(), email.ToLower()));
-            return teacher?.Themes;
+            return teacher?.BachelorThemes;
         }
     }
 }

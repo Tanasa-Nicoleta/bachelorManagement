@@ -36,7 +36,7 @@ namespace BachelorManagement.ApiLayer.Controllers
         public IActionResult Register([FromBody] AccountDto accountDto)
         {
             if (!ModelState.IsValid)
-                return BadRequest();
+                return BadRequest("Invalid model state");
 
             if (_accountService.CheckIfUserNameExists(accountDto.Username))
                 return BadRequest("Username exists");

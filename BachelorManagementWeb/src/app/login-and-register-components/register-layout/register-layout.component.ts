@@ -15,6 +15,7 @@ export class RegisterLayoutComponent {
 
   private invalidError = false;
   private alreadyExistingAccount = false;
+  private invalidModelState = false;
   private matchError = false;
 
   body: {
@@ -84,7 +85,9 @@ export class RegisterLayoutComponent {
         if (err.status == 400)
           if(err.error == "Username exists"){
             this.alreadyExistingAccount = true;
-          }
+          }if(err.error == "Invalid model state"){
+            this.invalidModelState = true;
+          }          
       }
     );
 

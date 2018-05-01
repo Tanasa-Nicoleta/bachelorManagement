@@ -9,10 +9,15 @@ namespace BachelorManagement.BusinessLayer.Services
     public class TeacherService : ITeacherService
     {
         private readonly IRepository<Teacher> _teacherRepository;
+        private readonly IRepository<BachelorTheme> _bachelorThemeRepository;
+        private readonly IRepository<Student> _studentRepository;
 
-        public TeacherService(IRepository<Teacher> teacherRepository)
+        public TeacherService(IRepository<Teacher> teacherRepository, IRepository<BachelorTheme> bachelorThemeRepository,
+            IRepository<Student> studentRepository)
         {
             _teacherRepository = teacherRepository;
+            _bachelorThemeRepository = bachelorThemeRepository;
+            _studentRepository = studentRepository;
         }
 
         public IQueryable<Teacher> GetAllTeachers()
@@ -28,9 +33,34 @@ namespace BachelorManagement.BusinessLayer.Services
 
         public ICollection<BachelorTheme> GetTeacherBachelorThemes(string email)
         {
-            var teacher = _teacherRepository.GetAll().FirstOrDefault(t =>
-                string.Equals(t.Email.ToLower(), email.ToLower()));
-            return teacher?.BachelorThemes;
+            var teacher = GetTeacherByEmail(email);
+            var themes = GetTeacherBacelorThemes(teacher);
+            return new List<BachelorTheme>(themes);
         }
+
+
+        public ICollection<Student> GetTeacherBachelorStudents(string email)
+        {
+            var teacher = GetTeacherByEmail(email);
+            var students = GetTeacherStudents(teacher);
+            return new List<Student>(students);
+        }
+
+        private Teacher GetTeacherByEmail(string email)
+        {
+            return _teacherRepository.GetAll().FirstOrDefault(t =>
+                string.Equals(t.Email.ToLower(), email.ToLower()));
+        }
+
+        private IEnumerable<BachelorTheme> GetTeacherBacelorThemes(Teacher teacher)
+        {
+            return _bachelorThemeRepository.GetAll().Where(b => b.TeacherId == teacher.Id);
+        }
+
+        private IEnumerable<Student> GetTeacherStudents(Teacher teacher)
+        {
+            return _studentRepository.GetAll().Where(b => b.TeacherId == teacher.Id);
+        }
+
     }
 }

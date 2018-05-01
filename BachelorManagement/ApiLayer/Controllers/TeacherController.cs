@@ -29,8 +29,15 @@ namespace BachelorManagement.ApiLayer.Controllers
         [HttpGet]
         [Route("api/teacher/themes/{email}")]
         public IActionResult GetTeacherThemes(string email)
-        {
+         {
             return Ok(_teacherService.GetTeacherBachelorThemes(email));
+        }
+
+        [HttpGet]
+        [Route("api/teacher/students/{email}")]
+        public IActionResult GetTeacherStudents(string email)
+        {
+            return Ok(_teacherService.GetTeacherBachelorStudents(email));
         }
     }
 }

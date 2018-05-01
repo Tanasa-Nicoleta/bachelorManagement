@@ -90,13 +90,14 @@ namespace BachelorManagement.DataLayer
                 context.Students.Add(student);
             context.SaveChanges();
 
+
+
             var studentTheme = new BachelorTheme
             {
                 Description = "FloreaDescription",
                 StudentId = 1,
                 Title = "FloreaTitle"
             };
-
             context.BachelorThemes.Add(studentTheme);
             context.SaveChanges();
 

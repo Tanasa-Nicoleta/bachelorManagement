@@ -14,9 +14,9 @@ namespace BachelorManagement.DataLayer.Entities
         public ICollection<Session> Sessions { get; set; }
         public string Discipline { get; set; }
         public ICollection<BachelorTheme> BachelorThemes { get; set; }
-        public int Id { get; set; }
         public ICollection<MeetingRequest> MeetingRequests { get; set; }
         public string Requirement { get; set; }
         public string JobTitle { get; set; } // rename
+        public int Id { get; set; }
     }
 }

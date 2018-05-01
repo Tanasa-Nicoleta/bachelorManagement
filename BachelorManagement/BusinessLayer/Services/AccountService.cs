@@ -25,7 +25,7 @@ namespace BachelorManagement.BusinessLayer.Services
 
         public bool AddNewUser(string username, string password)
         {
-            _userRepository.Add(new User()
+            _userRepository.Add(new User
             {
                 Email = username,
                 Password = password,

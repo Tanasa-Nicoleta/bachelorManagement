@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using BachelorManagement.DataLayer.Entities;
 using BachelorManagement.DataLayer.Enums;
 
@@ -13,7 +12,7 @@ namespace BachelorManagement.DataLayer
 
             if (context.Users.Any())
                 return;
-            
+
             var teachers = new[]
             {
                 new Teacher
@@ -35,14 +34,14 @@ namespace BachelorManagement.DataLayer
                     NumberOfSpots = 10,
                     NumberOfAvailableSpots = 8,
                     JobTitle = "Prof. Dr.",
-                    Discipline = "Data structures", 
+                    Discipline = "Data structures",
                     Requirement = "No special requirement"
                 }
             };
             foreach (var teacher in teachers)
                 context.Teachers.Add(teacher);
             context.SaveChanges();
-            
+
             var teacherThemes = new[]
             {
                 new BachelorTheme

@@ -2,7 +2,7 @@
 
 namespace BachelorManagement.DataLayer.Repositories
 {
-    public class TeacherRepository: Repository<Teacher>
+    public class TeacherRepository : Repository<Teacher>
     {
     }
 }

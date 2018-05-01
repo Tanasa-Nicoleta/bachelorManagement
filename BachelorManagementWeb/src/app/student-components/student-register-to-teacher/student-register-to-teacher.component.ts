@@ -42,10 +42,9 @@ export class StudentRegisterToTeacherComponent {
                 for (let key in data.body) {
                     if (data.body.hasOwnProperty(key)) {
                         this.teacherList.push(new Teacher(data.body[key]['firstName'], data.body[key]['lastName'],
-                            data.body[key]['email'], data.body[key]['numberOfSpots'], data.body[key]['numberOfAvailableSpots'], null,
+                            data.body[key]['email'], data.body[key]['numberOfSpots'], data.body[key]['numberOfAvailableSpots'],
                             new Array<Bachelor>(), data.body[key]['discipline'], data.body[key]['jobTitle'], data.body[key]['requirement']));
                         this.teacherEmails.push(data.body[key]['email']);
-                        //   console.log("into for ", this.teacherEmails)          
                     }
                 }
                 this.setThemesToTeacher();
@@ -59,17 +58,14 @@ export class StudentRegisterToTeacherComponent {
 
     setThemesToTeacher() {
         let i = 0;
+
         for (let email in this.teacherEmails) {
             let themeResponse = this.http.get('http://localhost:64250/api/teacher/themes/' + this.teacherEmails[email], { observe: 'response' });
 
             themeResponse.subscribe(data => {
-                if(data.body[i]){  
-                    this.teacherList[i].ThemeTitles = data.body[i]['title'];
+                if (data.body[i]) {
                     this.teacherList[i].Themes.push(new Bachelor(data.body[i]['title'], data.body[i]['description']))
-                //console.log(data.body[i]['title'], data.body[i]['description']);
-                console.log(this.teacherList);
                 }
-                
             },
                 err => {
                     console.log("Error");

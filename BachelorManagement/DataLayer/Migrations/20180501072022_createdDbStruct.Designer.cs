@@ -10,9 +10,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BachelorManagement.DataLayer.Migrations
 {
     [DbContext(typeof(BachelorManagementContext))]
-    partial class BachelorManagementContextModelSnapshot : ModelSnapshot
+    [Migration("20180501072022_createdDbStruct")]
+    partial class createdDbStruct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

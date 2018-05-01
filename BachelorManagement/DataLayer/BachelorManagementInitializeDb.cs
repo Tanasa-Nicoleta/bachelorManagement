@@ -13,20 +13,7 @@ namespace BachelorManagement.DataLayer
 
             if (context.Users.Any())
                 return;
-
-            var themes = new[]
-            {
-                new BachelorTheme
-                {
-                    Description = "VladDescription",
-                    TeacherId = 1,
-                    Title = "VladTitle"
-                }
-            };
-            foreach (var theme in themes)
-                context.BachelorThemes.Add(theme);
-            context.SaveChanges();
-
+            
             var teachers = new[]
             {
                 new Teacher
@@ -35,22 +22,40 @@ namespace BachelorManagement.DataLayer
                     FirstName = "Vlad",
                     LastName = "Simion",
                     NumberOfSpots = 10,
-                    BachelorThemes = themes
-
+                    NumberOfAvailableSpots = 10,
+                    JobTitle = "Colab.",
+                    Discipline = "Introduction to programming",
+                    Requirement = "None"
                 },
                 new Teacher
                 {
                     Email = "simona.petrescu@info.uaic.ro",
                     FirstName = "Simona",
                     LastName = "Petrescu",
-                    NumberOfSpots = 10
+                    NumberOfSpots = 10,
+                    NumberOfAvailableSpots = 8,
+                    JobTitle = "Prof. Dr.",
+                    Discipline = "Data structures", 
+                    Requirement = "No special requirement"
                 }
             };
             foreach (var teacher in teachers)
                 context.Teachers.Add(teacher);
             context.SaveChanges();
+            
+            var teacherThemes = new[]
+            {
+                new BachelorTheme
+                {
+                    Description = "VladDescription",
+                    TeacherId = 1,
+                    Title = "VladTitle"
+                }
+            };
+            foreach (var theme in teacherThemes)
+                context.BachelorThemes.Add(theme);
+            context.SaveChanges();
 
-           
             var students = new[]
             {
                 new Student
@@ -69,7 +74,8 @@ namespace BachelorManagement.DataLayer
                     LastName = "Ursache",
                     SerialNumber = "31090104SL141235",
                     StartYear = "2014",
-                    TeacherId = 1
+                    TeacherId = 1,
+                    Achievements = "Onis participation"
                 },
                 new Student
                 {
@@ -85,23 +91,37 @@ namespace BachelorManagement.DataLayer
                 context.Students.Add(student);
             context.SaveChanges();
 
+            var studentTheme = new BachelorTheme
+            {
+                Description = "FloreaDescription",
+                StudentId = 1,
+                Title = "FloreaTitle"
+            };
+
+            context.BachelorThemes.Add(studentTheme);
+            context.SaveChanges();
+
             var comments = new[]
             {
                 new Comment
                 {
-                    StudentId = 1
+                    StudentId = 1,
+                    CommentContent = "Heloo! student1"
                 },
                 new Comment
                 {
-                    StudentId = 2
+                    StudentId = 2,
+                    CommentContent = "Hello! student2"
                 },
                 new Comment
                 {
-                    StudentId = 1
+                    StudentId = 1,
+                    CommentContent = "Hello! student1v2"
                 },
                 new Comment
                 {
-                    StudentId = 2
+                    TeacherId = 1,
+                    CommentContent = "Hello! Teacher1"
                 }
             };
             foreach (var comment in comments)
@@ -116,14 +136,20 @@ namespace BachelorManagement.DataLayer
                     Interval = "09:00 - 11:00",
                     TeacherId = 1
                 },
-
                 new Consultation
                 {
                     Day = WeekDays.Thursday,
                     Interval = "10:00 - 12:00",
                     TeacherId = 2
+                },
+                new Consultation
+                {
+                    Day = WeekDays.Friday,
+                    Interval = "10:00 - 12:00",
+                    StudentId = 1
                 }
             };
+
             foreach (var consultation in consultations)
                 context.Consultations.Add(consultation);
             context.SaveChanges();

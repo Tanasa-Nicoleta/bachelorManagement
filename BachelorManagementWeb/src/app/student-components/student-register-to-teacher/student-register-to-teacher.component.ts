@@ -3,6 +3,7 @@ import { Teacher } from '../../models/teacher.model';
 import { Bachelor } from '../../models/bachelor-degree.model';
 import { TitleService } from '../../services/title.service';
 import { Title } from '@angular/platform-browser';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
     selector: 'student-register-to-teacher',
@@ -15,7 +16,7 @@ export class StudentRegisterToTeacherComponent {
     optionText: string = "Next step";
 
     //api  call for the teachers list
-    teacherList: Array<Teacher>;
+    teacherList: Array<Teacher> = new Array<Teacher>();
     teacher1: Teacher;
     teacher2: Teacher;
     theme1: Bachelor;
@@ -24,22 +25,39 @@ export class StudentRegisterToTeacherComponent {
 
     titleService: TitleService;
 
-    constructor(private title: Title) {
+    constructor(private title: Title, private http: HttpClient) {
         this.titleService = new TitleService(title);
         this.titleService.setTitle("BDMApp Student Register To Teacher");
     }
     
     ngOnInit() {
+
+                
+        const themeResponse = this.http.get('http://localhost:64250/api/teacher', {observe: 'response'});
         
-    console.log("local: ", localStorage);
+        themeResponse.subscribe(      
+              data => {      
+                data.body  
+                for(let key in data.body){
+                    if(data.body.hasOwnProperty(key))
+                    {                    
+                    this.teacherList.push(new Teacher(data.body[key]['firstName'], data.body[key]['lastName'], 
+                      data.body[key]['email'], data.body[key]['numberOfSpots'], data.body[key]['numberOfAvailableSpots'], "'title'",
+                      null, data.body[key]['discipline'], data.body[key]['jobTitle'], data.body[key]['requirement']));
+                    }
+                }
+              },
+              err => {
+                console.log("Error");
+                console.log(err)                  
+              }
+            );
+
+         
+
         this.theme1 = new Bachelor("Theme1", "Description1 for Theme1");
         this.theme2 = new Bachelor("Theme2", "Description2 for Theme 2 and some random extra text");
         this.theme3 = new Bachelor("Theme3", "Description3 and other random text just for the text to align");
-
-        this.teacher1 = new Teacher("Ana", "Maria", "", 3, 2, "", [this.theme1, this.theme2], "Discipline1", "Prof", "No requirement.");
-        this.teacher2 = new Teacher("Ioana", "Pascu", "", 12, 11, "", [this.theme3], "Discipline2", "Prof Doctor", "FII Practic participation. ONIS Competition. Self coordinator");
-
-        this.teacherList = [this.teacher1, this.teacher2];
     }
 
     applyToTeacher(teacherFirstName: string, teacherLastName: string) {

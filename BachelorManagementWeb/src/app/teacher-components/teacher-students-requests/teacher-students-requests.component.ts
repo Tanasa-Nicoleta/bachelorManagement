@@ -20,17 +20,17 @@ export class TeacherStudentsRequestsComponent {
 
   studentList: [[Student, Achievement, boolean, boolean]] = [
     [new Student("Ana", "Maria", "An.Ma@info.uaic.ro",
-      new Bachelor("Title1", "Descripiton1 and some random extra text")),
+      new Bachelor("Title1", "Descripiton1 and some random extra text"), null, null, null, null),
     new Achievement("My achievement 1"),
     this.studentAccepted,
     this.studentDenied],
     [new Student("Anita", "Mona", "An.Mo@info.uaic.ro",
-      new Bachelor("Title2", "Descripiton2")),
+      new Bachelor("Title2", "Descripiton2"), null, null, null, null),
     new Achievement("My achievement and some other text"),
     this.studentAccepted,
     this.studentDenied],
     [new Student("Adriana", "Mihaela", "Ad.Mi@info.uaic.ro",
-      new Bachelor("Title3", "Descripiton3 and more words just to see how it looks on front")),
+      new Bachelor("Title3", "Descripiton3 and more words just to see how it looks on front"), null, null, null, null),
     new Achievement("My achievement and some other text too, just an example"),
     this.studentAccepted,
     this.studentDenied]];

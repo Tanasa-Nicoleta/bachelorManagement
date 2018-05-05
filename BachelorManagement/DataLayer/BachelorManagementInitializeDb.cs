@@ -42,19 +42,6 @@ namespace BachelorManagement.DataLayer
                 context.Teachers.Add(teacher);
             context.SaveChanges();
 
-            var teacherThemes = new[]
-            {
-                new BachelorTheme
-                {
-                    Description = "VladDescription",
-                    TeacherId = 1,
-                    Title = "VladTitle"
-                }
-            };
-            foreach (var theme in teacherThemes)
-                context.BachelorThemes.Add(theme);
-            context.SaveChanges();
-
             var students = new[]
             {
                 new Student
@@ -64,7 +51,9 @@ namespace BachelorManagement.DataLayer
                     LastName = "Florea",
                     SerialNumber = "31090104SL161234",
                     StartYear = "2016",
-                    TeacherId = 1
+                    TeacherId = 1,
+                    Achievements = "some achievements",
+                    GitUrl = "another git url"
                 },
                 new Student
                 {
@@ -74,7 +63,8 @@ namespace BachelorManagement.DataLayer
                     SerialNumber = "31090104SL141235",
                     StartYear = "2014",
                     TeacherId = 1,
-                    Achievements = "Onis participation"
+                    Achievements = "Onis participation",
+                    GitUrl = "a git url"
                 },
                 new Student
                 {
@@ -83,24 +73,58 @@ namespace BachelorManagement.DataLayer
                     LastName = "Leu",
                     SerialNumber = "31090104SL151234",
                     StartYear = "2015",
-                    TeacherId = 2
+                    TeacherId = 2,
+                    Achievements = "none",
+                    GitUrl = "git url"
                 }
             };
             foreach (var student in students)
                 context.Students.Add(student);
             context.SaveChanges();
 
-
-
-            var studentTheme = new BachelorTheme
+            var bachelorThemes = new[]
             {
-                Description = "FloreaDescription",
-                StudentId = 1,
-                Title = "FloreaTitle"
+                new BachelorTheme
+                {
+                    Description = "VladDescription",
+                    TeacherId = 1,
+                    Title = "VladTitle"
+                },
+                new BachelorTheme
+                {
+                    Description = "VladDescription123",
+                    TeacherId = 1,
+                    Title = "VladTitle123"
+                },
+                new BachelorTheme
+                {
+                    Description = "SimonaDescription",
+                    TeacherId = 2,
+                    Title = "SimonaTitle"
+                },
+                new BachelorTheme
+                {
+                    Description = "FloreaDescription",
+                    StudentId = 1,
+                    Title = "FloreaTitle"
+                },
+                new BachelorTheme
+                {
+                    Description = "MihaiDescription",
+                    StudentId = 2,
+                    Title = "MihaiTitle"
+                },
+                new BachelorTheme
+                {
+                    Description = "GeorgeDescription",
+                    StudentId = 3,
+                    Title = "GeorgeTitle"
+                }
             };
-            context.BachelorThemes.Add(studentTheme);
+            foreach (var theme in bachelorThemes)
+                context.BachelorThemes.Add(theme);
             context.SaveChanges();
-
+            
             var comments = new[]
             {
                 new Comment

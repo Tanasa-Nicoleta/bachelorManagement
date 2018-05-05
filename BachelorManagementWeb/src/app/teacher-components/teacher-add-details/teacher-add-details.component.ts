@@ -18,7 +18,7 @@ export class TeacherAddDetailsComponent {
   addThemeText: string = "Add a theme";
 
   teacherThemes: [Teacher, [string | null]] = [
-    new Teacher("Ana", "Maria", "", 3, 2, "", ["this.theme1", "this.theme2"], "Discipline1", "Prof", "No requirement."),
+    new Teacher("Ana", "Maria", "", 3, 2, "", ["this.theme1", "this.theme2"], "Discipline1", "No requirement."),
     [null]]
 
   titleService: TitleService;

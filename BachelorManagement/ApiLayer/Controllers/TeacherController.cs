@@ -23,7 +23,7 @@ namespace BachelorManagement.ApiLayer.Controllers
         [Route("api/teacher/{email}")]
         public IActionResult GetTeacher(string email)
         {
-            return Ok(_teacherService.GetTeacher(email));
+            return Ok(_teacherService.GetTeacherByEmail(email));
         }
 
         [HttpGet]

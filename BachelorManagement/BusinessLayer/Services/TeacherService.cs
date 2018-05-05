@@ -25,7 +25,7 @@ namespace BachelorManagement.BusinessLayer.Services
             return _teacherRepository.GetAll();
         }
 
-        public Teacher GetTeacher(string email)
+        public Teacher GetTeacherByEmail(string email)
         {
             return _teacherRepository.GetAll().FirstOrDefault(t =>
                 string.Equals(t.Email.ToLower(), email.ToLower()));
@@ -38,18 +38,11 @@ namespace BachelorManagement.BusinessLayer.Services
             return new List<BachelorTheme>(themes);
         }
 
-
         public ICollection<Student> GetTeacherBachelorStudents(string email)
         {
             var teacher = GetTeacherByEmail(email);
             var students = GetTeacherStudents(teacher);
             return new List<Student>(students);
-        }
-
-        private Teacher GetTeacherByEmail(string email)
-        {
-            return _teacherRepository.GetAll().FirstOrDefault(t =>
-                string.Equals(t.Email.ToLower(), email.ToLower()));
         }
 
         private IEnumerable<BachelorTheme> GetTeacherBacelorThemes(Teacher teacher)
@@ -59,7 +52,7 @@ namespace BachelorManagement.BusinessLayer.Services
 
         private IEnumerable<Student> GetTeacherStudents(Teacher teacher)
         {
-            return _studentRepository.GetAll().Where(b => b.TeacherId == teacher.Id);
+            return _studentRepository.GetAll().Where(s => s.TeacherId == teacher.Id);
         }
 
     }

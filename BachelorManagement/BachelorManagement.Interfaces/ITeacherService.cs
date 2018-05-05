@@ -8,7 +8,7 @@ namespace BachelorManagement.Interfaces
     {
         IQueryable<Teacher> GetAllTeachers();
 
-        Teacher GetTeacher(string email);
+        Teacher GetTeacherByEmail(string email);
 
         ICollection<BachelorTheme> GetTeacherBachelorThemes(string email);
 

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using BachelorManagement.DataLayer.Entities;
+﻿using BachelorManagement.DataLayer.Entities;
 
 namespace BachelorManagement.Interfaces
 {
@@ -7,6 +6,8 @@ namespace BachelorManagement.Interfaces
     {
         Teacher GetStudentsTeacher(string email);
         Student GetStudentByEmail(string email);
-        IEnumerable<BachelorTheme> GetStudentBachelorThemes(string email);
+        BachelorTheme GetStudentBachelorThemes(string email);
+        Mean GetStudentMeans(string email);
+        void AddAchievementToStudent(string email, string achievement);
     }
 }

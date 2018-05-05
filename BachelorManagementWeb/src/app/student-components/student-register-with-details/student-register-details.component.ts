@@ -30,11 +30,6 @@ export class StudentRegisterToTeacherDetailsComponent {
         this.getTeacherDetails(this.email);
     }
 
-    applyToTeacherWithDetails(title: string, description: string, achievement: string) {
-        console.log(title + " " + description + " " + achievement);
-        //api call for applying to a teacher
-    }
-
     getTeacherDetails(email: string) {
         const theacherResponse = this.http.get('http://localhost:64250/api/teacher/' + this.email, { observe: 'response' });
 
@@ -67,5 +62,10 @@ export class StudentRegisterToTeacherDetailsComponent {
                 console.log("Error");
                 console.log(err)
             });
+    }
+
+    
+    applyToTeacherWithDetails(title: string, description: string, achievement: string) {
+        console.log(title + " " + description + " " + achievement);
     }
 }

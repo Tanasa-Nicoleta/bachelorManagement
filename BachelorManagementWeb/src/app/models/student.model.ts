@@ -1,5 +1,6 @@
 import { Bachelor } from "./bachelor-degree.model";
 import { Mean } from "./mean.model";
+import { Teacher } from "./teacher.model";
 
 export class Student {
     constructor(firstName, lastName, email, theme, gitUrl, startYear, serialNumber, means) {
@@ -20,5 +21,6 @@ export class Student {
     GitUrl: string;
     StartYear: number;
     SerialNumber: string;
-    Means: Mean
+    Means: Mean;
+    TeacherName: string;
 }

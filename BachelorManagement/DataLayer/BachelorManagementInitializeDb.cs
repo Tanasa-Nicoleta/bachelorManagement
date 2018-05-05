@@ -124,7 +124,7 @@ namespace BachelorManagement.DataLayer
             foreach (var theme in bachelorThemes)
                 context.BachelorThemes.Add(theme);
             context.SaveChanges();
-            
+
             var comments = new[]
             {
                 new Comment

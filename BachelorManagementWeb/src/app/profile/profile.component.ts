@@ -4,6 +4,7 @@ import { Title } from '@angular/platform-browser';
 import { Mean } from '../models/mean.model';
 import { HttpClient } from '@angular/common/http';
 import { Student } from '../models/student.model';
+import { Bachelor } from '../models/bachelor-degree.model';
 
 @Component({
   selector: 'profile',
@@ -32,9 +33,11 @@ export class ProfileComponent {
 
     theacherResponse.subscribe(
       data => {
-        console.log(data.body);
         this.student = new Student(data.body['firstName'], data.body['lastName'], data.body['email'], null,
           data.body['gitUrl'], data.body['startYear'], data.body['serialNumber'], null);
+        this.setThemesToStudent();
+        this.setTeacherToStudent();
+        this.setMeansToStudent();
       },
       err => {
         console.log("Error");
@@ -43,7 +46,48 @@ export class ProfileComponent {
     );
   }
 
-  private getStudentBachelorTheme(email:string){
-    
+  setThemesToStudent() {
+    let themeResponse = this.http.get('http://localhost:64250/api/student/themes/' + this.student.Email, { observe: 'response' });
+
+    themeResponse.subscribe(data => {
+      if (data.body) {
+        this.student.Theme = new Bachelor(data.body['title'], data.body['description']);
+      }
+    },
+      err => {
+        console.log("Error");
+        console.log(err)
+      });
+  }
+
+  setTeacherToStudent() {
+    let themeResponse = this.http.get('http://localhost:64250/api/student/teacher/' + this.student.Email, { observe: 'response' });
+
+    themeResponse.subscribe(data => {
+      if (data.body) {
+        this.student.TeacherName = data.body['firstName'] + " " + data.body['lastName'];
+      }
+    },
+      err => {
+        console.log("Error");
+        console.log(err)
+      });
+  }
+
+  setMeansToStudent() {
+    let themeResponse = this.http.get('http://localhost:64250/api/student/means/' + this.student.Email, { observe: 'response' });
+
+    themeResponse.subscribe(data => {
+      if (data.body) {
+        this.student.Means = new Mean(data.body['firstSemester'], data.body['secondSemester'], data.body['thirdSemester'], 
+        data.body['fourthSemester'], data.body['fifthSemester'], data.body['sixthSemester'])
+
+      }
+    },
+      err => {
+        console.log("Error");
+        console.log(err)
+      });
   }
 }
+

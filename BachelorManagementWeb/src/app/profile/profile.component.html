@@ -19,7 +19,13 @@
                 Last Name: {{student.LastName}}
             </div>            
             <div class="profileDetails">
-                Teacher Name: ala bala
+                Teacher Name: {{student.TeacherName}}
+            </div>
+            <div class="profileDetails">
+                Theme name: {{student.Theme.Title}}
+            </div>
+            <div class="profileDetails">
+                Theme description: {{student.Theme.Description}}
             </div>
             <div class="profileDetails">
                 Repository address: <a href={{userGitUrl}}> {{student.GitUrl}}</a>
@@ -31,7 +37,8 @@
                 Start year: {{student.StartYear}}
             </div>
             <div class="profileDetails">
-                Means: ala bala
+                Means: {{student.Means.FirstSemester}}, {{student.Means.SecondSemester}},  {{student.Means.ThirdSemester}},  
+                {{student.Means.FourthSemester}},  {{student.Means.FifthSemester}},  {{student.Means.SixthSemester}},  
             </div>
         </div>
     </div>

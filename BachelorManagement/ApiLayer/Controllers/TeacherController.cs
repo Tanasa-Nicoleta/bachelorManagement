@@ -29,7 +29,7 @@ namespace BachelorManagement.ApiLayer.Controllers
         [HttpGet]
         [Route("api/teacher/themes/{email}")]
         public IActionResult GetTeacherThemes(string email)
-         {
+        {
             return Ok(_teacherService.GetTeacherBachelorThemes(email));
         }
 

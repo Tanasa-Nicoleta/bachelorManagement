@@ -8,11 +8,12 @@ namespace BachelorManagement.BusinessLayer.Services
 {
     public class TeacherService : ITeacherService
     {
-        private readonly IRepository<Teacher> _teacherRepository;
         private readonly IRepository<BachelorTheme> _bachelorThemeRepository;
         private readonly IRepository<Student> _studentRepository;
+        private readonly IRepository<Teacher> _teacherRepository;
 
-        public TeacherService(IRepository<Teacher> teacherRepository, IRepository<BachelorTheme> bachelorThemeRepository,
+        public TeacherService(IRepository<Teacher> teacherRepository,
+            IRepository<BachelorTheme> bachelorThemeRepository,
             IRepository<Student> studentRepository)
         {
             _teacherRepository = teacherRepository;
@@ -54,6 +55,5 @@ namespace BachelorManagement.BusinessLayer.Services
         {
             return _studentRepository.GetAll().Where(s => s.TeacherId == teacher.Id);
         }
-
     }
 }

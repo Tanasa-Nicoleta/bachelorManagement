@@ -6,17 +6,20 @@ using BachelorManagement.Interfaces;
 
 namespace BachelorManagement.BusinessLayer.Services
 {
-    public class StudentService: IStudentService
+    public class StudentService : IStudentService
     {
-        private IRepository<Student> _studentRepository;
-        private readonly IRepository<Teacher> _teacherRepository;
         private readonly IRepository<BachelorTheme> _bachelorThemeRepository;
+        private readonly IRepository<Teacher> _teacherRepository;
+        private readonly IRepository<Student> _studentRepository;
+        private readonly IRepository<Mean> _meanRepository;
 
-        public StudentService(IRepository<Student> studentRepository, IRepository<Teacher> teacherRepository, IRepository<BachelorTheme> bachelorThemeRepository)
+        public StudentService(IRepository<Student> studentRepository, IRepository<Teacher> teacherRepository,
+            IRepository<BachelorTheme> bachelorThemeRepository, IRepository<Mean> meanRepository)
         {
             _studentRepository = studentRepository;
             _teacherRepository = teacherRepository;
             _bachelorThemeRepository = bachelorThemeRepository;
+            _meanRepository = meanRepository;
         }
 
         public Student GetStudentByEmail(string email)
@@ -25,11 +28,11 @@ namespace BachelorManagement.BusinessLayer.Services
                 string.Equals(s.Email.ToLower(), email.ToLower()));
         }
 
-        public IEnumerable<BachelorTheme> GetStudentBachelorThemes(string email)
+        public BachelorTheme GetStudentBachelorThemes(string email)
         {
             var student = GetStudentByEmail(email);
-            var themes = GetStudentBacelorThemes(student);
-            return new List<BachelorTheme>(themes);
+            var theme = GetStudentBacelorThemes(student);
+            return theme;
         }
 
         public Teacher GetStudentsTeacher(string email)
@@ -39,14 +42,31 @@ namespace BachelorManagement.BusinessLayer.Services
             return teacher;
         }
 
-        private IEnumerable<BachelorTheme> GetStudentBacelorThemes(Student student)
+        public Mean GetStudentMeans(string email)
         {
-            return _bachelorThemeRepository.GetAll().Where(b => b.StudentId == student.Id);
+            var student = GetStudentByEmail(email);
+            var mean = GetStudentMean(student);
+            return mean;
+        }
+        public void AddAchievementToStudent(string email, string achievement)
+        {
+            var student = GetStudentByEmail(email);
+            student.Achievements = achievement;
+            _studentRepository.Update(student);
+        }
+        private BachelorTheme GetStudentBacelorThemes(Student student)
+        {
+            return _bachelorThemeRepository.GetAll().FirstOrDefault(b => b.StudentId == student.Id);
         }
 
         private Teacher GetStudentTeacher(Student student)
         {
             return _teacherRepository.GetAll().FirstOrDefault(t => t.Id == student.TeacherId);
+        }
+
+        private Mean GetStudentMean(Student student)
+        {
+            return _meanRepository.GetAll().FirstOrDefault(m => m.StudentId == student.Id);
         }
 
 

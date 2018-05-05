@@ -4,6 +4,7 @@ import { Bachelor } from '../../models/bachelor-degree.model';
 import { TitleService } from '../../services/title.service';
 import { Title } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'student-register-details',
@@ -20,8 +21,16 @@ export class StudentRegisterToTeacherDetailsComponent {
 
     titleService: TitleService;
     email: string = "vlad.simion@info.uaic.ro";
+    studentEmail: string = "mihai.ursache@info.uaic.ro";
 
-    constructor(private title: Title, private http: HttpClient) {
+    body: {
+        UserEmail: string;
+        Description: string;
+        Achievement: string;
+        Title: string;
+      };
+
+    constructor(private title: Title, private http: HttpClient, private router: Router) {
         this.titleService = new TitleService(title);
         this.titleService.setTitle("BDMApp Student Register To Teacher Details");
     }
@@ -66,6 +75,23 @@ export class StudentRegisterToTeacherDetailsComponent {
 
     
     applyToTeacherWithDetails(title: string, description: string, achievement: string) {
-        console.log(title + " " + description + " " + achievement);
+        this.body = {
+            UserEmail: this.studentEmail,
+            Achievement: achievement,
+            Description: description,
+            Title: title
+          };
+        const resp = this.http.post('http://localhost:64250/api/student/addTheme', this.body, {responseType: 'text'});
+        
+            resp.subscribe(      
+              data => {
+                console.log("Succes");
+                this.router.navigateByUrl('/teacherWall');        
+              },
+              err => {
+                console.log("Error");
+                console.log(err)
+                //if (err.status == 400)
+              });
     }
 }

@@ -1,4 +1,5 @@
-﻿using BachelorManagement.DataLayer;
+﻿using System.Linq;
+using BachelorManagement.DataLayer;
 using BachelorManagement.DataLayer.Entities;
 using BachelorManagement.Interfaces;
 
@@ -6,7 +7,6 @@ namespace BachelorManagement.BusinessLayer.Services
 {
     public class BachelorThemeService : IBachelorThemeService
     {
-
         private readonly IRepository<BachelorTheme> _bachelorThemeRepository;
         private readonly IStudentService _studentService;
 
@@ -21,14 +21,15 @@ namespace BachelorManagement.BusinessLayer.Services
             var student = _studentService.GetStudentByEmail(email);
             if (student != null)
             {
-                _bachelorThemeRepository.Add(new BachelorTheme
-                {
-                    Description = description,
-                    StudentId = student.Id,
-                    Title = title
-                });
+                var bachelorTheme = _bachelorThemeRepository.GetAll().FirstOrDefault(b => b.StudentId == student.Id);
+                if (bachelorTheme == null)
+                    _bachelorThemeRepository.Add(new BachelorTheme
+                    {
+                        Description = description,
+                        StudentId = student.Id,
+                        Title = title
+                    });
             }
         }
-
     }
 }

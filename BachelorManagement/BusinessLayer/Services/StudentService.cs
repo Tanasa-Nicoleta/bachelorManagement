@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using BachelorManagement.DataLayer;
 using BachelorManagement.DataLayer.Entities;
 using BachelorManagement.Interfaces;
@@ -9,9 +8,9 @@ namespace BachelorManagement.BusinessLayer.Services
     public class StudentService : IStudentService
     {
         private readonly IRepository<BachelorTheme> _bachelorThemeRepository;
-        private readonly IRepository<Teacher> _teacherRepository;
-        private readonly IRepository<Student> _studentRepository;
         private readonly IRepository<Mean> _meanRepository;
+        private readonly IRepository<Student> _studentRepository;
+        private readonly IRepository<Teacher> _teacherRepository;
 
         public StudentService(IRepository<Student> studentRepository, IRepository<Teacher> teacherRepository,
             IRepository<BachelorTheme> bachelorThemeRepository, IRepository<Mean> meanRepository)
@@ -48,12 +47,14 @@ namespace BachelorManagement.BusinessLayer.Services
             var mean = GetStudentMean(student);
             return mean;
         }
+
         public void AddAchievementToStudent(string email, string achievement)
         {
             var student = GetStudentByEmail(email);
             student.Achievements = achievement;
             _studentRepository.Update(student);
         }
+
         private BachelorTheme GetStudentBacelorThemes(Student student)
         {
             return _bachelorThemeRepository.GetAll().FirstOrDefault(b => b.StudentId == student.Id);
@@ -68,7 +69,5 @@ namespace BachelorManagement.BusinessLayer.Services
         {
             return _meanRepository.GetAll().FirstOrDefault(m => m.StudentId == student.Id);
         }
-
-
     }
 }

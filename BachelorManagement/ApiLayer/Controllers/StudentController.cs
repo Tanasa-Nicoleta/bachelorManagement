@@ -6,8 +6,8 @@ namespace BachelorManagement.ApiLayer.Controllers
 {
     public class StudentController : Controller
     {
-        private readonly IStudentService _studentService;
         private readonly IBachelorThemeService _bachelorThemeService;
+        private readonly IStudentService _studentService;
 
         public StudentController(IStudentService studentService, IBachelorThemeService bachelorThemeService)
         {
@@ -51,7 +51,8 @@ namespace BachelorManagement.ApiLayer.Controllers
                 return BadRequest();
 
             _studentService.AddAchievementToStudent(bachelorThemeDto.UserEmail, bachelorThemeDto.Achievement);
-            _bachelorThemeService.AddBachelorThemeToStudent(bachelorThemeDto.UserEmail, bachelorThemeDto.Title, bachelorThemeDto.Description);
+            _bachelorThemeService.AddBachelorThemeToStudent(bachelorThemeDto.UserEmail, bachelorThemeDto.Title,
+                bachelorThemeDto.Description);
 
             return Ok();
         }

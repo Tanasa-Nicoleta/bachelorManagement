@@ -2,7 +2,7 @@
 
 namespace BachelorManagement.DataLayer.Repositories
 {
-    public class MeanRepository: Repository<Mean>
+    public class MeanRepository : Repository<Mean>
     {
     }
 }

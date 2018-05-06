@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace BachelorManagement.ApiLayer.Models
+﻿namespace BachelorManagement.ApiLayer.Models
 {
     public class TeacherDto
     {

@@ -50,7 +50,7 @@ namespace BachelorManagement.ApiLayer.Controllers
 
             _teacherService.AddDetailsToTeacher(teacherDto.Email, teacherDto.Requirement, teacherDto.NoOfAvailableSpots,
                 teacherDto.ThemeTitle, teacherDto.ThemeDescription);
-            
+
             return Ok();
         }
     }

@@ -64,7 +64,8 @@ namespace BachelorManagement.ApiLayer.Controllers
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            _studentService.UpdateStudentRequest(studentRequestStatusDto.Email, studentRequestStatusDto.Accepted, studentRequestStatusDto.Denied);
+            _studentService.UpdateStudentRequest(studentRequestStatusDto.Email, studentRequestStatusDto.Accepted,
+                studentRequestStatusDto.Denied);
 
             return Ok();
         }

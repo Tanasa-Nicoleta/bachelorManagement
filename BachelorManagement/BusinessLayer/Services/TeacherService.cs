@@ -46,7 +46,8 @@ namespace BachelorManagement.BusinessLayer.Services
             return new List<Student>(students);
         }
 
-        public void AddDetailsToTeacher(string email, string requirement, int numberOfSpots, string themeTitle, string themeDescr)
+        public void AddDetailsToTeacher(string email, string requirement, int numberOfSpots, string themeTitle,
+            string themeDescr)
         {
             var teacher = GetTeacherByEmail(email);
             if (teacher != null)
@@ -55,6 +56,7 @@ namespace BachelorManagement.BusinessLayer.Services
                 teacher.NumberOfSpots = numberOfSpots;
                 AddBachelorThemeToTeacher(teacher.Email, themeTitle, themeDescr);
             }
+
             _teacherRepository.Update(teacher);
         }
 
@@ -62,7 +64,6 @@ namespace BachelorManagement.BusinessLayer.Services
         {
             var teacher = GetTeacherByEmail(email);
             if (teacher != null)
-            {
                 teacher.BachelorThemes = new List<BachelorTheme>
                 {
                     new BachelorTheme
@@ -72,7 +73,6 @@ namespace BachelorManagement.BusinessLayer.Services
                         TeacherId = teacher.Id
                     }
                 };
-            }
         }
 
         private IEnumerable<BachelorTheme> GetTeacherBacelorThemes(Teacher teacher)

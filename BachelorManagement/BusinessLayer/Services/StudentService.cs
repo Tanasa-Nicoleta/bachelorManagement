@@ -62,10 +62,9 @@ namespace BachelorManagement.BusinessLayer.Services
             {
                 student.Accepted = accepted;
                 student.Denied = denied;
-
             }
-            _studentRepository.Update(student);
 
+            _studentRepository.Update(student);
         }
 
         private BachelorTheme GetStudentBacelorThemes(Student student)

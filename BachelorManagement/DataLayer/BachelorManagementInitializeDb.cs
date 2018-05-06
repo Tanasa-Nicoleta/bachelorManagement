@@ -53,7 +53,9 @@ namespace BachelorManagement.DataLayer
                     StartYear = "2016",
                     TeacherId = 1,
                     Achievements = "some achievements",
-                    GitUrl = "another git url"
+                    GitUrl = "another git url",
+                    Accepted = false,
+                    Denied = false
                 },
                 new Student
                 {
@@ -64,7 +66,9 @@ namespace BachelorManagement.DataLayer
                     StartYear = "2014",
                     TeacherId = 1,
                     Achievements = "Onis participation",
-                    GitUrl = "a git url"
+                    GitUrl = "a git url",
+                    Accepted = false,
+                    Denied = false
                 },
                 new Student
                 {
@@ -75,7 +79,9 @@ namespace BachelorManagement.DataLayer
                     StartYear = "2015",
                     TeacherId = 2,
                     Achievements = "none",
-                    GitUrl = "git url"
+                    GitUrl = "git url",
+                    Accepted = false,
+                    Denied = false
                 }
             };
             foreach (var student in students)

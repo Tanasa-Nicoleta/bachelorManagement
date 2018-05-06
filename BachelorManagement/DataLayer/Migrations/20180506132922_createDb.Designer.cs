@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BachelorManagement.DataLayer.Migrations
 {
     [DbContext(typeof(BachelorManagementContext))]
-    [Migration("20180501095647_createdDbStruct")]
-    partial class createdDbStruct
+    [Migration("20180506132922_createDb")]
+    partial class createDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -156,7 +156,11 @@ namespace BachelorManagement.DataLayer.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<bool>("Accepted");
+
                     b.Property<string>("Achievements");
+
+                    b.Property<bool>("Denied");
 
                     b.Property<string>("Email");
 

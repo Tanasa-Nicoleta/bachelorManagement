@@ -1,9 +1,11 @@
 import { Bachelor } from "./bachelor-degree.model";
 import { Mean } from "./mean.model";
 import { Teacher } from "./teacher.model";
+import { Achievement } from "./achievement.model";
+import { debug } from "util";
 
 export class Student {
-    constructor(firstName, lastName, email, theme, gitUrl, startYear, serialNumber, means) {
+    constructor(firstName, lastName, email, theme, gitUrl, startYear, serialNumber, means, achievement, accepted, denied) {
         this.FirstName = firstName;
         this.LastName = lastName;
         this.Email = email;
@@ -11,7 +13,10 @@ export class Student {
         this.GitUrl = gitUrl;
         this.StartYear = startYear;
         this.SerialNumber = serialNumber;
-        this.Means = means
+        this.Means = means;
+        this.Achievement = achievement;
+        this.Accepted = accepted;
+        this.Denied = denied;
     }
     Id: number;
     FirstName: string;
@@ -23,4 +28,7 @@ export class Student {
     SerialNumber: string;
     Means: Mean;
     TeacherName: string;
+    Achievement: string;
+    Accepted: boolean;
+    Denied: boolean;
 }

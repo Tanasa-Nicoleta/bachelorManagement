@@ -12,6 +12,8 @@ namespace BachelorManagement.Interfaces
 
         ICollection<BachelorTheme> GetTeacherBachelorThemes(string email);
 
-        ICollection<Student> GetTeacherBachelorStudents(string email);
+        ICollection<Student> GetTeacherStudents(string email);
+
+        void AddDetailsToTeacher(string email, string requirement, int numberOfSpots, string themeTitle, string themeDescr);
     }
 }

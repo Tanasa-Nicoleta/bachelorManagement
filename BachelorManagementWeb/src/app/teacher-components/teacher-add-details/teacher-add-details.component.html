@@ -10,33 +10,31 @@
         <div>
             <span class="teacherDetailsRow">Number of students per session: </span>
             <span class="mdl-textfield mdl-js-textfield">
-                <input class="numberOfstudents" type="number" min="0" max="{{maxNumberOfStudents}}" placeholder="0" required>
+                <input #NumberOfStudents class="numberOfstudents" type="number" min="0" max="{{maxNumberOfStudents}}" placeholder="0" required>
             </span>
         </div>
         <div>
             <span class="teacherDetailsRow">Requirements:</span>
             <span class="mdl-textfield mdl-js-textfield">
-                <input #Description class="mdl-textfield__input" type="text" placeholder="Achievements that you would like the students to have.">
+                <input #Achievement class="mdl-textfield__input" type="text" placeholder="Achievements that you would like the students to have.">
             </span>
         </div>
         <div>
-            <span class="teacherDetailsRow">Themes:</span>
-        </div>
-        <div *ngIf="teacherThemes[1][0] != null || teacherThemes[1][1] != null">
-            <div *ngFor="let teacherTheme of teacherThemes[1]; let i = index;" class="teacherTheme">
-                <div class="teacherTheme">
-                    {{teacherTheme}}
-                </div>
-            </div>
-        </div>
-        <div>
-            <span class="mdl-textfield mdl-js-textfield teacherAddTheme">
-                <input #TeacherTheme class="mdl-textfield__input" type="text" placeholder="Theme - Description format, please!"
-                    [(ngModel)]="commentValue" (keydown.enter)="addComment(TeacherTheme.value)">
+            <span class="teacherDetailsRow">Theme title:</span>
+            <span class="mdl-textfield mdl-js-textfield">
+                <input #ThemeTitle class="mdl-textfield__input" type="text" placeholder="The title of your theme proposal.">
             </span>
         </div>
         <div>
-            <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" [routerLink]="['/studentRegisterToTeacher']">
+            <span class="teacherDetailsRow">Theme description:</span>
+            <span class="mdl-textfield mdl-js-textfield">
+                <input #ThemeDescr class="mdl-textfield__input" type="text" placeholder="The description of your theme proposal.">
+            </span>
+        </div>
+       
+        <div>
+            <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" 
+            (click)="addTeacherDetails(NumberOfStudents.value, Achievement.value, ThemeTitle.value, ThemeDescr.value)">
                 {{saveButtonText}}
             </button>
         </div>

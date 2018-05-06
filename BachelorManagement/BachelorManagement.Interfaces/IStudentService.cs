@@ -9,5 +9,6 @@ namespace BachelorManagement.Interfaces
         BachelorTheme GetStudentBachelorThemes(string email);
         Mean GetStudentMeans(string email);
         void AddAchievementToStudent(string email, string achievement);
+        void UpdateStudentRequest(string email, bool accepted, bool denied);
     }
 }

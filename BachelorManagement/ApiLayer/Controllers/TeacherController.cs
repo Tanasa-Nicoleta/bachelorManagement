@@ -1,4 +1,5 @@
-﻿using BachelorManagement.Interfaces;
+﻿using BachelorManagement.ApiLayer.Models;
+using BachelorManagement.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BachelorManagement.ApiLayer.Controllers
@@ -37,7 +38,20 @@ namespace BachelorManagement.ApiLayer.Controllers
         [Route("api/teacher/students/{email}")]
         public IActionResult GetTeacherStudents(string email)
         {
-            return Ok(_teacherService.GetTeacherBachelorStudents(email));
+            return Ok(_teacherService.GetTeacherStudents(email));
+        }
+
+        [HttpPost]
+        [Route("api/teacher/addDetails")]
+        public IActionResult AddTeacherDetails([FromBody] TeacherDto teacherDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            _teacherService.AddDetailsToTeacher(teacherDto.Email, teacherDto.Requirement, teacherDto.NoOfAvailableSpots,
+                teacherDto.ThemeTitle, teacherDto.ThemeDescription);
+            
+            return Ok();
         }
     }
 }

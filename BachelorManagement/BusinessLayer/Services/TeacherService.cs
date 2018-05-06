@@ -39,11 +39,40 @@ namespace BachelorManagement.BusinessLayer.Services
             return new List<BachelorTheme>(themes);
         }
 
-        public ICollection<Student> GetTeacherBachelorStudents(string email)
+        public ICollection<Student> GetTeacherStudents(string email)
         {
             var teacher = GetTeacherByEmail(email);
             var students = GetTeacherStudents(teacher);
             return new List<Student>(students);
+        }
+
+        public void AddDetailsToTeacher(string email, string requirement, int numberOfSpots, string themeTitle, string themeDescr)
+        {
+            var teacher = GetTeacherByEmail(email);
+            if (teacher != null)
+            {
+                teacher.Requirement = requirement;
+                teacher.NumberOfSpots = numberOfSpots;
+                AddBachelorThemeToTeacher(teacher.Email, themeTitle, themeDescr);
+            }
+            _teacherRepository.Update(teacher);
+        }
+
+        private void AddBachelorThemeToTeacher(string email, string title, string description)
+        {
+            var teacher = GetTeacherByEmail(email);
+            if (teacher != null)
+            {
+                teacher.BachelorThemes = new List<BachelorTheme>
+                {
+                    new BachelorTheme
+                    {
+                        Description = description,
+                        Title = title,
+                        TeacherId = teacher.Id
+                    }
+                };
+            }
         }
 
         private IEnumerable<BachelorTheme> GetTeacherBacelorThemes(Teacher teacher)

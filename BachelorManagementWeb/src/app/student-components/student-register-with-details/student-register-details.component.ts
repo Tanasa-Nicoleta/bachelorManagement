@@ -62,7 +62,7 @@ export class StudentRegisterToTeacherDetailsComponent {
         themeResponse.subscribe(data => {
             for (let key in data.body) {
                 if (data.body[key]) {
-                    this.teacher.Themes.push(new Bachelor(data.body[key]['title'], data.body[key]['description']));
+                    this.teacher.Theme = new Bachelor(data.body[key]['title'], data.body[key]['description']);
                 }
             }   
             console.log(this.teacher);

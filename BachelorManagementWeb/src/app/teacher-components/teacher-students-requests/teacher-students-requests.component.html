@@ -37,22 +37,22 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let student of studentList; let i = index;">
-                                <td class="columnContent">{{student[0].FirstName + " " + student[0].LastName}}</td>
-                                <td class="columnContent">{{student[0].Theme.Title}}: {{student[0].Theme.Description}}</td>
-                                <td class="columnContent">{{student[1].Description}}</td>
+                                <td class="columnContent">{{student.FirstName + " " + student.LastName}}</td>
+                                <td class="columnContent">{{student.Theme.Title}}: {{student.Theme.Description}}</td>
+                                <td class="columnContent">{{student.Achievement}}</td>
                                 <td class="columnContent">
-                                    <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect acceptRequestButton" *ngIf="student[2] == false && student[3] == false"
-                                        (click)="acceptStudent(student[0])">
+                                    <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect acceptRequestButton" *ngIf="student.Accepted == false && student.Denied == false"
+                                        (click)="acceptStudent(student)">
                                         {{acceptStudentsRequest}}
                                     </button>
-                                    <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect denyRequestButton" *ngIf="student[2] == false && student[3] == false"
-                                        (click)="denyStudent(student[0])">
+                                    <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect denyRequestButton" *ngIf="student.Accepted == false && student.Denied == false"
+                                        (click)="denyStudent(student)">
                                         {{denyStudentsRequest}}
                                     </button>
-                                    <div *ngIf="student[2] == true">
+                                    <div *ngIf="student.Accepted == true">
                                         Accepted
                                     </div>
-                                    <div *ngIf="student[3] == true">
+                                    <div *ngIf="student.Denied == true">
                                         Denied
                                     </div>
                                 </td>

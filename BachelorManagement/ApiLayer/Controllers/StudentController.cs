@@ -50,9 +50,21 @@ namespace BachelorManagement.ApiLayer.Controllers
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            _studentService.AddAchievementToStudent(bachelorThemeDto.UserEmail, bachelorThemeDto.Achievement);
-            _bachelorThemeService.AddBachelorThemeToStudent(bachelorThemeDto.UserEmail, bachelorThemeDto.Title,
+            _studentService.AddAchievementToStudent(bachelorThemeDto.Email, bachelorThemeDto.Achievement);
+            _bachelorThemeService.AddBachelorThemeToStudent(bachelorThemeDto.Email, bachelorThemeDto.Title,
                 bachelorThemeDto.Description);
+
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("api/student/teacherRequestStatus")]
+        public IActionResult UpdateStudentRequest([FromBody] StudentRequestStatusDto studentRequestStatusDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            _studentService.UpdateStudentRequest(studentRequestStatusDto.Email, studentRequestStatusDto.Accepted, studentRequestStatusDto.Denied);
 
             return Ok();
         }

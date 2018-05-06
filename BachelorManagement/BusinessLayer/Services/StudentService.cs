@@ -55,6 +55,19 @@ namespace BachelorManagement.BusinessLayer.Services
             _studentRepository.Update(student);
         }
 
+        public void UpdateStudentRequest(string email, bool accepted, bool denied)
+        {
+            var student = GetStudentByEmail(email);
+            if (student != null)
+            {
+                student.Accepted = accepted;
+                student.Denied = denied;
+
+            }
+            _studentRepository.Update(student);
+
+        }
+
         private BachelorTheme GetStudentBacelorThemes(Student student)
         {
             return _bachelorThemeRepository.GetAll().FirstOrDefault(b => b.StudentId == student.Id);

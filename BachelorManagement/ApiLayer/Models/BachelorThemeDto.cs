@@ -8,6 +8,6 @@ namespace BachelorManagement.ApiLayer.Models
 
         public string Description { get; set; }
         public string Achievement { get; set; }
-        public string UserEmail { get; set; }
+        public string Email { get; set; }
     }
 }

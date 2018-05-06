@@ -64,7 +64,7 @@ export class StudentRegisterToTeacherComponent {
 
             themeResponse.subscribe(data => {
                 if (data.body[i]) {
-                    this.teacherList[i].Themes.push(new Bachelor(data.body[i]['title'], data.body[i]['description']))
+                    this.teacherList[i].Theme = new Bachelor(data.body[i]['title'], data.body[i]['description'])
                 }
             },
                 err => {

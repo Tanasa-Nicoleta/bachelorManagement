@@ -14,13 +14,12 @@ import { Title } from '@angular/platform-browser';
 export class LoginLayoutComponent {
 
   private invalidError = false;
+  titleService: TitleService;
 
   body: {
     Username: string;
     Password: string;
   };
-
-  titleService: TitleService;
 
   constructor(private http: HttpClient, private router: Router, private title: Title) {
     this.titleService = new TitleService(title);
@@ -33,21 +32,17 @@ export class LoginLayoutComponent {
       Password: pass
     };
 
-    const resp = this.http.post('http://localhost:64250/api/account/login', this.body, {responseType: 'text'});
+    const resp = this.http.post('http://localhost:64250/api/account/login', this.body, { responseType: 'text' });
 
-    resp.subscribe(      
+    resp.subscribe(
       data => {
-        console.log("Succes");
-        this.router.navigateByUrl('/welcome');        
+        this.router.navigateByUrl('/welcome');
       },
       err => {
-        console.log("Error");
-        console.log(err)
         if (err.status == 400)
           this.invalidError = true;
       }
     );
-
   }
 
 }

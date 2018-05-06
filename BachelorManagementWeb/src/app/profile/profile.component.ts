@@ -16,7 +16,6 @@ export class ProfileComponent {
 
   email: string = "mihai.ursache@info.uaic.ro";
   student: Student;
-
   titleService: TitleService;
 
   constructor(private title: Title, private http: HttpClient) {
@@ -34,7 +33,7 @@ export class ProfileComponent {
     theacherResponse.subscribe(
       data => {
         this.student = new Student(data.body['firstName'], data.body['lastName'], data.body['email'], null,
-          data.body['gitUrl'], data.body['startYear'], data.body['serialNumber'], null);
+          data.body['gitUrl'], data.body['startYear'], data.body['serialNumber'], null, data.body['achievements'], data.body['accepted'], data.body['denied']);
         this.setThemesToStudent();
         this.setTeacherToStudent();
         this.setMeansToStudent();
@@ -57,13 +56,14 @@ export class ProfileComponent {
       err => {
         console.log("Error");
         console.log(err)
-      });
+      }
+    );
   }
 
   setTeacherToStudent() {
-    let themeResponse = this.http.get('http://localhost:64250/api/student/teacher/' + this.student.Email, { observe: 'response' });
+    let theacherRespose = this.http.get('http://localhost:64250/api/student/teacher/' + this.student.Email, { observe: 'response' });
 
-    themeResponse.subscribe(data => {
+    theacherRespose.subscribe(data => {
       if (data.body) {
         this.student.TeacherName = data.body['firstName'] + " " + data.body['lastName'];
       }
@@ -71,23 +71,25 @@ export class ProfileComponent {
       err => {
         console.log("Error");
         console.log(err)
-      });
+      }
+    );
   }
 
   setMeansToStudent() {
-    let themeResponse = this.http.get('http://localhost:64250/api/student/means/' + this.student.Email, { observe: 'response' });
+    let meansResponse = this.http.get('http://localhost:64250/api/student/means/' + this.student.Email, { observe: 'response' });
 
-    themeResponse.subscribe(data => {
+    meansResponse.subscribe(data => {
       if (data.body) {
-        this.student.Means = new Mean(data.body['firstSemester'], data.body['secondSemester'], data.body['thirdSemester'], 
-        data.body['fourthSemester'], data.body['fifthSemester'], data.body['sixthSemester'])
+        this.student.Means = new Mean(data.body['firstSemester'], data.body['secondSemester'], data.body['thirdSemester'],
+          data.body['fourthSemester'], data.body['fifthSemester'], data.body['sixthSemester'])
 
       }
     },
       err => {
         console.log("Error");
         console.log(err)
-      });
+      }
+    );
   }
 }
 

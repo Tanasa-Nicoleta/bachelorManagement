@@ -12,10 +12,8 @@ import { Observable } from 'rxjs/Observable';
     styleUrls: ['../../app.component.scss', '../student.component.scss']
 })
 
-
 export class StudentRegisterToTeacherComponent {
     optionText: string = "Next step";
-
     teacherList: Array<Teacher> = new Array<Teacher>();
     teacherEmails: string[] = [];
     titleService: TitleService;
@@ -70,7 +68,8 @@ export class StudentRegisterToTeacherComponent {
                 err => {
                     console.log("Error");
                     console.log(err)
-                });
+                }
+            );
         }
     }
 }

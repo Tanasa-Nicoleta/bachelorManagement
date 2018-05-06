@@ -17,24 +17,18 @@ export class RegisterLayoutComponent {
   private alreadyExistingAccount = false;
   private invalidModelState = false;
   private matchError = false;
+  titleService: TitleService;
+  passRegex: RegExp = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=!*()\-_{}\\ |:;\,<>?`~\[\]\.\'])(?=\S+$).{6,32}$/;
 
   body: {
     Username: string;
     Password: string;
   };
-  
-  menuItems: [MenuItem] = [
-    new MenuItem("Register", "/welcome")
-  ];
-
-  titleService: TitleService;
 
   constructor(private http: HttpClient, private router: Router, private title: Title) {
     this.titleService = new TitleService(title);
     this.titleService.setTitle("BDMApp Register");
   }
-
-  passRegex: RegExp = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=!*()\-_{}\\ |:;\,<>?`~\[\]\.\'])(?=\S+$).{6,32}$/;
 
   private isValidPassword(pass: string) {
     if (pass.length < 6 || !this.passRegex.test(pass) || pass.length > 32) {
@@ -75,21 +69,20 @@ export class RegisterLayoutComponent {
       Password: pass
     };
 
-    const resp = this.http.post('http://localhost:64250/api/account/register', this.body, {observe: 'response'});
+    const resp = this.http.post('http://localhost:64250/api/account/register', this.body, { observe: 'response' });
 
-    resp.subscribe(      
+    resp.subscribe(
       data => {
-        this.router.navigateByUrl('/welcome');        
+        this.router.navigateByUrl('/welcome');
       },
       err => {
         if (err.status == 400)
-          if(err.error == "Username exists"){
+          if (err.error == "Username exists") {
             this.alreadyExistingAccount = true;
-          }if(err.error == "Invalid model state"){
+          } if (err.error == "Invalid model state") {
             this.invalidModelState = true;
-          }          
+          }
       }
     );
-
   }
 }

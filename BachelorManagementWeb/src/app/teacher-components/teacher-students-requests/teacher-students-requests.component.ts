@@ -13,19 +13,15 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['../../app.component.scss', '../teacher.component.scss']
 })
 
-
 export class TeacherStudentsRequestsComponent {
   numberOfSpots: number = 12;
   numberOfAvailableSpots: number = 10;
   studentAccepted: boolean = false;
   studentDenied: boolean = false;
   email: string = "vlad.simion@info.uaic.ro";
-
   studentList: Array<Student> = new Array<Student>();
-
   acceptStudentsRequest: string = "Accept";
   denyStudentsRequest: string = "Deny";
-
   titleService: TitleService;
 
   constructor(private title: Title, private http: HttpClient, private router: Router) {
@@ -38,9 +34,9 @@ export class TeacherStudentsRequestsComponent {
   }
 
   getTeacherStudents() {
-    const theacherResponse = this.http.get('http://localhost:64250/api/teacher/students/' + this.email, { observe: 'response' });
+    const studentResponse = this.http.get('http://localhost:64250/api/teacher/students/' + this.email, { observe: 'response' });
 
-    theacherResponse.subscribe(
+    studentResponse.subscribe(
       data => {
         for (let key in data.body) {
           if (data.body[key]) {
@@ -60,8 +56,8 @@ export class TeacherStudentsRequestsComponent {
   }
 
   setBachelorThemeToStudents(email: string, key: string) {
-    const theacherResponse = this.http.get('http://localhost:64250/api/student/themes/' + email, { observe: 'response' });
-    theacherResponse.subscribe(
+    const themeResponse = this.http.get('http://localhost:64250/api/student/themes/' + email, { observe: 'response' });
+    themeResponse.subscribe(
       data => {
         this.studentList[key]['Theme'] = new Bachelor(data.body['title'], data.body['description']);
       },
@@ -74,25 +70,25 @@ export class TeacherStudentsRequestsComponent {
 
   acceptStudent(student: Student) {
     this.numberOfAvailableSpots--;
+
     this.studentList.forEach(stud => {
       if (stud.Email == student.Email) {
         stud.Accepted = stud.Accepted == true ? false : true;
+
         var body = {
           Email: stud.Email,
           Accepted: stud.Accepted,
           Denied: stud.Denied,
         };
-        console.log(body);
+
         const resp = this.http.post('http://localhost:64250/api/student/teacherRequestStatus', body, { responseType: 'text' });
 
         resp.subscribe(
           data => {
-            console.log("Succes");
           },
           err => {
             console.log("Error");
             console.log(err)
-            //if (err.status == 400)
           });
       }
     });
@@ -101,25 +97,24 @@ export class TeacherStudentsRequestsComponent {
   denyStudent(student: Student) {
     this.studentList.forEach(stud => {
       if (stud.Email == student.Email) {
-        if (stud.Email == student.Email) {          
-          stud.Denied = stud.Denied == true ? false : true;
-          var body = {
-            Email: stud.Email,
-            Accepted: stud.Accepted,
-            Denied: stud.Denied,
-          };
-          const resp = this.http.post('http://localhost:64250/api/student/teacherRequestStatus', body, { responseType: 'text' });
+        stud.Denied = stud.Denied == true ? false : true;
 
-          resp.subscribe(
-            data => {
-              console.log("Succes");
-            },
-            err => {
-              console.log("Error");
-              console.log(err)
-              //if (err.status == 400)
-            });
-        }
-      }});
+        var body = {
+          Email: stud.Email,
+          Accepted: stud.Accepted,
+          Denied: stud.Denied,
+        };
+
+        const resp = this.http.post('http://localhost:64250/api/student/teacherRequestStatus', body, { responseType: 'text' });
+
+        resp.subscribe(
+          data => {
+          },
+          err => {
+            console.log("Error");
+            console.log(err)
+          });
+      }
+    });
   }
 }

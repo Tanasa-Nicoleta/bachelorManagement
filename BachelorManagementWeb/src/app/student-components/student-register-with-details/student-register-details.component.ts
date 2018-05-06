@@ -12,13 +12,10 @@ import { Router } from '@angular/router';
     styleUrls: ['../../app.component.scss', '../student.component.scss', './student-register-details.component.scss']
 })
 
-
 export class StudentRegisterToTeacherDetailsComponent {
 
     buttonText: string = "Subimt";
-
     teacher: Teacher;
-
     titleService: TitleService;
     email: string = "vlad.simion@info.uaic.ro";
     studentEmail: string = "mihai.ursache@info.uaic.ro";
@@ -28,7 +25,7 @@ export class StudentRegisterToTeacherDetailsComponent {
         Description: string;
         Achievement: string;
         Title: string;
-      };
+    };
 
     constructor(private title: Title, private http: HttpClient, private router: Router) {
         this.titleService = new TitleService(title);
@@ -64,34 +61,36 @@ export class StudentRegisterToTeacherDetailsComponent {
                 if (data.body[key]) {
                     this.teacher.Theme = new Bachelor(data.body[key]['title'], data.body[key]['description']);
                 }
-            }   
+            }
             console.log(this.teacher);
         },
             err => {
                 console.log("Error");
                 console.log(err)
-            });
+            }
+        );
     }
 
-    
+
     applyToTeacherWithDetails(title: string, description: string, achievement: string) {
         this.body = {
             UserEmail: this.studentEmail,
             Achievement: achievement,
             Description: description,
             Title: title
-          };
-        const resp = this.http.post('http://localhost:64250/api/student/addTheme', this.body, {responseType: 'text'});
-        
-            resp.subscribe(      
-              data => {
-                console.log("Succes");
-                this.router.navigateByUrl('/teacherWall');        
-              },
-              err => {
+        };
+
+        const resp = this.http.post('http://localhost:64250/api/student/addTheme', this.body, { responseType: 'text' });
+
+        resp.subscribe(
+            data => {
+                this.router.navigateByUrl('/teacherWall');
+            },
+            err => {
                 console.log("Error");
                 console.log(err)
                 //if (err.status == 400)
-              });
+            }
+        );
     }
 }

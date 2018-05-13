@@ -26,13 +26,13 @@
                         <td class="columnContent">{{teacher.Discipline}}</td>
                         <td class="columnContent">
                             <table>
-                                <tr *ngFor=" let teacherTheme of teacher.Themes">
+                                <tr>
                                     <td>
                                         <ul>
                                             <li>
                                                 <input type="checkbox" checked>
-                                                <h2>{{teacherTheme.Title}} &#8630;</h2>
-                                                <p>{{teacherTheme.Description}}</p>
+                                                <h2>{{teacher.Theme.Title}} &#8630;</h2>
+                                                <p>{{teacher.Theme.Description}}</p>
 
                                             </li>
                                             <li>

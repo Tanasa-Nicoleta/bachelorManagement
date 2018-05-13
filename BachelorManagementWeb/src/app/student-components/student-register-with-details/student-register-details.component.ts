@@ -21,7 +21,7 @@ export class StudentRegisterToTeacherDetailsComponent {
     studentEmail: string = "mihai.ursache@info.uaic.ro";
 
     body: {
-        UserEmail: string;
+        Email: string;
         Description: string;
         Achievement: string;
         Title: string;
@@ -74,7 +74,7 @@ export class StudentRegisterToTeacherDetailsComponent {
 
     applyToTeacherWithDetails(title: string, description: string, achievement: string) {
         this.body = {
-            UserEmail: this.studentEmail,
+            Email: this.studentEmail,
             Achievement: achievement,
             Description: description,
             Title: title

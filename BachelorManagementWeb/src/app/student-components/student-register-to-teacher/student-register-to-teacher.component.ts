@@ -56,14 +56,17 @@ export class StudentRegisterToTeacherComponent {
 
     setThemesToTeacher() {
         let i = 0;
+        let j = 0;
 
         for (let email in this.teacherEmails) {
             let themeResponse = this.http.get('http://localhost:64250/api/teacher/themes/' + this.teacherEmails[email], { observe: 'response' });
 
             themeResponse.subscribe(data => {
+                console.log("body: ", data.body);
                 if (data.body[i]) {
-                    this.teacherList[i].Theme = new Bachelor(data.body[i]['title'], data.body[i]['description'])
+                    this.teacherList[j].Theme = new Bachelor(data.body[i]['title'], data.body[i]['description']);              ;
                 }
+                j++;
             },
                 err => {
                     console.log("Error");

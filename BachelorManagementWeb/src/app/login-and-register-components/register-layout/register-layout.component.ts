@@ -17,6 +17,7 @@ export class RegisterLayoutComponent {
   private alreadyExistingAccount = false;
   private invalidModelState = false;
   private matchError = false;
+  private buttonText: string = 'Register';
   titleService: TitleService;
   passRegex: RegExp = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=!*()\-_{}\\ |:;\,<>?`~\[\]\.\'])(?=\S+$).{6,32}$/;
 

@@ -8,9 +8,9 @@
         <div class="teacherDetails">
             <div class="teacherDetailRow">{{teacher.Grade}} {{teacher.FirstName}} {{teacher.LastName}} </div>
             <div class="teacherDetailRow">{{teacher.Discipline}}</div>
-            <div *ngFor=" let teacherTheme of teacher.Themes" class="teacherDetailRow">
-                <p class="teacherDetailRow">{{teacherTheme.Title}}</p>
-                <p class="teacherDetailRowSecondary">{{teacherTheme.Description}}</p>
+            <div class="teacherDetailRow">
+                <p class="teacherDetailRow">{{teacher.Theme.Title}}</p>
+                <p class="teacherDetailRowSecondary">{{teacher.Theme.Description}}</p>
             </div>
         </div>
 

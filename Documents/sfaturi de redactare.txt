@@ -9,11 +9,14 @@ aceste semne de punctuatie pe randul de mai sus...
 6) Adaugati bibliografie si link-uri acolo unde ati preluat informatii pe modelul din http://profs.info.uaic.ro/~tr/tr09-02.pdf ....
 7) Folositi imagini, scheme logice, scheme cu structura bazelor de date, tabele, grafice.
 8) Nu dati <enter> pentru a sari la pagina noua. Cand incepeti un capitol nou folositi optiunea Insert Break si acolo alegeti Page Break...
-9) Adaugati etichete la Tabele, Figuri si referiti aceste etichete in text. Etichetele se scriu cu Font de 10, pe modelul "Tabela 1: Datele obtinute in urma testelor" 
+9) Adaugati etichete la Tabele, Figuri si referiti aceste etichete in text. Etichetele se scriu cu Font de 10, pe modelul "Tabela 1: 
+Datele obtinute in urma testelor" 
 si se refera pe modelul: "Dupa cum se poate observa in Tabela 1 de mai jos, .... "
-10) Daca folositi Google Translate pentru a va traduce ceva, nu faceti Copy/Paste in documentul vostru ca vi se copie si formatarea de pe Google Translate.
+10) Daca folositi Google Translate pentru a va traduce ceva, nu faceti Copy/Paste in documentul vostru ca vi se copie si formatarea de pe 
+Google Translate.
 Ca sa nu copiati formatarea se face Copy/Paste Special/Unformatted Text.
-11) Figurile, Tabelele si Etichetele lor sa fie aliniate pe centru, sa aiba titlu si sa fie referite in text. Daca le-ati preluat de undeva, specificati acest lucru, ca sa nu intrati in zona de "furt intelectual"!
+11) Figurile, Tabelele si Etichetele lor sa fie aliniate pe centru, sa aiba titlu si sa fie referite in text. Daca le-ati preluat de undeva, 
+specificati acest lucru, ca sa nu intrati in zona de "furt intelectual"!
 12) Evitati cat mai mult link-urile catre pagini Wikipedia.
 
 

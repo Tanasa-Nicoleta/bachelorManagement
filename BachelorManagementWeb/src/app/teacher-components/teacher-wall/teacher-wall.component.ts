@@ -7,6 +7,8 @@ import { Month } from '../../models/month.model';
 import { Comment } from '../../models/comment.model';
 import { TitleService } from '../../services/title.service';
 import { Title } from '@angular/platform-browser';
+import { HttpClient } from '@angular/common/http';
+import { Teacher } from '../../models/teacher.model';
 
 @Component({
   selector: 'teacher-wall',
@@ -15,8 +17,8 @@ import { Title } from '@angular/platform-browser';
 })
 
 export class TeacherWallComponent {
-  teacherName: string = "Teacher Name"; // to be taken from api
-  studentName: string = "Student Name";
+  teacherName: string = "Vlad Simion";
+  studentName: string = "Mihai Ursache";
 
   availableDay: string = DayOfWeek[0];
   availableHours: string = "12:00";
@@ -30,43 +32,69 @@ export class TeacherWallComponent {
   hideCommentsButton: string = "Hide comments";
   showCommentsButton: string = "Show comments";
   showComments: boolean = false;
+  teacherEmail: string = "vlad.simion@info.uaic.ro";
 
   teacherObs: [[TeacherObservation, [Comment | null], boolean]] = [
-    [new TeacherObservation("Hello everybody! Welcome to my page.", new DateClass(1, Month[1], 2018, "12:00")),
+    [new TeacherObservation("Hello everybody! Welcome to my page.", new DateClass(1, Month[1], 2018, "12:00"), 0),
     [new Comment(this.studentName, "Hello! Thank you!", new DateClass(1, Month[1], 2018, "12:00")),
     new Comment(this.studentName, "Hello! Thank you, mister " + this.teacherName + "!", new DateClass(20, Month[1], 2018, "14:40"))],
-    this.showComments],
-    [new TeacherObservation("Good morning! I want to see your papers soon.", new DateClass(20, Month[1], 2018, "14:40")),
-    [new Comment(this.studentName, "Hello! Thank you, mister " + this.teacherName + "!", new DateClass(20, Month[1], 2018, "14:40"))],
-    this.showComments],
-    [new TeacherObservation("Hello! Any updates?", new DateClass(21, Month[1], 2018, "12:00")),
-    [null], this.showComments],
-    [new TeacherObservation("Is anybody having a problem?", new DateClass(22, Month[1], 2018, "19:35")),
-    [null], this.showComments],
-    [new TeacherObservation("I  have some news for you!" +
-      "I'm not available to see you in person in the next two weeks because of some personal problems." +
-      "I would be available on this platform so if you got ay questions plese shoot. :)",
-      new DateClass(25, Month[1], 2018, "21:30")),
-    [null], this.showComments],
-    [new TeacherObservation("Good morning! I want to see your updated papers on Monday.", new DateClass(29, Month[1], 2018, "12:28")),
-    [null], this.showComments]
-  ];
+    this.showComments]];
 
   titleService: TitleService;
 
-  constructor(private title: Title) {
+  constructor(private title: Title, private http: HttpClient) {
     this.titleService = new TitleService(title);
     this.titleService.setTitle("BDMApp Teacher Wall");
   }
 
-  ngOnInit(){
-    this.getTeacherWallInfos();
+  ngOnInit() {
+    this.getTeacherWallComments();
   }
 
-  getTeacherWallInfos(){
+  getTeacherWallComments() {
+    const commentResponse = this.http.get('http://localhost:64250/api/teacher/comments/' + this.teacherEmail, { observe: 'response' });
 
+    commentResponse.subscribe(
+      data => {
+        for (let key in data.body) {
+          if (data.body.hasOwnProperty(key)) {
+            this.teacherObs.push(
+              [new TeacherObservation(data.body[key]['commentContent'], new DateClass(20, Month[1], 2018, "14:40"), data.body[key]['id']), 
+              [new Comment(this.teacherName, "some content", new DateClass(20, Month[1], 2018, "14:40"))], 
+              false]);
+            
+          }
+          this.getTeacherWallCommentReplies(data.body[key]['id']);
+        }
+      },
+      err => {
+        console.log("Error");
+        console.log(err)
+      }
+    );
   }
 
+  getTeacherWallCommentReplies(commentId: number) {
+    const commentReplyResponse = this.http.get('http://localhost:64250/api/teacher/comments/' + this.teacherEmail + "/" + commentId, { observe: 'response' });
+
+    commentReplyResponse.subscribe(
+      data => {
+        for (let key in data.body) {
+          if (data.body.hasOwnProperty(key)) {
+           for(let index in this.teacherObs){
+              if(this.teacherObs[index][0].id == commentId){
+                this.teacherObs[index][1].push(new Comment("Mihai Ursache", data.body[key]['commentReplyContent'], new DateClass(20, Month[1], 2018, "14:40")));
+              }
+            }            
+          }}
+          console.log(this.teacherObs);
+      },
+      err => {
+        console.log("Error");
+        console.log(err)
+      }
+    );
+  }
 
   requestMetting() {
     if (this.meetingRequest) {
@@ -92,7 +120,7 @@ export class TeacherWallComponent {
     let comment = new Comment(teacherObservation[1][0].name,
       commentContent,
       new DateClass(datetime.getDate(), Month[datetime.getMonth()], datetime.getFullYear(), hour));
-      
+
     this.teacherObs.forEach(teacherOb => {
       if (teacherOb[0] == teacherObservation[0]) {
         teacherOb[1].push(comment);

@@ -1,4 +1,7 @@
-﻿using BachelorManagement.ApiLayer.Models;
+﻿using System.Collections.Generic;
+using System.Linq;
+using BachelorManagement.ApiLayer.Models;
+using BachelorManagement.DataLayer.Entities;
 using BachelorManagement.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,11 +11,15 @@ namespace BachelorManagement.ApiLayer.Controllers
     {
         private readonly IBachelorThemeService _bachelorThemeService;
         private readonly IStudentService _studentService;
+        private readonly ICommentReplyService _commentReplyService;
 
-        public StudentController(IStudentService studentService, IBachelorThemeService bachelorThemeService)
+        public StudentController(IStudentService studentService, 
+            IBachelorThemeService bachelorThemeService,
+            ICommentReplyService commentReplyService)
         {
             _studentService = studentService;
             _bachelorThemeService = bachelorThemeService;
+            _commentReplyService = commentReplyService;
         }
 
         [HttpGet]
@@ -75,6 +82,19 @@ namespace BachelorManagement.ApiLayer.Controllers
         public IActionResult GetTeacherComments(string email)
         {
             return Ok(_studentService.GetStudentComments(email));
+        }
+
+        [HttpGet]
+        [Route("api/student/comments/{email}/{id}")]
+        public IActionResult GetTeacherCommentReplies(string email, int id)
+        {
+            var commentReplies = new List<CommentReply>();
+            var comments = _studentService.GetStudentComments(email).Where(c => c.Id == id);
+            foreach (var comment in comments)
+            {
+                commentReplies.AddRange(_commentReplyService.GetCommentReplies(comment.Id));
+            }
+            return Ok(commentReplies);
         }
     }
 }

@@ -70,11 +70,11 @@ namespace BachelorManagement.DataLayer.Migrations
                     TeacherId = table.Column<int>(nullable: false),
                     Achievements = table.Column<string>(nullable: true),
                     GitUrl = table.Column<string>(nullable: true),
+                    Accepted = table.Column<bool>(nullable: false),
+                    Denied = table.Column<bool>(nullable: false),
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy",
-                            SqlServerValueGenerationStrategy.IdentityColumn),
-                    Accepted = table.Column<bool>(nullable: false),
-                    Denied = table.Column<bool>(nullable: false)
+                            SqlServerValueGenerationStrategy.IdentityColumn)
                 },
                 constraints: table =>
                 {
@@ -146,6 +146,7 @@ namespace BachelorManagement.DataLayer.Migrations
                     StudentId = table.Column<int>(nullable: true),
                     TeacherId = table.Column<int>(nullable: true),
                     CommentContent = table.Column<string>(nullable: true),
+                    Date = table.Column<DateTime>(nullable: false),
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy",
                             SqlServerValueGenerationStrategy.IdentityColumn)
@@ -250,6 +251,28 @@ namespace BachelorManagement.DataLayer.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                "CommentReplies",
+                table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy",
+                            SqlServerValueGenerationStrategy.IdentityColumn),
+                    CommentId = table.Column<int>(nullable: false),
+                    CommentReplyContent = table.Column<string>(nullable: true),
+                    Date = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CommentReplies", x => x.Id);
+                    table.ForeignKey(
+                        "FK_CommentReplies_Comments_CommentId",
+                        x => x.CommentId,
+                        "Comments",
+                        "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 "IX_BachelorThemes_StudentId",
                 "BachelorThemes",
@@ -261,6 +284,11 @@ namespace BachelorManagement.DataLayer.Migrations
                 "IX_BachelorThemes_TeacherId",
                 "BachelorThemes",
                 "TeacherId");
+
+            migrationBuilder.CreateIndex(
+                "IX_CommentReplies_CommentId",
+                "CommentReplies",
+                "CommentId");
 
             migrationBuilder.CreateIndex(
                 "IX_Comments_StudentId",
@@ -324,7 +352,7 @@ namespace BachelorManagement.DataLayer.Migrations
                 "BachelorThemes");
 
             migrationBuilder.DropTable(
-                "Comments");
+                "CommentReplies");
 
             migrationBuilder.DropTable(
                 "Consultations");
@@ -342,10 +370,13 @@ namespace BachelorManagement.DataLayer.Migrations
                 "Years");
 
             migrationBuilder.DropTable(
-                "Students");
+                "Comments");
 
             migrationBuilder.DropTable(
                 "Sessions");
+
+            migrationBuilder.DropTable(
+                "Students");
 
             migrationBuilder.DropTable(
                 "Teachers");

@@ -59,6 +59,15 @@ export class TeacherWallComponent {
     this.titleService.setTitle("BDMApp Teacher Wall");
   }
 
+  ngOnInit(){
+    this.getTeacherWallInfos();
+  }
+
+  getTeacherWallInfos(){
+
+  }
+
+
   requestMetting() {
     if (this.meetingRequest) {
       this.meetingRequest = false;

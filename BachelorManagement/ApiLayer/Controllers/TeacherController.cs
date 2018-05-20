@@ -53,5 +53,12 @@ namespace BachelorManagement.ApiLayer.Controllers
 
             return Ok();
         }
+
+        [HttpGet]
+        [Route("api/teacher/comments/{email}")]
+        public IActionResult GetTeacherComments(string email)
+        {
+            return Ok(_teacherService.GetTeacherComments(email));
+        }
     }
 }

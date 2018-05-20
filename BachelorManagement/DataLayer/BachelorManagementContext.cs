@@ -27,6 +27,8 @@ namespace BachelorManagement.DataLayer
 
         public virtual DbSet<BachelorTheme> BachelorThemes { get; set; }
 
+        public virtual DbSet<CommentReply> CommentReplies { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var cn = @"Server=(localdb)\mssqllocaldb;Database=BachelorDegreeManagement;Trusted_Connection=True;";

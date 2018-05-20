@@ -9,16 +9,19 @@ namespace BachelorManagement.BusinessLayer.Services
     public class TeacherService : ITeacherService
     {
         private readonly IRepository<BachelorTheme> _bachelorThemeRepository;
+        private readonly ICommentService _commentService;
         private readonly IRepository<Student> _studentRepository;
         private readonly IRepository<Teacher> _teacherRepository;
 
         public TeacherService(IRepository<Teacher> teacherRepository,
             IRepository<BachelorTheme> bachelorThemeRepository,
-            IRepository<Student> studentRepository)
+            IRepository<Student> studentRepository,
+            ICommentService commentService)
         {
             _teacherRepository = teacherRepository;
             _bachelorThemeRepository = bachelorThemeRepository;
             _studentRepository = studentRepository;
+            _commentService = commentService;
         }
 
         public IQueryable<Teacher> GetAllTeachers()
@@ -58,6 +61,15 @@ namespace BachelorManagement.BusinessLayer.Services
             }
 
             _teacherRepository.Update(teacher);
+        }
+
+        public ICollection<Comment> GetTeacherComments(string email)
+        {
+            var teacher = GetTeacherByEmail(email);
+            ICollection<Comment> comments = null;
+            if (teacher != null) comments = _commentService.GetTeacherComments(teacher.Email);
+
+            return comments;
         }
 
         private void AddBachelorThemeToTeacher(string email, string title, string description)

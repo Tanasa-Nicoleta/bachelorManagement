@@ -14,6 +14,8 @@ namespace BachelorManagement.Interfaces
 
         ICollection<Student> GetTeacherStudents(string email);
 
+        ICollection<Comment> GetTeacherComments(string email);
+
         void AddDetailsToTeacher(string email, string requirement, int numberOfSpots, string themeTitle,
             string themeDescr);
     }

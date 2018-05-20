@@ -34,6 +34,8 @@ namespace BachelorManagement.ApiLayer
             services.AddScoped<ITeacherService, TeacherService>();
             services.AddScoped<IStudentService, StudentService>();
             services.AddScoped<IBachelorThemeService, BachelorThemeService>();
+            services.AddScoped<ICommentService, CommentService>();
+            services.AddScoped<ICommentReplyService, CommentReplyService>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
         }
 

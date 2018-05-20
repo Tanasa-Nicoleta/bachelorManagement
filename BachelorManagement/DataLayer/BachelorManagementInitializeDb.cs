@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using BachelorManagement.DataLayer.Entities;
 using BachelorManagement.DataLayer.Enums;
 
@@ -136,26 +137,55 @@ namespace BachelorManagement.DataLayer
                 new Comment
                 {
                     StudentId = 1,
-                    CommentContent = "Heloo! student1"
+                    CommentContent = "Heloo! student1",
+                    Date = DateTime.Now.AddDays(-2)
                 },
                 new Comment
                 {
                     StudentId = 2,
-                    CommentContent = "Hello! student2"
+                    CommentContent = "Hello! student2",
+                    Date = DateTime.Now.AddDays(-1)
                 },
                 new Comment
                 {
                     StudentId = 1,
-                    CommentContent = "Hello! student1v2"
+                    CommentContent = "Hello! student1v2",
+                    Date = DateTime.Now.AddDays(1)
                 },
                 new Comment
                 {
                     TeacherId = 1,
-                    CommentContent = "Hello! Teacher1"
+                    CommentContent = "Hello! Teacher1",
+                    Date = DateTime.Now.AddDays(2)
+                },
+                new Comment
+                {
+                    TeacherId = 1,
+                    CommentContent = "Hello! Teacher1v2",
+                    Date = DateTime.Now.AddDays(3)
                 }
             };
             foreach (var comment in comments)
                 context.Comments.Add(comment);
+            context.SaveChanges();
+
+            var commentReplies = new[]
+            {
+                new CommentReply
+                {
+                    CommentId = 4,
+                    CommentReplyContent = "Reply for comment 4, teacher 1",
+                    Date = DateTime.Now.AddDays(2.5)
+                },
+                new CommentReply
+                {
+                    CommentId = 5,
+                    CommentReplyContent = "Reply for comment 5, teacher 1",
+                    Date = DateTime.Now.AddDays(3.5)
+                }
+            };
+            foreach (var commentReply in commentReplies)
+                context.CommentReplies.Add(commentReply);
             context.SaveChanges();
 
             var consultations = new[]

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BachelorManagement.DataLayer.Migrations
 {
     [DbContext(typeof(BachelorManagementContext))]
-    [Migration("20180506132922_createDb")]
+    [Migration("20180520103100_createDb")]
     partial class createDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,6 +51,8 @@ namespace BachelorManagement.DataLayer.Migrations
 
                     b.Property<string>("CommentContent");
 
+                    b.Property<DateTime>("Date");
+
                     b.Property<int?>("StudentId");
 
                     b.Property<int?>("TeacherId");
@@ -62,6 +64,24 @@ namespace BachelorManagement.DataLayer.Migrations
                     b.HasIndex("TeacherId");
 
                     b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("BachelorManagement.DataLayer.Entities.CommentReply", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("CommentId");
+
+                    b.Property<string>("CommentReplyContent");
+
+                    b.Property<DateTime>("Date");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CommentId");
+
+                    b.ToTable("CommentReplies");
                 });
 
             modelBuilder.Entity("BachelorManagement.DataLayer.Entities.Consultation", b =>
@@ -263,6 +283,14 @@ namespace BachelorManagement.DataLayer.Migrations
                     b.HasOne("BachelorManagement.DataLayer.Entities.Teacher", "Teacher")
                         .WithMany()
                         .HasForeignKey("TeacherId");
+                });
+
+            modelBuilder.Entity("BachelorManagement.DataLayer.Entities.CommentReply", b =>
+                {
+                    b.HasOne("BachelorManagement.DataLayer.Entities.Comment", "Comment")
+                        .WithMany("CommentReplies")
+                        .HasForeignKey("CommentId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("BachelorManagement.DataLayer.Entities.Consultation", b =>

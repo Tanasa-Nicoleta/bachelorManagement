@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using BachelorManagement.DataLayer;
 using BachelorManagement.DataLayer.Entities;
 using BachelorManagement.Interfaces;
@@ -8,17 +9,20 @@ namespace BachelorManagement.BusinessLayer.Services
     public class StudentService : IStudentService
     {
         private readonly IRepository<BachelorTheme> _bachelorThemeRepository;
+        private readonly ICommentService _commentService;
         private readonly IRepository<Mean> _meanRepository;
         private readonly IRepository<Student> _studentRepository;
         private readonly IRepository<Teacher> _teacherRepository;
 
         public StudentService(IRepository<Student> studentRepository, IRepository<Teacher> teacherRepository,
-            IRepository<BachelorTheme> bachelorThemeRepository, IRepository<Mean> meanRepository)
+            IRepository<BachelorTheme> bachelorThemeRepository, IRepository<Mean> meanRepository,
+            ICommentService commentService)
         {
             _studentRepository = studentRepository;
             _teacherRepository = teacherRepository;
             _bachelorThemeRepository = bachelorThemeRepository;
             _meanRepository = meanRepository;
+            _commentService = commentService;
         }
 
         public Student GetStudentByEmail(string email)
@@ -65,6 +69,15 @@ namespace BachelorManagement.BusinessLayer.Services
             }
 
             _studentRepository.Update(student);
+        }
+
+        public ICollection<Comment> GetStudentComments(string email)
+        {
+            var student = GetStudentByEmail(email);
+            ICollection<Comment> comments = null;
+            if (student != null) comments = _commentService.GetStudentComments(student.Email);
+
+            return comments;
         }
 
         private BachelorTheme GetStudentBacelorThemes(Student student)

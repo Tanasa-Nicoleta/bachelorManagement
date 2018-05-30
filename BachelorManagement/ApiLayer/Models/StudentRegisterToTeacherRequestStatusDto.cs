@@ -1,6 +1,6 @@
 ﻿namespace BachelorManagement.ApiLayer.Models
 {
-    public class StudentRequestStatusDto
+    public class StudentRegisterToTeacherRequestStatusDto
     {
         public string TeacherEmail { get; set; }
         public string StudentEmail { get; set; }

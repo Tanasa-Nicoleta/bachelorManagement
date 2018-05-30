@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BachelorManagement.DataLayer.Enums;
+using System;
 
 namespace BachelorManagement.DataLayer.Entities
 {
@@ -9,6 +10,7 @@ namespace BachelorManagement.DataLayer.Entities
         public Teacher Teacher { get; set; }
         public int? StudentId { get; set; }
         public Student Student { get; set; }
+        public MeetingRequestStatus Status { get; set; } 
         public int Id { get; set; }
     }
 }

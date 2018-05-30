@@ -103,5 +103,10 @@ namespace BachelorManagement.BusinessLayer.Services
         {
             return _studentRepository.GetAll().Where(s => s.TeacherId == teacher.Id);
         }
+
+        public Teacher GetTeacherById(int id)
+        {
+            return _teacherRepository.GetAll().FirstOrDefault(t => t.Id == id);
+        }
     }
 }

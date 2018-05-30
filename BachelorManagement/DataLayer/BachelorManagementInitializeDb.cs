@@ -319,6 +319,21 @@ namespace BachelorManagement.DataLayer
             foreach (var year in years)
                 context.Years.Add(year);
             context.SaveChanges();
+
+            var meetingRequests = new[]
+            {
+                new MeetingRequest
+                {
+                    StudentId = 1,
+                    TeacherId = 1,
+                    Date = DateTime.Now.AddDays(2),
+                    Status = MeetingRequestStatus.Pending
+                }
+            };
+            foreach(var meeting in meetingRequests)
+                context.MeetingRequests.Add(meeting);
+            context.SaveChanges();
+
         }
     }
 }

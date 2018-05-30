@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
@@ -9,8 +10,8 @@ namespace BachelorManagement.DataLayer.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                "Teachers",
-                table => new
+                name: "Teachers",
+                columns: table => new
                 {
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
@@ -21,46 +22,49 @@ namespace BachelorManagement.DataLayer.Migrations
                     Requirement = table.Column<string>(nullable: true),
                     JobTitle = table.Column<string>(nullable: true),
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy",
-                            SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
                 },
-                constraints: table => { table.PrimaryKey("PK_Teachers", x => x.Id); });
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Teachers", x => x.Id);
+                });
 
             migrationBuilder.CreateTable(
-                "Users",
-                table => new
+                name: "Users",
+                columns: table => new
                 {
                     Email = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: true),
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy",
-                            SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
                 },
-                constraints: table => { table.PrimaryKey("PK_Users", x => x.Id); });
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                });
 
             migrationBuilder.CreateTable(
-                "Sessions",
-                table => new
+                name: "Sessions",
+                columns: table => new
                 {
                     TeacherId = table.Column<int>(nullable: false),
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy",
-                            SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Sessions", x => x.Id);
                     table.ForeignKey(
-                        "FK_Sessions_Teachers_TeacherId",
-                        x => x.TeacherId,
-                        "Teachers",
-                        "Id",
+                        name: "FK_Sessions_Teachers_TeacherId",
+                        column: x => x.TeacherId,
+                        principalTable: "Teachers",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                "Students",
-                table => new
+                name: "Students",
+                columns: table => new
                 {
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
@@ -73,133 +77,128 @@ namespace BachelorManagement.DataLayer.Migrations
                     Accepted = table.Column<bool>(nullable: false),
                     Denied = table.Column<bool>(nullable: false),
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy",
-                            SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Students", x => x.Id);
                     table.ForeignKey(
-                        "FK_Students_Teachers_TeacherId",
-                        x => x.TeacherId,
-                        "Teachers",
-                        "Id",
+                        name: "FK_Students_Teachers_TeacherId",
+                        column: x => x.TeacherId,
+                        principalTable: "Teachers",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                "Years",
-                table => new
+                name: "Years",
+                columns: table => new
                 {
                     YearValue = table.Column<string>(nullable: true),
                     SpringSession = table.Column<bool>(nullable: false),
                     SummerSession = table.Column<bool>(nullable: false),
                     SessionId = table.Column<int>(nullable: false),
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy",
-                            SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Years", x => x.Id);
                     table.ForeignKey(
-                        "FK_Years_Sessions_SessionId",
-                        x => x.SessionId,
-                        "Sessions",
-                        "Id",
+                        name: "FK_Years_Sessions_SessionId",
+                        column: x => x.SessionId,
+                        principalTable: "Sessions",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                "BachelorThemes",
-                table => new
+                name: "BachelorThemes",
+                columns: table => new
                 {
                     Title = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     TeacherId = table.Column<int>(nullable: true),
                     StudentId = table.Column<int>(nullable: true),
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy",
-                            SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_BachelorThemes", x => x.Id);
                     table.ForeignKey(
-                        "FK_BachelorThemes_Students_StudentId",
-                        x => x.StudentId,
-                        "Students",
-                        "Id",
+                        name: "FK_BachelorThemes_Students_StudentId",
+                        column: x => x.StudentId,
+                        principalTable: "Students",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        "FK_BachelorThemes_Teachers_TeacherId",
-                        x => x.TeacherId,
-                        "Teachers",
-                        "Id",
+                        name: "FK_BachelorThemes_Teachers_TeacherId",
+                        column: x => x.TeacherId,
+                        principalTable: "Teachers",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                "Comments",
-                table => new
+                name: "Comments",
+                columns: table => new
                 {
                     StudentId = table.Column<int>(nullable: true),
                     TeacherId = table.Column<int>(nullable: true),
                     CommentContent = table.Column<string>(nullable: true),
                     Date = table.Column<DateTime>(nullable: false),
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy",
-                            SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Comments", x => x.Id);
                     table.ForeignKey(
-                        "FK_Comments_Students_StudentId",
-                        x => x.StudentId,
-                        "Students",
-                        "Id",
+                        name: "FK_Comments_Students_StudentId",
+                        column: x => x.StudentId,
+                        principalTable: "Students",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        "FK_Comments_Teachers_TeacherId",
-                        x => x.TeacherId,
-                        "Teachers",
-                        "Id",
+                        name: "FK_Comments_Teachers_TeacherId",
+                        column: x => x.TeacherId,
+                        principalTable: "Teachers",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                "Consultations",
-                table => new
+                name: "Consultations",
+                columns: table => new
                 {
                     Day = table.Column<int>(nullable: false),
                     Interval = table.Column<string>(nullable: true),
                     TeacherId = table.Column<int>(nullable: true),
                     StudentId = table.Column<int>(nullable: true),
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy",
-                            SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Consultations", x => x.Id);
                     table.ForeignKey(
-                        "FK_Consultations_Students_StudentId",
-                        x => x.StudentId,
-                        "Students",
-                        "Id",
+                        name: "FK_Consultations_Students_StudentId",
+                        column: x => x.StudentId,
+                        principalTable: "Students",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        "FK_Consultations_Teachers_TeacherId",
-                        x => x.TeacherId,
-                        "Teachers",
-                        "Id",
+                        name: "FK_Consultations_Teachers_TeacherId",
+                        column: x => x.TeacherId,
+                        principalTable: "Teachers",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                "Means",
-                table => new
+                name: "Means",
+                columns: table => new
                 {
                     FirstSemester = table.Column<double>(nullable: false),
                     SecondSemester = table.Column<double>(nullable: false),
@@ -209,177 +208,175 @@ namespace BachelorManagement.DataLayer.Migrations
                     SixthSemester = table.Column<double>(nullable: false),
                     StudentId = table.Column<int>(nullable: false),
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy",
-                            SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Means", x => x.Id);
                     table.ForeignKey(
-                        "FK_Means_Students_StudentId",
-                        x => x.StudentId,
-                        "Students",
-                        "Id",
+                        name: "FK_Means_Students_StudentId",
+                        column: x => x.StudentId,
+                        principalTable: "Students",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                "MeetingRequest",
-                table => new
+                name: "MeetingRequests",
+                columns: table => new
                 {
                     Date = table.Column<DateTime>(nullable: false),
                     TeacherId = table.Column<int>(nullable: true),
                     StudentId = table.Column<int>(nullable: true),
+                    Status = table.Column<int>(nullable: false),
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy",
-                            SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MeetingRequest", x => x.Id);
+                    table.PrimaryKey("PK_MeetingRequests", x => x.Id);
                     table.ForeignKey(
-                        "FK_MeetingRequest_Students_StudentId",
-                        x => x.StudentId,
-                        "Students",
-                        "Id",
+                        name: "FK_MeetingRequests_Students_StudentId",
+                        column: x => x.StudentId,
+                        principalTable: "Students",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        "FK_MeetingRequest_Teachers_TeacherId",
-                        x => x.TeacherId,
-                        "Teachers",
-                        "Id",
+                        name: "FK_MeetingRequests_Teachers_TeacherId",
+                        column: x => x.TeacherId,
+                        principalTable: "Teachers",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                "CommentReplies",
-                table => new
+                name: "CommentReplies",
+                columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy",
-                            SqlServerValueGenerationStrategy.IdentityColumn),
                     CommentId = table.Column<int>(nullable: false),
                     CommentReplyContent = table.Column<string>(nullable: true),
-                    Date = table.Column<DateTime>(nullable: false)
+                    Date = table.Column<DateTime>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CommentReplies", x => x.Id);
                     table.ForeignKey(
-                        "FK_CommentReplies_Comments_CommentId",
-                        x => x.CommentId,
-                        "Comments",
-                        "Id",
+                        name: "FK_CommentReplies_Comments_CommentId",
+                        column: x => x.CommentId,
+                        principalTable: "Comments",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                "IX_BachelorThemes_StudentId",
-                "BachelorThemes",
-                "StudentId",
+                name: "IX_BachelorThemes_StudentId",
+                table: "BachelorThemes",
+                column: "StudentId",
                 unique: true,
                 filter: "[StudentId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                "IX_BachelorThemes_TeacherId",
-                "BachelorThemes",
-                "TeacherId");
+                name: "IX_BachelorThemes_TeacherId",
+                table: "BachelorThemes",
+                column: "TeacherId");
 
             migrationBuilder.CreateIndex(
-                "IX_CommentReplies_CommentId",
-                "CommentReplies",
-                "CommentId");
+                name: "IX_CommentReplies_CommentId",
+                table: "CommentReplies",
+                column: "CommentId");
 
             migrationBuilder.CreateIndex(
-                "IX_Comments_StudentId",
-                "Comments",
-                "StudentId");
+                name: "IX_Comments_StudentId",
+                table: "Comments",
+                column: "StudentId");
 
             migrationBuilder.CreateIndex(
-                "IX_Comments_TeacherId",
-                "Comments",
-                "TeacherId");
+                name: "IX_Comments_TeacherId",
+                table: "Comments",
+                column: "TeacherId");
 
             migrationBuilder.CreateIndex(
-                "IX_Consultations_StudentId",
-                "Consultations",
-                "StudentId");
+                name: "IX_Consultations_StudentId",
+                table: "Consultations",
+                column: "StudentId");
 
             migrationBuilder.CreateIndex(
-                "IX_Consultations_TeacherId",
-                "Consultations",
-                "TeacherId",
+                name: "IX_Consultations_TeacherId",
+                table: "Consultations",
+                column: "TeacherId",
                 unique: true,
                 filter: "[TeacherId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                "IX_Means_StudentId",
-                "Means",
-                "StudentId",
+                name: "IX_Means_StudentId",
+                table: "Means",
+                column: "StudentId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                "IX_MeetingRequest_StudentId",
-                "MeetingRequest",
-                "StudentId",
+                name: "IX_MeetingRequests_StudentId",
+                table: "MeetingRequests",
+                column: "StudentId",
                 unique: true,
                 filter: "[StudentId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                "IX_MeetingRequest_TeacherId",
-                "MeetingRequest",
-                "TeacherId");
+                name: "IX_MeetingRequests_TeacherId",
+                table: "MeetingRequests",
+                column: "TeacherId");
 
             migrationBuilder.CreateIndex(
-                "IX_Sessions_TeacherId",
-                "Sessions",
-                "TeacherId");
+                name: "IX_Sessions_TeacherId",
+                table: "Sessions",
+                column: "TeacherId");
 
             migrationBuilder.CreateIndex(
-                "IX_Students_TeacherId",
-                "Students",
-                "TeacherId");
+                name: "IX_Students_TeacherId",
+                table: "Students",
+                column: "TeacherId");
 
             migrationBuilder.CreateIndex(
-                "IX_Years_SessionId",
-                "Years",
-                "SessionId");
+                name: "IX_Years_SessionId",
+                table: "Years",
+                column: "SessionId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                "BachelorThemes");
+                name: "BachelorThemes");
 
             migrationBuilder.DropTable(
-                "CommentReplies");
+                name: "CommentReplies");
 
             migrationBuilder.DropTable(
-                "Consultations");
+                name: "Consultations");
 
             migrationBuilder.DropTable(
-                "Means");
+                name: "Means");
 
             migrationBuilder.DropTable(
-                "MeetingRequest");
+                name: "MeetingRequests");
 
             migrationBuilder.DropTable(
-                "Users");
+                name: "Users");
 
             migrationBuilder.DropTable(
-                "Years");
+                name: "Years");
 
             migrationBuilder.DropTable(
-                "Comments");
+                name: "Comments");
 
             migrationBuilder.DropTable(
-                "Sessions");
+                name: "Sessions");
 
             migrationBuilder.DropTable(
-                "Students");
+                name: "Students");
 
             migrationBuilder.DropTable(
-                "Teachers");
+                name: "Teachers");
         }
     }
 }

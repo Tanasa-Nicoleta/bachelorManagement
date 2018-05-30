@@ -6,6 +6,7 @@ import { TitleService } from '../../services/title.service';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { MeetingRequest } from '../../models/meeting-request';
 
 @Component({
   selector: 'teacher-students-requests',
@@ -18,6 +19,7 @@ export class TeacherStudentsRequestsComponent {
   numberOfAvailableSpots: number;
   studentList: Array<Student> = new Array<Student>();
   titleService: TitleService;
+  meetingRequests: Array<MeetingRequest> = new Array<MeetingRequest>();
 
   limitDate: Date = new Date(2018, 6, 15);
   today: Date = new Date();
@@ -32,11 +34,36 @@ export class TeacherStudentsRequestsComponent {
   }
 
   ngOnInit() {
-    this.getTeacherDetails(this.email);
-    this.getTeacherStudents(this.email);
+    if (this.dueDatePassed) {
+      this.getTeacherMeetingRequests(this.email);
+    }
+    else {
+      this.getTeacherDetails(this.email);
+      this.getTeacherStudents(this.email);
+    }
   }
 
-  getTeacherDetails(email: string){
+  getTeacherMeetingRequests(email: string) {
+    const teacherResponse = this.http.get('http://localhost:64250/api/teacher/studentMeetingRequest/' + email,
+      { observe: 'response' });
+    teacherResponse.subscribe(
+      data => {
+        for (let key in data.body) {
+          if (data.body[key]) {
+            this.meetingRequests.push(new MeetingRequest(data.body[key]["studentEmail"], data.body[key]["teacherEmail"],
+              data.body[key]["date"]));
+          }
+        }
+        console.log(this.meetingRequests);
+      },
+      err => {
+        console.log("Error");
+        console.log(err)
+      }
+    );
+  }
+
+  getTeacherDetails(email: string) {
     const teacherResponse = this.http.get('http://localhost:64250/api/teacher/' + email, { observe: 'response' });
     teacherResponse.subscribe(
       data => {

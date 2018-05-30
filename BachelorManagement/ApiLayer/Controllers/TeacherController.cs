@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
 using BachelorManagement.ApiLayer.Models;
 using BachelorManagement.DataLayer.Entities;
 using BachelorManagement.Interfaces;
@@ -11,13 +10,19 @@ namespace BachelorManagement.ApiLayer.Controllers
     public class TeacherController : Controller
     {
         private readonly ITeacherService _teacherService;
+        private readonly IStudentService _studentService;
         private readonly ICommentReplyService _commentReplyService;
+        private readonly IMeetingRequestService _meetingRequestService;
 
-        public TeacherController(ITeacherService teacherService, 
-            ICommentReplyService commentReplyService)
+        public TeacherController(ITeacherService teacherService,
+            ICommentReplyService commentReplyService,
+            IMeetingRequestService meetingRequestService,
+            IStudentService studentService)
         {
             _teacherService = teacherService;
             _commentReplyService = commentReplyService;
+            _meetingRequestService = meetingRequestService;
+            _studentService = studentService;
         }
 
         [HttpGet]
@@ -79,6 +84,34 @@ namespace BachelorManagement.ApiLayer.Controllers
                 commentReplies.AddRange(_commentReplyService.GetCommentReplies(comment.Id));
             }
             return Ok(commentReplies);
+        }
+
+        [HttpGet]
+        [Route("api/teacher/studentMeetingRequest/{email}")]
+        public IActionResult GetTeacherMeetingRequest(string email)
+        {
+            var teacher = _teacherService.GetTeacherByEmail(email);
+            List<MeetingRequest> meetingRequests = new List<MeetingRequest>();
+
+            if (teacher != null)
+            {
+                meetingRequests = _meetingRequestService.GetTeacherMeetingRequests(teacher.Id);
+            }
+
+            var meetingRequestDto = new List<StudentMeetingRequestDto>();
+            foreach (var meetingRequest in meetingRequests)
+            {
+                meetingRequestDto.Add(
+                    new StudentMeetingRequestDto
+                    {
+                        Date = meetingRequest.Date,
+                        StudentEmail = _studentService.GetStudentById(meetingRequest.StudentId.Value).Email,
+                        TeacherEmail = _teacherService.GetTeacherById(meetingRequest.TeacherId.Value).Email
+                    }
+                );
+            };
+
+            return Ok(meetingRequestDto);
         }
     }
 }

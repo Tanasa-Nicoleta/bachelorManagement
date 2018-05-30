@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BachelorManagement.DataLayer.Migrations
 {
     [DbContext(typeof(BachelorManagementContext))]
-    [Migration("20180520103100_createDb")]
+    [Migration("20180530132324_createDb")]
     partial class createDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -142,6 +142,8 @@ namespace BachelorManagement.DataLayer.Migrations
 
                     b.Property<DateTime>("Date");
 
+                    b.Property<int>("Status");
+
                     b.Property<int?>("StudentId");
 
                     b.Property<int?>("TeacherId");
@@ -154,7 +156,7 @@ namespace BachelorManagement.DataLayer.Migrations
 
                     b.HasIndex("TeacherId");
 
-                    b.ToTable("MeetingRequest");
+                    b.ToTable("MeetingRequests");
                 });
 
             modelBuilder.Entity("BachelorManagement.DataLayer.Entities.Session", b =>

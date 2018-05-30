@@ -10,6 +10,8 @@ namespace BachelorManagement.Interfaces
 
         Teacher GetTeacherByEmail(string email);
 
+        Teacher GetTeacherById(int id);
+
         ICollection<BachelorTheme> GetTeacherBachelorThemes(string email);
 
         ICollection<Student> GetTeacherStudents(string email);

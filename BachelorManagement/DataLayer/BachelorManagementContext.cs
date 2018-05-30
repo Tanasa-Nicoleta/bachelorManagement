@@ -29,9 +29,11 @@ namespace BachelorManagement.DataLayer
 
         public virtual DbSet<CommentReply> CommentReplies { get; set; }
 
+        public virtual DbSet<MeetingRequest> MeetingRequests { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var cn = @"Server=(localdb)\mssqllocaldb;Database=BachelorDegreeManagement;Trusted_Connection=True;";
+            var cn = @"Server=localhost;Database=BachelorDegreeManagementV7;integrated security=SSPI;";
             optionsBuilder.UseSqlServer(cn);
 
             base.OnConfiguring(optionsBuilder);

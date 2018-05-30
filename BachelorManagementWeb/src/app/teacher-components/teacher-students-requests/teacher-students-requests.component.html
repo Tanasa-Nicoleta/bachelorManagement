@@ -68,8 +68,10 @@
 
         </div>
 
-        <div *ngIf="dueDatePassed">
-            See meeting requests
+        <div *ngIf="dueDatePassed" class="bordered content_border">
+            <div *ngFor="let meeting of meetingRequests">
+                {{meeting.StudentEmail}} {{meeting.TeacherEmail}} {{meeting.Date}}
+            </div>
         </div>        
     </div>
 </div>

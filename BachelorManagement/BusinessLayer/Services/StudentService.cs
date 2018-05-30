@@ -94,5 +94,10 @@ namespace BachelorManagement.BusinessLayer.Services
         {
             return _meanRepository.GetAll().FirstOrDefault(m => m.StudentId == student.Id);
         }
+
+        public Student GetStudentById(int id)
+        {
+            return _studentRepository.GetAll().FirstOrDefault(s => s.Id == id);
+        }
     }
 }

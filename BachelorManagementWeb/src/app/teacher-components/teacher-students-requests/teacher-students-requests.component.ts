@@ -16,13 +16,15 @@ import { HttpClient } from '@angular/common/http';
 export class TeacherStudentsRequestsComponent {
   numberOfSpots: number;
   numberOfAvailableSpots: number;
-  studentAccepted: boolean = false;
-  studentDenied: boolean = false;
-  email: string = "vlad.simion@info.uaic.ro";
   studentList: Array<Student> = new Array<Student>();
+  titleService: TitleService;
+
+  limitDate: Date = new Date(2018, 6, 15);
+  today: Date = new Date();
+  email: string = "vlad.simion@info.uaic.ro";
   acceptStudentsRequest: string = "Accept";
   denyStudentsRequest: string = "Deny";
-  titleService: TitleService;
+  dueDatePassed: boolean = true; //this.limitDate < this.today;
 
   constructor(private title: Title, private http: HttpClient, private router: Router) {
     this.titleService = new TitleService(title);

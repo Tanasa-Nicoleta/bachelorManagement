@@ -16,13 +16,16 @@
             </div>
         </div>
 
-        <div class="bordered content_border">
+        <div  *ngIf="dueDatePassed == false" class="bordered content_border">
             <div class="spots">
                 <div>
                     Number of spots: {{numberOfSpots}}
                 </div>
                 <div>
                     Number of available spots: {{numberOfAvailableSpots}}
+                </div>
+                <div>
+                    Limit date: {{limitDate.getDate()}}.{{limitDate.getMonth()}}.{{limitDate.getFullYear()}}
                 </div>
             </div>
 
@@ -37,7 +40,7 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let student of studentList; let i = index;">
-                                <td class="columnContent">{{student.FirstName + " " + student.LastName}}</td>
+                                <td class="columnContent">{{student.FirstName}} {{student.LastName}}</td>
                                 <td class="columnContent">{{student.Theme.Title}}: {{student.Theme.Description}}</td>
                                 <td class="columnContent">{{student.Achievement}}</td>
                                 <td class="columnContent">
@@ -64,5 +67,9 @@
             </div>
 
         </div>
+
+        <div *ngIf="dueDatePassed">
+            See meeting requests
+        </div>        
     </div>
 </div>

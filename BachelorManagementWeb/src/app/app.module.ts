@@ -19,6 +19,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { TeacherGitDetailsPerStudentComponent } from './teacher-components/teacher-git-details-per-student/teacher-git-details-per-student.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ForgotPasswordComponent } from './login-and-register-components/forgot-password/forgot-password.component';
+import { InformationComponent } from './information/information.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ForgotPasswordComponent } from './login-and-register-components/forgot-
     WelcomeComponent,
     TeacherGitDetailsPerStudentComponent,
     ProfileComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    InformationComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +57,8 @@ import { ForgotPasswordComponent } from './login-and-register-components/forgot-
       { path: 'welcome', component: WelcomeComponent, pathMatch: 'full' },
       { path: 'gitDetails', component: TeacherGitDetailsPerStudentComponent, pathMatch: 'full' },
       { path: 'profile', component: ProfileComponent, pathMatch: 'full' },
-      { path: 'forgotPassword', component: ForgotPasswordComponent, pathMatch: 'full' },
+      { path: 'forgotPassword', component: ForgotPasswordComponent, pathMatch: 'full' },      
+      { path: 'information', component: InformationComponent, pathMatch: 'full' },
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: '**', redirectTo: 'login', pathMatch: 'full' }
     ]),

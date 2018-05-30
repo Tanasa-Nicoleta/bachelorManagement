@@ -17,6 +17,7 @@ export class StudentRegisterToTeacherComponent {
     teacherList: Array<Teacher> = new Array<Teacher>();
     teacherEmails: string[] = [];
     titleService: TitleService;
+    dueDate: Date = new Date(2018, 6, 15);
 
     constructor(private title: Title, private http: HttpClient) {
         this.titleService = new TitleService(title);

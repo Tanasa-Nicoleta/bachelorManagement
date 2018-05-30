@@ -52,6 +52,12 @@ $information-tablet: "only screen and (max-width : $tablet-break)";
       }
 }
 
+#emailInput{
+    &.invalidEmail{
+        border: solid 1.5px $input-border-color-error;
+      }
+}
+
 input{
     padding: 0px 15px;
     width: 30%;

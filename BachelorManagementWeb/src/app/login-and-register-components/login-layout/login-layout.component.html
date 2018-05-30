@@ -15,7 +15,7 @@
                         </div>
 
                         <input #SubmitEmail name="SubmitEmail" (ngModel)="body.Username" type="text" placeholder="lastName.firstName@info.uaic.ro"
-                                id="emailInput" pattern="1" required>
+                                id="emailInput" (keyup)="validateEmail($event.target)" required>
                 </div>
 
                 <div>

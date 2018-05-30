@@ -9,6 +9,9 @@
 
     <div class="contentContainer">
         <div class="mdl-cell mdl-cell--12-col">
+            <div class="columnTitle dueDate">
+                You have to choose one of the following teachers before: {{dueDate.getDate()}}.0{{dueDate.getMonth()}}.{{dueDate.getFullYear()}} 
+            </div>
             <table class="table">
                 <thead>
                     <th class="columnTitle numberColumn"> Number </th>
@@ -21,7 +24,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let teacher of teacherList; let i = index;">
-                        <td class="columnContent">{{i + 1}}</td>
+                        <td class="columnContent">{{i + 1}}</td>     
                         <td class="columnContent">{{teacher.Grade + " " + teacher.FirstName + " " + teacher.LastName}}</td>
                         <td class="columnContent">{{teacher.Discipline}}</td>
                         <td class="columnContent">

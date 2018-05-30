@@ -15,6 +15,7 @@ export class LoginLayoutComponent {
 
   private invalidError = false;
   titleService: TitleService;
+  emailRegex: RegExp = /^.+\b@info\.uaic\.ro\b$/;
 
   body: {
     Username: string;
@@ -43,6 +44,15 @@ export class LoginLayoutComponent {
           this.invalidError = true;
       }
     );
+  }
+
+  private validateEmail(email: HTMLInputElement) {
+    this.invalidError = !this.emailRegex.test(email.value);
+    console.log(this.invalidError);
+    if (this.invalidError)
+      email.classList.add('invalidEmail');
+    else
+      email.classList.remove('invalidEmail');
   }
 
 }

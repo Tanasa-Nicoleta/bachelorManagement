@@ -11,13 +11,10 @@
             </div>
         </div>
 
-        <div>
+        <div *ngIf="isTeacher == false">
             <div class="profileDetails">
-                First Name: {{student.FirstName}}
+                Name: {{student.FirstName}} {{student.LastName}}
             </div>
-            <div class="profileDetails">
-                Last Name: {{student.LastName}}
-            </div>            
             <div class="profileDetails">
                 Teacher Name: {{student.TeacherName}}
             </div>
@@ -28,7 +25,8 @@
                 Theme description: {{student.Theme.Description}}
             </div>
             <div class="profileDetails">
-                Repository address: <a href={{userGitUrl}}> {{student.GitUrl}}</a>
+                Repository address:
+                <a href={{userGitUrl}}> {{student.GitUrl}}</a>
             </div>
             <div class="profileDetails">
                 Serial Number: {{student.SerialNumber}}
@@ -37,8 +35,46 @@
                 Start year: {{student.StartYear}}
             </div>
             <div class="profileDetails">
-                Means: {{student.Means.FirstSemester}}, {{student.Means.SecondSemester}},  {{student.Means.ThirdSemester}},  
-                {{student.Means.FourthSemester}},  {{student.Means.FifthSemester}},  {{student.Means.SixthSemester}},  
+                Means: {{student.Means.FirstSemester}}, {{student.Means.SecondSemester}}, {{student.Means.ThirdSemester}}, {{student.Means.FourthSemester}},
+                {{student.Means.FifthSemester}}, {{student.Means.SixthSemester}},
+            </div>
+        </div>
+
+        <div *ngIf="isTeacher">
+            <div class="profileDetails">
+                Name: {{teacher.Grade}} {{teacher.FirstName}} {{teacher.LastName}}
+            </div>
+            <div class="profileDetails">
+                Requirement: {{teacher.Requirement}}
+            </div>
+            <div class="profileDetails">
+                Themes: 
+            </div>
+            <div *ngFor="let theme of teacher.Theme">                
+                <div class="profileSecondaryDetails">
+                    Name: {{theme.Title}}
+                </div>
+                <div class="profileSecondaryDetails spacingBottom">
+                    Description: {{theme.Description}}
+                </div>
+            </div>
+            <div class="profileDetails">
+                Students:
+            </div>
+            <div *ngFor="let student of teacher.Student">
+                <div class="profileSecondaryDetails">
+                    Name: {{student.FirstName}} {{student.LastName}}
+                </div>
+                <div class="profileSecondaryDetails">
+                    Theme: {{student.Theme.Title}}
+                </div>
+                <div class="profileSecondaryDetails">
+                    Theme Description: {{student.Theme.Description}}
+                </div>
+                <div class="profileSecondaryDetails spacingBottom">
+                    Repository address:
+                    <a href={{userGitUrl}}> {{student.GitUrl}}</a>
+                </div>
             </div>
         </div>
     </div>

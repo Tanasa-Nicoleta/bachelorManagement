@@ -14,8 +14,8 @@ import { HttpClient } from '@angular/common/http';
 })
 
 export class TeacherStudentsRequestsComponent {
-  numberOfSpots: number = 12;
-  numberOfAvailableSpots: number = 10;
+  numberOfSpots: number;
+  numberOfAvailableSpots: number;
   studentAccepted: boolean = false;
   studentDenied: boolean = false;
   email: string = "vlad.simion@info.uaic.ro";
@@ -30,11 +30,26 @@ export class TeacherStudentsRequestsComponent {
   }
 
   ngOnInit() {
-    this.getTeacherStudents();
+    this.getTeacherDetails(this.email);
+    this.getTeacherStudents(this.email);
   }
 
-  getTeacherStudents() {
-    const studentResponse = this.http.get('http://localhost:64250/api/teacher/students/' + this.email, { observe: 'response' });
+  getTeacherDetails(email: string){
+    const teacherResponse = this.http.get('http://localhost:64250/api/teacher/' + email, { observe: 'response' });
+    teacherResponse.subscribe(
+      data => {
+        this.numberOfAvailableSpots = data.body["numberOfAvailableSpots"];
+        this.numberOfSpots = data.body["numberOfSpots"];
+      },
+      err => {
+        console.log("Error");
+        console.log(err)
+      }
+    );
+  }
+
+  getTeacherStudents(email: string) {
+    const studentResponse = this.http.get('http://localhost:64250/api/teacher/students/' + email, { observe: 'response' });
 
     studentResponse.subscribe(
       data => {
@@ -76,7 +91,8 @@ export class TeacherStudentsRequestsComponent {
         stud.Accepted = stud.Accepted == true ? false : true;
 
         var body = {
-          Email: stud.Email,
+          TeacherEmail: this.email,
+          StudentEmail: stud.Email,
           Accepted: stud.Accepted,
           Denied: stud.Denied,
         };
@@ -100,7 +116,8 @@ export class TeacherStudentsRequestsComponent {
         stud.Denied = stud.Denied == true ? false : true;
 
         var body = {
-          Email: stud.Email,
+          TeacherEmail: this.email,
+          StudentEmail: stud.Email,
           Accepted: stud.Accepted,
           Denied: stud.Denied,
         };

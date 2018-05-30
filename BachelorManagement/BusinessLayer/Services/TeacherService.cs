@@ -72,6 +72,13 @@ namespace BachelorManagement.BusinessLayer.Services
             return comments;
         }
 
+        public void DecreaseTeacherAvailableSpots(string email)
+        {
+            var teacher = GetTeacherByEmail(email);
+            teacher.NumberOfAvailableSpots--;
+            _teacherRepository.Update(teacher);
+        }
+
         private void AddBachelorThemeToTeacher(string email, string title, string description)
         {
             var teacher = GetTeacherByEmail(email);

@@ -22,3 +22,6 @@ BachelorManagement/BachelorManagement.DataLayer.Test/obj/
 BachelorManagement/BachelorManagement.ApiLayer.Test/bin/
 BachelorManagement/BachelorManagement.BusinessLayer.Test/bin/
 BachelorManagement/BachelorManagement.DataLayer.Test/bin/
+BachelorManagement/BachelorManagement.Interfaces/bin/
+BachelorManagement/BachelorManagement.Interfaces/obj/
+BachelorManagement/.vs/BachelorManagement/v15/.suo

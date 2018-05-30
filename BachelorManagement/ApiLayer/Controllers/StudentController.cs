@@ -12,14 +12,17 @@ namespace BachelorManagement.ApiLayer.Controllers
         private readonly IBachelorThemeService _bachelorThemeService;
         private readonly IStudentService _studentService;
         private readonly ICommentReplyService _commentReplyService;
+        private readonly ITeacherService _teacherService;
 
         public StudentController(IStudentService studentService, 
             IBachelorThemeService bachelorThemeService,
-            ICommentReplyService commentReplyService)
+            ICommentReplyService commentReplyService,
+            ITeacherService teacherService)
         {
             _studentService = studentService;
             _bachelorThemeService = bachelorThemeService;
             _commentReplyService = commentReplyService;
+            _teacherService = teacherService;
         }
 
         [HttpGet]
@@ -71,8 +74,13 @@ namespace BachelorManagement.ApiLayer.Controllers
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            _studentService.UpdateStudentRequest(studentRequestStatusDto.Email, studentRequestStatusDto.Accepted,
-                studentRequestStatusDto.Denied);
+            _studentService.UpdateStudentRequest(studentRequestStatusDto.StudentEmail, 
+                studentRequestStatusDto.Accepted, studentRequestStatusDto.Denied);
+
+            if (studentRequestStatusDto.Accepted)
+            {
+                _teacherService.DecreaseTeacherAvailableSpots(studentRequestStatusDto.TeacherEmail);
+            }
 
             return Ok();
         }

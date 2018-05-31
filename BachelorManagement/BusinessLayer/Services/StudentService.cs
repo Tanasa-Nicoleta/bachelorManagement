@@ -44,6 +44,7 @@ namespace BachelorManagement.BusinessLayer.Services
         {
             var student = GetStudentByEmail(email);
             var theme = GetStudentBacelorThemes(student);
+
             return theme;
         }
 
@@ -51,6 +52,7 @@ namespace BachelorManagement.BusinessLayer.Services
         {
             var student = GetStudentByEmail(email);
             var teacher = GetStudentTeacher(student);
+
             return teacher;
         }
 
@@ -58,19 +60,23 @@ namespace BachelorManagement.BusinessLayer.Services
         {
             var student = GetStudentByEmail(email);
             var mean = GetStudentMean(student);
+
             return mean;
         }
 
         public void AddAchievementToStudent(string email, string achievement)
         {
             var student = GetStudentByEmail(email);
+
             student.Achievements = achievement;
+
             _studentRepository.Update(student);
         }
 
         public void UpdateStudentRequest(string email, bool accepted, bool denied)
         {
             var student = GetStudentByEmail(email);
+
             if (student != null)
             {
                 student.Accepted = accepted;
@@ -82,17 +88,13 @@ namespace BachelorManagement.BusinessLayer.Services
 
         public ICollection<Comment> GetStudentComments(string email)
         {
-            var student = GetStudentByEmail(email);
             ICollection<Comment> comments = null;
+            var student = GetStudentByEmail(email);
+
             if (student != null) comments = _commentService.GetStudentComments(student.Email);
 
             return comments;
-        }
-
-        public void AddStudentPost(string studentEemail, string teacherEmail, string postContent, DateTime date)
-        {
-            
-        }
+        }        
 
         private BachelorTheme GetStudentBacelorThemes(Student student)
         {

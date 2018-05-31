@@ -1,6 +1,6 @@
 <div class="layoutContainer">
+
     <profile-header>
-        <!-- too see if it needs to be another -->
     </profile-header>
 
     <div class="contentContainer">
@@ -25,19 +25,23 @@
             <div class="profileSecondaryDetails">
                 Repository url: {{userData.Url}}
             </div>
+
             <div class="subtitle profileDetails">
                 Languages
             </div>
-            <div *ngFor="let language of languagesArray"  class="profileSecondaryDetails">
-                {{language.name}}: {{language.size}} 
+            <div *ngFor="let language of languagesArray" class="profileSecondaryDetails">
+                {{language.Name}}: {{language.Size}}
             </div>
+
             <div class="subtitle profileDetails">
                 Commits
             </div>
-            <div *ngFor="let commit of commitsArray"  class="profileSecondaryDetails">
-                {{commit.date.getDate()}}.{{commit.date.getMonth()}}.{{commit.date.getFullYear()}}: {{commit.message}}
+            <div *ngFor="let commit of commitsArray" class="profileSecondaryDetails">
+                {{commit.Date.getDate()}}.{{commit.Date.getMonth()}}.{{commit.Date.getFullYear()}}: {{commit.Message}}
             </div>
+
         </div>
+
     </div>
 
 </div>

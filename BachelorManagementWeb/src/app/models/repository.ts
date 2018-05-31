@@ -1,4 +1,4 @@
-export class Repository{
+export class Repository {
     constructor(name, url) {
         this.Name = name;
         this.Url = url;

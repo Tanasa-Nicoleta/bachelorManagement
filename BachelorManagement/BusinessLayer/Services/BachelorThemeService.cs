@@ -19,9 +19,11 @@ namespace BachelorManagement.BusinessLayer.Services
         public void AddBachelorThemeToStudent(string email, string title, string description)
         {
             var student = _studentService.GetStudentByEmail(email);
+
             if (student != null)
             {
                 var bachelorTheme = _bachelorThemeRepository.GetAll().FirstOrDefault(b => b.StudentId == student.Id);
+
                 if (bachelorTheme == null)
                     _bachelorThemeRepository.Add(new BachelorTheme
                     {

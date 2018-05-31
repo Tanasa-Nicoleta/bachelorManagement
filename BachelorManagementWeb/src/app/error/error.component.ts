@@ -11,12 +11,11 @@ import { TitleService } from '../services/title.service';
 export class ErrorComponent {
   welcomeText: string = "Something went wrong,";
   welcomeSubtext: string = "please try again later!";
-  
+
   titleService: TitleService;
 
   constructor(private title: Title) {
     this.titleService = new TitleService(title);
     this.titleService.setTitle("BDMApp Error");
   }
-
 }

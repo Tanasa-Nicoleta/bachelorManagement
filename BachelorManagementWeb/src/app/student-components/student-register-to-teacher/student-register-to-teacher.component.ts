@@ -13,11 +13,12 @@ import { Observable } from 'rxjs/Observable';
 })
 
 export class StudentRegisterToTeacherComponent {
+    dueDate: Date = new Date(2018, 6, 15);
     optionText: string = "Next step";
+
     teacherList: Array<Teacher> = new Array<Teacher>();
     teacherEmails: string[] = [];
     titleService: TitleService;
-    dueDate: Date = new Date(2018, 6, 15);
 
     constructor(private title: Title, private http: HttpClient) {
         this.titleService = new TitleService(title);
@@ -65,7 +66,7 @@ export class StudentRegisterToTeacherComponent {
             themeResponse.subscribe(data => {
                 console.log("body: ", data.body);
                 if (data.body[i]) {
-                    this.teacherList[j].Theme = new Bachelor(data.body[i]['title'], data.body[i]['description']);              ;
+                    this.teacherList[j].Theme = new Bachelor(data.body[i]['title'], data.body[i]['description']);;
                 }
                 j++;
             },

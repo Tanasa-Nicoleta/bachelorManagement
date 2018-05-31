@@ -42,7 +42,7 @@ import { StudentWorkComponent } from './student-components/student-work/student-
     ProfileComponent,
     ForgotPasswordComponent,
     InformationComponent,
-    NoProfileHeaderComponent, 
+    NoProfileHeaderComponent,
     StudentWorkComponent
   ],
   imports: [
@@ -63,8 +63,8 @@ import { StudentWorkComponent } from './student-components/student-work/student-
       { path: 'welcome', component: WelcomeComponent, pathMatch: 'full' },
       { path: 'gitDetails', component: TeacherGitDetailsPerStudentComponent, pathMatch: 'full' },
       { path: 'profile', component: ProfileComponent, pathMatch: 'full' },
-      { path: 'forgotPassword', component: ForgotPasswordComponent, pathMatch: 'full' },      
-      { path: 'information', component: InformationComponent, pathMatch: 'full' }, 
+      { path: 'forgotPassword', component: ForgotPasswordComponent, pathMatch: 'full' },
+      { path: 'information', component: InformationComponent, pathMatch: 'full' },
       { path: 'studentWork', component: StudentWorkComponent, pathMatch: 'full' },
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: '**', redirectTo: 'login', pathMatch: 'full' }
@@ -73,5 +73,6 @@ import { StudentWorkComponent } from './student-components/student-work/student-
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule {
 }

@@ -15,18 +15,18 @@ import { MeetingRequest } from '../../models/meeting-request';
 })
 
 export class TeacherStudentsRequestsComponent {
+  email: string = "vlad.simion@info.uaic.ro";
+  acceptStudentsRequest: string = "Accept";
+  denyStudentsRequest: string = "Deny";
+  dueDatePassed: boolean = false; //this.limitDate < this.today;
+  limitDate: Date = new Date(2018, 6, 15);
+
   numberOfSpots: number;
   numberOfAvailableSpots: number;
   studentList: Array<Student> = new Array<Student>();
   titleService: TitleService;
   meetingRequests: Array<MeetingRequest> = new Array<MeetingRequest>();
-
-  limitDate: Date = new Date(2018, 6, 15);
   today: Date = new Date();
-  email: string = "vlad.simion@info.uaic.ro";
-  acceptStudentsRequest: string = "Accept";
-  denyStudentsRequest: string = "Deny";
-  dueDatePassed: boolean = true; //this.limitDate < this.today;
 
   constructor(private title: Title, private http: HttpClient, private router: Router) {
     this.titleService = new TitleService(title);
@@ -44,8 +44,8 @@ export class TeacherStudentsRequestsComponent {
   }
 
   getTeacherMeetingRequests(email: string) {
-    const teacherResponse = this.http.get('http://localhost:64250/api/teacher/studentMeetingRequest/' + email,
-      { observe: 'response' });
+    const teacherResponse = this.http.get('http://localhost:64250/api/teacher/studentMeetingRequest/' + email, { observe: 'response' });
+
     teacherResponse.subscribe(
       data => {
         for (let key in data.body) {
@@ -54,7 +54,6 @@ export class TeacherStudentsRequestsComponent {
               data.body[key]["date"]));
           }
         }
-        console.log(this.meetingRequests);
       },
       err => {
         console.log("Error");
@@ -65,6 +64,7 @@ export class TeacherStudentsRequestsComponent {
 
   getTeacherDetails(email: string) {
     const teacherResponse = this.http.get('http://localhost:64250/api/teacher/' + email, { observe: 'response' });
+
     teacherResponse.subscribe(
       data => {
         this.numberOfAvailableSpots = data.body["numberOfAvailableSpots"];
@@ -100,7 +100,10 @@ export class TeacherStudentsRequestsComponent {
   }
 
   setBachelorThemeToStudents(email: string, key: string) {
+    this.studentList[key]['Theme'] = new Bachelor(null, null);
+
     const themeResponse = this.http.get('http://localhost:64250/api/student/themes/' + email, { observe: 'response' });
+
     themeResponse.subscribe(
       data => {
         this.studentList[key]['Theme'] = new Bachelor(data.body['title'], data.body['description']);

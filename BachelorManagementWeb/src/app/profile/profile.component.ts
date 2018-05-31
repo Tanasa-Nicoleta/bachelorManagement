@@ -14,13 +14,13 @@ import { TeacherProfile } from '../models/teacher-profile.model';
 })
 
 export class ProfileComponent {
-
+  isTeacher: boolean = false;
   email: string = "mihai.ursache@info.uaic.ro";
   teacherEmail: string = "vlad.simion@info.uaic.ro";
+
   student: Student;
   teacher: TeacherProfile;
   titleService: TitleService;
-  isTeacher: boolean = false;
 
   constructor(private title: Title, private http: HttpClient) {
     this.titleService = new TitleService(title);
@@ -43,8 +43,6 @@ export class ProfileComponent {
         this.teacher = new TeacherProfile(data.body["firstName"], data.body["lastName"], data.body["email"], null, data.body["jobTitle"], data.body["requirement"], null)
         this.setThemesToTeacher();
         this.setStudentsToTeacher();
-        console.log(this.teacher);
-        
       },
       err => {
         console.log("Error");
@@ -121,6 +119,7 @@ export class ProfileComponent {
 
   private setThemesToTeacher() {
     this.teacher.Theme = new Array<Bachelor>();
+
     let themeResponse = this.http.get('http://localhost:64250/api/teacher/themes/' + this.teacher.Email, { observe: 'response' });
 
     themeResponse.subscribe(data => {
@@ -141,6 +140,7 @@ export class ProfileComponent {
 
   private setStudentsToTeacher() {
     this.teacher.Student = new Array<Student>();
+
     let themeResponse = this.http.get('http://localhost:64250/api/teacher/students/' + this.teacher.Email, { observe: 'response' });
 
     themeResponse.subscribe(data => {

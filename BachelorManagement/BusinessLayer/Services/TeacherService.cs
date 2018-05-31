@@ -42,6 +42,7 @@ namespace BachelorManagement.BusinessLayer.Services
         {
             var teacher = GetTeacherByEmail(email);
             var themes = GetTeacherBacelorThemes(teacher);
+
             return new List<BachelorTheme>(themes);
         }
 
@@ -49,6 +50,7 @@ namespace BachelorManagement.BusinessLayer.Services
         {
             var teacher = GetTeacherByEmail(email);
             var students = GetTeacherStudents(teacher);
+
             return new List<Student>(students);
         }
 
@@ -56,6 +58,7 @@ namespace BachelorManagement.BusinessLayer.Services
             string themeDescr)
         {
             var teacher = GetTeacherByEmail(email);
+
             if (teacher != null)
             {
                 teacher.Requirement = requirement;
@@ -68,8 +71,9 @@ namespace BachelorManagement.BusinessLayer.Services
 
         public ICollection<Comment> GetTeacherComments(string email)
         {
-            var teacher = GetTeacherByEmail(email);
             ICollection<Comment> comments = null;
+            var teacher = GetTeacherByEmail(email);
+
             if (teacher != null) comments = _commentService.GetTeacherComments(teacher.Email);
 
             return comments;
@@ -78,13 +82,16 @@ namespace BachelorManagement.BusinessLayer.Services
         public void DecreaseTeacherAvailableSpots(string email)
         {
             var teacher = GetTeacherByEmail(email);
+
             teacher.NumberOfAvailableSpots--;
+
             _teacherRepository.Update(teacher);
         }
 
         private void AddBachelorThemeToTeacher(string email, string title, string description)
         {
             var teacher = GetTeacherByEmail(email);
+
             if (teacher != null)
                 teacher.BachelorThemes = new List<BachelorTheme>
                 {

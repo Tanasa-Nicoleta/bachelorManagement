@@ -9,9 +9,9 @@ import { MenuItem } from '../../models/menu-items';
 
 export class TeacherSidebarComponent {
   menuItems: MenuItem[] = [
-    new MenuItem("Home", "/welcome"), 
-    new MenuItem("Students Requests", "/teacherStudentsRequests"), 
-    new MenuItem("Wall", "/teacherWall"), 
+    new MenuItem("Home", "/welcome"),
+    new MenuItem("Students Requests", "/teacherStudentsRequests"),
+    new MenuItem("Wall", "/teacherWall"),
     new MenuItem("Profile", "/profile")
   ];
 }

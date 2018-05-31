@@ -15,10 +15,11 @@ import { Router } from '@angular/router';
 export class StudentRegisterToTeacherDetailsComponent {
 
     buttonText: string = "Subimt";
-    teacher: Teacher;
-    titleService: TitleService;
     email: string = "vlad.simion@info.uaic.ro";
     studentEmail: string = "mihai.ursache@info.uaic.ro";
+
+    teacher: Teacher;
+    titleService: TitleService;
 
     body: {
         Email: string;
@@ -56,13 +57,14 @@ export class StudentRegisterToTeacherDetailsComponent {
     setThemesToTeacher() {
         let themeResponse = this.http.get('http://localhost:64250/api/teacher/themes/' + this.teacher.Email, { observe: 'response' });
 
-        themeResponse.subscribe(data => {
-            for (let key in data.body) {
-                if (data.body[key]) {
-                    this.teacher.Theme = new Bachelor(data.body[key]['title'], data.body[key]['description']);
+        themeResponse.subscribe(
+            data => {
+                for (let key in data.body) {
+                    if (data.body[key]) {
+                        this.teacher.Theme = new Bachelor(data.body[key]['title'], data.body[key]['description']);
+                    }
                 }
-            }
-        },
+            },
             err => {
                 console.log("Error");
                 console.log(err)

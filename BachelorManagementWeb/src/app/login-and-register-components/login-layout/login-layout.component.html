@@ -1,4 +1,5 @@
 <div class="layoutContainer">
+
         <div class="contentContainer">
                 <div class="welcomeToAppTitle">
                         Welcome To Your Bachelor Degree Management App
@@ -9,11 +10,9 @@
                 </div>
 
                 <div>
-
                         <div class="email">
                                 Email
                         </div>
-
                         <input #SubmitEmail name="SubmitEmail" (ngModel)="body.Username" type="text" placeholder="lastName.firstName@info.uaic.ro"
                                 id="emailInput" (keyup)="validateEmail($event.target)" required>
                 </div>
@@ -22,22 +21,21 @@
                         <div class="password">
                                 Password
                         </div>
-
-                        <input #SubmitPass name="SubmitPass" type="password" placeholder="**********" id="passwordInput" required>
+                        <input #SubmitPass name="SubmitPass" type="password" placeholder="**********" id="passwordInput" (keyup)="deleteErrors()"
+                                required>
                 </div>
 
                 <div class="forgotPassword">
                         <a [routerLink]="['/forgotPassword']"> Forgot password?</a>
                 </div>
 
-
                 <div *ngIf="invalidError" class="invalidCredentials">
                         Invalid email or password!
                 </div>
 
                 <button type="submit" id="submitButtonRectangle" (click)="submit(SubmitEmail.value,SubmitPass.value);">
-                        <div id="submitButtonText">Login
-
+                        <div id="submitButtonText">
+                                Login
                         </div>
                 </button>
 

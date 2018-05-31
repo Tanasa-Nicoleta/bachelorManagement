@@ -16,9 +16,11 @@
                 <div>
                     Available day and hour: {{availableDay}}, {{availableHours}}
                 </div>
+
                 <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect requestButton" (click)="requestMetting()">
                     {{requestAMeetingButton}}
                 </button>
+
                 <div *ngIf="meetingRequest" class="meetingRequested">
                     Meeting request status: {{meetingRequestStatus}}
                 </div>
@@ -26,7 +28,7 @@
 
             <div class="deadineDetails">
                 <div>
-                    Upcoming deadline: {{upcomingDeadlineDay.day}}-{{upcomingDeadlineDay.month}}-{{upcomingDeadlineDay.year}}, {{upcomingDeadlineDay.hour}}
+                    Upcoming deadline: {{upcomingDeadlineDay.Day}}-{{upcomingDeadlineDay.Month}}-{{upcomingDeadlineDay.Year}}, {{upcomingDeadlineDay.Hour}}
                 </div>
             </div>
 
@@ -51,12 +53,15 @@
             <div>
                 {{teacherName}}
             </div>
+
             <span class="obsContent">
-                {{teacherOb[0].observation}}
+                {{teacherOb[0].Observation}}
             </span>
+
             <span class="obsTimestamp">
-                {{teacherOb[0].timestamp.day}}-{{teacherOb[0].timestamp.month}}-{{teacherOb[0].timestamp.year}}, {{teacherOb[0].timestamp.hour}}
+                {{teacherOb[0].Timestamp.Day}}-{{teacherOb[0].Timestamp.Month}}-{{teacherOb[0].Timestamp.Year}}, {{teacherOb[0].Timestamp.Hour}}
             </span>
+
             <div>
                 <div *ngIf="teacherOb[1][0] != null" class="showComments" (click)="showAllComments(teacherOb)">
                     <div *ngIf="teacherOb[2] == false">
@@ -67,26 +72,31 @@
                     </div>
                 </div>
             </div>
+
             <div *ngIf="teacherOb[2] == true">
                 <div *ngIf="teacherOb[1][0] != null">
                     <div *ngFor="let comment of teacherOb[1]; let i = index;" class="comment">
                         <div>
-                            {{teacherOb[1][i].name}}
+                            {{teacherOb[1][i].Name}}
                         </div>
                         <span class="commentContent">
-                            {{teacherOb[1][i].content}}
+                            {{teacherOb[1][i].Content}}
                         </span>
                         <span class="commentTimestamp">
-                            {{teacherOb[1][i].timestamp.day}}-{{teacherOb[1][i].timestamp.month}}-{{teacherOb[1][i].timestamp.year}}, {{teacherOb[1][i].timestamp.hour}}
+                            {{teacherOb[1][i].Timestamp.Day}}-{{teacherOb[1][i].Timestamp.Month}}-{{teacherOb[1][i].Timestamp.Year}}, {{teacherOb[1][i].Timestamp.Hour}}
                         </span>
                     </div>
                 </div>
             </div>
+
             <div>
                 <span class="mdl-textfield mdl-js-textfield addCommentRow">
                     <input #Comment class="mdl-textfield__input" type="text" placeholder="Your comment here." (keydown.enter)="addComment(Comment.value, teacherOb)">
                 </span>
             </div>
+
         </div>
+
     </div>
+
 </div>

@@ -14,7 +14,6 @@ import { Repository } from '../../models/repository';
   styleUrls: ['../../app.component.scss', '../teacher.component.scss']
 })
 
-
 export class TeacherGitDetailsPerStudentComponent implements OnInit {
   gitUserName: string = "Tanasa-Nicoleta";
   gitProjectName: string = "bachelorManagement";
@@ -22,11 +21,8 @@ export class TeacherGitDetailsPerStudentComponent implements OnInit {
   userData: Repository = new Repository(null, null);
   languagesData: any;
   commitsData: any;
-  errorData: any;
-
   languagesArray: Language[] = [];
   commitsArray: Array<Commit> = new Array<Commit>();
-
   titleService: TitleService;
 
   constructor(private http: HttpClient, private title: Title) {
@@ -45,10 +41,11 @@ export class TeacherGitDetailsPerStudentComponent implements OnInit {
 
     resp.subscribe(
       data => {
-        this.userData  = new Repository(data.body[0]["name"], data.body[0]["html_url"]);
+        this.userData = new Repository(data.body[0]["name"], data.body[0]["html_url"]);
       },
       err => {
-        this.errorData = err;
+        console.log("Error");
+        console.log(err)
       });
   }
 
@@ -61,20 +58,22 @@ export class TeacherGitDetailsPerStudentComponent implements OnInit {
         this.iterateForLanguages();
       },
       err => {
-        this.errorData = err;
+        console.log("Error");
+        console.log(err)
       });
   }
 
   getCommitData() {
     var resp = this.http.get('https://api.github.com/repos/' + this.gitUserName + '/' + this.gitProjectName + '/commits ');
-    
+
     resp.subscribe(
       data => {
         this.commitsData = data;
         this.iterateForCommits();
       },
       err => {
-        this.errorData = err;
+        console.log("Error");
+        console.log(err)
       });
   }
 

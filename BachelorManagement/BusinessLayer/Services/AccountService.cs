@@ -31,6 +31,7 @@ namespace BachelorManagement.BusinessLayer.Services
                 Password = password,
                 UserType = UserType.Student
             });
+
             return true;
         }
 

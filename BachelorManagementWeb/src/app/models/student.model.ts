@@ -2,7 +2,6 @@ import { Bachelor } from "./bachelor-degree.model";
 import { Mean } from "./mean.model";
 import { Teacher } from "./teacher.model";
 import { Achievement } from "./achievement.model";
-import { debug } from "util";
 
 export class Student {
     constructor(firstName, lastName, email, theme, gitUrl, startYear, serialNumber, means, achievement, accepted, denied) {

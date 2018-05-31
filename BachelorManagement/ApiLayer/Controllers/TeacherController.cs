@@ -58,15 +58,18 @@ namespace BachelorManagement.ApiLayer.Controllers
 
             foreach (var student in students)
             {
-                studentDtos.Add(new StudentDto
-                {
-                    Email = student.Email,
-                    FirstName = student.FirstName,
-                    LastName = student.LastName,
-                    GitUrl = student.GitUrl,
-                    Achievements = student.Achievements,
-                    BachelorTheme = _studentService.GetStudentBachelorThemes(student.Email)
-                }
+                studentDtos.Add(
+                    new StudentDto
+                    {
+                        Email = student.Email,
+                        FirstName = student.FirstName,
+                        LastName = student.LastName,
+                        GitUrl = student.GitUrl,
+                        Achievements = student.Achievements,
+                        Accepted = student.Accepted,
+                        Denied = student.Denied,
+                        BachelorTheme = _studentService.GetStudentBachelorThemes(student.Email)
+                    }
                 );
             }
 
@@ -99,10 +102,12 @@ namespace BachelorManagement.ApiLayer.Controllers
         {
             var commentReplies = new List<CommentReply>();
             var comments = _teacherService.GetTeacherComments(email).Where(c => c.Id == id);
+
             foreach (var comment in comments)
             {
                 commentReplies.AddRange(_commentReplyService.GetCommentReplies(comment.Id));
             }
+
             return Ok(commentReplies);
         }
 
@@ -111,14 +116,14 @@ namespace BachelorManagement.ApiLayer.Controllers
         public IActionResult GetTeacherMeetingRequest(string email)
         {
             var teacher = _teacherService.GetTeacherByEmail(email);
+            var meetingRequestDto = new List<StudentMeetingRequestDto>();
             List<MeetingRequest> meetingRequests = new List<MeetingRequest>();
 
             if (teacher != null)
             {
                 meetingRequests = _meetingRequestService.GetTeacherMeetingRequests(teacher.Id);
             }
-
-            var meetingRequestDto = new List<StudentMeetingRequestDto>();
+            
             foreach (var meetingRequest in meetingRequests)
             {
                 meetingRequestDto.Add(

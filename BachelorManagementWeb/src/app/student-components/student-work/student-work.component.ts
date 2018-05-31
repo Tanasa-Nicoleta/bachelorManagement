@@ -12,10 +12,11 @@ import { Bachelor } from '../../models/bachelor-degree.model';
 })
 
 export class StudentWorkComponent {
-    titleService: TitleService;
     dueDate: Date = new Date(2018, 6, 15);
     teacherEmail: string = "vlad.simion@info.uaic.ro";
+
     students: Array<Student> = new Array<Student>();
+    titleService: TitleService;
 
     constructor(private title: Title, private http: HttpClient) {
         this.titleService = new TitleService(title);
@@ -50,6 +51,7 @@ export class StudentWorkComponent {
 
     setBachelorThemeToStudents(email: string, key: string) {
         const themeResponse = this.http.get('http://localhost:64250/api/student/themes/' + email, { observe: 'response' });
+
         themeResponse.subscribe(
             data => {
                 this.students[key]['Theme'] = new Bachelor(data.body['title'], data.body['description']);

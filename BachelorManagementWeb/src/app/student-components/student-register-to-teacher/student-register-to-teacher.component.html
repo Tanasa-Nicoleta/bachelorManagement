@@ -3,15 +3,17 @@
 <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
 
 <div class="layoutContainer">
+
     <profile-header>
-        <!-- it goes out when taken care with router outlet -->
     </profile-header>
 
     <div class="contentContainer">
         <div class="mdl-cell mdl-cell--12-col">
+
             <div class="columnTitle dueDate">
-                You have to choose one of the following teachers before: {{dueDate.getDate()}}.0{{dueDate.getMonth()}}.{{dueDate.getFullYear()}} 
+                You have to choose one of the following teachers before: {{dueDate.getDate()}}.0{{dueDate.getMonth()}}.{{dueDate.getFullYear()}}
             </div>
+
             <table class="table">
                 <thead>
                     <th class="columnTitle numberColumn"> Number </th>
@@ -22,9 +24,10 @@
                     <th class="columnTitle"> Number of spots </th>
                     <th class="columnTitle"> Option </th>
                 </thead>
+
                 <tbody>
                     <tr *ngFor="let teacher of teacherList; let i = index;">
-                        <td class="columnContent">{{i + 1}}</td>     
+                        <td class="columnContent">{{i + 1}}</td>
                         <td class="columnContent">{{teacher.Grade + " " + teacher.FirstName + " " + teacher.LastName}}</td>
                         <td class="columnContent">{{teacher.Discipline}}</td>
                         <td class="columnContent">
@@ -53,9 +56,15 @@
                             </button>
                         </td>
                     </tr>
+
                 </tbody>
+
             </table>
-            <h2 *ngIf="teacherList.length == 0" class="no-data-to-display">No data to display</h2>
+
+            <h2 *ngIf="teacherList.length == 0" class="no-data-to-display">
+                No data to display
+            </h2>
+
         </div>
     </div>
 </div>

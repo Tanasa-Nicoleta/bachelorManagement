@@ -19,21 +19,16 @@ import { Teacher } from '../../models/teacher.model';
 export class TeacherWallComponent {
   teacherName: string = "Vlad Simion";
   studentName: string = "Mihai Ursache";
-
   availableDay: string = DayOfWeek[0];
   availableHours: string = "12:00";
-
   upcomingDeadlineDay: DateClass = new DateClass(1, Month[2], 2018, "14:00");
-
   requestAMeetingButton: string = "Request a meeting";
   meetingRequest: boolean = false;
   meetingRequestStatus: string = MeetingRequestStatus[0];
-
   hideCommentsButton: string = "Hide comments";
   showCommentsButton: string = "Show comments";
   showComments: boolean = false;
   teacherEmail: string = "vlad.simion@info.uaic.ro";
-
   teacherObs: [[TeacherObservation, [Comment | null], boolean]] = [
     [new TeacherObservation("Hello everybody! Welcome to my page.", new DateClass(1, Month[1], 2018, "12:00"), 0),
     [new Comment(this.studentName, "Hello! Thank you, mister " + this.teacherName + "!", new DateClass(20, Month[1], 2018, "14:40"))],
@@ -58,10 +53,10 @@ export class TeacherWallComponent {
         for (let key in data.body) {
           if (data.body.hasOwnProperty(key)) {
             this.teacherObs.push(
-              [new TeacherObservation(data.body[key]['commentContent'], new DateClass(20, Month[1], 2018, "14:40"), data.body[key]['id']), 
-              [new Comment(this.teacherName, "some content", new DateClass(20, Month[1], 2018, "14:40"))], 
-              false]);
-            
+              [new TeacherObservation(data.body[key]['commentContent'], new DateClass(20, Month[1], 2018, "14:40"), data.body[key]['id']),
+              [new Comment(this.teacherName, "some content", new DateClass(20, Month[1], 2018, "14:40"))],
+                false]);
+
           }
           this.getTeacherWallCommentReplies(data.body[key]['id']);
         }
@@ -80,12 +75,13 @@ export class TeacherWallComponent {
       data => {
         for (let key in data.body) {
           if (data.body.hasOwnProperty(key)) {
-           for(let index in this.teacherObs){
-              if(this.teacherObs[index][0].id == commentId){
+            for (let index in this.teacherObs) {
+              if (this.teacherObs[index][0].Id == commentId) {
                 this.teacherObs[index][1].push(new Comment("Mihai Ursache", data.body[key]['commentReplyContent'], new DateClass(20, Month[1], 2018, "14:40")));
               }
-            }            
-          }}
+            }
+          }
+        }
       },
       err => {
         console.log("Error");
@@ -111,11 +107,10 @@ export class TeacherWallComponent {
   }
 
   addComment(commentContent: string, teacherObservation: [TeacherObservation, [Comment | null], boolean]) {
-
     let datetime = new Date();
     let minutes = (datetime.getMinutes() + "").length == 2 ? datetime.getMinutes() : "0" + datetime.getMinutes();
     let hour = datetime.getHours() + ":" + minutes;
-    let comment = new Comment(teacherObservation[1][0].name,
+    let comment = new Comment(teacherObservation[1][0].Name,
       commentContent,
       new DateClass(datetime.getDate(), Month[datetime.getMonth()], datetime.getFullYear(), hour));
 
@@ -126,8 +121,9 @@ export class TeacherWallComponent {
     });
   }
 
-  addPost(commentContent: string){
+  addPost(commentContent: string) {
     this.teacherObs[0].push(new TeacherObservation(commentContent, Date.now, 1));
+    //backend call
   }
 
   showAllComments(teacherObservation: [TeacherObservation, [Comment | null], boolean]) {

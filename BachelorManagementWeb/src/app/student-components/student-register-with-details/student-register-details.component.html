@@ -1,6 +1,8 @@
 <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+
 <div class="layoutContainer">
+
     <profile-header>
     </profile-header>
 
@@ -29,18 +31,22 @@
                         <input #Description class="mdl-textfield__input" type="text" placeholder="A brief description about your idea">
                     </span>
                 </div>
+
                 <div>
                     <span class="studentDetailsRow">Personal achievements:</span>
                     <span class="mdl-textfield mdl-js-textfield  studentDetailsRowSecondary">
                         <input #Achievement class="mdl-textfield__input" type="text" placeholder="Articles you wrote, projects and competitions etc.">
                     </span>
                 </div>
+
                 <div>
                     <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" (click)="applyToTeacherWithDetails(Title.value, Description.value, Achievement.value)">
                         {{buttonText}}
                     </button>
                 </div>
+
             </div>
+
         </div>
 
     </div>

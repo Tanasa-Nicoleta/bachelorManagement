@@ -1,5 +1,7 @@
 <div class="layoutContainer">
+
     <div class="contentContainer contentContainerAlign">
+
         <div class="welcomeToAppTitle">
             Welcome To Your Bachelor Degree Management App
         </div>
@@ -12,7 +14,6 @@
             <div class="email">
                 Email
             </div>
-
             <input #SubmitEmail name="SubmitEmail" type="text" placeholder="lastName.firstName@info.uaic.ro" id="emailInput" (keyup)="validateEmail($event.target)"
                 (clickOutside)="checkIfUsernameExists(SubmitEmail.value)" required>
         </div>
@@ -25,7 +26,6 @@
             <div class="password">
                 Password
             </div>
-
             <input #SubmitPass name="SubmitPass" type="password" placeholder="**********" id="passwordInput" (keyup)="validatePass($event.target);"
                 required>
         </div>
@@ -38,7 +38,6 @@
             <div class="password">
                 Confirm Password
             </div>
-
             <input #ConfirmPass name="ConfirmPass" type="password" placeholder="**********" id="confirmPasswordInput" (keyup)="confirmPass($event.target,SubmitPass.value);"
                 required>
         </div>
@@ -51,10 +50,10 @@
             Invalid email or password format!
         </div>
 
-        <button type="submit" id="submitButtonRectangle" [disabled]="invalidEmailError || invalidError || matchError" (click)="submit(SubmitEmail.value,SubmitPass.value);">
+        <button type="submit" id="submitButtonRectangle" [disabled]="invalidEmailError || invalidError || matchError || alreadyExistingAccount"
+            (click)="submit(SubmitEmail.value,SubmitPass.value);">
             <div id="submitButtonText">{{buttonText}}</div>
         </button>
-
 
         <div class="register">
             If you forgot your password, click
@@ -71,4 +70,5 @@
         </div>
 
     </div>
+
 </div>

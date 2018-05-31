@@ -47,7 +47,6 @@ namespace BachelorManagement.ApiLayer.Controllers
             return NoContent();
         }
 
-
         [HttpPost("register/check")]
         public IActionResult Register([FromBody] RegisterCheckDto registerCheckDto)
         {

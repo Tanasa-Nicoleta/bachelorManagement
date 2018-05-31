@@ -209,7 +209,6 @@ namespace BachelorManagement.DataLayer
                     StudentId = 1
                 }
             };
-
             foreach (var consultation in consultations)
                 context.Consultations.Add(consultation);
             context.SaveChanges();
@@ -258,7 +257,6 @@ namespace BachelorManagement.DataLayer
             foreach (var session in sessions)
                 context.Sessions.Add(session);
             context.SaveChanges();
-
 
             var users = new[]
             {
@@ -333,7 +331,6 @@ namespace BachelorManagement.DataLayer
             foreach(var meeting in meetingRequests)
                 context.MeetingRequests.Add(meeting);
             context.SaveChanges();
-
         }
     }
 }

@@ -116,10 +116,12 @@ namespace BachelorManagement.ApiLayer.Controllers
         {
             var commentReplies = new List<CommentReply>();
             var comments = _studentService.GetStudentComments(email).Where(c => c.Id == id);
+
             foreach (var comment in comments)
             {
                 commentReplies.AddRange(_commentReplyService.GetCommentReplies(comment.Id));
             }
+
             return Ok(commentReplies);
         }
 

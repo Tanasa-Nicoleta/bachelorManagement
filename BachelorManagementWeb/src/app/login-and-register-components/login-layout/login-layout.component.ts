@@ -15,8 +15,9 @@ export class LoginLayoutComponent {
 
   private invalidError = false;
   private invalidEmailError = false;
-  titleService: TitleService;
   emailRegex: RegExp = /^.+\b@info\.uaic\.ro\b$/;
+
+  titleService: TitleService;
 
   body: {
     Username: string;
@@ -28,7 +29,7 @@ export class LoginLayoutComponent {
     this.titleService.setTitle("BDMApp Login");
   }
 
-  public submit(email: string, pass: string) {
+  submit(email: string, pass: string) {
     this.body = {
       Username: email,
       Password: pass
@@ -47,13 +48,17 @@ export class LoginLayoutComponent {
     );
   }
 
-  private validateEmail(email: HTMLInputElement) {
+  validateEmail(email: HTMLInputElement) {
+    this.invalidError = false;
     this.invalidEmailError = !this.emailRegex.test(email.value);
-    console.log(this.invalidEmailError);
+
     if (this.invalidEmailError)
       email.classList.add('invalidEmail');
     else
       email.classList.remove('invalidEmail');
   }
 
+  deleteErrors() {
+    this.invalidError = false;
+  }
 }

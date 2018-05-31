@@ -1,43 +1,47 @@
 <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
 <div class="layoutContainer">
+
     <profile-header>
-        <!-- too see if it needs to be another -->
     </profile-header>
 
     <div class="contentContainer">
         <div class="teacherDetailsRowTitle">Details</div>
+
         <div>
             <span class="teacherDetailsRow">Number of students per session: </span>
             <span class="mdl-textfield mdl-js-textfield">
                 <input #NumberOfStudents class="numberOfstudents" type="number" min="0" max="{{maxNumberOfStudents}}" placeholder="0" required>
             </span>
         </div>
+
         <div>
             <span class="teacherDetailsRow">Requirements:</span>
             <span class="mdl-textfield mdl-js-textfield">
                 <input #Achievement class="mdl-textfield__input" type="text" placeholder="Achievements that you would like the students to have.">
             </span>
         </div>
+
         <div>
             <span class="teacherDetailsRow">Theme title:</span>
             <span class="mdl-textfield mdl-js-textfield">
                 <input #ThemeTitle class="mdl-textfield__input" type="text" placeholder="The title of your theme proposal.">
             </span>
         </div>
+
         <div>
             <span class="teacherDetailsRow">Theme description:</span>
             <span class="mdl-textfield mdl-js-textfield">
                 <input #ThemeDescr class="mdl-textfield__input" type="text" placeholder="The description of your theme proposal.">
             </span>
         </div>
-       
+
         <div>
-            <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" 
-            (click)="addTeacherDetails(NumberOfStudents.value, Achievement.value, ThemeTitle.value, ThemeDescr.value)">
+            <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" (click)="addTeacherDetails(NumberOfStudents.value, Achievement.value, ThemeTitle.value, ThemeDescr.value)">
                 {{saveButtonText}}
             </button>
         </div>
+
     </div>
 
 </div>

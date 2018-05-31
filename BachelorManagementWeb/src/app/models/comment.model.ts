@@ -2,11 +2,11 @@ import { DateClass } from "./date.model";
 
 export class Comment {
     constructor(name, content, timestamp) {
-        this.name = name;
-        this.content = content;
-        this.timestamp = timestamp;
+        this.Name = name;
+        this.Content = content;
+        this.Timestamp = timestamp;
     }
-    name: string;
-    content: string;
-    timestamp: DateClass
+    Name: string;
+    Content: string;
+    Timestamp: DateClass
 }

@@ -1,8 +1,8 @@
 export class Commit {
     constructor(message, date) {
-        this.message = message;
-        this.date = date;
+        this.Message = message;
+        this.Date = date;
     }
-    message: string;
-    date: Date;
+    Message: string;
+    Date: Date;
 }

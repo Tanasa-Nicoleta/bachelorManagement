@@ -3,11 +3,11 @@ import { timeout } from "q";
 
 export class TeacherObservation {
     constructor(obs, timestamp, id) {
-        this.observation = obs;
-        this.timestamp = timestamp;
-        this.id = id;
+        this.Observation = obs;
+        this.Timestamp = timestamp;
+        this.Id = id;
     }
-    id: number;
-    observation: string;
-    timestamp: DateClass;
+    Id: number;
+    Observation: string;
+    Timestamp: DateClass;
 }

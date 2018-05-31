@@ -16,12 +16,13 @@ export class RegisterLayoutComponent {
   private invalidError = false;
   private alreadyExistingAccount = false;
   private invalidModelState = false;
+  private invalidEmailError = false;
   private matchError = false;
   private buttonText: string = 'Register';
-  titleService: TitleService;
-  private invalidEmailError = false;
   emailRegex: RegExp = /^.+\b@info\.uaic\.ro\b$/;
   passRegex: RegExp = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=!*()\-_{}\\ |:;\,<>?`~\[\]\.\'])(?=\S+$).{6,32}$/;
+
+  titleService: TitleService;
 
   body: {
     Username: string;
@@ -37,27 +38,28 @@ export class RegisterLayoutComponent {
     this.titleService.setTitle("BDMApp Register");
   }
 
-  private isValidPassword(pass: string) {
-    if (pass.length < 6 || !this.passRegex.test(pass) || pass.length > 32) {
+  isValidPassword(pass: string) {
+    if (pass.length < 6 || !this.passRegex.test(pass) || pass.length > 32)
       return false;
-    }
+
     return true;
   }
 
-  private validatePass(password: HTMLInputElement) {
+  validatePass(password: HTMLInputElement) {
     this.invalidError = !this.passRegex.test(password.value);
+
     if (this.invalidError)
       password.classList.add('invalidPass');
     else
       password.classList.remove('invalidPass');
   }
 
-  DeleteError() {
+  deleteError() {
     this.invalidError = false;
     this.matchError = false;
   }
 
-  public confirmPass(password: HTMLInputElement, Password: string) {
+  confirmPass(password: HTMLInputElement, Password: string) {
     if (password.value !== Password) {
       password.classList.add('invalidPass');
       this.matchError = true;
@@ -65,12 +67,12 @@ export class RegisterLayoutComponent {
     }
     else {
       password.classList.remove('invalidPass');
-      this.DeleteError();
+      this.deleteError();
       return true;
     }
   }
 
-  public submit(email: string, pass: string) {
+  submit(email: string, pass: string) {
     this.body = {
       Username: email,
       Password: pass
@@ -93,17 +95,17 @@ export class RegisterLayoutComponent {
     );
   }
 
-  private validateEmail(email: HTMLInputElement) {
+  validateEmail(email: HTMLInputElement) {
     this.alreadyExistingAccount = false;
     this.invalidEmailError = !this.emailRegex.test(email.value);
+
     if (this.invalidEmailError)
       email.classList.add('invalidEmail');
     else
       email.classList.remove('invalidEmail');
   }
 
-  checkIfUsernameExists(email: string){
-    console.log("email.innerText", email);
+  checkIfUsernameExists(email: string) {
     this.registerCheckBody = {
       Email: email
     };
@@ -118,7 +120,7 @@ export class RegisterLayoutComponent {
         if (err.status == 400)
           if (err.error == "Username exists") {
             this.alreadyExistingAccount = true;
-          }     
+          }
       }
     );
   }

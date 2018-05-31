@@ -1,8 +1,8 @@
 export class Language {
     constructor(name, size) {
-        this.name = name;
-        this.size = size;
+        this.Name = name;
+        this.Size = size;
     }
-    name: string;
-    size: number;
+    Name: string;
+    Size: number;
 }

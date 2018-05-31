@@ -11,6 +11,7 @@ import { Title } from '@angular/platform-browser';
 export class WelcomeComponent {
   welcomeText: string = "Welcome to the Bachelor Degree Management App,";
   welcomeSubtext: string = "keep up with the good work and you will succeed!";
+
   titleService: TitleService;
 
   constructor(private title: Title) {

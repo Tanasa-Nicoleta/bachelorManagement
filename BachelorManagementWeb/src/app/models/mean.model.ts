@@ -1,4 +1,4 @@
-export class Mean{
+export class Mean {
     constructor(firstSemester, secondSemester, thirdSemester, fourthSemester, fifthSemester, sixthSemester) {
         this.FirstSemester = firstSemester;
         this.SecondSemester = secondSemester;
@@ -7,7 +7,6 @@ export class Mean{
         this.FifthSemester = fifthSemester;
         this.SixthSemester = sixthSemester;
     }
-
     FirstSemester: number;
     SecondSemester: number;
     ThirdSemester: number;

@@ -13,12 +13,13 @@ import { Bachelor } from '../../models/bachelor-degree.model';
 })
 
 export class TeacherAddDetailsComponent {
-  commentValue: string;
   maxNumberOfStudents: number = 15;
   saveButtonText: string = "Save details";
   addThemeText: string = "Add a theme";
   teacherThemes: Teacher = new Teacher("Vlad", "Simion", "vlad.simion@info.uaic.ro", 3, 2, null,
     "Discipline1", "", "No requirement.");
+
+  commentValue: string;
   titleService: TitleService;
 
   detailsBody: {
@@ -36,7 +37,6 @@ export class TeacherAddDetailsComponent {
 
   addComment(themeContent: string) {
     var bachelor = themeContent.split("-");
-    console.log(bachelor);
     this.teacherThemes.Theme = new Bachelor(bachelor[0], bachelor[1]);
     this.commentValue = ' ';
   };

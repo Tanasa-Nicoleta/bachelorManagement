@@ -19,6 +19,8 @@ export class RegisterLayoutComponent {
   private matchError = false;
   private buttonText: string = 'Register';
   titleService: TitleService;
+  private invalidEmailError = false;
+  emailRegex: RegExp = /^.+\b@info\.uaic\.ro\b$/;
   passRegex: RegExp = /^(?=.*[0-9])(?=.*[A-Z])(?=.*[@#$%^&+=!*()\-_{}\\ |:;\,<>?`~\[\]\.\'])(?=\S+$).{6,32}$/;
 
   body: {
@@ -85,5 +87,14 @@ export class RegisterLayoutComponent {
           }
       }
     );
+  }
+
+  private validateEmail(email: HTMLInputElement) {
+    this.invalidEmailError = !this.emailRegex.test(email.value);
+    console.log(this.invalidEmailError);
+    if (this.invalidEmailError)
+      email.classList.add('invalidEmail');
+    else
+      email.classList.remove('invalidEmail');
   }
 }

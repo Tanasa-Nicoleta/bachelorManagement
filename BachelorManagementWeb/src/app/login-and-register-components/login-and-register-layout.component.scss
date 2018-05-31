@@ -83,6 +83,10 @@ input{
     }
   }
 
+input:invalid {
+    box-shadow: none;
+}
+
 .forgotPassword{
     padding: 10px;
 }

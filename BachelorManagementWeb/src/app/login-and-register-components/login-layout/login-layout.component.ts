@@ -14,6 +14,7 @@ import { Title } from '@angular/platform-browser';
 export class LoginLayoutComponent {
 
   private invalidError = false;
+  private invalidEmailError = false;
   titleService: TitleService;
   emailRegex: RegExp = /^.+\b@info\.uaic\.ro\b$/;
 
@@ -47,9 +48,9 @@ export class LoginLayoutComponent {
   }
 
   private validateEmail(email: HTMLInputElement) {
-    this.invalidError = !this.emailRegex.test(email.value);
-    console.log(this.invalidError);
-    if (this.invalidError)
+    this.invalidEmailError = !this.emailRegex.test(email.value);
+    console.log(this.invalidEmailError);
+    if (this.invalidEmailError)
       email.classList.add('invalidEmail');
     else
       email.classList.remove('invalidEmail');

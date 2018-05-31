@@ -13,8 +13,8 @@
                 Email
             </div>
 
-            <input #SubmitEmail name="SubmitEmail" type="text" placeholder="lastName.firstName@info.uaic.ro" id="emailInput" 
-                pattern="^.+\b@info\.uaic\.ro\b$" required>
+            <input #SubmitEmail name="SubmitEmail" type="text" placeholder="lastName.firstName@info.uaic.ro" id="emailInput" (keyup)="validateEmail($event.target)"
+                required>
         </div>
 
         <div>
@@ -22,8 +22,8 @@
                 Password
             </div>
 
-            <input #SubmitPass name="SubmitPass" type="password" placeholder="**********" id="passwordInput" 
-                (keyup)="validatePass($event.target);" required>
+            <input #SubmitPass name="SubmitPass" type="password" placeholder="**********" id="passwordInput" (keyup)="validatePass($event.target);"
+                required>
         </div>
 
         <div id="error" *ngIf="invalidError">
@@ -51,7 +51,8 @@
             Invalid email or password format!
         </div>
 
-        <button type="submit" id="submitButtonRectangle" [disabled]="(!SubmitPass.valid && SubmitPass.dirty) || matchError" (click)="submit(SubmitEmail.value,SubmitPass.value);">
+        <button type="submit" id="submitButtonRectangle" [disabled]="invalidEmailError || invalidError || matchError"
+            (click)="submit(SubmitEmail.value,SubmitPass.value);">
             <div id="submitButtonText">{{buttonText}}</div>
         </button>
 

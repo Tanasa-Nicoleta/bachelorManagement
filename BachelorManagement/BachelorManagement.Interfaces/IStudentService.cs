@@ -1,12 +1,15 @@
 ﻿using System.Collections.Generic;
 using BachelorManagement.DataLayer.Entities;
 using System;
+using System.Linq;
 
 namespace BachelorManagement.Interfaces
 {
     public interface IStudentService
     {
         Teacher GetStudentsTeacher(string email);
+
+        IQueryable<Student> GetAllStudents();
 
         Student GetStudentById(int id);
 

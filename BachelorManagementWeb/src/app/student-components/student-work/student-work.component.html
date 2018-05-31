@@ -1,0 +1,38 @@
+<script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+
+<div class="layoutContainer">
+    <profile-header>
+    </profile-header>
+
+    <div class="contentContainer">
+        <div class="bordered sidebar_border">
+            <div class="sidebar_content">
+                <teacher-sidebar>
+                </teacher-sidebar>
+            </div>
+        </div>
+
+        <div>
+            <div class="secondaryText secondaryTextForDetails centerContainer">
+                Student's work
+            </div>
+            <div>
+                <div *ngFor="let student of students">
+                    <div class="profileDetails">
+                        Name: {{student.FirstName}} {{student.LastName}}
+                    </div>
+                    <div class="profileDetails">
+                        Achievements: {{student.Achievement}}
+                    </div>
+                    <div class="profileDetails">
+                        GitUrl: {{student.GitUrl}}
+                    </div>
+                    <div class="profileDetails spacingBottom">
+                        --- INSERT CHARTS HERE ---
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

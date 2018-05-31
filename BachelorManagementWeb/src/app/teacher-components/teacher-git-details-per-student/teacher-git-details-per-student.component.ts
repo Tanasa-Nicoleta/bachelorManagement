@@ -6,6 +6,7 @@ import { Language } from '../../models/language.model';
 import { Commit } from '../../models/commit.model';
 import { TitleService } from '../../services/title.service';
 import { Title } from '@angular/platform-browser';
+import { Repository } from '../../models/repository';
 
 @Component({
   selector: 'teacher-git-details-per-student',
@@ -18,13 +19,13 @@ export class TeacherGitDetailsPerStudentComponent implements OnInit {
   gitUserName: string = "Tanasa-Nicoleta";
   gitProjectName: string = "bachelorManagement";
 
-  userData: any;
+  userData: Repository = new Repository(null, null);
   languagesData: any;
   commitsData: any;
   errorData: any;
 
   languagesArray: Language[] = [];
-  commitsArray: Commit[] = []
+  commitsArray: Array<Commit> = new Array<Commit>();
 
   titleService: TitleService;
 
@@ -40,11 +41,11 @@ export class TeacherGitDetailsPerStudentComponent implements OnInit {
   };
 
   getRepositoryData() {
-    var resp = this.http.get('https://api.github.com/users/' + this.gitUserName + '/repos');
+    var resp = this.http.get('https://api.github.com/users/' + this.gitUserName + '/repos', { observe: 'response' });
 
     resp.subscribe(
       data => {
-        this.userData = data;
+        this.userData  = new Repository(data.body[0]["name"], data.body[0]["html_url"]);
       },
       err => {
         this.errorData = err;
@@ -88,7 +89,7 @@ export class TeacherGitDetailsPerStudentComponent implements OnInit {
   iterateForCommits() {
     for (var key in this.commitsData) {
       if (this.commitsData.hasOwnProperty(key)) {
-        this.commitsArray.push(new Commit(this.commitsData.commit.commit, this.commitsData.commit.author.date));
+        this.commitsArray.push(new Commit(this.commitsData[key].commit.message, new Date(this.commitsData[key].commit.author.date)));
       }
     }
   }

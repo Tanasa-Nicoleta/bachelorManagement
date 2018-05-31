@@ -50,7 +50,24 @@ namespace BachelorManagement.ApiLayer.Controllers
         [Route("api/teacher/students/{email}")]
         public IActionResult GetTeacherStudents(string email)
         {
-            return Ok(_teacherService.GetTeacherStudents(email));
+            var students = _teacherService.GetTeacherStudents(email);
+            List<StudentDto> studentDtos = new List<StudentDto>();
+
+            foreach (var student in students)
+            {
+                studentDtos.Add(new StudentDto
+                {
+                    Email = student.Email,
+                    FirstName = student.FirstName,
+                    LastName = student.LastName,
+                    GitUrl = student.GitUrl,
+                    Achievements = student.Achievements,
+                    BachelorTheme = _studentService.GetStudentBachelorThemes(student.Email)
+                }
+                );
+            }
+
+            return Ok(studentDtos);
         }
 
         [HttpPost]

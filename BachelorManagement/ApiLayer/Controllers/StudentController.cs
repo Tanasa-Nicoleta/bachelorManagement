@@ -15,7 +15,7 @@ namespace BachelorManagement.ApiLayer.Controllers
         private readonly ITeacherService _teacherService;
         private readonly IMeetingRequestService _meetingRequestService;
 
-        public StudentController(IStudentService studentService, 
+        public StudentController(IStudentService studentService,
             IBachelorThemeService bachelorThemeService,
             ICommentReplyService commentReplyService,
             ITeacherService teacherService,
@@ -77,7 +77,7 @@ namespace BachelorManagement.ApiLayer.Controllers
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            _studentService.UpdateStudentRequest(studentRequestStatusDto.StudentEmail, 
+            _studentService.UpdateStudentRequest(studentRequestStatusDto.StudentEmail,
                 studentRequestStatusDto.Accepted, studentRequestStatusDto.Denied);
 
             if (studentRequestStatusDto.Accepted)
@@ -118,7 +118,7 @@ namespace BachelorManagement.ApiLayer.Controllers
             var student = _studentService.GetStudentByEmail(studentMeetingDto.StudentEmail);
             var teacher = _teacherService.GetTeacherByEmail(studentMeetingDto.TeacherEmail);
 
-            if(student != null && teacher != null)
+            if (student != null && teacher != null)
             {
                 _meetingRequestService.AddMeetingRequest(student.Id, teacher.Id, studentMeetingDto.Date);
             }
@@ -133,7 +133,7 @@ namespace BachelorManagement.ApiLayer.Controllers
             var student = _studentService.GetStudentByEmail(email);
             MeetingRequest meetingRequest = null;
 
-            if(student != null)
+            if (student != null)
             {
                 meetingRequest = _meetingRequestService.GetStudentMeetingRequests(student.Id);
             }

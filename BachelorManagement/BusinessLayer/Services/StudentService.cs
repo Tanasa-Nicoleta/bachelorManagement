@@ -25,6 +25,11 @@ namespace BachelorManagement.BusinessLayer.Services
             _commentService = commentService;
         }
 
+        public IQueryable<Student> GetAllStudents()
+        {
+            return _studentRepository.GetAll();
+        }
+
         public Student GetStudentByEmail(string email)
         {
             return _studentRepository.GetAll().FirstOrDefault(s =>

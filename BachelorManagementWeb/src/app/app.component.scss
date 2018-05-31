@@ -105,6 +105,10 @@ div > a{
     width: 80%;
 }
 
+.secondaryTextForDetails{
+    margin-bottom: 2%;
+}
+
 .sidebar_content{
     cursor: pointer;
     color: $text-color;
@@ -136,14 +140,14 @@ div > a{
     font-family: $text-font;
     color: $text-color;    
     font-size: $text-size-header;
-    margin: 1% 20%;
+    margin: 0% 20%;
 }
 
 .profileSecondaryDetails{
     font-family: $text-font;
     color: $text-color;    
     font-size: $text-size-header - 4;
-    margin: 1% 5% 1% 25%;
+    margin: 0% 5% 0% 25%;
 }
 
 .spacingLeft{
@@ -151,7 +155,7 @@ div > a{
 }
 
 .spacingBottom{
-    padding-bottom: 1%;
+    padding-bottom: 2%;
 }
 
 *:focus {outline-color:$content-container-bg-color}

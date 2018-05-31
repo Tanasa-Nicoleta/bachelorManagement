@@ -21,6 +21,7 @@ import { ForgotPasswordComponent } from './login-and-register-components/forgot-
 import { InformationComponent } from './information/information.component';
 import { ProfileHeaderComponent } from './headers/profile-header/profile-header.component';
 import { NoProfileHeaderComponent } from './headers/no-profile-header/no-profile-header.component';
+import { StudentWorkComponent } from './student-components/student-work/student-work.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { NoProfileHeaderComponent } from './headers/no-profile-header/no-profile
     ProfileComponent,
     ForgotPasswordComponent,
     InformationComponent,
-    NoProfileHeaderComponent
+    NoProfileHeaderComponent, 
+    StudentWorkComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +62,8 @@ import { NoProfileHeaderComponent } from './headers/no-profile-header/no-profile
       { path: 'gitDetails', component: TeacherGitDetailsPerStudentComponent, pathMatch: 'full' },
       { path: 'profile', component: ProfileComponent, pathMatch: 'full' },
       { path: 'forgotPassword', component: ForgotPasswordComponent, pathMatch: 'full' },      
-      { path: 'information', component: InformationComponent, pathMatch: 'full' },
+      { path: 'information', component: InformationComponent, pathMatch: 'full' }, 
+      { path: 'studentWork', component: StudentWorkComponent, pathMatch: 'full' },
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: '**', redirectTo: 'login', pathMatch: 'full' }
     ]),

@@ -4,30 +4,39 @@
     </profile-header>
 
     <div class="contentContainer">
-        <div class="secondaryText centerContainer">
-            Version Control System Details
+        <div class="bordered sidebar_border">
+            <div class="sidebar_content">
+                <teacher-sidebar>
+                </teacher-sidebar>
+            </div>
         </div>
 
-        <div class="subtitle">
-            Repos:
-        </div>
         <div>
-            Repository name: {{userData[0].name}}
-        </div>
-        <div>
-            Repository url: {{userData[0].html_url}}
-        </div>
-        <div class="subtitle">
-            Languages
-        </div>
-        <div *ngFor="let language of languagesArray">
-            {{language.name}}: {{language.size}}
-        </div>
-        <div class="subtitle">
-            Commits
-        </div>
-        <div *ngFor="let commit of commitsArray;">
-            {{commit.date}} : {{commit.message}}
+            <div class="secondaryText secondaryTextForDetails centerContainer">
+                Version Control System Details
+            </div>
+
+            <div class="subtitle profileDetails">
+                Repository information
+            </div>
+            <div class="profileSecondaryDetails">
+                Repository name: {{userData.Name}}
+            </div>
+            <div class="profileSecondaryDetails">
+                Repository url: {{userData.Url}}
+            </div>
+            <div class="subtitle profileDetails">
+                Languages
+            </div>
+            <div *ngFor="let language of languagesArray"  class="profileSecondaryDetails">
+                {{language.name}}: {{language.size}} 
+            </div>
+            <div class="subtitle profileDetails">
+                Commits
+            </div>
+            <div *ngFor="let commit of commitsArray"  class="profileSecondaryDetails">
+                {{commit.date.getDate()}}.{{commit.date.getMonth()}}.{{commit.date.getFullYear()}}: {{commit.message}}
+            </div>
         </div>
     </div>
 

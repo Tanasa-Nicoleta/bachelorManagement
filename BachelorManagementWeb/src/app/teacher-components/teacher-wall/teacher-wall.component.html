@@ -4,7 +4,6 @@
 <div class="layoutContainer">
 
     <profile-header>
-        <!-- check if another is needed -->
     </profile-header>
 
     <div class="contentContainer">
@@ -36,6 +35,15 @@
                     <teacher-sidebar>
                     </teacher-sidebar>
                 </div>
+            </div>
+        </div>
+
+
+        <div class="wall">
+            <div>
+                <span class="mdl-textfield mdl-js-textfield addCommentRow">
+                    <input #Post class="mdl-textfield__input" type="text" placeholder="Your post here." (keydown.enter)="addPost(Post.value);">
+                </span>
             </div>
         </div>
 
@@ -80,7 +88,5 @@
                 </span>
             </div>
         </div>
-
-
     </div>
 </div>

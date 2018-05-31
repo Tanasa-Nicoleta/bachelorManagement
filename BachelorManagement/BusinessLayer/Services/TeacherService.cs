@@ -31,6 +31,9 @@ namespace BachelorManagement.BusinessLayer.Services
 
         public Teacher GetTeacherByEmail(string email)
         {
+            if(email == null)
+                return null;
+
             return _teacherRepository.GetAll().FirstOrDefault(t =>
                 string.Equals(t.Email.ToLower(), email.ToLower()));
         }

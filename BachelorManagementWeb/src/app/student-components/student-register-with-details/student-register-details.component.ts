@@ -62,7 +62,6 @@ export class StudentRegisterToTeacherDetailsComponent {
                     this.teacher.Theme = new Bachelor(data.body[key]['title'], data.body[key]['description']);
                 }
             }
-            console.log(this.teacher);
         },
             err => {
                 console.log("Error");

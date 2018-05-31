@@ -28,6 +28,10 @@ export class RegisterLayoutComponent {
     Password: string;
   };
 
+  registerCheckBody: {
+    Email: string;
+  }
+
   constructor(private http: HttpClient, private router: Router, private title: Title) {
     this.titleService = new TitleService(title);
     this.titleService.setTitle("BDMApp Register");
@@ -90,11 +94,32 @@ export class RegisterLayoutComponent {
   }
 
   private validateEmail(email: HTMLInputElement) {
+    this.alreadyExistingAccount = false;
     this.invalidEmailError = !this.emailRegex.test(email.value);
-    console.log(this.invalidEmailError);
     if (this.invalidEmailError)
       email.classList.add('invalidEmail');
     else
       email.classList.remove('invalidEmail');
+  }
+
+  checkIfUsernameExists(email: string){
+    console.log("email.innerText", email);
+    this.registerCheckBody = {
+      Email: email
+    };
+
+    const resp = this.http.post('http://localhost:64250/api/account/register/check', this.registerCheckBody, { observe: 'response' });
+
+    resp.subscribe(
+      data => {
+        console.log("welcome");
+      },
+      err => {
+        if (err.status == 400)
+          if (err.error == "Username exists") {
+            this.alreadyExistingAccount = true;
+          }     
+      }
+    );
   }
 }

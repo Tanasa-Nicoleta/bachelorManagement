@@ -3,6 +3,7 @@ using System.Linq;
 using BachelorManagement.DataLayer;
 using BachelorManagement.DataLayer.Entities;
 using BachelorManagement.Interfaces;
+using System;
 
 namespace BachelorManagement.BusinessLayer.Services
 {
@@ -32,6 +33,9 @@ namespace BachelorManagement.BusinessLayer.Services
 
         public Student GetStudentByEmail(string email)
         {
+            if(email == null)
+                return null;
+
             return _studentRepository.GetAll().FirstOrDefault(s =>
                 string.Equals(s.Email.ToLower(), email.ToLower()));
         }
@@ -83,6 +87,11 @@ namespace BachelorManagement.BusinessLayer.Services
             if (student != null) comments = _commentService.GetStudentComments(student.Email);
 
             return comments;
+        }
+
+        public void AddStudentPost(string studentEemail, string teacherEmail, string postContent, DateTime date)
+        {
+            
         }
 
         private BachelorTheme GetStudentBacelorThemes(Student student)

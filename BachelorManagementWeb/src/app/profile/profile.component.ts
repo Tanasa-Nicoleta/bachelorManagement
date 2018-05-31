@@ -20,7 +20,7 @@ export class ProfileComponent {
   student: Student;
   teacher: TeacherProfile;
   titleService: TitleService;
-  isTeacher: boolean = true;
+  isTeacher: boolean = false;
 
   constructor(private title: Title, private http: HttpClient) {
     this.titleService = new TitleService(title);

@@ -35,8 +35,7 @@
                 Start year: {{student.StartYear}}
             </div>
             <div class="profileDetails">
-                Means: {{student.Means.FirstSemester}}, {{student.Means.SecondSemester}}, {{student.Means.ThirdSemester}}, {{student.Means.FourthSemester}},
-                {{student.Means.FifthSemester}}, {{student.Means.SixthSemester}},
+                Means: {{student.Means.FirstSemester == 0 ? "" : student.Means.FirstSemester}}{{student.Means.SecondSemester == 0 ? "" : ", " + student.Means.SecondSemester}}{{student.Means.ThirdSemester == 0 ? "" : ", " + student.Means.ThirdSemester}}{{student.Means.FourthSemester == 0 ? "" : ", " + student.Means.FourthSemester}}{{student.Means.FifthSemester == 0 ? "" : ", " + student.Means.FifthSemester}}{{student.Means.SixthSemester == 0 ? "" : ", " + student.Means.SixthSemester}}
             </div>
         </div>
 

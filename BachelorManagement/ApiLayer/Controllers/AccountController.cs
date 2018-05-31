@@ -46,5 +46,15 @@ namespace BachelorManagement.ApiLayer.Controllers
 
             return NoContent();
         }
+
+
+        [HttpPost("register/check")]
+        public IActionResult Register([FromBody] RegisterCheckDto registerCheckDto)
+        {
+            if (_accountService.CheckIfUserNameExists(registerCheckDto.Email))
+                return BadRequest("Username exists");
+
+            return NoContent();
+        }
     }
 }

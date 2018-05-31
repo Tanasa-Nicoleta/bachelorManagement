@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using BachelorManagement.DataLayer.Entities;
+using System;
 
 namespace BachelorManagement.Interfaces
 {
@@ -8,5 +9,7 @@ namespace BachelorManagement.Interfaces
         ICollection<Comment> GetTeacherComments(string email);
 
         ICollection<Comment> GetStudentComments(string email);
+
+        void AddComment(int? studentId, int? teacherId, string commentContent, DateTime date);
     }
 }

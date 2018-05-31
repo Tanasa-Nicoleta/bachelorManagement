@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { ClickOutsideModule } from 'ng4-click-outside';
 
 import { AppComponent } from './app.component';
 import { LoginLayoutComponent } from './login-and-register-components/login-layout/login-layout.component';
@@ -48,6 +49,7 @@ import { StudentWorkComponent } from './student-components/student-work/student-
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    ClickOutsideModule,
     RouterModule.forRoot([
       { path: 'login', component: LoginLayoutComponent, pathMatch: 'full' },
       { path: 'register', component: RegisterLayoutComponent, pathMatch: 'full' },

@@ -12,17 +12,20 @@ namespace BachelorManagement.ApiLayer.Controllers
         private readonly ITeacherService _teacherService;
         private readonly IStudentService _studentService;
         private readonly ICommentReplyService _commentReplyService;
+        private readonly ICommentService _commentService;
         private readonly IMeetingRequestService _meetingRequestService;
 
         public TeacherController(ITeacherService teacherService,
             ICommentReplyService commentReplyService,
             IMeetingRequestService meetingRequestService,
-            IStudentService studentService)
+            IStudentService studentService,
+            ICommentService commentService)
         {
             _teacherService = teacherService;
             _commentReplyService = commentReplyService;
             _meetingRequestService = meetingRequestService;
             _studentService = studentService;
+            _commentService = commentService;
         }
 
         [HttpGet]
@@ -129,6 +132,18 @@ namespace BachelorManagement.ApiLayer.Controllers
             };
 
             return Ok(meetingRequestDto);
+        }
+
+        [HttpPost]
+        [Route("api/teacher/comments/{email}")]
+        public IActionResult AddStudentPost([FromBody] PostDto postDto)
+        {
+            var student = _studentService.GetStudentByEmail(postDto.StudentEmail);
+            var teacher = _teacherService.GetTeacherByEmail(postDto.TeacherEmail);
+
+            _commentService.AddComment(student?.Id, teacher?.Id, postDto.CommentContent, postDto.Date);
+
+            return Ok();
         }
     }
 }

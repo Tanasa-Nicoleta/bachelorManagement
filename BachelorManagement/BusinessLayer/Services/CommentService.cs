@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using BachelorManagement.DataLayer;
 using BachelorManagement.DataLayer.Entities;
@@ -13,6 +14,18 @@ namespace BachelorManagement.BusinessLayer.Services
         public CommentService(IRepository<Comment> commentRepository)
         {
             _commentRepository = commentRepository;
+        }
+
+        public void AddComment(int? studentId, int? teacherId, string commentContent, DateTime date)
+        {
+            _commentRepository.Add(new Comment
+            {
+                TeacherId = teacherId == null ? null : teacherId,
+                StudentId = studentId == null ? null : studentId,
+                CommentContent = commentContent,
+                Date = date
+            }
+            );
         }
 
         public ICollection<Comment> GetStudentComments(string email)

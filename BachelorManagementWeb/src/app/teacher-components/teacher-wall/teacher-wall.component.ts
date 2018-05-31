@@ -36,8 +36,7 @@ export class TeacherWallComponent {
 
   teacherObs: [[TeacherObservation, [Comment | null], boolean]] = [
     [new TeacherObservation("Hello everybody! Welcome to my page.", new DateClass(1, Month[1], 2018, "12:00"), 0),
-    [new Comment(this.studentName, "Hello! Thank you!", new DateClass(1, Month[1], 2018, "12:00")),
-    new Comment(this.studentName, "Hello! Thank you, mister " + this.teacherName + "!", new DateClass(20, Month[1], 2018, "14:40"))],
+    [new Comment(this.studentName, "Hello! Thank you, mister " + this.teacherName + "!", new DateClass(20, Month[1], 2018, "14:40"))],
     this.showComments]];
 
   titleService: TitleService;
@@ -87,7 +86,6 @@ export class TeacherWallComponent {
               }
             }            
           }}
-          console.log(this.teacherObs);
       },
       err => {
         console.log("Error");
@@ -126,6 +124,10 @@ export class TeacherWallComponent {
         teacherOb[1].push(comment);
       }
     });
+  }
+
+  addPost(commentContent: string){
+    this.teacherObs[0].push(new TeacherObservation(commentContent, Date.now, 1));
   }
 
   showAllComments(teacherObservation: [TeacherObservation, [Comment | null], boolean]) {

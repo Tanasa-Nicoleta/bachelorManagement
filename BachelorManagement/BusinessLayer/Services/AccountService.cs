@@ -36,6 +36,9 @@ namespace BachelorManagement.BusinessLayer.Services
 
         public bool CheckIfUserNameExists(string username)
         {
+            if(username == null)
+                return false;
+
             return _userRepository.GetAll()
                        .SingleOrDefault(u =>
                            string.Equals(u.Email.ToLower(), username.ToLower())) != null;

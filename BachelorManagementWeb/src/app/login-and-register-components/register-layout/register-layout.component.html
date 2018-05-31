@@ -14,7 +14,11 @@
             </div>
 
             <input #SubmitEmail name="SubmitEmail" type="text" placeholder="lastName.firstName@info.uaic.ro" id="emailInput" (keyup)="validateEmail($event.target)"
-                required>
+                (clickOutside)="checkIfUsernameExists(SubmitEmail.value)" required>
+        </div>
+
+        <div *ngIf="alreadyExistingAccount" class="invalidCredentials">
+            This email address is already registered!
         </div>
 
         <div>
@@ -43,16 +47,11 @@
             ! Passwords don't match
         </div>
 
-        <div *ngIf="alreadyExistingAccount" class="invalidCredentials">
-            This email address is already registered!
-        </div>
-
         <div *ngIf="invalidModelState" class="invalidCredentials">
             Invalid email or password format!
         </div>
 
-        <button type="submit" id="submitButtonRectangle" [disabled]="invalidEmailError || invalidError || matchError"
-            (click)="submit(SubmitEmail.value,SubmitPass.value);">
+        <button type="submit" id="submitButtonRectangle" [disabled]="invalidEmailError || invalidError || matchError" (click)="submit(SubmitEmail.value,SubmitPass.value);">
             <div id="submitButtonText">{{buttonText}}</div>
         </button>
 

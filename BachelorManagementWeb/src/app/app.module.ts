@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { LoginLayoutComponent } from './login-and-register-components/login-layout/login-layout.component';
 import { RegisterLayoutComponent } from './login-and-register-components/register-layout/register-layout.component';
 import { HttpClientModule } from '@angular/common/http';
-import { StudentHeaderComponent } from './student-components/student-header/student-header.component';
 import { StudentRegisterToTeacherComponent } from './student-components/student-register-to-teacher/student-register-to-teacher.component';
 import { StudentRegisterToTeacherDetailsComponent } from './student-components/student-register-with-details/student-register-details.component';
 import { TeacherAddDetailsComponent } from './teacher-components/teacher-add-details/teacher-add-details.component';
@@ -20,13 +19,15 @@ import { TeacherGitDetailsPerStudentComponent } from './teacher-components/teach
 import { ProfileComponent } from './profile/profile.component';
 import { ForgotPasswordComponent } from './login-and-register-components/forgot-password/forgot-password.component';
 import { InformationComponent } from './information/information.component';
+import { ProfileHeaderComponent } from './headers/profile-header/profile-header.component';
+import { NoProfileHeaderComponent } from './headers/no-profile-header/no-profile-header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginLayoutComponent,
     RegisterLayoutComponent,
-    StudentHeaderComponent,
+    ProfileHeaderComponent,
     StudentRegisterToTeacherComponent,
     StudentRegisterToTeacherDetailsComponent,
     TeacherAddDetailsComponent,
@@ -38,7 +39,8 @@ import { InformationComponent } from './information/information.component';
     TeacherGitDetailsPerStudentComponent,
     ProfileComponent,
     ForgotPasswordComponent,
-    InformationComponent
+    InformationComponent,
+    NoProfileHeaderComponent
   ],
   imports: [
     BrowserModule,

@@ -33,7 +33,7 @@ namespace BachelorManagement.BusinessLayer.Services
 
         public Student GetStudentByEmail(string email)
         {
-            if(email == null)
+            if (email == null)
                 return null;
 
             return _studentRepository.GetAll().FirstOrDefault(s =>
@@ -94,7 +94,7 @@ namespace BachelorManagement.BusinessLayer.Services
             if (student != null) comments = _commentService.GetStudentComments(student.Email);
 
             return comments;
-        }        
+        }
 
         private BachelorTheme GetStudentBacelorThemes(Student student)
         {
@@ -114,6 +114,31 @@ namespace BachelorManagement.BusinessLayer.Services
         public Student GetStudentById(int id)
         {
             return _studentRepository.GetAll().FirstOrDefault(s => s.Id == id);
+        }
+
+        public void EditStudent(Student student)
+        {
+            var oldStudent = GetStudentByEmail(student.Email);
+
+            var oldBachelorTheme = GetBachelorThemeByStudentId(oldStudent.Id);
+
+            if(student.StudentBachelorTheme.Title != null)            
+                oldBachelorTheme.Title = student.StudentBachelorTheme.Title;
+
+            if (student.StudentBachelorTheme.Description != null)
+                oldBachelorTheme.Description = student.StudentBachelorTheme.Description;            
+    
+            if(student.GitUrl != null)
+                oldStudent.GitUrl = student.GitUrl;
+
+            _studentRepository.Update(oldStudent);
+            _bachelorThemeRepository.Update(oldBachelorTheme);
+        }
+
+
+        public BachelorTheme GetBachelorThemeByStudentId(int studentId)
+        {
+            return _bachelorThemeRepository.GetAll().FirstOrDefault(b => b.StudentId == studentId);
         }
     }
 }

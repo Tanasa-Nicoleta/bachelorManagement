@@ -164,5 +164,28 @@ namespace BachelorManagement.ApiLayer.Controllers
 
             return Ok(meetingRequestDto);
         }
+
+        [HttpPut]
+        [Route("api/student/editStudent")]
+        public IActionResult EditStudent([FromBody] EditStudentDto editStudentDto) 
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            _studentService.EditStudent(
+                    new Student
+                    {
+                        Email = editStudentDto.Email,
+                        GitUrl = editStudentDto.GitUrl,
+                        StudentBachelorTheme = new BachelorTheme
+                        {
+                            Title = editStudentDto.BachelorThemeTitle,
+                            Description = editStudentDto.BachelorThemeDescription
+                        }
+                    }
+                );
+
+            return Ok();
+        }
     }
 }

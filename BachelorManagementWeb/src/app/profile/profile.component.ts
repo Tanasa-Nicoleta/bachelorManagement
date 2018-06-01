@@ -10,17 +10,27 @@ import { TeacherProfile } from '../models/teacher-profile.model';
 @Component({
   selector: 'profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['../app.component.scss']
+  styleUrls: ['../app.component.scss', '../student-components/student.component.scss', '../teacher-components/teacher.component.scss']
 })
 
 export class ProfileComponent {
-  isTeacher: boolean = false;
   email: string = "mihai.ursache@info.uaic.ro";
   teacherEmail: string = "vlad.simion@info.uaic.ro";
+  editText: string = "edit profile";
+  submitText: string = "submit";
+  isTeacher: boolean = false;
+  showEditForm: boolean = false;
 
   student: Student;
   teacher: TeacherProfile;
   titleService: TitleService;
+
+  editProfileBody: {
+    Email: string;
+    GitUrl: string;
+    ThemeTitle: string;
+    ThemeDescription: string;
+  }
 
   constructor(private title: Title, private http: HttpClient) {
     this.titleService = new TitleService(title);
@@ -159,5 +169,30 @@ export class ProfileComponent {
       }
     );
   };
+
+  enableEditProfile() {
+    this.showEditForm = true;
+  }
+
+  editRecord(email: string, gitUrl: string, themeTitle: string, themeDescription: string) {
+    this.editProfileBody = {
+      Email: email,
+      ThemeDescription: themeDescription,
+      ThemeTitle: themeTitle,
+      GitUrl: gitUrl
+    }
+
+    const resp = this.http.put('http://localhost:64250/api/student/editStudent', this.editProfileBody, { responseType: 'text' });
+
+    resp.subscribe(
+      data => {
+        window.location.reload();
+      },
+      err => {
+        console.log("Error");
+        console.log(err)
+      });
+  }
+
 }
 

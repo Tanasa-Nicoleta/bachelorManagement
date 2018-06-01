@@ -14,7 +14,7 @@ namespace BachelorManagement.DataLayer.Entities
         public Teacher Teacher { get; set; }
         public string Achievements { get; set; }
         public MeetingRequest MeetingRequest { get; set; }
-        public BachelorTheme BachelorTheme { get; set; }
+        public BachelorTheme StudentBachelorTheme { get; set; }
         public ICollection<Comment> Comments { get; set; }
         public string GitUrl { get; set; }
         public bool Accepted { get; set; }

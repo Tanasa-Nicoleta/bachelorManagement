@@ -1,3 +1,6 @@
+<script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+
 <div class="layoutContainer">
     <profile-header>
 
@@ -11,32 +14,92 @@
             </div>
         </div>
 
-        <div *ngIf="isTeacher == false">
-            <div class="profileDetails">
-                Name: {{student.FirstName}} {{student.LastName}}
+        <div *ngIf="!isTeacher">
+            <div *ngIf="!showEditForm">
+                <div class="profileDetails">
+                    Name: {{student.FirstName}} {{student.LastName}}
+                </div>
+                <div class="profileDetails">
+                    Teacher Name: {{student.TeacherName}}
+                </div>
+                <div class="profileDetails">
+                    Theme name: {{student.Theme.Title}}
+                </div>
+                <div class="profileDetails">
+                    Theme description: {{student.Theme.Description}}
+                </div>
+                <div class="profileDetails">
+                    Repository address:
+                    <a href={{userGitUrl}}> {{student.GitUrl}}</a>
+                </div>
+                <div class="profileDetails">
+                    Serial Number: {{student.SerialNumber}}
+                </div>
+                <div class="profileDetails">
+                    Start year: {{student.StartYear}}
+                </div>
+                <div class="profileDetails">
+                    Means: {{student.Means.FirstSemester == 0 ? "" : student.Means.FirstSemester}}{{student.Means.SecondSemester == 0 ? "" :
+                    ", " + student.Means.SecondSemester}}{{student.Means.ThirdSemester == 0 ? "" : ", " + student.Means.ThirdSemester}}{{student.Means.FourthSemester
+                    == 0 ? "" : ", " + student.Means.FourthSemester}}{{student.Means.FifthSemester == 0 ? "" : ", " + student.Means.FifthSemester}}{{student.Means.SixthSemester
+                    == 0 ? "" : ", " + student.Means.SixthSemester}}
+                </div>
+                <div class="profileDetails">
+                    <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect editTeacherButton" (click)="enableEditProfile()">
+                        {{editText}}
+                    </button>
+                </div>
+
             </div>
-            <div class="profileDetails">
-                Teacher Name: {{student.TeacherName}}
+
+            <div *ngIf="showEditForm">
+                <div class="mdl-cell mdl-cell--12-col">
+
+                    <div class="centerContainerAdminWall">
+                        <div class="teacherDetailsRowTitle">
+                            Edit profile
+                        </div>
+
+                        <div>
+                            <span class="teacherDetailsRow">First name: {{student.FirstName}}</span>
+                        </div>
+                        <div>
+                            <span class="teacherDetailsRow">Last name: {{student.LastName}}</span>
+                        </div>
+                        <div>
+                            <span class="teacherDetailsRow">Email: {{student.Email}}</span>
+                        </div>
+
+                        <div>
+                            <span class="teacherDetailsRow">Git Url:</span>
+                            <span class="mdl-textfield mdl-js-textfield addTeacherAdmin editInput">
+                                <input #GitUrl class="mdl-textfield__input" type="text" placeholder={{student.GitUrl}}>
+                            </span>
+                        </div>
+
+                        <div>
+                            <span class="teacherDetailsRow">Theme title:</span>
+                            <span class="mdl-textfield mdl-js-textfield addTeacherAdmin editInput">
+                                <input #ThemeTitle class="mdl-textfield__input" type="text" placeholder={{student.Theme.Title}}>
+                            </span>
+                        </div>
+
+                        <div>
+                            <span class="teacherDetailsRow">Theme description:</span>
+                            <span class="mdl-textfield mdl-js-textfield addTeacherAdmin editInput">
+                                <input #ThemeDescription class="mdl-textfield__input" type="text" placeholder={{student.Theme.Description}}>
+                            </span>
+                        </div>
+
+                        <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" (click)="editRecord(student.Email, GitUrl.value.length == 0 ? GitUrl.placeholder : GitUrl.value, ThemeTitle.value.length == 0 ? ThemeTitle.placeholder : ThemeTitle.value, ThemeDescription.value.length == 0 ? ThemeDescription.placeholder : ThemeDescription.value)">
+                            {{submitText}}
+                        </button>
+                    </div>
+
+                </div>
+
             </div>
-            <div class="profileDetails">
-                Theme name: {{student.Theme.Title}}
-            </div>
-            <div class="profileDetails">
-                Theme description: {{student.Theme.Description}}
-            </div>
-            <div class="profileDetails">
-                Repository address:
-                <a href={{userGitUrl}}> {{student.GitUrl}}</a>
-            </div>
-            <div class="profileDetails">
-                Serial Number: {{student.SerialNumber}}
-            </div>
-            <div class="profileDetails">
-                Start year: {{student.StartYear}}
-            </div>
-            <div class="profileDetails">
-                Means: {{student.Means.FirstSemester == 0 ? "" : student.Means.FirstSemester}}{{student.Means.SecondSemester == 0 ? "" : ", " + student.Means.SecondSemester}}{{student.Means.ThirdSemester == 0 ? "" : ", " + student.Means.ThirdSemester}}{{student.Means.FourthSemester == 0 ? "" : ", " + student.Means.FourthSemester}}{{student.Means.FifthSemester == 0 ? "" : ", " + student.Means.FifthSemester}}{{student.Means.SixthSemester == 0 ? "" : ", " + student.Means.SixthSemester}}
-            </div>
+
         </div>
 
         <div *ngIf="isTeacher">
@@ -47,9 +110,9 @@
                 Requirement: {{teacher.Requirement}}
             </div>
             <div class="profileDetails">
-                Themes: 
+                Themes:
             </div>
-            <div *ngFor="let theme of teacher.Theme">                
+            <div *ngFor="let theme of teacher.Theme">
                 <div class="profileSecondaryDetails">
                     Name: {{theme.Title}}
                 </div>

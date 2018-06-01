@@ -16,5 +16,6 @@ namespace BachelorManagement.Interfaces
         Mean GetStudentMeans(string email);
         void AddAchievementToStudent(string email, string achievement);
         void UpdateStudentRequest(string email, bool accepted, bool denied);        
+        void EditStudent(Student student);
     }
 }

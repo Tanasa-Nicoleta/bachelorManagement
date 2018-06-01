@@ -150,5 +150,6 @@ namespace BachelorManagement.ApiLayer.Controllers
 
             return Ok();
         }
+
     }
 }

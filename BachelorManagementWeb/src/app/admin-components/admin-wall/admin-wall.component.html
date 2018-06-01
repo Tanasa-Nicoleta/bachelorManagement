@@ -31,10 +31,10 @@
                             <td class="columnContent">{{teacher.Email}}</td>
                             <td class="columnContent">{{teacher.NoOfSpots}}</td>
                             <td class="columnContent">
-                                <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                                <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" (click)="removeTeacher(teacher.Email)">
                                     {{deleteText}}
                                 </button>
-                                <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect editTeacherButton">
+                                <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect editTeacherButton" (click)="editTeacher(teacher.Email, teacher.FirstName, teacher.LastName, teacher.Discipline, teacher.NoOfSpots, teacher.Grade)">
                                     {{editText}}
                                 </button>
                             </td>
@@ -57,6 +57,57 @@
             </div>
 
         </div>
+
+        <div *ngIf="showEditTeacherForm">
+            <div class="teacherDetailsRowTitle">
+                Edit record
+            </div>
+
+            <span>
+                <div>
+                    <span class="teacherDetailsRow">First name:</span>
+                    <span class="mdl-textfield mdl-js-textfield addTeacherAdmin editInput">
+                        <input #FirstName class="mdl-textfield__input" type="text" placeholder={{teacher.FirstName}}>
+                    </span>
+                </div>
+
+                <div>
+                    <span class="teacherDetailsRow">Last name:</span>
+                    <span class="mdl-textfield mdl-js-textfield addTeacherAdmin editInput">
+                        <input #LastName class="mdl-textfield__input" type="text" placeholder={{teacher.LastName}}>
+                    </span>
+                </div>
+            </span>
+
+            <span>
+                <div>
+                    <span class="teacherDetailsRow">Discipline:</span>
+                    <span class="mdl-textfield mdl-js-textfield addTeacherAdmin editInput">
+                        <input #Discipline class="mdl-textfield__input" type="text" placeholder={{teacher.Discipline}}>
+                    </span>
+                </div>
+
+                <div>
+                    <span class="teacherDetailsRow">Job title:</span>
+                    <span class="mdl-textfield mdl-js-textfield addTeacherAdmin editInput">
+                        <input #JobTitle class="mdl-textfield__input" type="text" placeholder={{teacher.Grade}}>
+                    </span>
+                </div>
+
+                <div>
+                    <span class="teacherDetailsRow">Maximum number of students:</span>
+                    <span class="mdl-textfield mdl-js-textfield addTeacherAdmin editInput">
+                        <input #MaxNoOfSpots class="mdl-textfield__input" type="text" placeholder={{teacher.NoOfSpots}}>
+                    </span>
+                </div>
+            </span>
+            
+            <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" (click)="editRecord(teacher.Email, FirstName.value.length == 0 ? FirstName.placeholder : FirstName.value, LastName.value.length == 0 ? LastName.placeholder : LastName.value, Discipline.value.length == 0 ? Discipline.placeholder : Discipline.value, MaxNoOfSpots.value.length == 0 ? MaxNoOfSpots.placeholder : MaxNoOfSpots.value, JobTitle.value.length == 0 ? JobTitle.placeholder : JobTitle.value)">
+                {{submitText}}
+            </button>
+
+        </div>
+
 
         <div *ngIf="showAddTeacherForm" class="centerContainer">
 
@@ -110,7 +161,7 @@
                 </div>
             </span>
 
-            <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" (click)="addNewRecord()">
+            <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" (click)="addNewRecord(Email.value, FirstName.value, LastName.value, Discipline.value, MaxNoOfSpots.value, JobTitle.value)">
                 {{submitText}}
             </button>
 

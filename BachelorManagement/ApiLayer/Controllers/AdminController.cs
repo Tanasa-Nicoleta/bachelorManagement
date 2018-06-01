@@ -47,5 +47,26 @@ namespace BachelorManagement.ApiLayer.Controllers
             return Ok();
         }
 
+        [HttpPut("editTeacher")]
+        public IActionResult EditTeacher([FromBody] TeacherDto teacherDto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            _teacherService.EditTeacher(
+                    new Teacher
+                    {
+                        FirstName = teacherDto.FirstName,
+                        LastName = teacherDto.LastName,
+                        Discipline = teacherDto.Discipline,
+                        Email = teacherDto.Email,
+                        NumberOfSpots = teacherDto.NumberOfSpots,
+                        JobTitle = teacherDto.JobTitle
+                    }
+                );
+
+            return Ok();
+        }
+
     }
 }

@@ -16,6 +16,7 @@ namespace BachelorManagement.Interfaces
             string themeDescr);
         void DecreaseTeacherAvailableSpots(string email);
         void AddTeacher(Teacher teacher);
+        void EditTeacher(Teacher teacher);
         void RemoveTeacher(string email);
     }
 }

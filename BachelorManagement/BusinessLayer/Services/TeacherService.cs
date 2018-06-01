@@ -31,7 +31,7 @@ namespace BachelorManagement.BusinessLayer.Services
 
         public Teacher GetTeacherByEmail(string email)
         {
-            if(email == null)
+            if (email == null)
                 return null;
 
             return _teacherRepository.GetAll().FirstOrDefault(t =>
@@ -128,10 +128,25 @@ namespace BachelorManagement.BusinessLayer.Services
         {
             var teacher = GetTeacherByEmail(email);
 
-            if(teacher != null)
+            if (teacher != null)
             {
                 _teacherRepository.Delete(teacher);
             }
+        }
+
+        public void EditTeacher(Teacher teacher)
+        {
+            var oldTeacher = GetTeacherByEmail(teacher.Email);
+
+            oldTeacher.Email = teacher.Email;
+            oldTeacher.FirstName = teacher.FirstName;
+            oldTeacher.LastName = teacher.LastName;
+            oldTeacher.Discipline = teacher.Discipline;
+            oldTeacher.JobTitle = teacher.JobTitle;
+            oldTeacher.NumberOfAvailableSpots = teacher.NumberOfAvailableSpots;
+
+
+            _teacherRepository.Update(oldTeacher);
         }
     }
 }

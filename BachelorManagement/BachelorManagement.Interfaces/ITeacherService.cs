@@ -15,5 +15,7 @@ namespace BachelorManagement.Interfaces
         void AddDetailsToTeacher(string email, string requirement, int numberOfSpots, string themeTitle,
             string themeDescr);
         void DecreaseTeacherAvailableSpots(string email);
+        void AddTeacher(Teacher teacher);
+        void RemoveTeacher(string email);
     }
 }

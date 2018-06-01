@@ -118,5 +118,20 @@ namespace BachelorManagement.BusinessLayer.Services
         {
             return _teacherRepository.GetAll().FirstOrDefault(t => t.Id == id);
         }
+
+        public void AddTeacher(Teacher teacher)
+        {
+            _teacherRepository.Add(teacher);
+        }
+
+        public void RemoveTeacher(string email)
+        {
+            var teacher = GetTeacherByEmail(email);
+
+            if(teacher != null)
+            {
+                _teacherRepository.Delete(teacher);
+            }
+        }
     }
 }

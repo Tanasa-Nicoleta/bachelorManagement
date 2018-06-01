@@ -23,6 +23,7 @@ import { InformationComponent } from './information/information.component';
 import { ProfileHeaderComponent } from './headers/profile-header/profile-header.component';
 import { NoProfileHeaderComponent } from './headers/no-profile-header/no-profile-header.component';
 import { StudentWorkComponent } from './student-components/student-work/student-work.component';
+import { AdminWallComponent } from './admin-components/admin-wall.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { StudentWorkComponent } from './student-components/student-work/student-
     ForgotPasswordComponent,
     InformationComponent,
     NoProfileHeaderComponent,
-    StudentWorkComponent
+    StudentWorkComponent,
+    AdminWallComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +67,8 @@ import { StudentWorkComponent } from './student-components/student-work/student-
       { path: 'profile', component: ProfileComponent, pathMatch: 'full' },
       { path: 'forgotPassword', component: ForgotPasswordComponent, pathMatch: 'full' },
       { path: 'information', component: InformationComponent, pathMatch: 'full' },
-      { path: 'studentWork', component: StudentWorkComponent, pathMatch: 'full' },
+      { path: 'studentWork', component: StudentWorkComponent, pathMatch: 'full' },      
+      { path: 'adminWall', component: AdminWallComponent, pathMatch: 'full' },
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: '**', redirectTo: 'login', pathMatch: 'full' }
     ]),

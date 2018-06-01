@@ -78,7 +78,7 @@ namespace BachelorManagement.ApiLayer.Controllers
 
         [HttpPost]
         [Route("api/teacher/addDetails")]
-        public IActionResult AddTeacherDetails([FromBody] TeacherDto teacherDto)
+        public IActionResult AddTeacherDetails([FromBody] TeacherDetailsDto teacherDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest();

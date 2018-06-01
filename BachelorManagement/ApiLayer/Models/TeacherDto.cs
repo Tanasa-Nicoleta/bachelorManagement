@@ -2,10 +2,11 @@
 {
     public class TeacherDto
     {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Email { get; set; }
-        public int NoOfAvailableSpots { get; set; }
-        public string Requirement { get; set; }
-        public string ThemeTitle { get; set; }
-        public string ThemeDescription { get; set; }
+        public int NumberOfSpots { get; set; }
+        public string Discipline { get; set; }
+        public string JobTitle { get; set; }
     }
 }

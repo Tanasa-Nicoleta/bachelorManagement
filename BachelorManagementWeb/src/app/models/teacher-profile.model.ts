@@ -1,5 +1,6 @@
 import { Bachelor } from "./bachelor-degree.model";
 import { Student } from "./student.model";
+import { DayOfWeek } from "./day-of-week.model";
 
 export class TeacherProfile {
     constructor(firstName, lastName, email, theme, grade, requirement, student) {
@@ -18,4 +19,6 @@ export class TeacherProfile {
     Grade: string;
     Requirement: string;
     Student: Array<Student>;
+    ConsultationDay: string;
+    ConsultationInterval: string;
 }

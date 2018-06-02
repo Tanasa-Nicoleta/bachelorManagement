@@ -109,6 +109,29 @@
             <div class="profileDetails">
                 Requirement: {{teacher.Requirement}}
             </div>
+
+            <div class="profileDetails" *ngIf="showEditConsultation == false">
+                Consultation: {{teacher.ConsultationDay}}, {{teacher.ConsultationInterval}}
+            </div>
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect requestButton" (click)="allowEditConsultation()">
+                {{editConsultationButton}}
+            </button>
+
+            <div *ngIf="showEditConsultation">
+                <span>
+                    Consultation day: 
+                </span>
+                <span class="mdl-textfield mdl-js-textfield addCommentRow">
+                    <input #ConsultationDay class="mdl-textfield__input" type="text" placeholder="Your comment here.">
+                </span>
+                <span>
+                    Consultation interval: 
+                </span>
+                <span class="mdl-textfield mdl-js-textfield addCommentRow">
+                    <input #ConsultationInterval class="mdl-textfield__input" type="text" placeholder="Your comment here.">
+                </span>
+            </div>
+
             <div class="profileDetails">
                 Themes:
             </div>

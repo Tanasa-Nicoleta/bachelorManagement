@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { Student } from '../models/student.model';
 import { Bachelor } from '../models/bachelor-degree.model';
 import { TeacherProfile } from '../models/teacher-profile.model';
+import { DayOfWeek } from '../models/day-of-week.model';
 
 @Component({
   selector: 'profile',
@@ -18,11 +19,13 @@ export class ProfileComponent {
   teacherEmail: string = "vlad.simion@info.uaic.ro";
   editText: string = "edit profile";
   submitText: string = "submit";
-  isTeacher: boolean = false;
+  isTeacher: boolean = true;
   showEditForm: boolean = false;
+  showEditConsultation: boolean = false;
+  editConsultationButton: string = "edit";
 
   student: Student;
-  teacher: TeacherProfile;
+  teacher: TeacherProfile = new TeacherProfile(null, null, null, null, null, null, null);
   titleService: TitleService;
 
   editProfileBody: {
@@ -53,6 +56,7 @@ export class ProfileComponent {
         this.teacher = new TeacherProfile(data.body["firstName"], data.body["lastName"], data.body["email"], null, data.body["jobTitle"], data.body["requirement"], null)
         this.setThemesToTeacher();
         this.setStudentsToTeacher();
+        this.setConsultationToTeacher();
       },
       err => {
         console.log("Error");
@@ -127,7 +131,7 @@ export class ProfileComponent {
     );
   }
 
-  private setThemesToTeacher() {
+  setThemesToTeacher() {
     this.teacher.Theme = new Array<Bachelor>();
 
     let themeResponse = this.http.get('http://localhost:64250/api/teacher/themes/' + this.teacher.Email, { observe: 'response' });
@@ -148,7 +152,7 @@ export class ProfileComponent {
     );
   };
 
-  private setStudentsToTeacher() {
+  setStudentsToTeacher() {
     this.teacher.Student = new Array<Student>();
 
     let themeResponse = this.http.get('http://localhost:64250/api/teacher/students/' + this.teacher.Email, { observe: 'response' });
@@ -169,6 +173,24 @@ export class ProfileComponent {
       }
     );
   };
+
+  setConsultationToTeacher(){
+    console.log("consulations setting");
+    let consultationResponse = this.http.get('http://localhost:64250/api/teacher/getConsultation/' + this.teacher.Email, { observe: 'response' });
+
+    consultationResponse.subscribe(data => {
+      if (data.body) {
+        console.log("consultations: ",data.body['day'],  data.body['interval'] );
+        this.teacher.ConsultationDay = DayOfWeek[data.body['day']];
+        this.teacher.ConsultationInterval = data.body['interval'];
+      }
+    },
+      err => {
+        console.log("Error");
+        console.log(err)
+      }
+    );
+  }
 
   enableEditProfile() {
     this.showEditForm = true;
@@ -192,6 +214,10 @@ export class ProfileComponent {
         console.log("Error");
         console.log(err)
       });
+  }
+
+  allowEditConsultation(){
+    this.showEditConsultation = true;
   }
 
 }

@@ -15,18 +15,21 @@ namespace BachelorManagement.ApiLayer.Controllers
         private readonly ICommentReplyService _commentReplyService;
         private readonly ICommentService _commentService;
         private readonly IMeetingRequestService _meetingRequestService;
+        private readonly IConsultationService _consultationService;
 
         public TeacherController(ITeacherService teacherService,
             ICommentReplyService commentReplyService,
             IMeetingRequestService meetingRequestService,
             IStudentService studentService,
-            ICommentService commentService)
+            ICommentService commentService,
+            IConsultationService consultationService)
         {
             _teacherService = teacherService;
             _commentReplyService = commentReplyService;
             _meetingRequestService = meetingRequestService;
             _studentService = studentService;
             _commentService = commentService;
+            _consultationService = consultationService;
         }
 
         [HttpGet]
@@ -190,6 +193,79 @@ namespace BachelorManagement.ApiLayer.Controllers
             _commentService.AddComment(student?.Id, teacher?.Id, postDto.CommentContent, postDto.Date);
 
             return Ok(student);
+        }
+
+        [HttpGet]
+        [Route("api/teacher/getConsultation/{email}")]
+        public IActionResult GetTeacherConsultation(string email)
+        {
+            Consultation consultation = new Consultation();
+            var teacher = _teacherService.GetTeacherByEmail(email);
+
+            if(teacher != null)
+            {
+                consultation = _consultationService.GetTeacherConsultation(teacher.Id);
+            }
+
+            return Ok(consultation);
+        }
+
+        [HttpPost]
+        [Route("api/teacher/removeConsultation")]
+        public IActionResult RemoveTeacherConsultation([FromBody] ConsultationDto consultationDto)
+        {
+            Consultation consultation = new Consultation();
+            var teacher = _teacherService.GetTeacherByEmail(consultationDto.TeacherEmail);
+
+            if (teacher != null)
+            {
+                consultation = _consultationService.GetTeacherConsultation(teacher.Id);
+            }
+
+            _consultationService.RemoveConsultation(consultation);
+
+            return Ok(consultation);
+        }
+
+        [HttpPost]
+        [Route("api/teacher/addConsultation")]
+        public IActionResult AddTeacherConsultation([FromBody] ConsultationDto consultationDto)
+        {
+            Consultation consultation = new Consultation();
+            var teacher = _teacherService.GetTeacherByEmail(consultationDto.TeacherEmail);
+
+            if (teacher != null)
+            {
+                 _consultationService.AddConsultation(teacher.Id, (WeekDays)consultationDto.Day, consultationDto.Interval);
+                    
+            }            
+
+            return Ok(consultation);
+        }
+
+        [HttpPut]
+        [Route("api/teacher/editConsultation")]
+        public IActionResult EditTeacherConsultation([FromBody] ConsultationDto consultationDto) 
+        {
+            Consultation consultation = new Consultation();
+            var teacher = _teacherService.GetTeacherByEmail(consultationDto.TeacherEmail);
+
+            if (teacher != null)
+            {
+                consultation = _consultationService.GetTeacherConsultation(teacher.Id);
+            }
+                                   
+            _consultationService.UpdateConsultation(
+                    new Consultation
+                    { 
+                        Day = (WeekDays) consultationDto.Day,
+                        Interval = consultationDto.Interval,
+                        TeacherId = consultation.TeacherId,
+                        Id = consultation.Id
+                    }
+                );
+
+            return Ok(consultation);
         }
 
     }

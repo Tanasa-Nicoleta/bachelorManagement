@@ -201,12 +201,6 @@ namespace BachelorManagement.DataLayer
                     Day = WeekDays.Thursday,
                     Interval = "10:00 - 12:00",
                     TeacherId = 2
-                },
-                new Consultation
-                {
-                    Day = WeekDays.Friday,
-                    Interval = "10:00 - 12:00",
-                    StudentId = 1
                 }
             };
             foreach (var consultation in consultations)

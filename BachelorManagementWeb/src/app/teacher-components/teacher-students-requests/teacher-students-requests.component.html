@@ -66,10 +66,10 @@
         </div>
 
         <div *ngIf="dueDatePassed" class="bordered content_border">
-            <div *ngFor="let meeting of meetingRequests">
+            <div *ngFor="let meeting of meetingRequests meetingRequestDetails">
                 <span class="profileDetails meetingRequestDetails">
-                    Student: {{meeting.StudentEmail}} --- Date: {{meeting.Date.getDate()}}.{{meeting.Date.getMonth()}}.{{meeting.Date.getFullYear()}}
-                    --- Time: {{meeting.Date.getHours()}}:{{meeting.Date.getMinutes()}}
+                    Student email: {{meeting.StudentEmail}} --- Request date: {{meeting.Date.getDate()}}.{{meeting.Date.getMonth()}}.{{meeting.Date.getFullYear()}}
+                    --- Request time: {{meeting.Date.getHours()}}:{{meeting.Date.getMinutes()}}   
                 </span>
 
                 <span>
@@ -86,12 +86,12 @@
                     </button>
                 </span>
 
-                <div clas="columnContent" *ngIf="meeting.Accepted">
-                    Accepted
-                </div>
-                <div class="columnContent" *ngIf="meeting.Declined">
-                    Declined
-                </div> 
+                <span clas="profileDetails meetingRequestDetails" *ngIf="meeting.Accepted">
+                    ---   Status: Accepted
+                </span>
+                <span class="profileDetails meetingRequestDetails" *ngIf="meeting.Declined">
+                    ---   Status: Declined
+                </span> 
 
             </div>
         </div>

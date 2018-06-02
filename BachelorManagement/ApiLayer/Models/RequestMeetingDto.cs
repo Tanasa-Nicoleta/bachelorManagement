@@ -2,10 +2,10 @@
 
 namespace BachelorManagement.ApiLayer.Models
 {
-    public class StudentMeetingRequestDto
+    public class RequestMeetingDto
     {
         public string TeacherEmail { get; set; }
         public string StudentEmail { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
     }
 }

@@ -19,10 +19,13 @@ import { Teacher } from '../../models/teacher.model';
 export class TeacherWallComponent {
   teacherName: string = "Vlad Simion";
   studentName: string = "Mihai Ursache";
+  studentEmail: string = "mihai.ursache@info.uaic.ro";
   availableDay: string = DayOfWeek[0];
   availableHours: string = "12:00";
   upcomingDeadlineDay: DateClass = new DateClass(1, Month[2], 2018, "14:00");
   requestAMeetingButton: string = "Request a meeting";
+  request: string = "Request a meeting";
+  cancel: string = "Cancel the meeting request";
   meetingRequest: boolean = false;
   meetingRequestStatus: string = MeetingRequestStatus[0];
   hideCommentsButton: string = "Hide comments";
@@ -31,10 +34,16 @@ export class TeacherWallComponent {
   teacherEmail: string = "vlad.simion@info.uaic.ro";
   teacherObs: [[TeacherObservation, [Comment | null], boolean]] = [
     [new TeacherObservation("Hello everybody! Welcome to my page.", new DateClass(1, Month[1], 2018, "12:00"), 0),
-    [new Comment(this.studentName, "Hello! Thank you, mister " + this.teacherName + "!", new DateClass(20, Month[1], 2018, "14:40"))],
+    [new Comment(this.studentName, "Hello! Thank you!", new DateClass(20, Month[1], 2018, "14:40"))],
     this.showComments]];
 
   titleService: TitleService;
+
+  meetingRequestBody: {
+    StudentEmail: string,
+    TeacherEmail: string,
+    Date: Date
+  }
 
   constructor(private title: Title, private http: HttpClient) {
     this.titleService = new TitleService(title);
@@ -43,6 +52,25 @@ export class TeacherWallComponent {
 
   ngOnInit() {
     this.getTeacherWallComments();
+    this.getMeetingRequestStatus();
+  }
+
+  getMeetingRequestStatus(){
+    const commentResponse = this.http.get('http://localhost:64250/api/student/studentMeetingRequestStatus/' + this.studentEmail, { observe: 'response' });
+
+    commentResponse.subscribe(
+      data => {
+         this.meetingRequestStatus = MeetingRequestStatus[data.body['status']];
+         if(data.body['status'] == 1 || data.body['status'] == 2){
+          this.requestAMeetingButton = this.cancel;
+          this.meetingRequest = true;
+         }
+      },
+      err => {
+        console.log("Error");
+        console.log(err)
+      }
+    );
   }
 
   getTeacherWallComments() {
@@ -91,6 +119,60 @@ export class TeacherWallComponent {
   }
 
   requestMetting() {
+    if (this.requestAMeetingButton == this.request) {
+      this.registerRequestMeeting();
+    }
+
+    if (this.requestAMeetingButton == this.cancel) {
+      this.cancelRequestMeeting();
+    }
+
+    this.displayMeetingRequest();
+  }
+
+  registerRequestMeeting() {
+    this.meetingRequestBody = {
+      StudentEmail: this.studentEmail,
+      TeacherEmail: this.teacherEmail,
+      Date: new Date()
+    }
+
+    const commentReplyResponse = this.http.post('http://localhost:64250/api/student/studentMeetingRequest', this.meetingRequestBody, { observe: 'response' });
+
+    commentReplyResponse.subscribe(
+      data => {
+        this.meetingRequestStatus = MeetingRequestStatus[0];
+      },
+      err => {
+        console.log("Error requesting meeting");
+        console.log(err)
+      }
+    );
+
+  }
+
+  cancelRequestMeeting() {
+    this.meetingRequestBody = {
+      StudentEmail: this.studentEmail,
+      TeacherEmail: this.teacherEmail,
+      Date: new Date()
+    }
+
+    const commentReplyResponse = this.http.post('http://localhost:64250/api/student/deleteStudentMeetingRequest', this.meetingRequestBody, { observe: 'response' });
+
+    commentReplyResponse.subscribe(
+      data => {
+
+      },
+      err => {
+        console.log("Error canceling meeting");
+        console.log(err)
+      }
+    );
+
+  }
+
+  displayMeetingRequest() {
     if (this.meetingRequest) {
       this.meetingRequest = false;
     }
@@ -98,11 +180,11 @@ export class TeacherWallComponent {
       this.meetingRequest = true;
     }
 
-    if (this.requestAMeetingButton == "Request a meeting") {
-      this.requestAMeetingButton = "Cancel the meeting request";
+    if (this.requestAMeetingButton == this.request) {
+      this.requestAMeetingButton = this.cancel;
     }
     else {
-      this.requestAMeetingButton = "Request a meeting";
+      this.requestAMeetingButton = this.request;
     }
   }
 

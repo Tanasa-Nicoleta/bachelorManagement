@@ -48,13 +48,13 @@
                                     </button>
                                     <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect denyRequestButton" *ngIf="student.Accepted == false && student.Denied == false"
                                         (click)="denyStudent(student)">
-                                        {{denyStudentsRequest}}
+                                        {{declineStudentsRequest}}
                                     </button>
                                     <div *ngIf="student.Accepted == true">
                                         Accepted
                                     </div>
                                     <div *ngIf="student.Denied == true">
-                                        Denied
+                                        Declined
                                     </div>
                                 </td>
                             </tr>
@@ -67,7 +67,32 @@
 
         <div *ngIf="dueDatePassed" class="bordered content_border">
             <div *ngFor="let meeting of meetingRequests">
-                {{meeting.StudentEmail}} {{meeting.TeacherEmail}} {{meeting.Date}}
+                <span class="profileDetails meetingRequestDetails">
+                    Student: {{meeting.StudentEmail}} --- Date: {{meeting.Date.getDate()}}.{{meeting.Date.getMonth()}}.{{meeting.Date.getFullYear()}}
+                    --- Time: {{meeting.Date.getHours()}}:{{meeting.Date.getMinutes()}}
+                </span>
+
+                <span>
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect requestButton meetingRequestDetailsButton"
+                        (click)="acceptRequestMetting(meeting.StudentEmail, meeting.TeacherEmail)" *ngIf="meeting.Accepted == false && meeting.Declined == false">
+                        {{acceptStudentsRequest}}
+                    </button>
+                </span>
+
+                <span>
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect requestButton meetingRequestDetailsButton"
+                        (click)="declineRequestMetting(meeting.StudentEmail, meeting.TeacherEmail)" *ngIf="meeting.Accepted == false && meeting.Declined == false">
+                        {{declineStudentsRequest}}
+                    </button>
+                </span>
+
+                <div clas="columnContent" *ngIf="meeting.Accepted">
+                    Accepted
+                </div>
+                <div class="columnContent" *ngIf="meeting.Declined">
+                    Declined
+                </div> 
+
             </div>
         </div>
 

@@ -4,6 +4,7 @@ using BachelorManagement.ApiLayer.Models;
 using BachelorManagement.DataLayer.Entities;
 using BachelorManagement.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using BachelorManagement.DataLayer.Enums;
 
 namespace BachelorManagement.ApiLayer.Controllers
 {
@@ -116,7 +117,7 @@ namespace BachelorManagement.ApiLayer.Controllers
         public IActionResult GetTeacherMeetingRequest(string email)
         {
             var teacher = _teacherService.GetTeacherByEmail(email);
-            var meetingRequestDto = new List<StudentMeetingRequestDto>();
+            var meetingRequestDto = new List<RequestMeetingDto>();
             List<MeetingRequest> meetingRequests = new List<MeetingRequest>();
 
             if (teacher != null)
@@ -127,7 +128,7 @@ namespace BachelorManagement.ApiLayer.Controllers
             foreach (var meetingRequest in meetingRequests)
             {
                 meetingRequestDto.Add(
-                    new StudentMeetingRequestDto
+                    new RequestMeetingDto
                     {
                         Date = meetingRequest.Date,
                         StudentEmail = _studentService.GetStudentById(meetingRequest.StudentId.Value).Email,
@@ -140,6 +141,46 @@ namespace BachelorManagement.ApiLayer.Controllers
         }
 
         [HttpPost]
+        [Route("api/teacher/acceptStudentMeetingRequest")]
+        public IActionResult AcceptStudentMeetingRequest([FromBody] RequestMeetingDto meetingRequestDto)
+        {
+            var student = _studentService.GetStudentByEmail(meetingRequestDto.StudentEmail);
+            MeetingRequest meetingRequest = new MeetingRequest();
+
+            if (student != null)
+            {
+                meetingRequest = _meetingRequestService.GetStudentMeetingRequests(student.Id);
+            }
+
+            if(meetingRequest != null)
+            {
+               _meetingRequestService.UpdateMeetingRequestStatus(meetingRequest, MeetingRequestStatus.Accepted);
+            }            
+
+            return Ok(student);
+        }
+
+        [HttpPost]
+        [Route("api/teacher/declineStudentMeetingRequest")]
+        public IActionResult DeclineStudentMeetingRequest([FromBody] RequestMeetingDto meetingRequestDto)
+        {
+            var student = _studentService.GetStudentByEmail(meetingRequestDto.StudentEmail);
+            MeetingRequest meetingRequest = new MeetingRequest();
+
+            if (student != null)
+            {
+                meetingRequest = _meetingRequestService.GetStudentMeetingRequests(student.Id);
+            }
+
+            if (meetingRequest != null)
+            {
+                _meetingRequestService.UpdateMeetingRequestStatus(meetingRequest, MeetingRequestStatus.Declined);
+            }
+
+            return Ok(new object());
+        }
+
+        [HttpPost]
         [Route("api/teacher/comments/{email}")]
         public IActionResult AddStudentPost([FromBody] PostDto postDto)
         {
@@ -148,7 +189,7 @@ namespace BachelorManagement.ApiLayer.Controllers
 
             _commentService.AddComment(student?.Id, teacher?.Id, postDto.CommentContent, postDto.Date);
 
-            return Ok();
+            return Ok(student);
         }
 
     }

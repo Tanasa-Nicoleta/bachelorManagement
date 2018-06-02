@@ -39,5 +39,20 @@ namespace BachelorManagement.BusinessLayer.Services
         {
             return _meetingRequestRepository.GetAll().Where(m => m.TeacherId == teacherId).ToList();
         }
+
+        public void DeleteMeetingRequest(int studentId, int teacherId)
+        {
+            var meetingRequest = _meetingRequestRepository.GetAll().FirstOrDefault(m => m.StudentId == studentId && m.TeacherId == teacherId);
+
+            _meetingRequestRepository.Delete(meetingRequest);
+        }
+
+        public void UpdateMeetingRequestStatus(MeetingRequest meetingRequest, MeetingRequestStatus status)
+        {
+            var oldMeetingrequest = _meetingRequestRepository.GetAll().FirstOrDefault(m => m.Id == meetingRequest.Id);
+            oldMeetingrequest.Status = status;
+
+            _meetingRequestRepository.Update(oldMeetingrequest);
+        }
     }
 }

@@ -7,6 +7,7 @@ import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { MeetingRequest } from '../../models/meeting-request';
+import { MeetingRequestStatus } from '../../models/meeting-request-status.model';
 
 @Component({
   selector: 'teacher-students-requests',
@@ -17,8 +18,8 @@ import { MeetingRequest } from '../../models/meeting-request';
 export class TeacherStudentsRequestsComponent {
   email: string = "vlad.simion@info.uaic.ro";
   acceptStudentsRequest: string = "Accept";
-  denyStudentsRequest: string = "Deny";
-  dueDatePassed: boolean = false; //this.limitDate < this.today;
+  declineStudentsRequest: string = "Decline";
+  dueDatePassed: boolean = true; //this.limitDate < this.today;
   limitDate: Date = new Date(2018, 6, 15);
 
   numberOfSpots: number;
@@ -28,6 +29,12 @@ export class TeacherStudentsRequestsComponent {
   meetingRequests: Array<MeetingRequest> = new Array<MeetingRequest>();
   today: Date = new Date();
 
+  meetingRequestBody: {
+    StudentEmail: string,
+    TeacherEmail: string,
+    Date: Date
+  }
+
   constructor(private title: Title, private http: HttpClient, private router: Router) {
     this.titleService = new TitleService(title);
     this.titleService.setTitle("BDMApp Teacher Students Requests");
@@ -36,6 +43,7 @@ export class TeacherStudentsRequestsComponent {
   ngOnInit() {
     if (this.dueDatePassed) {
       this.getTeacherMeetingRequests(this.email);
+      this.getTeacherStudents(this.email);
     }
     else {
       this.getTeacherDetails(this.email);
@@ -51,9 +59,25 @@ export class TeacherStudentsRequestsComponent {
         for (let key in data.body) {
           if (data.body[key]) {
             this.meetingRequests.push(new MeetingRequest(data.body[key]["studentEmail"], data.body[key]["teacherEmail"],
-              data.body[key]["date"]));
+              new Date(data.body[key]["date"]), null, null));
+            this.getMeetingRequestStatus(this.meetingRequests.find(m => m.StudentEmail == data.body[key]["studentEmail"]), data.body[key]["studentEmail"])
           }
         }
+      },
+      err => {
+        console.log("Error 1");
+        console.log(err)
+      }
+    );
+  }
+
+  getMeetingRequestStatus(meetingRequest: MeetingRequest, email: string) {
+    const commentResponse = this.http.get('http://localhost:64250/api/student/studentMeetingRequestStatus/' + email, { observe: 'response' });
+
+    commentResponse.subscribe(
+      data => {
+        meetingRequest.Accepted = MeetingRequestStatus[data.body['status']] == MeetingRequestStatus[1];
+        meetingRequest.Declined = MeetingRequestStatus[data.body['status']] == MeetingRequestStatus[2];
       },
       err => {
         console.log("Error");
@@ -61,6 +85,7 @@ export class TeacherStudentsRequestsComponent {
       }
     );
   }
+
 
   getTeacherDetails(email: string) {
     const teacherResponse = this.http.get('http://localhost:64250/api/teacher/' + email, { observe: 'response' });
@@ -165,5 +190,49 @@ export class TeacherStudentsRequestsComponent {
           });
       }
     });
+  }
+
+  acceptRequestMetting(studentEmail: string, teacherEmail: string) {
+    this.meetingRequestBody = {
+      StudentEmail: studentEmail,
+      TeacherEmail: teacherEmail,
+      Date: new Date()
+    }
+
+    const commentReplyResponse = this.http.post('http://localhost:64250/api/teacher/acceptStudentMeetingRequest', this.meetingRequestBody, { observe: 'response' });
+
+    commentReplyResponse.subscribe(
+      data => {
+        this.meetingRequests.forEach(meetingRequest => {
+          if (meetingRequest.StudentEmail == studentEmail) { meetingRequest.Accepted = true; }
+        });
+      },
+      err => {
+        console.log("Error canceling meeting");
+        console.log(err)
+      }
+    );
+  }
+
+  declineRequestMetting(studentEmail: string, teacherEmail: string) {
+    this.meetingRequestBody = {
+      StudentEmail: studentEmail,
+      TeacherEmail: teacherEmail,
+      Date: new Date()
+    }
+
+    const commentReplyResponse = this.http.post('http://localhost:64250/api/teacher/declineStudentMeetingRequest', this.meetingRequestBody, { observe: 'response' });
+
+    commentReplyResponse.subscribe(
+      data => {
+        this.meetingRequests.forEach(meetingRequest => {
+          if (meetingRequest.StudentEmail == studentEmail) { meetingRequest.Declined = true; }
+        });
+      },
+      err => {
+        console.log("Error canceling meeting");
+        console.log(err)
+      }
+    );
   }
 }

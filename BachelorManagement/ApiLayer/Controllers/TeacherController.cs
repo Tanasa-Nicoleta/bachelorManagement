@@ -5,6 +5,7 @@ using BachelorManagement.DataLayer.Entities;
 using BachelorManagement.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using BachelorManagement.DataLayer.Enums;
+using System;
 
 namespace BachelorManagement.ApiLayer.Controllers
 {
@@ -184,16 +185,29 @@ namespace BachelorManagement.ApiLayer.Controllers
         }
 
         [HttpPost]
-        [Route("api/teacher/comments/{email}")]
-        public IActionResult AddStudentPost([FromBody] PostDto postDto)
+        [Route("api/teacher/comments")]
+        public IActionResult AddTeacherPost([FromBody] PostDto postDto)
         {
             var student = _studentService.GetStudentByEmail(postDto.StudentEmail);
             var teacher = _teacherService.GetTeacherByEmail(postDto.TeacherEmail);
 
-            _commentService.AddComment(student?.Id, teacher?.Id, postDto.CommentContent, postDto.Date);
+            _commentService.AddComment(student?.Id, teacher?.Id, postDto.CommentContent, DateTime.Now);
 
             return Ok(student);
         }
+
+
+        [HttpPost]
+        [Route("api/teacher/addCommentReply")]
+        public IActionResult AddTeacherCommentReply([FromBody] CommentReplyDto commentReplyDto) 
+        {
+            var comment = _commentService.GetCommentById(commentReplyDto.CommentId);
+
+            _commentReplyService.AddCommentReply(commentReplyDto.CommentId, commentReplyDto.CommentContent);
+
+            return Ok(comment);
+        }
+
 
         [HttpGet]
         [Route("api/teacher/getConsultation/{email}")]

@@ -8,6 +8,7 @@ namespace BachelorManagement.Interfaces
     {
         ICollection<Comment> GetTeacherComments(string email);
         ICollection<Comment> GetStudentComments(string email);
+        Comment GetCommentById(int commentId);
         void AddComment(int? studentId, int? teacherId, string commentContent, DateTime date);
     }
 }

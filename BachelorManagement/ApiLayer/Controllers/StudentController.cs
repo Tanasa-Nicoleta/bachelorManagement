@@ -4,6 +4,7 @@ using BachelorManagement.ApiLayer.Models;
 using BachelorManagement.DataLayer.Entities;
 using BachelorManagement.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace BachelorManagement.ApiLayer.Controllers
 {
@@ -96,18 +97,6 @@ namespace BachelorManagement.ApiLayer.Controllers
         public IActionResult GetTeacherComments(string email)
         {
             return Ok(_studentService.GetStudentComments(email));
-        }
-
-        [HttpPost]
-        [Route("api/student/comments/{email}")]
-        public IActionResult AddStudentPost([FromBody] PostDto postDto)
-        {
-            var student = _studentService.GetStudentByEmail(postDto.StudentEmail);
-            var teacher = _teacherService.GetTeacherByEmail(postDto.TeacherEmail);
-            
-            _commentService.AddComment(student?.Id, teacher?.Id, postDto.CommentContent, postDto.Date);
-
-            return Ok();
         }
 
         [HttpGet]

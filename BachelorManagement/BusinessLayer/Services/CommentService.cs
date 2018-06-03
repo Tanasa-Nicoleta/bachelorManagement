@@ -28,6 +28,11 @@ namespace BachelorManagement.BusinessLayer.Services
             );
         }
 
+        public Comment GetCommentById(int commentId)
+        {
+            return _commentRepository.GetAll().FirstOrDefault(c => c.Id == commentId);
+        }
+
         public ICollection<Comment> GetStudentComments(string email)
         {
             return _commentRepository.GetAll().Where(c => c.Student.Email == email).ToList();

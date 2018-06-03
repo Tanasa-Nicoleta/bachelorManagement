@@ -45,6 +45,17 @@ export class TeacherWallComponent {
     Date: Date
   }
 
+  postBody:{
+    StudentEmail: string;
+    TeacherEmail: string;
+    CommentContent: string;
+  }
+
+  commentBody:{
+    CommentId: number;
+    CommentContent: string;
+  }
+
   constructor(private title: Title, private http: HttpClient) {
     this.titleService = new TitleService(title);
     this.titleService.setTitle("BDMApp Teacher Wall");
@@ -189,23 +200,43 @@ export class TeacherWallComponent {
   }
 
   addComment(commentContent: string, teacherObservation: [TeacherObservation, [Comment | null], boolean]) {
-    let datetime = new Date();
-    let minutes = (datetime.getMinutes() + "").length == 2 ? datetime.getMinutes() : "0" + datetime.getMinutes();
-    let hour = datetime.getHours() + ":" + minutes;
-    let comment = new Comment(teacherObservation[1][0].Name,
-      commentContent,
-      new DateClass(datetime.getDate(), Month[datetime.getMonth()], datetime.getFullYear(), hour));
-
-    this.teacherObs.forEach(teacherOb => {
-      if (teacherOb[0] == teacherObservation[0]) {
-        teacherOb[1].push(comment);
+      this.commentBody = {
+        CommentId: teacherObservation[0].Id,
+        CommentContent: commentContent
       }
-    });
+  
+      const commentReplyResponse = this.http.post('http://localhost:64250/api/teacher/addCommentReply', this.commentBody, { observe: 'response' });
+  
+      commentReplyResponse.subscribe(
+        data => {
+          window.location.reload();
+        },
+        err => {
+          console.log("Error");
+          console.log(err)
+        }
+      );
+    
   }
 
   addPost(commentContent: string) {
-    this.teacherObs[0].push(new TeacherObservation(commentContent, Date.now, 1));
-    //backend call
+    this.postBody = {
+      StudentEmail: this.studentEmail,
+      TeacherEmail: this.teacherEmail,
+      CommentContent: commentContent
+    }
+
+    const commentReplyResponse = this.http.post('http://localhost:64250/api/teacher/comments', this.postBody, { observe: 'response' });
+
+    commentReplyResponse.subscribe(
+      data => {
+        window.location.reload();
+      },
+      err => {
+        console.log("Error");
+        console.log(err)
+      }
+    );
   }
 
   showAllComments(teacherObservation: [TeacherObservation, [Comment | null], boolean]) {

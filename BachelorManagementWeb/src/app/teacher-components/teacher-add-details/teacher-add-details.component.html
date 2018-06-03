@@ -37,7 +37,21 @@
         </div>
 
         <div>
-            <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" (click)="addTeacherDetails(NumberOfStudents.value, Achievement.value, ThemeTitle.value, ThemeDescr.value)">
+            <span class="teacherDetailsRow">Consultation day:</span>
+            <span class="mdl-textfield mdl-js-textfield">
+                <input #ConsultationDay class="mdl-textfield__input" type="text" placeholder="e.g. Monday">
+            </span>
+        </div>
+
+        <div>
+            <span class="teacherDetailsRow">Consultation interval:</span>
+            <span class="mdl-textfield mdl-js-textfield">
+                <input #ConsultationInterval class="mdl-textfield__input" type="text" placeholder="e.g. 09:00-11:00">
+            </span>
+        </div>
+
+        <div>
+            <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" (click)="addTeacherDetails(NumberOfStudents.value, Achievement.value, ThemeTitle.value, ThemeDescr.value, ConsultationDay.value, ConsultationInterval.value)">
                 {{saveButtonText}}
             </button>
         </div>

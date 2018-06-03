@@ -23,6 +23,7 @@ export class ProfileComponent {
   showEditForm: boolean = false;
   showEditConsultation: boolean = false;
   editConsultationButton: string = "edit";
+  saveConsultationButton: string = "submit";
 
   student: Student;
   teacher: TeacherProfile = new TeacherProfile(null, null, null, null, null, null, null);
@@ -33,6 +34,12 @@ export class ProfileComponent {
     GitUrl: string;
     ThemeTitle: string;
     ThemeDescription: string;
+  }
+
+  editConsultationBody:{
+    TeacherEmail: string;
+    Day: DayOfWeek;
+    Interval: string;
   }
 
   constructor(private title: Title, private http: HttpClient) {
@@ -218,6 +225,28 @@ export class ProfileComponent {
 
   allowEditConsultation(){
     this.showEditConsultation = true;
+  }
+
+  editConsultation(email: string, day: string, interval: string){
+    this.editConsultationBody = {
+      TeacherEmail: email,
+      Day: DayOfWeek[day],
+      Interval: interval
+    }
+
+    const resp = this.http.put('http://localhost:64250/api/teacher/editConsultation', this.editConsultationBody, { responseType: 'text' });
+
+    resp.subscribe(
+      data => {
+        window.location.reload();
+      },
+      err => {
+        console.log("Error");
+        console.log(err)
+      });
+
+    this.showEditConsultation = false;      
+
   }
 
 }

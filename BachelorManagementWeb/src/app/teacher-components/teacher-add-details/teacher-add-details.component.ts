@@ -5,6 +5,7 @@ import { Title } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Bachelor } from '../../models/bachelor-degree.model';
+import { DayOfWeek } from '../../models/day-of-week.model';
 
 @Component({
   selector: 'teacher-add-details',
@@ -30,6 +31,12 @@ export class TeacherAddDetailsComponent {
     ThemeDescription: string
   }
 
+  consultationBody: {
+    TeacherEmail: string,
+    Day: DayOfWeek,
+    Interval: string
+  }
+
   constructor(private title: Title, private http: HttpClient, private router: Router) {
     this.titleService = new TitleService(title);
     this.titleService.setTitle("BDMApp Teacher Add Details");
@@ -41,7 +48,7 @@ export class TeacherAddDetailsComponent {
     this.commentValue = ' ';
   };
 
-  addTeacherDetails(numberOfStudents: number, requirement: string, themeTitle: string, themeDesrc: string) {
+  addTeacherDetails(numberOfStudents: number, requirement: string, themeTitle: string, themeDesrc: string, consultationDay: string, consultationInterval: string) {
     this.detailsBody = {
       Email: this.teacherThemes.Email,
       NoOfAvailableSpots: numberOfStudents,
@@ -51,6 +58,25 @@ export class TeacherAddDetailsComponent {
     };
 
     const resp = this.http.post('http://localhost:64250/api/teacher/addDetails', this.detailsBody, { responseType: 'text' });
+
+    resp.subscribe(
+      data => {
+        this.addTeacherConsultationDay(this.teacherThemes.Email, consultationDay, consultationInterval);
+      },
+      err => {
+        console.log("Error");
+        console.log(err)
+      });
+  }
+
+  addTeacherConsultationDay(email: string, day: string, interval: string){
+    this.consultationBody = {
+      TeacherEmail: email,
+      Day: DayOfWeek[day],
+      Interval: interval
+    };
+
+    const resp = this.http.post('http://localhost:64250/api/teacher/addConsultation', this.consultationBody, { responseType: 'text' });
 
     resp.subscribe(
       data => {

@@ -111,25 +111,29 @@
             </div>
 
             <div class="profileDetails" *ngIf="showEditConsultation == false">
-                Consultation: {{teacher.ConsultationDay}}, {{teacher.ConsultationInterval}}
+                <span>Consultation: {{teacher.ConsultationDay}}, {{teacher.ConsultationInterval}}</span>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect editConsultationButton" *ngIf="showEditConsultation == false"
+                    (click)="allowEditConsultation()">
+                    {{editConsultationButton}}
+                </button>
             </div>
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect requestButton" (click)="allowEditConsultation()">
-                {{editConsultationButton}}
-            </button>
 
             <div *ngIf="showEditConsultation">
-                <span>
-                    Consultation day: 
+                <span class="consultationDetails">
+                    Consultation day:
                 </span>
-                <span class="mdl-textfield mdl-js-textfield addCommentRow">
-                    <input #ConsultationDay class="mdl-textfield__input" type="text" placeholder="Your comment here.">
+                <span class="mdl-textfield mdl-js-textfield editConsultationRow editInput">
+                    <input #ConsultationDay class="mdl-textfield__input" type="text" placeholder={{teacher.ConsultationDay}}>
                 </span>
-                <span>
-                    Consultation interval: 
+                <span class="consultationIntervalDetails">
+                    Consultation interval:
                 </span>
-                <span class="mdl-textfield mdl-js-textfield addCommentRow">
-                    <input #ConsultationInterval class="mdl-textfield__input" type="text" placeholder="Your comment here.">
+                <span class="mdl-textfield mdl-js-textfield editConsultationRow editInput">
+                    <input #ConsultationInterval class="mdl-textfield__input" type="text" placeholder={{teacher.ConsultationInterval}}>
                 </span>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect saveConsultationButton" (click)="editConsultation(teacher.Email, ConsultationDay.value.length == 0 ? ConsultationDay.placeholder : ConsultationDay.value, ConsultationInterval.value.length == 0 ? ConsultationInterval.placeholder : ConsultationInterval.value)">
+                    {{saveConsultationButton}}
+                </button>
             </div>
 
             <div class="profileDetails">

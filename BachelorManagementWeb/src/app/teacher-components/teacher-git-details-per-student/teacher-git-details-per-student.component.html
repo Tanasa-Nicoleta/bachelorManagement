@@ -27,21 +27,51 @@
             </div>
 
             <div class="subtitle profileDetails">
-                Languages
+                Used languages
             </div>
-            <div *ngFor="let language of languagesArray" class="profileSecondaryDetails">
-                {{language.Name}}: {{language.Size}}
+            <div class="profileSecondaryDetails">
+                <canvas class="canvasClass" baseChart [data]="languageChartData" [labels]="languageChartLabels" [chartType]="languageChartType"
+                    [colors]="languageChartColors"></canvas>
             </div>
 
             <div class="subtitle profileDetails">
-                Commits
+                Additions and deletions for the last 10 weeks
             </div>
-            <div *ngFor="let commit of commitsArray" class="profileSecondaryDetails">
-                {{commit.Date.getDate()}}.{{commit.Date.getMonth()}}.{{commit.Date.getFullYear()}}: {{commit.Message}}
+            <div class="profileSecondaryDetails">
+                <canvas class="canvasClass" baseChart [datasets]="addAndDelChartData" [labels]="addAndDelChartLabels" [colors]="addAndDelChartColors"
+                    [legend]="addAndDelChartLegend" [chartType]="addAndDelChartType" [options]="addAndDelChartOptions" (chartHover)="chartHovered($event)"></canvas>
+            </div>
+
+            <div class="subtitle profileDetails">
+                Last 30 commits
+            </div>
+            <div>
+                <div class="mdl-cell mdl-cell--12-col profileSecondaryDetails">
+                    <table class="table">
+                        <thead>
+                            <th class="columnTitle"> Date </th>
+                            <th class="columnTitle"> Description </th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let commit of commitsArray; let i = index;">
+                                <td class="columnGitContent">{{commit.Date.getDate()}}.{{commit.Date.getMonth()}}.{{commit.Date.getFullYear()}}</td>
+                                <td class="columnGitContent columnGitContentMessage">{{commit.Message}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h2 *ngIf="commitsArray.length == 0" class="no-data-to-display">No data to display</h2>
+                </div>
             </div>
 
         </div>
 
     </div>
+
+
+
+
+
+
+
 
 </div>

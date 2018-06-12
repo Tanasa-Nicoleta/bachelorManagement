@@ -7,6 +7,7 @@ import { Commit } from '../../models/commit.model';
 import { TitleService } from '../../services/title.service';
 import { Title } from '@angular/platform-browser';
 import { Repository } from '../../models/repository';
+import { delay } from 'q';
 
 @Component({
   selector: 'teacher-git-details-per-student',
@@ -25,6 +26,55 @@ export class TeacherGitDetailsPerStudentComponent implements OnInit {
   commitsArray: Array<Commit> = new Array<Commit>();
   titleService: TitleService;
 
+
+
+  languageChartLabels: string[] = [];
+  languageChartData: number[] = [];
+  languageChartType: string = 'doughnut';
+  languageChartColors: Array<any> = [{ backgroundColor: ['rgba(127, 255, 212, 0.5)', 'rgba(107, 77, 194, 0.5)', 'rgba(0, 255, 255, 0.5)', 'rgba(253, 227, 167, 0.5)', 'rgba(111, 200, 206, 0.5)'] }];
+
+  public chartHovered(e: any): void {
+    console.log(e);
+  }
+
+
+  addChartData: number[] = [];
+  delChartData: number[] = [];
+  addAndDelChartData: Array<any> = [
+    { data: this.addChartData, label: 'Additons' },
+    { data: this.delChartData, label: 'Deletions' }
+  ];
+  addAndDelChartLabels: Array<any> = ['week 1', 'week 2', 'week 3', 'week 4', 'week 5', 'week 6', 'week 7', 'week 8', 'week 9', 'week 10'];
+  addAndDelChartColors: Array<any> = [
+    {
+      backgroundColor: 'rgba(127, 255, 212, 0.5)',
+      borderColor: 'rgba(148,159,177,1)',
+      pointBackgroundColor: 'rgba(148,159,177,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+    },
+    {
+      backgroundColor: 'rgba(243, 71, 96, 0.5)',
+      borderColor: 'rgba(77,83,96,1)',
+      pointBackgroundColor: 'rgba(77,83,96,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(77,83,96,1)'
+    }
+  ];
+  addAndDelChartLegend: boolean = true;
+  addAndDelChartType: string = 'line';
+  addAndDelChartOptions: any = {
+    scales: {
+      yAxes: [{
+        id: 'y-axis-1', ticks: {
+          min: 0,
+          max: 800
+        }}]
+    }
+  };
+
   constructor(private http: HttpClient, private title: Title) {
     this.titleService = new TitleService(title);
     this.titleService.setTitle("BDMApp Teacher Details Per Student");
@@ -34,6 +84,7 @@ export class TeacherGitDetailsPerStudentComponent implements OnInit {
     this.getRepositoryData();
     this.getLanguagesData();
     this.getCommitData();
+    this.getAdditonsAndDelletionPerWeek();
   };
 
   getRepositoryData() {
@@ -63,6 +114,27 @@ export class TeacherGitDetailsPerStudentComponent implements OnInit {
       });
   }
 
+  getAdditonsAndDelletionPerWeek() {
+
+    var resp = this.http.get('https://api.github.com/repos/' + this.gitUserName + '/' + this.gitProjectName + '/stats/code_frequency');
+
+    resp.subscribe(
+      data => {
+        let i = 0;
+        for (let key in data) {
+          if (data[key] && i < 10) {
+            this.addChartData.push(data[key][1]);
+            this.delChartData.push(data[key][2] * (-1));
+          }
+          i++;
+        }
+      },
+      err => {
+        console.log("Error");
+        console.log(err)
+      });
+  }
+
   getCommitData() {
     var resp = this.http.get('https://api.github.com/repos/' + this.gitUserName + '/' + this.gitProjectName + '/commits ');
 
@@ -83,6 +155,13 @@ export class TeacherGitDetailsPerStudentComponent implements OnInit {
         this.languagesArray.push(new Language(key, this.languagesData[key] / 1024 / 1024));
       }
     }
+    this.languagesArray.forEach(l =>
+      this.languageChartLabels.push(l.Name)
+    );
+
+    this.languagesArray.forEach(l =>
+      this.languageChartData.push(l.Size)
+    );
   }
 
   iterateForCommits() {

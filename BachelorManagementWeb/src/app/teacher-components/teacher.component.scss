@@ -136,7 +136,7 @@ $text-size-content-table: 14px;
     cursor: pointer;
 }
 
-.no-data-to-display, .columnTitle, .columnContent{
+.no-data-to-display, .columnTitle, .columnContent, .columnGitContent{
     text-align: center;
     font-family: $text-font;
     color: $text-color;
@@ -151,6 +151,15 @@ $text-size-content-table: 14px;
 .columnContent{
     padding: 0.5% 0%;
     font-size: $text-size-header - 4;
+}
+
+.columnGitContent{
+    text-align: left;
+    padding-right: 0%;
+}
+
+.columnGitContentMessage{
+    padding-left: 1.5%;
 }
 
 .table, td, th{   
@@ -270,4 +279,10 @@ h2{
 .editConsultationButton{
     margin: 0.2%;
     margin-left: 2%;
+}
+
+.canvasClass{
+    margin-bottom: 1%;
+    width: 70% !important;
+    height: 40% !important;
 }

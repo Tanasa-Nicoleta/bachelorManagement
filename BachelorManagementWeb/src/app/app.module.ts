@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { ClickOutsideModule } from 'ng4-click-outside';
 
 import { AppComponent } from './app.component';
@@ -52,6 +53,7 @@ import { AdminWallComponent } from './admin-components/admin-wall/admin-wall.com
     FormsModule,
     HttpClientModule,
     ClickOutsideModule,
+    ChartsModule,
     RouterModule.forRoot([
       { path: 'login', component: LoginLayoutComponent, pathMatch: 'full' },
       { path: 'register', component: RegisterLayoutComponent, pathMatch: 'full' },
@@ -68,7 +70,7 @@ import { AdminWallComponent } from './admin-components/admin-wall/admin-wall.com
       { path: 'forgotPassword', component: ForgotPasswordComponent, pathMatch: 'full' },
       { path: 'information', component: InformationComponent, pathMatch: 'full' },
       { path: 'studentWork', component: StudentWorkComponent, pathMatch: 'full' },      
-      { path: 'adminWall', component: AdminWallComponent, pathMatch: 'full' }, 
+      { path: 'adminWall', component: AdminWallComponent, pathMatch: 'full' },       
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: '**', redirectTo: 'login', pathMatch: 'full' }
     ]),

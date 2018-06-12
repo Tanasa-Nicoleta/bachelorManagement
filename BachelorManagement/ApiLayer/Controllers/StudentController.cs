@@ -207,6 +207,7 @@ namespace BachelorManagement.ApiLayer.Controllers
                     {
                         Email = editStudentDto.Email,
                         GitUrl = editStudentDto.GitUrl,
+                        Pending = editStudentDto.Pending,
                         StudentBachelorTheme = new BachelorTheme
                         {
                             Title = editStudentDto.BachelorThemeTitle,

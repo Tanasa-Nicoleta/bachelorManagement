@@ -5,6 +5,7 @@ import { TitleService } from '../../services/title.service';
 import { Title } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { Student } from '../../models/student.model';
 
 @Component({
     selector: 'student-register-to-teacher',
@@ -15,10 +16,13 @@ import { Observable } from 'rxjs/Observable';
 export class StudentRegisterToTeacherComponent {
     dueDate: Date = new Date(2018, 6, 15);
     optionText: string = "Next step";
+    studentEmail: string = "mihai.ursache@info.uaic.ro";
+    acceptedByTeacher: boolean = false;
 
     teacherList: Array<Teacher> = new Array<Teacher>();
     teacherEmails: string[] = [];
     titleService: TitleService;
+    student: Student;
 
     constructor(private title: Title, private http: HttpClient) {
         this.titleService = new TitleService(title);
@@ -27,11 +31,34 @@ export class StudentRegisterToTeacherComponent {
 
     ngOnInit() {
         this.getTeachers();
+        this.getStudent(this.studentEmail);
+    }
+
+    getStudent(email: string){
+        const studentResponse = this.http.get('http://localhost:64250/api/student/' + email, { observe: 'response' });
+
+        studentResponse.subscribe(
+            data => {
+                this.student = new Student(data.body['firstName'], data.body['lastName'], data.body['email'], null, data.body['gitUrl'], data.body['startYear'], data.body['serialNumber'], null, data.body['achievements'], data.body['accepted'], data.body['denied']);
+                this.student.Pending = data.body['pending'];
+            },
+            err => {
+                console.log("Error");
+                console.log(err)
+            }
+        );
+
+        if(this.student.Accepted == true){
+
+        }
+
+        if(this.student.Denied == true){
+
+        }
     }
 
     applyToTeacher(teacherFirstName: string, teacherLastName: string) {
-        console.log(teacherFirstName + " " + teacherLastName);
-        //send those to the next file
+        this.student.Pending = true;
     }
 
     getTeachers() {
@@ -64,7 +91,6 @@ export class StudentRegisterToTeacherComponent {
             let themeResponse = this.http.get('http://localhost:64250/api/teacher/themes/' + this.teacherEmails[email], { observe: 'response' });
 
             themeResponse.subscribe(data => {
-                console.log("body: ", data.body);
                 if (data.body[i]) {
                     this.teacherList[j].Theme = new Bachelor(data.body[i]['title'], data.body[i]['description']);;
                 }

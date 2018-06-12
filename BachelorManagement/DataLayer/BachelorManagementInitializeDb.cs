@@ -56,7 +56,8 @@ namespace BachelorManagement.DataLayer
                     Achievements = "some achievements",
                     GitUrl = "another git url",
                     Accepted = false,
-                    Denied = false
+                    Denied = false,
+                    Pending = false
                 },
                 new Student
                 {
@@ -69,7 +70,8 @@ namespace BachelorManagement.DataLayer
                     Achievements = "Onis participation",
                     GitUrl = "a git url",
                     Accepted = false,
-                    Denied = false
+                    Denied = false,
+                    Pending = false
                 },
                 new Student
                 {

@@ -19,6 +19,7 @@ namespace BachelorManagement.DataLayer.Entities
         public string GitUrl { get; set; }
         public bool Accepted { get; set; }
         public bool Denied { get; set; }
+        public bool Pending { get; set; } 
         public int Id { get; set; }
     }
 }

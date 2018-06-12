@@ -6,5 +6,6 @@
         public string BachelorThemeTitle { get; set; }
         public string BachelorThemeDescription { get; set; }
         public string GitUrl { get; set; }
+        public bool Pending { get; set; }
     }
 }

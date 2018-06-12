@@ -81,6 +81,7 @@ namespace BachelorManagement.BusinessLayer.Services
             {
                 student.Accepted = accepted;
                 student.Denied = denied;
+                student.Pending = false;
             }
 
             _studentRepository.Update(student);
@@ -130,6 +131,9 @@ namespace BachelorManagement.BusinessLayer.Services
     
             if(student.GitUrl != null)
                 oldStudent.GitUrl = student.GitUrl;
+
+            if (student.Pending != oldStudent.Pending)
+                oldStudent.Pending = student.Pending;
 
             _studentRepository.Update(oldStudent);
             _bachelorThemeRepository.Update(oldBachelorTheme);

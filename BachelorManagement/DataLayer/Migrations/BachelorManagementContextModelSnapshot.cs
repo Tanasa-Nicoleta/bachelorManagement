@@ -92,13 +92,9 @@ namespace BachelorManagement.DataLayer.Migrations
 
                     b.Property<string>("Interval");
 
-                    b.Property<int?>("StudentId");
-
                     b.Property<int?>("TeacherId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("StudentId");
 
                     b.HasIndex("TeacherId")
                         .IsUnique()
@@ -191,6 +187,8 @@ namespace BachelorManagement.DataLayer.Migrations
 
                     b.Property<string>("LastName");
 
+                    b.Property<bool>("Pending");
+
                     b.Property<string>("SerialNumber");
 
                     b.Property<string>("StartYear");
@@ -267,7 +265,7 @@ namespace BachelorManagement.DataLayer.Migrations
             modelBuilder.Entity("BachelorManagement.DataLayer.Entities.BachelorTheme", b =>
                 {
                     b.HasOne("BachelorManagement.DataLayer.Entities.Student", "Student")
-                        .WithOne("BachelorTheme")
+                        .WithOne("StudentBachelorTheme")
                         .HasForeignKey("BachelorManagement.DataLayer.Entities.BachelorTheme", "StudentId");
 
                     b.HasOne("BachelorManagement.DataLayer.Entities.Teacher", "Teacher")
@@ -296,10 +294,6 @@ namespace BachelorManagement.DataLayer.Migrations
 
             modelBuilder.Entity("BachelorManagement.DataLayer.Entities.Consultation", b =>
                 {
-                    b.HasOne("BachelorManagement.DataLayer.Entities.Student", "Student")
-                        .WithMany()
-                        .HasForeignKey("StudentId");
-
                     b.HasOne("BachelorManagement.DataLayer.Entities.Teacher", "Teacher")
                         .WithOne("Consultation")
                         .HasForeignKey("BachelorManagement.DataLayer.Entities.Consultation", "TeacherId");

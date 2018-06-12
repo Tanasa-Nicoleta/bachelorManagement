@@ -30,4 +30,5 @@ export class Student {
     Achievement: string;
     Accepted: boolean;
     Denied: boolean;
+    Pending: boolean;
 }

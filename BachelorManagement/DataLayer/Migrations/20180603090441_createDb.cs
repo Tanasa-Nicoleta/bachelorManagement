@@ -44,6 +44,27 @@ namespace BachelorManagement.DataLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Consultations",
+                columns: table => new
+                {
+                    Day = table.Column<int>(nullable: false),
+                    Interval = table.Column<string>(nullable: true),
+                    TeacherId = table.Column<int>(nullable: true),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Consultations", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Consultations_Teachers_TeacherId",
+                        column: x => x.TeacherId,
+                        principalTable: "Teachers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Sessions",
                 columns: table => new
                 {
@@ -76,6 +97,7 @@ namespace BachelorManagement.DataLayer.Migrations
                     GitUrl = table.Column<string>(nullable: true),
                     Accepted = table.Column<bool>(nullable: false),
                     Denied = table.Column<bool>(nullable: false),
+                    Pending = table.Column<bool>(nullable: false),
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
                 },
@@ -162,34 +184,6 @@ namespace BachelorManagement.DataLayer.Migrations
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Comments_Teachers_TeacherId",
-                        column: x => x.TeacherId,
-                        principalTable: "Teachers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Consultations",
-                columns: table => new
-                {
-                    Day = table.Column<int>(nullable: false),
-                    Interval = table.Column<string>(nullable: true),
-                    TeacherId = table.Column<int>(nullable: true),
-                    StudentId = table.Column<int>(nullable: true),
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Consultations", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Consultations_Students_StudentId",
-                        column: x => x.StudentId,
-                        principalTable: "Students",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Consultations_Teachers_TeacherId",
                         column: x => x.TeacherId,
                         principalTable: "Teachers",
                         principalColumn: "Id",
@@ -296,11 +290,6 @@ namespace BachelorManagement.DataLayer.Migrations
                 name: "IX_Comments_TeacherId",
                 table: "Comments",
                 column: "TeacherId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Consultations_StudentId",
-                table: "Consultations",
-                column: "StudentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Consultations_TeacherId",

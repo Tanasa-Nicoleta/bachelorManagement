@@ -40,12 +40,57 @@ export class LoginLayoutComponent {
     resp.subscribe(
       data => {
         this.router.navigateByUrl('/welcome');
+        this.getUserType(email);
       },
       err => {
         if (err.status == 400)
           this.invalidError = true;
       }
     );
+  }
+
+  getUserType(email: string){
+    this.body = {
+      Username: email,
+      Password: null
+    };
+
+    const resp = this.http.post('http://localhost:64250/api/account/checkUserType', this.body, { responseType: 'text' });
+
+    resp.subscribe(
+      data => {
+        this.getUserToken(email, data);
+      },
+      err => {
+        console.log("Error");
+        console.log(err);
+      }
+    );
+  }
+
+  getUserToken(email: string, isTeacher: string){
+    this.body = {
+      Username: email,
+      Password: null
+    };
+
+    const resp = this.http.put('http://localhost:64250/api/account/addAccessToken', this.body, { responseType: 'text' });
+
+    resp.subscribe(
+      data => {
+        this.setLocalStorage(email, isTeacher, data)
+      },
+      err => {
+        console.log("Error");
+        console.log(err);
+      }
+    );
+  }
+
+  setLocalStorage(email: string, isTeacher: string, token: string){    
+    localStorage.setItem('email', email);
+    localStorage.setItem('isTeacher', isTeacher);
+    localStorage.setItem('token', token);
   }
 
   validateEmail(email: HTMLInputElement) {

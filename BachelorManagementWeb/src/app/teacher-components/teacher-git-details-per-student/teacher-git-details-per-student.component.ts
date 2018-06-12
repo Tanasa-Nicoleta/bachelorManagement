@@ -26,17 +26,10 @@ export class TeacherGitDetailsPerStudentComponent implements OnInit {
   commitsArray: Array<Commit> = new Array<Commit>();
   titleService: TitleService;
 
-
-
   languageChartLabels: string[] = [];
   languageChartData: number[] = [];
   languageChartType: string = 'doughnut';
   languageChartColors: Array<any> = [{ backgroundColor: ['rgba(127, 255, 212, 0.5)', 'rgba(107, 77, 194, 0.5)', 'rgba(0, 255, 255, 0.5)', 'rgba(253, 227, 167, 0.5)', 'rgba(111, 200, 206, 0.5)'] }];
-
-  public chartHovered(e: any): void {
-    console.log(e);
-  }
-
 
   addChartData: number[] = [];
   delChartData: number[] = [];
@@ -80,6 +73,10 @@ export class TeacherGitDetailsPerStudentComponent implements OnInit {
     this.titleService.setTitle("BDMApp Teacher Details Per Student");
   }
 
+  public chartHovered(e: any): void {
+    console.log(e);
+  }
+
   ngOnInit() {
     this.getRepositoryData();
     this.getLanguagesData();
@@ -88,6 +85,7 @@ export class TeacherGitDetailsPerStudentComponent implements OnInit {
   };
 
   getRepositoryData() {
+
     var resp = this.http.get('https://api.github.com/users/' + this.gitUserName + '/repos', { observe: 'response' });
 
     resp.subscribe(

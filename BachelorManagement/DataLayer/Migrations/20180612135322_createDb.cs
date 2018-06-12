@@ -33,6 +33,8 @@ namespace BachelorManagement.DataLayer.Migrations
                 name: "Users",
                 columns: table => new
                 {
+                    Token = table.Column<Guid>(nullable: false),
+                    UserType = table.Column<int>(nullable: false),
                     Email = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: true),
                     Id = table.Column<int>(nullable: false)

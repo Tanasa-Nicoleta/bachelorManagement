@@ -23,7 +23,7 @@ namespace BachelorManagement.DataLayer
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var cn = @"Server=localhost;Database=BachelorDegreeManagementV8;integrated security=SSPI;";
+            var cn = @"Server=localhost;Database=BachelorDegreeManagementV9;integrated security=SSPI;";
             optionsBuilder.UseSqlServer(cn);
 
             base.OnConfiguring(optionsBuilder);

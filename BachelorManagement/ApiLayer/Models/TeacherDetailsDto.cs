@@ -7,5 +7,6 @@
         public string Requirement { get; set; }
         public string ThemeTitle { get; set; }
         public string ThemeDescription { get; set; }
+        public string Token { get; set; }
     }
 }

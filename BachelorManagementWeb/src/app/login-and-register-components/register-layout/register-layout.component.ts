@@ -83,6 +83,7 @@ export class RegisterLayoutComponent {
     resp.subscribe(
       data => {
         this.router.navigateByUrl('/welcome');
+        this.getUserToken(email, "false");
       },
       err => {
         if (err.status == 400)
@@ -93,6 +94,34 @@ export class RegisterLayoutComponent {
           }
       }
     );
+  }
+
+
+  getUserToken(email: string, isTeacher: string){
+    this.body = {
+      Username: email,
+      Password: null
+    };
+
+    const resp = this.http.put('http://localhost:64250/api/account/addAccessToken', this.body, { responseType: 'text' });
+
+    resp.subscribe(
+      data => {
+        this.setLocalStorage(email, isTeacher, data)
+      },
+      err => {
+        console.log("Error");
+        console.log(err);
+      }
+    );
+  }
+
+  setLocalStorage(email: string, isTeacher: string, token: string){    
+    localStorage.setItem('email', email);
+    localStorage.setItem('isTeacher', isTeacher);
+    localStorage.setItem('token', token);
+
+    console.log(localStorage);
   }
 
   validateEmail(email: HTMLInputElement) {

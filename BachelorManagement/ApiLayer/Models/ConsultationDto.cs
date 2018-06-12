@@ -5,5 +5,6 @@
         public int Day { get; set; }
         public string Interval { get; set; }
         public string TeacherEmail { get; set; }
+        public string Token { get; set; }
     }
 }

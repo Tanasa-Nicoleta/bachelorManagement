@@ -16,13 +16,15 @@ namespace BachelorManagement.ApiLayer.Controllers
         private readonly ICommentService _commentService;
         private readonly ITeacherService _teacherService;
         private readonly IMeetingRequestService _meetingRequestService;
+        private readonly IAccountService _accountService;
 
         public StudentController(IStudentService studentService,
             IBachelorThemeService bachelorThemeService,
             ICommentReplyService commentReplyService,
             ITeacherService teacherService,
             IMeetingRequestService meetingRequestService,
-            ICommentService commentService)
+            ICommentService commentService,
+            IAccountService accountService)
         {
             _studentService = studentService;
             _bachelorThemeService = bachelorThemeService;
@@ -30,34 +32,47 @@ namespace BachelorManagement.ApiLayer.Controllers
             _teacherService = teacherService;
             _meetingRequestService = meetingRequestService;
             _commentService = commentService;
+            _accountService = accountService;
         }
 
         [HttpGet]
-        [Route("api/student/{email}")]
-        public IActionResult GetStudent(string email)
+        [Route("api/student/{email}/{token}")]
+        public IActionResult GetStudent(string email, string token)
         {
+            if (!_accountService.CheckTheTokenValidity(email, new Guid(token)))
+                return BadRequest();
+
             return Ok(_studentService.GetStudentByEmail(email));
         }
 
         [HttpGet]
-        [Route("api/student/teacher/{email}")]
-        public IActionResult GetStudentTeacher(string email)
+        [Route("api/student/teacher/{email}/{token}")]
+        public IActionResult GetStudentTeacher(string email, string token)
         {
-            return Ok(_studentService.GetStudentsTeacher(email));
+            if (!_accountService.CheckTheTokenValidity(email, new Guid(token)))
+                return BadRequest();
+
+            return Ok(_studentService.GetStudentsTeacher(email));                      
         }
 
         [HttpGet]
-        [Route("api/student/themes/{email}")]
-        public IActionResult GetStudentsThemes(string email)
+        [Route("api/student/themes/{userEmail}/{email}/{token}")]
+        public IActionResult GetStudentsThemes(string userEmail, string email, string token)
         {
-            return Ok(_studentService.GetStudentBachelorThemes(email));
+            if (!_accountService.CheckTheTokenValidity(userEmail, new Guid(token)))
+                return BadRequest();
+
+            return Ok(_studentService.GetStudentBachelorThemes(email));            
         }
 
         [HttpGet]
-        [Route("api/student/means/{email}")]
-        public IActionResult GetStudentMeans(string email)
+        [Route("api/student/means/{email}/{token}")]
+        public IActionResult GetStudentMeans(string email, string token)
         {
-            return Ok(_studentService.GetStudentMeans(email));
+            if (!_accountService.CheckTheTokenValidity(email, new Guid(token)))
+                return BadRequest();
+
+            return Ok(_studentService.GetStudentMeans(email));            
         }
 
         [HttpPost]
@@ -65,6 +80,9 @@ namespace BachelorManagement.ApiLayer.Controllers
         public IActionResult AddTheme([FromBody] BachelorThemeDto bachelorThemeDto)
         {
             if (!ModelState.IsValid)
+                return BadRequest();
+
+            if (!_accountService.CheckTheTokenValidity(bachelorThemeDto.Email, new Guid(bachelorThemeDto.Token)))
                 return BadRequest();
 
             _studentService.AddAchievementToStudent(bachelorThemeDto.Email, bachelorThemeDto.Achievement);
@@ -81,6 +99,9 @@ namespace BachelorManagement.ApiLayer.Controllers
             if (!ModelState.IsValid)
                 return BadRequest();
 
+            if (!_accountService.CheckTheTokenValidity(studentRequestStatusDto.StudentEmail, new Guid(studentRequestStatusDto.Token)))
+                return BadRequest();
+
             _studentService.UpdateStudentRequest(studentRequestStatusDto.StudentEmail,
                 studentRequestStatusDto.Accepted, studentRequestStatusDto.Denied);
 
@@ -93,16 +114,22 @@ namespace BachelorManagement.ApiLayer.Controllers
         }
 
         [HttpGet]
-        [Route("api/student/comments/{email}")]
-        public IActionResult GetTeacherComments(string email)
+        [Route("api/student/comments/{email}/{token}")]
+        public IActionResult GetTeacherComments(string email, string token)
         {
+            if (!_accountService.CheckTheTokenValidity(email, new Guid(token)))
+                return BadRequest();
+
             return Ok(_studentService.GetStudentComments(email));
         }
 
         [HttpGet]
-        [Route("api/student/comments/{email}/{id}")]
-        public IActionResult GetTeacherCommentReplies(string email, int id)
+        [Route("api/student/comments/{email}/{id}/{token}")]
+        public IActionResult GetTeacherCommentReplies(string email, int id, string token)
         {
+            if (!_accountService.CheckTheTokenValidity(email, new Guid(token)))
+                return BadRequest();
+
             var commentReplies = new List<CommentReply>();
             var comments = _studentService.GetStudentComments(email).Where(c => c.Id == id);
 
@@ -119,6 +146,9 @@ namespace BachelorManagement.ApiLayer.Controllers
         public IActionResult AddStudentMeetingRequest([FromBody] RequestMeetingDto studentMeetingDto)
         {
             if (!ModelState.IsValid)
+                return BadRequest();
+
+            if (!_accountService.CheckTheTokenValidity(studentMeetingDto.StudentEmail, new Guid(studentMeetingDto.Token)))
                 return BadRequest();
 
             var student = _studentService.GetStudentByEmail(studentMeetingDto.StudentEmail);
@@ -139,6 +169,9 @@ namespace BachelorManagement.ApiLayer.Controllers
             if (!ModelState.IsValid)
                 return BadRequest();
 
+            if (!_accountService.CheckTheTokenValidity(studentMeetingDto.StudentEmail, new Guid(studentMeetingDto.Token)))
+                return BadRequest();
+
             var student = _studentService.GetStudentByEmail(studentMeetingDto.StudentEmail);
             var teacher = _teacherService.GetTeacherByEmail(studentMeetingDto.TeacherEmail);
 
@@ -151,9 +184,12 @@ namespace BachelorManagement.ApiLayer.Controllers
         }
 
         [HttpGet]
-        [Route("api/student/studentMeetingRequest/{email}")]
-        public IActionResult GetStudentMeetingRequest(string email) 
+        [Route("api/student/studentMeetingRequest/{email}/{token}")]
+        public IActionResult GetStudentMeetingRequest(string email, string token)
         {
+            if (!_accountService.CheckTheTokenValidity(email, new Guid(token)))
+                return BadRequest();
+
             var student = _studentService.GetStudentByEmail(email);
             var meetingRequestDto = new RequestMeetingDto();
             MeetingRequest meetingRequest = null;
@@ -163,20 +199,23 @@ namespace BachelorManagement.ApiLayer.Controllers
                 meetingRequest = _meetingRequestService.GetStudentMeetingRequests(student.Id);
             }
 
-            if(meetingRequest != null)
+            if (meetingRequest != null)
             {
                 meetingRequestDto.Date = meetingRequest.Date;
                 meetingRequestDto.StudentEmail = _studentService.GetStudentById(meetingRequest.StudentId.Value).Email;
                 meetingRequestDto.TeacherEmail = _teacherService.GetTeacherById(meetingRequest.TeacherId.Value).Email;
-            }            
+            }
 
             return Ok(meetingRequestDto);
         }
 
         [HttpGet]
-        [Route("api/student/studentMeetingRequestStatus/{email}")]
-        public IActionResult GetStudentMeetingRequestStatus(string email)
+        [Route("api/student/studentMeetingRequestStatus/{email}/{token}")]
+        public IActionResult GetStudentMeetingRequestStatus(string email, string token)
         {
+            if (!_accountService.CheckTheTokenValidity(email, new Guid(token)))
+                return BadRequest();
+
             var student = _studentService.GetStudentByEmail(email);
             var requestMeetingStatusDto = new RequestMeetingStatusDto();
             MeetingRequest meetingRequest = null;
@@ -197,9 +236,12 @@ namespace BachelorManagement.ApiLayer.Controllers
 
         [HttpPut]
         [Route("api/student/editStudent")]
-        public IActionResult EditStudent([FromBody] EditStudentDto editStudentDto) 
+        public IActionResult EditStudent([FromBody] EditStudentDto editStudentDto)
         {
             if (!ModelState.IsValid)
+                return BadRequest();
+
+            if (!_accountService.CheckTheTokenValidity(editStudentDto.Email, new Guid(editStudentDto.Token)))
                 return BadRequest();
 
             _studentService.EditStudent(

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BachelorManagement.DataLayer.Migrations
 {
     [DbContext(typeof(BachelorManagementContext))]
-    [Migration("20180603090441_createDb")]
+    [Migration("20180612135322_createDb")]
     partial class createDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -237,6 +237,10 @@ namespace BachelorManagement.DataLayer.Migrations
                     b.Property<string>("Email");
 
                     b.Property<string>("Password");
+
+                    b.Property<Guid>("Token");
+
+                    b.Property<int>("UserType");
 
                     b.HasKey("Id");
 

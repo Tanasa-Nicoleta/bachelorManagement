@@ -237,6 +237,10 @@ namespace BachelorManagement.DataLayer.Migrations
 
                     b.Property<string>("Password");
 
+                    b.Property<Guid>("Token");
+
+                    b.Property<int>("UserType");
+
                     b.HasKey("Id");
 
                     b.ToTable("Users");

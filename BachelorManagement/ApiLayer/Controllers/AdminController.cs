@@ -2,6 +2,7 @@
 using BachelorManagement.DataLayer.Entities;
 using BachelorManagement.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace BachelorManagement.ApiLayer.Controllers
 {
@@ -9,10 +10,12 @@ namespace BachelorManagement.ApiLayer.Controllers
     public class AdminController : Controller
     {
         private readonly ITeacherService _teacherService;
+        private readonly IAccountService _accountService;
 
-        public AdminController(ITeacherService teacherService)
+        public AdminController(ITeacherService teacherService, IAccountService accountService)
         {
             _teacherService = teacherService;
+            _accountService = accountService;
         }
 
         [HttpPost("addTeacher")]
@@ -20,7 +23,10 @@ namespace BachelorManagement.ApiLayer.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest();
-            
+
+            if (!_accountService.CheckTheTokenValidity(teacherDto.Email, new Guid(teacherDto.Token)))
+                return BadRequest();
+
             _teacherService.AddTeacher(
                 new Teacher
                 { 
@@ -42,6 +48,9 @@ namespace BachelorManagement.ApiLayer.Controllers
             if (!ModelState.IsValid)
                 return BadRequest();
 
+            if (!_accountService.CheckTheTokenValidity(teacherRemoveDto.Email, new Guid(teacherRemoveDto.Token)))
+                return BadRequest();
+
             _teacherService.RemoveTeacher(teacherRemoveDto.Email);
 
             return Ok();
@@ -51,6 +60,9 @@ namespace BachelorManagement.ApiLayer.Controllers
         public IActionResult EditTeacher([FromBody] TeacherDto teacherDto)
         {
             if (!ModelState.IsValid)
+                return BadRequest();
+
+            if (!_accountService.CheckTheTokenValidity(teacherDto.Email, new Guid(teacherDto.Token)))
                 return BadRequest();
 
             _teacherService.EditTeacher(

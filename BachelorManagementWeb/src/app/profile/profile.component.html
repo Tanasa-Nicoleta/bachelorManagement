@@ -14,7 +14,7 @@
             </div>
         </div>
 
-        <div *ngIf="!isTeacher">
+        <div *ngIf="isTeacher == false">
             <div *ngIf="!showEditForm">
                 <div class="profileDetails">
                     Name: {{student.FirstName}} {{student.LastName}}

@@ -78,12 +78,19 @@ export class LoginLayoutComponent {
 
     resp.subscribe(
       data => {
-        if(isTeacher == "False")
-        {
-          this.getStudentTeacher(email, isTeacher, data);
+        if (isTeacher == "False") {
+          if (email != 'admin.admin@info.uaic.ro') {
+            this.getStudentTeacher(email, isTeacher, data);
+            this.navigateForStudent();
+          }
+          else {
+            this.setLocalStorage(email, email, isTeacher, data);
+            this.navigateForAdmin();
+          }
         }
-        else{          
+        else {
           this.setLocalStorage(email, email, isTeacher, data);
+          this.navigateForTeacher();
         }
       },
       err => {
@@ -93,16 +100,50 @@ export class LoginLayoutComponent {
     );
   }
 
+  navigateForStudent() {
+    this.router.navigateByUrl('/studentRegisterToTeacher');
+  }
+
+  navigateForTeacher() {
+    this.getTeacherDetails();
+  }
+
+  getTeacherDetails() {
+    let teacherEmail = localStorage.getItem('teacherEmail');
+    let tokenService = new TokenService();
+    let token = tokenService.buildToken();
+    const teacherResponse = this.http.get('http://localhost:64250/api/teacher/' +  teacherEmail+ '/' + teacherEmail + '/' + token, { observe: 'response' });
+
+    teacherResponse.subscribe(
+      data => {
+        console.log(data.body);
+        if (data.body['requirement'] != null) {
+          this.router.navigateByUrl('/teacherStudentsRequests');
+        }
+        else {
+          this.router.navigateByUrl('/teacherAddDetails')
+        }
+      },
+      err => {
+        console.log("Error");
+        console.log(err)
+      }
+    );
+  }
+
+  navigateForAdmin() {
+    this.router.navigateByUrl('/adminWall');
+  }
+
   getStudentTeacher(studentEmail: string, isTeacher: string, token: string) {
     localStorage.setItem('token', token);
-    let tokenService = new TokenService();   
+    let tokenService = new TokenService();
     token = tokenService.buildToken();
 
     const resp = this.http.get('http://localhost:64250/api/student/teacher/' + studentEmail + '/' + token, { observe: 'response' });
 
     resp.subscribe(
       data => {
-        console.log("data: ", data.body);
         this.setLocalStorage(studentEmail, data.body['email'], isTeacher, token);
       },
       err => {
@@ -123,8 +164,6 @@ export class LoginLayoutComponent {
     }
     localStorage.setItem('isTeacher', isTeacher);
     localStorage.setItem('token', token);
-    
-    this.router.navigateByUrl('/welcome');    
   }
 
   validateEmail(email: HTMLInputElement) {

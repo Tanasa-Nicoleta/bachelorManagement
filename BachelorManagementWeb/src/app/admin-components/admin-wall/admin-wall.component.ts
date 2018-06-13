@@ -13,7 +13,7 @@ import { TokenService } from '../../services/token.service';
 })
 
 export class AdminWallComponent {
-    email: string = "test.test@info.uaic.ro"
+    email: string;
     deleteText: string = "Remove";
     editText: string = "Edit";
     addTeacherText: string = "Add new record";
@@ -46,6 +46,7 @@ export class AdminWallComponent {
     }
 
     constructor(private title: Title, private http: HttpClient) {
+        this.email = localStorage.getItem('studentEmail');
         this.titleService = new TitleService(title);
         this.titleService.setTitle("BDMApp Admin wall");
         this.tokenService = new TokenService();   

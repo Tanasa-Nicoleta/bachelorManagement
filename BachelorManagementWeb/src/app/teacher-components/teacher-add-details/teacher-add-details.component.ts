@@ -18,13 +18,13 @@ export class TeacherAddDetailsComponent {
   maxNumberOfStudents: number = 15;
   saveButtonText: string = "Save details";
   addThemeText: string = "Add a theme";
-  teacherThemes: Teacher = new Teacher("Vlad", "Simion", "vlad.simion@info.uaic.ro", 3, 2, null,
-    "Discipline1", "", "No requirement.");
 
   commentValue: string;
   titleService: TitleService;
   tokenService: TokenService;
   token: string;
+  teacherEmail: string;
+  teacherHasDetails: boolean;
 
   detailsBody: {
     Email: string,
@@ -43,21 +43,16 @@ export class TeacherAddDetailsComponent {
   }
 
   constructor(private title: Title, private http: HttpClient, private router: Router) {
+    this.teacherEmail = localStorage.getItem('teacherEmail');
     this.titleService = new TitleService(title);
     this.titleService.setTitle("BDMApp Teacher Add Details");
     this.tokenService = new TokenService();   
     this.token = this.tokenService.buildToken();
   }
 
-  addComment(themeContent: string) {
-    var bachelor = themeContent.split("-");
-    this.teacherThemes.Theme = new Bachelor(bachelor[0], bachelor[1]);
-    this.commentValue = ' ';
-  };
-
   addTeacherDetails(numberOfStudents: number, requirement: string, themeTitle: string, themeDesrc: string, consultationDay: string, consultationInterval: string) {
     this.detailsBody = {
-      Email: this.teacherThemes.Email,
+      Email: this.teacherEmail,
       NoOfAvailableSpots: numberOfStudents,
       Requirement: requirement,
       ThemeTitle: themeTitle,
@@ -69,7 +64,7 @@ export class TeacherAddDetailsComponent {
 
     resp.subscribe(
       data => {
-        this.addTeacherConsultationDay(this.teacherThemes.Email, consultationDay, consultationInterval);
+        this.addTeacherConsultationDay(this.teacherEmail, consultationDay, consultationInterval);
       },
       err => {
         console.log("Error");

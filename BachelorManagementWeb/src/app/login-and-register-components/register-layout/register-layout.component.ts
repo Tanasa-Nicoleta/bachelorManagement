@@ -84,7 +84,6 @@ export class RegisterLayoutComponent {
 
     resp.subscribe(
       data => {
-        this.router.navigateByUrl('/welcome');
         this.getUserToken(email, "false");
       },
       err => {
@@ -118,9 +117,10 @@ export class RegisterLayoutComponent {
   }
 
   setLocalStorage(email: string, isTeacher: string, token: string){    
-    localStorage.setItem('email', email);
+    localStorage.setItem('studentEmail', email);
     localStorage.setItem('isTeacher', isTeacher);
     localStorage.setItem('token', token);
+    this.router.navigateByUrl('/welcome');
   }
 
   validateEmail(email: HTMLInputElement) {

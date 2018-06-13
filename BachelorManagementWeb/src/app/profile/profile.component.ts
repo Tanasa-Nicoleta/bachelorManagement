@@ -182,7 +182,7 @@ export class ProfileComponent {
   setStudentsToTeacher() {
     this.teacher.Student = new Array<Student>();
 
-    let themeResponse = this.http.get('http://localhost:64250/api/teacher/students/' + this.teacher.Email + "/" + this.token, { observe: 'response' });
+    let themeResponse = this.http.get('http://localhost:64250/api/teacher/students/'+ this.teacher.Email + '/' + this.teacher.Email + "/" + this.token, { observe: 'response' });
 
     themeResponse.subscribe(data => {
       if (data.body) {

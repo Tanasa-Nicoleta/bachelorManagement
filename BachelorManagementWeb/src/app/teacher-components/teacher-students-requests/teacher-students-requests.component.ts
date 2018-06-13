@@ -110,7 +110,7 @@ export class TeacherStudentsRequestsComponent {
   }
 
   getTeacherStudents(email: string) {
-    const studentResponse = this.http.get('http://localhost:64250/api/teacher/students/' + email + '/' + this.token, { observe: 'response' });
+    const studentResponse = this.http.get('http://localhost:64250/api/teacher/students/' + email + '/' + email + '/' + this.token, { observe: 'response' });
 
     studentResponse.subscribe(
       data => {

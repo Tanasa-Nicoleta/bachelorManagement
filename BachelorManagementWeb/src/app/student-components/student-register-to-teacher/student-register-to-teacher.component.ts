@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Student } from '../../models/student.model';
 import { TokenService } from '../../services/token.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'student-register-to-teacher',
@@ -23,52 +24,54 @@ export class StudentRegisterToTeacherComponent {
     studentEmail: string;
     teacherEmails: string[] = [];
     titleService: TitleService;
-    student: Student;  
+    student: Student;
     tokenService: TokenService;
     token: string;
 
-    constructor(private title: Title, private http: HttpClient) {
+    constructor(private title: Title, private http: HttpClient, private router: Router) {
         this.titleService = new TitleService(title);
         this.titleService.setTitle("BDMApp Student Register To Teacher");
-        this.tokenService = new TokenService();   
+        this.tokenService = new TokenService();
         this.token = this.tokenService.buildToken();
     }
 
     ngOnInit() {
-        this.studentEmail = localStorage.getItem('email');
+        this.studentEmail = localStorage.getItem('studentEmail');
+        this.getStudent(this.studentEmail);        
         this.getTeachers();
-        this.getStudent(this.studentEmail);
     }
 
-    getStudent(email: string){
+    getStudent(email: string) {
         const studentResponse = this.http.get('http://localhost:64250/api/student/' + email + '/' + this.token, { observe: 'response' });
 
         studentResponse.subscribe(
             data => {
                 this.student = new Student(data.body['firstName'], data.body['lastName'], data.body['email'], null, data.body['gitUrl'], data.body['startYear'], data.body['serialNumber'], null, data.body['achievements'], data.body['accepted'], data.body['denied']);
                 this.student.Pending = data.body['pending'];
+
+                if (this.student.Accepted == true) {
+                    this.acceptedByTeacher = true;
+                    this.router.navigateByUrl('/teacherWall');
+                }
+
+                if (this.student.Denied == true) {
+                    this.student.Pending = false;
+                }
             },
             err => {
                 console.log("Error");
                 console.log(err)
             }
         );
-        if(this.student.Accepted == true){
-            this.acceptedByTeacher = true; 
-        }        
-
-        if(this.student.Denied == true){
-            this.acceptedByTeacher = false;
-        }
     }
 
     applyToTeacher(teacherFirstName: string, teacherLastName: string) {
-        localStorage.setItem('teacherEmail', teacherFirstName +'.'+teacherLastName+'@info.uaic.ro');
+        localStorage.setItem('teacherEmail', teacherFirstName + '.' + teacherLastName + '@info.uaic.ro');
         this.student.Pending = true;
     }
 
     getTeachers() {
-        const teacherResponse = this.http.get('http://localhost:64250/api/teachers/' + this.studentEmail  + '/' + this.token, { observe: 'response' });
+        const teacherResponse = this.http.get('http://localhost:64250/api/teachers/' + this.studentEmail + '/' + this.token, { observe: 'response' });
 
         teacherResponse.subscribe(
             data => {

@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Bachelor } from '../../models/bachelor-degree.model';
 import { DayOfWeek } from '../../models/day-of-week.model';
+import { TokenService } from '../../services/token.service';
 
 @Component({
   selector: 'teacher-add-details',
@@ -22,24 +23,30 @@ export class TeacherAddDetailsComponent {
 
   commentValue: string;
   titleService: TitleService;
+  tokenService: TokenService;
+  token: string;
 
   detailsBody: {
     Email: string,
     NoOfAvailableSpots: number,
     Requirement: string,
     ThemeTitle: string,
-    ThemeDescription: string
+    ThemeDescription: string,
+    Token: string;
   }
 
   consultationBody: {
     TeacherEmail: string,
     Day: DayOfWeek,
-    Interval: string
+    Interval: string;
+    Token: string;
   }
 
   constructor(private title: Title, private http: HttpClient, private router: Router) {
     this.titleService = new TitleService(title);
     this.titleService.setTitle("BDMApp Teacher Add Details");
+    this.tokenService = new TokenService();   
+    this.token = this.tokenService.buildToken();
   }
 
   addComment(themeContent: string) {
@@ -54,7 +61,8 @@ export class TeacherAddDetailsComponent {
       NoOfAvailableSpots: numberOfStudents,
       Requirement: requirement,
       ThemeTitle: themeTitle,
-      ThemeDescription: themeDesrc
+      ThemeDescription: themeDesrc,
+      Token: this.token
     };
 
     const resp = this.http.post('http://localhost:64250/api/teacher/addDetails', this.detailsBody, { responseType: 'text' });
@@ -73,7 +81,8 @@ export class TeacherAddDetailsComponent {
     this.consultationBody = {
       TeacherEmail: email,
       Day: DayOfWeek[day],
-      Interval: interval
+      Interval: interval,
+      Token: this.token
     };
 
     const resp = this.http.post('http://localhost:64250/api/teacher/addConsultation', this.consultationBody, { responseType: 'text' });

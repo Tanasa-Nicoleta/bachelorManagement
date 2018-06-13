@@ -79,6 +79,7 @@ export class LoginLayoutComponent {
     resp.subscribe(
       data => {
         this.setLocalStorage(email, isTeacher, data)
+        console.log(localStorage);
       },
       err => {
         console.log("Error");

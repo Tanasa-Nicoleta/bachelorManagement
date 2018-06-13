@@ -6,6 +6,7 @@ using BachelorManagement.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using BachelorManagement.DataLayer.Enums;
 using System;
+using BachelorManagement.ApiLayer.Utils;
 
 namespace BachelorManagement.ApiLayer.Controllers
 {
@@ -40,6 +41,8 @@ namespace BachelorManagement.ApiLayer.Controllers
         [Route("api/teachers/{email}/{token}")]
         public IActionResult Get(string email, string token)
         {
+            if (!Token.CheckTokenFormat(token))
+                return BadRequest();
 
             if (!_accountService.CheckTheTokenValidity(email, new Guid(token)))
                 return BadRequest();
@@ -48,22 +51,26 @@ namespace BachelorManagement.ApiLayer.Controllers
         }
 
         [HttpGet]
-        [Route("api/teacher/{email}/{token}")]
-        public IActionResult GetTeacher(string email, string token)
+        [Route("api/teacher/{userEmail}/{email}/{token}")]
+        public IActionResult GetTeacher(string userEmail, string email, string token)
         {
-            var t = token.Replace("\\", "");
+            if (!Token.CheckTokenFormat(token))
+                return BadRequest();
 
-            if (!_accountService.CheckTheTokenValidity(email, new Guid(token)))
+            if (!_accountService.CheckTheTokenValidity(userEmail, new Guid(token)))
                 return BadRequest();
 
             return Ok(_teacherService.GetTeacherByEmail(email));
         }
 
         [HttpGet]
-        [Route("api/teacher/themes/{email}/{token}")]
-        public IActionResult GetTeacherThemes(string email, string token)
+        [Route("api/teacher/themes/{userEmail}/{email}/{token}")]
+        public IActionResult GetTeacherThemes(string userEmail, string email, string token)
         {
-            if (!_accountService.CheckTheTokenValidity(email, new Guid(token)))
+            if (!Token.CheckTokenFormat(token))
+                return BadRequest();
+
+            if (!_accountService.CheckTheTokenValidity(userEmail, new Guid(token)))
                 return BadRequest();
 
             return Ok(_teacherService.GetTeacherBachelorThemes(email));
@@ -73,6 +80,9 @@ namespace BachelorManagement.ApiLayer.Controllers
         [Route("api/teacher/students/{email}/{token}")]
         public IActionResult GetTeacherStudents(string email, string token)
         {
+            if (!Token.CheckTokenFormat(token))
+                return BadRequest();
+
             if (!_accountService.CheckTheTokenValidity(email, new Guid(token)))
                 return BadRequest();
 
@@ -106,6 +116,9 @@ namespace BachelorManagement.ApiLayer.Controllers
             if (!ModelState.IsValid)
                 return BadRequest();
 
+            if (!Token.CheckTokenFormat(teacherDto.Token))
+                return BadRequest();
+
             if (!_accountService.CheckTheTokenValidity(teacherDto.Email, new Guid(teacherDto.Token)))
                 return BadRequest();
 
@@ -116,20 +129,26 @@ namespace BachelorManagement.ApiLayer.Controllers
         }
 
         [HttpGet]
-        [Route("api/teacher/comments/{email}/{token}")]
-        public IActionResult GetTeacherComments(string email, string token)
+        [Route("api/teacher/comments/{userEmail}/{email}/{token}")]
+        public IActionResult GetTeacherComments(string userEmail, string email, string token)
         {
-            if (!_accountService.CheckTheTokenValidity(email, new Guid(token)))
+            if (!Token.CheckTokenFormat(token))
+                return BadRequest();
+
+            if (!_accountService.CheckTheTokenValidity(userEmail, new Guid(token)))
                 return BadRequest();
 
             return Ok(_teacherService.GetTeacherComments(email));
         }
 
         [HttpGet]
-        [Route("api/teacher/comments/{email}/{id}/{token}")]
-        public IActionResult GetTeacherCommentReplies(string email, int id, string token)
+        [Route("api/teacher/comments/{userEmail}/{email}/{id}/{token}")]
+        public IActionResult GetTeacherCommentReplies(string userEmail, string email, int id, string token)
         {
-            if (!_accountService.CheckTheTokenValidity(email, new Guid(token)))
+            if (!Token.CheckTokenFormat(token))
+                return BadRequest();
+
+            if (!_accountService.CheckTheTokenValidity(userEmail, new Guid(token)))
                 return BadRequest();
 
             var commentReplies = new List<CommentReply>();
@@ -147,6 +166,9 @@ namespace BachelorManagement.ApiLayer.Controllers
         [Route("api/teacher/studentMeetingRequest/{email}/{token}")]
         public IActionResult GetTeacherMeetingRequest(string email, string token)
         {
+            if (!Token.CheckTokenFormat(token))
+                return BadRequest();
+
             if (!_accountService.CheckTheTokenValidity(email, new Guid(token)))
                 return BadRequest();
 
@@ -178,6 +200,8 @@ namespace BachelorManagement.ApiLayer.Controllers
         [Route("api/teacher/acceptStudentMeetingRequest")]
         public IActionResult AcceptStudentMeetingRequest([FromBody] RequestMeetingDto meetingRequestDto)
         {
+            if (!Token.CheckTokenFormat(meetingRequestDto.Token))
+                return BadRequest();
 
             if (!_accountService.CheckTheTokenValidity(meetingRequestDto.TeacherEmail, new Guid(meetingRequestDto.Token)))
                 return BadRequest();
@@ -202,6 +226,8 @@ namespace BachelorManagement.ApiLayer.Controllers
         [Route("api/teacher/declineStudentMeetingRequest")]
         public IActionResult DeclineStudentMeetingRequest([FromBody] RequestMeetingDto meetingRequestDto)
         {
+            if (!Token.CheckTokenFormat(meetingRequestDto.Token))
+                return BadRequest();
 
             if (!_accountService.CheckTheTokenValidity(meetingRequestDto.TeacherEmail, new Guid(meetingRequestDto.Token)))
                 return BadRequest();
@@ -226,6 +252,9 @@ namespace BachelorManagement.ApiLayer.Controllers
         [Route("api/teacher/comments")]
         public IActionResult AddTeacherPost([FromBody] PostDto postDto)
         {
+            if (!Token.CheckTokenFormat(postDto.Token))
+                return BadRequest();
+
             if (_accountService.CheckTheTokenValidity(postDto.TeacherEmail, new Guid(postDto.Token)) || _accountService.CheckTheTokenValidity(postDto.StudentEmail, new Guid(postDto.Token)))
             {
                 var student = _studentService.GetStudentByEmail(postDto.StudentEmail);
@@ -256,6 +285,9 @@ namespace BachelorManagement.ApiLayer.Controllers
         [Route("api/teacher/getConsultation/{email}/{token}")]
         public IActionResult GetTeacherConsultation(string email, string token)
         {
+            if (!Token.CheckTokenFormat(token))
+                return BadRequest();
+
             if (!_accountService.CheckTheTokenValidity(email, new Guid(token)))
                 return BadRequest();
 
@@ -274,6 +306,9 @@ namespace BachelorManagement.ApiLayer.Controllers
         [Route("api/teacher/removeConsultation")]
         public IActionResult RemoveTeacherConsultation([FromBody] ConsultationDto consultationDto)
         {
+            if (!Token.CheckTokenFormat(consultationDto.Token))
+                return BadRequest();
+
             if (!_accountService.CheckTheTokenValidity(consultationDto.TeacherEmail, new Guid(consultationDto.Token)))
                 return BadRequest();
 
@@ -294,6 +329,9 @@ namespace BachelorManagement.ApiLayer.Controllers
         [Route("api/teacher/addConsultation")]
         public IActionResult AddTeacherConsultation([FromBody] ConsultationDto consultationDto)
         {
+            if (!Token.CheckTokenFormat(consultationDto.Token))
+                return BadRequest();
+
             if (!_accountService.CheckTheTokenValidity(consultationDto.TeacherEmail, new Guid(consultationDto.Token)))
                 return BadRequest();
 
@@ -312,6 +350,9 @@ namespace BachelorManagement.ApiLayer.Controllers
         [Route("api/teacher/editConsultation")]
         public IActionResult EditTeacherConsultation([FromBody] ConsultationDto consultationDto)
         {
+            if (!Token.CheckTokenFormat(consultationDto.Token))
+                return BadRequest();
+
             if (!_accountService.CheckTheTokenValidity(consultationDto.TeacherEmail, new Guid(consultationDto.Token)))
                 return BadRequest();
 

@@ -4,6 +4,7 @@ import { TitleService } from '../../services/title.service';
 import { HttpClient } from '@angular/common/http';
 import { Student } from '../../models/student.model';
 import { Bachelor } from '../../models/bachelor-degree.model';
+import { TokenService } from '../../services/token.service';
 
 @Component({
     selector: 'student-work',
@@ -17,10 +18,14 @@ export class StudentWorkComponent {
 
     students: Array<Student> = new Array<Student>();
     titleService: TitleService;
+    tokenService: TokenService;
+    token: string;
 
     constructor(private title: Title, private http: HttpClient) {
         this.titleService = new TitleService(title);
         this.titleService.setTitle("BDMApp Student Work");
+        this.tokenService = new TokenService();   
+        this.token = this.tokenService.buildToken();
     }
 
     ngOnInit() {
@@ -28,7 +33,7 @@ export class StudentWorkComponent {
     }
 
     getTeacherStudents(email: string) {
-        const teacherResponse = this.http.get('http://localhost:64250/api/teacher/students/' + email, { observe: 'response' });
+        const teacherResponse = this.http.get('http://localhost:64250/api/teacher/students/' + email + '/' + this.token, { observe: 'response' });
 
         teacherResponse.subscribe(
             data => {
@@ -50,7 +55,7 @@ export class StudentWorkComponent {
     }
 
     setBachelorThemeToStudents(email: string, key: string) {
-        const themeResponse = this.http.get('http://localhost:64250/api/student/themes/' + email, { observe: 'response' });
+        const themeResponse = this.http.get('http://localhost:64250/api/student/themes/' + this.teacherEmail + '/' + email + '/' + this.token, { observe: 'response' });
 
         themeResponse.subscribe(
             data => {

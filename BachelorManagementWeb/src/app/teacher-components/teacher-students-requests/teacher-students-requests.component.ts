@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { MeetingRequest } from '../../models/meeting-request';
 import { MeetingRequestStatus } from '../../models/meeting-request-status.model';
+import { TokenService } from '../../services/token.service';
 
 @Component({
   selector: 'teacher-students-requests',
@@ -27,17 +28,22 @@ export class TeacherStudentsRequestsComponent {
   studentList: Array<Student> = new Array<Student>();
   titleService: TitleService;
   meetingRequests: Array<MeetingRequest> = new Array<MeetingRequest>();
-  today: Date = new Date();
+  today: Date = new Date(); 
+  tokenService: TokenService;
+  token: string;
 
   meetingRequestBody: {
     StudentEmail: string,
     TeacherEmail: string,
-    Date: Date
+    Date: Date,
+    Token: string
   }
 
   constructor(private title: Title, private http: HttpClient, private router: Router) {
     this.titleService = new TitleService(title);
     this.titleService.setTitle("BDMApp Teacher Students Requests");
+    this.tokenService = new TokenService();   
+    this.token = this.tokenService.buildToken();
   }
 
   ngOnInit() {
@@ -52,7 +58,7 @@ export class TeacherStudentsRequestsComponent {
   }
 
   getTeacherMeetingRequests(email: string) {
-    const teacherResponse = this.http.get('http://localhost:64250/api/teacher/studentMeetingRequest/' + email, { observe: 'response' });
+    const teacherResponse = this.http.get('http://localhost:64250/api/teacher/studentMeetingRequest/' + email + '/' + this.token, { observe: 'response' });
 
     teacherResponse.subscribe(
       data => {
@@ -72,7 +78,7 @@ export class TeacherStudentsRequestsComponent {
   }
 
   getMeetingRequestStatus(meetingRequest: MeetingRequest, email: string) {
-    const commentResponse = this.http.get('http://localhost:64250/api/student/studentMeetingRequestStatus/' + email, { observe: 'response' });
+    const commentResponse = this.http.get('http://localhost:64250/api/student/studentMeetingRequestStatus/' + email + '/' + this.token, { observe: 'response' });
 
     commentResponse.subscribe(
       data => {
@@ -88,7 +94,7 @@ export class TeacherStudentsRequestsComponent {
 
 
   getTeacherDetails(email: string) {
-    const teacherResponse = this.http.get('http://localhost:64250/api/teacher/' + email, { observe: 'response' });
+    const teacherResponse = this.http.get('http://localhost:64250/api/teacher/' + email + '/' + email +  '/' + this.token, { observe: 'response' });
 
     teacherResponse.subscribe(
       data => {
@@ -103,7 +109,7 @@ export class TeacherStudentsRequestsComponent {
   }
 
   getTeacherStudents(email: string) {
-    const studentResponse = this.http.get('http://localhost:64250/api/teacher/students/' + email, { observe: 'response' });
+    const studentResponse = this.http.get('http://localhost:64250/api/teacher/students/' + email + '/' + this.token, { observe: 'response' });
 
     studentResponse.subscribe(
       data => {
@@ -127,7 +133,7 @@ export class TeacherStudentsRequestsComponent {
   setBachelorThemeToStudents(email: string, key: string) {
     this.studentList[key]['Theme'] = new Bachelor(null, null);
 
-    const themeResponse = this.http.get('http://localhost:64250/api/student/themes/' + email, { observe: 'response' });
+    const themeResponse = this.http.get('http://localhost:64250/api/student/themes/'+ this.email + '/' + email + '/' + this.token, { observe: 'response' });
 
     themeResponse.subscribe(
       data => {
@@ -152,6 +158,7 @@ export class TeacherStudentsRequestsComponent {
           StudentEmail: stud.Email,
           Accepted: stud.Accepted,
           Denied: stud.Denied,
+          Token: this.token
         };
 
         const resp = this.http.post('http://localhost:64250/api/student/teacherRequestStatus', body, { responseType: 'text' });
@@ -177,6 +184,7 @@ export class TeacherStudentsRequestsComponent {
           StudentEmail: stud.Email,
           Accepted: stud.Accepted,
           Denied: stud.Denied,
+          Token: this.token
         };
 
         const resp = this.http.post('http://localhost:64250/api/student/teacherRequestStatus', body, { responseType: 'text' });
@@ -196,7 +204,8 @@ export class TeacherStudentsRequestsComponent {
     this.meetingRequestBody = {
       StudentEmail: studentEmail,
       TeacherEmail: teacherEmail,
-      Date: new Date()
+      Date: new Date(),
+      Token: this.token
     }
 
     const commentReplyResponse = this.http.post('http://localhost:64250/api/teacher/acceptStudentMeetingRequest', this.meetingRequestBody, { observe: 'response' });
@@ -218,7 +227,8 @@ export class TeacherStudentsRequestsComponent {
     this.meetingRequestBody = {
       StudentEmail: studentEmail,
       TeacherEmail: teacherEmail,
-      Date: new Date()
+      Date: new Date(),
+      Token: this.token
     }
 
     const commentReplyResponse = this.http.post('http://localhost:64250/api/teacher/declineStudentMeetingRequest', this.meetingRequestBody, { observe: 'response' });

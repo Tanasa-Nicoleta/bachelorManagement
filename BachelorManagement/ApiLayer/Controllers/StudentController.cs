@@ -5,6 +5,7 @@ using BachelorManagement.DataLayer.Entities;
 using BachelorManagement.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using BachelorManagement.ApiLayer.Utils;
 
 namespace BachelorManagement.ApiLayer.Controllers
 {
@@ -39,6 +40,9 @@ namespace BachelorManagement.ApiLayer.Controllers
         [Route("api/student/{email}/{token}")]
         public IActionResult GetStudent(string email, string token)
         {
+            if (!Token.CheckTokenFormat(token))
+                return BadRequest();
+
             if (!_accountService.CheckTheTokenValidity(email, new Guid(token)))
                 return BadRequest();
 
@@ -49,6 +53,9 @@ namespace BachelorManagement.ApiLayer.Controllers
         [Route("api/student/teacher/{email}/{token}")]
         public IActionResult GetStudentTeacher(string email, string token)
         {
+            if (!Token.CheckTokenFormat(token))
+                return BadRequest();
+
             if (!_accountService.CheckTheTokenValidity(email, new Guid(token)))
                 return BadRequest();
 
@@ -59,6 +66,9 @@ namespace BachelorManagement.ApiLayer.Controllers
         [Route("api/student/themes/{userEmail}/{email}/{token}")]
         public IActionResult GetStudentsThemes(string userEmail, string email, string token)
         {
+            if (!Token.CheckTokenFormat(token))
+                return BadRequest();
+
             if (!_accountService.CheckTheTokenValidity(userEmail, new Guid(token)))
                 return BadRequest();
 
@@ -69,6 +79,9 @@ namespace BachelorManagement.ApiLayer.Controllers
         [Route("api/student/means/{email}/{token}")]
         public IActionResult GetStudentMeans(string email, string token)
         {
+            if (!Token.CheckTokenFormat(token))
+                return BadRequest();
+
             if (!_accountService.CheckTheTokenValidity(email, new Guid(token)))
                 return BadRequest();
 
@@ -80,6 +93,9 @@ namespace BachelorManagement.ApiLayer.Controllers
         public IActionResult AddTheme([FromBody] BachelorThemeDto bachelorThemeDto)
         {
             if (!ModelState.IsValid)
+                return BadRequest();
+
+            if (!Token.CheckTokenFormat(bachelorThemeDto.Token))
                 return BadRequest();
 
             if (!_accountService.CheckTheTokenValidity(bachelorThemeDto.Email, new Guid(bachelorThemeDto.Token)))
@@ -99,7 +115,10 @@ namespace BachelorManagement.ApiLayer.Controllers
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            if (!_accountService.CheckTheTokenValidity(studentRequestStatusDto.StudentEmail, new Guid(studentRequestStatusDto.Token)))
+            if (!Token.CheckTokenFormat(studentRequestStatusDto.Token))
+                return BadRequest();
+
+            if (!_accountService.CheckTheTokenValidity(studentRequestStatusDto.TeacherEmail, new Guid(studentRequestStatusDto.Token)))
                 return BadRequest();
 
             _studentService.UpdateStudentRequest(studentRequestStatusDto.StudentEmail,
@@ -117,6 +136,9 @@ namespace BachelorManagement.ApiLayer.Controllers
         [Route("api/student/comments/{email}/{token}")]
         public IActionResult GetTeacherComments(string email, string token)
         {
+            if (!Token.CheckTokenFormat(token))
+                return BadRequest();
+
             if (!_accountService.CheckTheTokenValidity(email, new Guid(token)))
                 return BadRequest();
 
@@ -127,6 +149,9 @@ namespace BachelorManagement.ApiLayer.Controllers
         [Route("api/student/comments/{email}/{id}/{token}")]
         public IActionResult GetTeacherCommentReplies(string email, int id, string token)
         {
+            if (!Token.CheckTokenFormat(token))
+                return BadRequest();
+
             if (!_accountService.CheckTheTokenValidity(email, new Guid(token)))
                 return BadRequest();
 
@@ -146,6 +171,9 @@ namespace BachelorManagement.ApiLayer.Controllers
         public IActionResult AddStudentMeetingRequest([FromBody] RequestMeetingDto studentMeetingDto)
         {
             if (!ModelState.IsValid)
+                return BadRequest();
+
+            if (!Token.CheckTokenFormat(studentMeetingDto.Token))
                 return BadRequest();
 
             if (!_accountService.CheckTheTokenValidity(studentMeetingDto.StudentEmail, new Guid(studentMeetingDto.Token)))
@@ -169,6 +197,9 @@ namespace BachelorManagement.ApiLayer.Controllers
             if (!ModelState.IsValid)
                 return BadRequest();
 
+            if (!Token.CheckTokenFormat(studentMeetingDto.Token))
+                return BadRequest();
+
             if (!_accountService.CheckTheTokenValidity(studentMeetingDto.StudentEmail, new Guid(studentMeetingDto.Token)))
                 return BadRequest();
 
@@ -187,6 +218,9 @@ namespace BachelorManagement.ApiLayer.Controllers
         [Route("api/student/studentMeetingRequest/{email}/{token}")]
         public IActionResult GetStudentMeetingRequest(string email, string token)
         {
+            if (!Token.CheckTokenFormat(token))
+                return BadRequest();
+
             if (!_accountService.CheckTheTokenValidity(email, new Guid(token)))
                 return BadRequest();
 
@@ -213,6 +247,9 @@ namespace BachelorManagement.ApiLayer.Controllers
         [Route("api/student/studentMeetingRequestStatus/{email}/{token}")]
         public IActionResult GetStudentMeetingRequestStatus(string email, string token)
         {
+            if (!Token.CheckTokenFormat(token))
+                return BadRequest();
+
             if (!_accountService.CheckTheTokenValidity(email, new Guid(token)))
                 return BadRequest();
 
@@ -239,6 +276,9 @@ namespace BachelorManagement.ApiLayer.Controllers
         public IActionResult EditStudent([FromBody] EditStudentDto editStudentDto)
         {
             if (!ModelState.IsValid)
+                return BadRequest();
+
+            if (!Token.CheckTokenFormat(editStudentDto.Token))
                 return BadRequest();
 
             if (!_accountService.CheckTheTokenValidity(editStudentDto.Email, new Guid(editStudentDto.Token)))

@@ -70,7 +70,7 @@ import { AdminWallComponent } from './admin-components/admin-wall/admin-wall.com
       { path: 'forgotPassword', component: ForgotPasswordComponent, pathMatch: 'full' },
       { path: 'information', component: InformationComponent, pathMatch: 'full' },
       { path: 'studentWork', component: StudentWorkComponent, pathMatch: 'full' },      
-      { path: 'adminWall', component: AdminWallComponent, pathMatch: 'full' },       
+      { path: 'adminWall', component: AdminWallComponent, pathMatch: 'full' },     
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: '**', redirectTo: 'login', pathMatch: 'full' }
     ]),

@@ -7,8 +7,9 @@ import { Month } from '../../models/month.model';
 import { Comment } from '../../models/comment.model';
 import { TitleService } from '../../services/title.service';
 import { Title } from '@angular/platform-browser';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Teacher } from '../../models/teacher.model';
+import { TokenService } from '../../services/token.service';
 
 @Component({
   selector: 'teacher-wall',
@@ -37,18 +38,22 @@ export class TeacherWallComponent {
     [new Comment(this.studentName, "Hello! Thank you!", new DateClass(20, Month[1], 2018, "14:40"))],
     this.showComments]];
 
-  titleService: TitleService;
+  titleService: TitleService; 
+  tokenService: TokenService;
+  token: string;
 
   meetingRequestBody: {
     StudentEmail: string,
     TeacherEmail: string,
-    Date: Date
+    Date: Date,
+    Token: string
   }
 
   postBody:{
     StudentEmail: string;
     TeacherEmail: string;
     CommentContent: string;
+    Token: string;
   }
 
   commentBody:{
@@ -59,6 +64,8 @@ export class TeacherWallComponent {
   constructor(private title: Title, private http: HttpClient) {
     this.titleService = new TitleService(title);
     this.titleService.setTitle("BDMApp Teacher Wall");
+    this.tokenService = new TokenService();   
+    this.token = this.tokenService.buildToken();
   }
 
   ngOnInit() {
@@ -67,7 +74,7 @@ export class TeacherWallComponent {
   }
 
   getMeetingRequestStatus(){
-    const commentResponse = this.http.get('http://localhost:64250/api/student/studentMeetingRequestStatus/' + this.studentEmail, { observe: 'response' });
+    const commentResponse = this.http.get('http://localhost:64250/api/student/studentMeetingRequestStatus/' + this.studentEmail + '/' + this.token, { observe: 'response' });
 
     commentResponse.subscribe(
       data => {
@@ -78,14 +85,20 @@ export class TeacherWallComponent {
          }
       },
       err => {
-        console.log("Error");
+        console.log("Error getting status");
         console.log(err)
       }
     );
   }
 
   getTeacherWallComments() {
-    const commentResponse = this.http.get('http://localhost:64250/api/teacher/comments/' + this.teacherEmail, { observe: 'response' });
+    if(localStorage.getItem('isTeacher') == 'False'){
+      var commentResponse = this.http.get('http://localhost:64250/api/teacher/comments/'+ this.studentEmail + '/' + this.teacherEmail + '/' + this.token, { observe: 'response' });
+    }
+
+    if(localStorage.getItem('isTeacher') == 'True'){
+      var commentResponse = this.http.get('http://localhost:64250/api/teacher/comments/'+ this.teacherEmail + '/' + this.teacherEmail + '/' + this.token, { observe: 'response' });
+    }
 
     commentResponse.subscribe(
       data => {
@@ -101,14 +114,20 @@ export class TeacherWallComponent {
         }
       },
       err => {
-        console.log("Error");
+        console.log("Error comments");
         console.log(err)
       }
     );
   }
 
   getTeacherWallCommentReplies(commentId: number) {
-    const commentReplyResponse = this.http.get('http://localhost:64250/api/teacher/comments/' + this.teacherEmail + "/" + commentId, { observe: 'response' });
+    if(localStorage.getItem('isTeacher') == 'False'){
+      var commentReplyResponse = this.http.get('http://localhost:64250/api/teacher/comments/' + this.studentEmail + '/' + this.teacherEmail + "/" + commentId + '/' + this.token, { observe: 'response' });
+    }
+
+    if(localStorage.getItem('isTeacher') == 'True'){
+      var commentReplyResponse = this.http.get('http://localhost:64250/api/teacher/comments/' + this.teacherEmail + '/' + this.teacherEmail + "/" + commentId + '/' + this.token, { observe: 'response' });
+    }
 
     commentReplyResponse.subscribe(
       data => {
@@ -123,7 +142,7 @@ export class TeacherWallComponent {
         }
       },
       err => {
-        console.log("Error");
+        console.log("Error comment replies");
         console.log(err)
       }
     );
@@ -145,7 +164,8 @@ export class TeacherWallComponent {
     this.meetingRequestBody = {
       StudentEmail: this.studentEmail,
       TeacherEmail: this.teacherEmail,
-      Date: new Date()
+      Date: new Date(),
+      Token: this.token
     }
 
     const commentReplyResponse = this.http.post('http://localhost:64250/api/student/studentMeetingRequest', this.meetingRequestBody, { observe: 'response' });
@@ -166,7 +186,8 @@ export class TeacherWallComponent {
     this.meetingRequestBody = {
       StudentEmail: this.studentEmail,
       TeacherEmail: this.teacherEmail,
-      Date: new Date()
+      Date: new Date(),
+      Token: this.token
     }
 
     const commentReplyResponse = this.http.post('http://localhost:64250/api/student/deleteStudentMeetingRequest', this.meetingRequestBody, { observe: 'response' });
@@ -212,7 +233,7 @@ export class TeacherWallComponent {
           window.location.reload();
         },
         err => {
-          console.log("Error");
+          console.log("Error adding comment");
           console.log(err)
         }
       );
@@ -223,7 +244,8 @@ export class TeacherWallComponent {
     this.postBody = {
       StudentEmail: this.studentEmail,
       TeacherEmail: this.teacherEmail,
-      CommentContent: commentContent
+      CommentContent: commentContent,
+      Token: this.token
     }
 
     const commentReplyResponse = this.http.post('http://localhost:64250/api/teacher/comments', this.postBody, { observe: 'response' });
@@ -233,7 +255,7 @@ export class TeacherWallComponent {
         window.location.reload();
       },
       err => {
-        console.log("Error");
+        console.log("Error add post");
         console.log(err)
       }
     );

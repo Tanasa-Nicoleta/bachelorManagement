@@ -7,6 +7,7 @@ import { Student } from '../models/student.model';
 import { Bachelor } from '../models/bachelor-degree.model';
 import { TeacherProfile } from '../models/teacher-profile.model';
 import { DayOfWeek } from '../models/day-of-week.model';
+import { TokenService } from '../services/token.service';
 
 @Component({
   selector: 'profile',
@@ -28,6 +29,8 @@ export class ProfileComponent {
   student: Student;
   teacher: TeacherProfile = new TeacherProfile(null, null, null, null, null, null, null);
   titleService: TitleService;
+  tokenService: TokenService;
+  token: string;
 
   editProfileBody: {
     Email: string;
@@ -46,7 +49,9 @@ export class ProfileComponent {
 
   constructor(private title: Title, private http: HttpClient) {
     this.titleService = new TitleService(title);
-    this.titleService.setTitle("BDMApp Profile");
+    this.titleService.setTitle("BDMApp Profile"); 
+    this.tokenService = new TokenService();   
+    this.token = this.tokenService.buildToken();
   }
 
   ngOnInit() {
@@ -57,17 +62,9 @@ export class ProfileComponent {
     }
   }
 
-  buildToken(): string {
-    let token: string = localStorage.getItem('token').replace("\"", "");
-    token = token.substring(0, token.length - 1);
-
-    return token;
-  }
 
   private getTeacherDetails(email: string) {
-    let token = this.buildToken();
-
-    const theacherResponse = this.http.get('http://localhost:64250/api/teacher/' + this.teacherEmail + '/' + token, { observe: 'response' });
+    const theacherResponse = this.http.get('http://localhost:64250/api/teacher/' + this.teacherEmail +'/' + this.teacherEmail + '/' + this.token, { observe: 'response' });
 
     theacherResponse.subscribe(
       data => {
@@ -85,9 +82,7 @@ export class ProfileComponent {
 
 
   private getStudentsDetails(email: string) {
-    let token = this.buildToken();
-
-    const studentResponse = this.http.get('http://localhost:64250/api/student/' + this.email + "/" + token, { observe: 'response' });
+    const studentResponse = this.http.get('http://localhost:64250/api/student/' + this.email + "/" + this.token, { observe: 'response' });
 
     studentResponse.subscribe(
       data => {
@@ -108,9 +103,7 @@ export class ProfileComponent {
   }
 
   setThemesToStudent(email: string, student: Student) {
-    let token = this.buildToken();
-
-    let themeResponse = this.http.get('http://localhost:64250/api/student/themes/' + localStorage.getItem("email") + "/" + email + "/" + token, { observe: 'response' });
+    let themeResponse = this.http.get('http://localhost:64250/api/student/themes/' + localStorage.getItem("email") + "/" + email + "/" + this.token, { observe: 'response' });
 
     themeResponse.subscribe(data => {
       if (data.body) {
@@ -125,9 +118,7 @@ export class ProfileComponent {
   }
 
   setTeacherToStudent(email: string, student: Student) {
-    let token = this.buildToken();
-
-    let theacherRespose = this.http.get('http://localhost:64250/api/student/teacher/' + email + "/" + token, { observe: 'response' });
+    let theacherRespose = this.http.get('http://localhost:64250/api/student/teacher/' + email + "/" + this.token, { observe: 'response' });
 
     theacherRespose.subscribe(data => {
       if (data.body) {
@@ -142,9 +133,7 @@ export class ProfileComponent {
   }
 
   setMeansToStudent(email: string, student: Student) {
-    let token = this.buildToken();
-
-    let meansResponse = this.http.get('http://localhost:64250/api/student/means/' + email + "/" + token, { observe: 'response' });
+    let meansResponse = this.http.get('http://localhost:64250/api/student/means/' + email + "/" + this.token, { observe: 'response' });
 
     meansResponse.subscribe(data => {
       if (data.body) {
@@ -162,9 +151,7 @@ export class ProfileComponent {
 
   setThemesToTeacher() {
     this.teacher.Theme = new Array<Bachelor>();
-    let token = this.buildToken();
-
-    let themeResponse = this.http.get('http://localhost:64250/api/teacher/themes/' + this.teacher.Email + "/" + token, { observe: 'response' });
+    let themeResponse = this.http.get('http://localhost:64250/api/teacher/themes/' + this.teacherEmail + '/' +this.teacher.Email + "/" + this.token, { observe: 'response' });
 
     themeResponse.subscribe(data => {
       if (data.body) {
@@ -184,9 +171,8 @@ export class ProfileComponent {
 
   setStudentsToTeacher() {
     this.teacher.Student = new Array<Student>();
-    let token = this.buildToken();
 
-    let themeResponse = this.http.get('http://localhost:64250/api/teacher/students/' + this.teacher.Email + "/" + token, { observe: 'response' });
+    let themeResponse = this.http.get('http://localhost:64250/api/teacher/students/' + this.teacher.Email + "/" + this.token, { observe: 'response' });
 
     themeResponse.subscribe(data => {
       if (data.body) {
@@ -206,9 +192,7 @@ export class ProfileComponent {
   };
 
   setConsultationToTeacher() {
-    let token = this.buildToken();
-
-    let consultationResponse = this.http.get('http://localhost:64250/api/teacher/getConsultation/' + this.teacher.Email + "/" + token, { observe: 'response' });
+    let consultationResponse = this.http.get('http://localhost:64250/api/teacher/getConsultation/' + this.teacher.Email + "/" + this.token, { observe: 'response' });
 
     consultationResponse.subscribe(data => {
       if (data.body) {
@@ -228,14 +212,12 @@ export class ProfileComponent {
   }
 
   editRecord(email: string, gitUrl: string, themeTitle: string, themeDescription: string) {
-    let token = this.buildToken();
-
     this.editProfileBody = {
       Email: email,
       ThemeDescription: themeDescription,
       ThemeTitle: themeTitle,
       GitUrl: gitUrl,
-      Token: token
+      Token: this.token
     }
 
     const resp = this.http.put('http://localhost:64250/api/student/editStudent', this.editProfileBody, { responseType: 'text' });
@@ -255,13 +237,11 @@ export class ProfileComponent {
   }
 
   editConsultation(email: string, day: string, interval: string) {
-    let token = this.buildToken();
-
     this.editConsultationBody = {
       TeacherEmail: email,
       Day: DayOfWeek[day],
       Interval: interval,
-      Token: token
+      Token: this.token
     }
 
     const resp = this.http.put('http://localhost:64250/api/teacher/editConsultation', this.editConsultationBody, { responseType: 'text' });

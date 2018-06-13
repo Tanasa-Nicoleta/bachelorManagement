@@ -24,7 +24,7 @@ namespace BachelorManagement.ApiLayer.Controllers
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            if (!_accountService.CheckTheTokenValidity(teacherDto.Email, new Guid(teacherDto.Token)))
+            if (!_accountService.CheckTheTokenValidity(teacherDto.AdminEmail, new Guid(teacherDto.Token)))
                 return BadRequest();
 
             _teacherService.AddTeacher(
@@ -48,7 +48,7 @@ namespace BachelorManagement.ApiLayer.Controllers
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            if (!_accountService.CheckTheTokenValidity(teacherRemoveDto.Email, new Guid(teacherRemoveDto.Token)))
+            if (!_accountService.CheckTheTokenValidity(teacherRemoveDto.AdminEmail, new Guid(teacherRemoveDto.Token)))
                 return BadRequest();
 
             _teacherService.RemoveTeacher(teacherRemoveDto.Email);
@@ -62,7 +62,7 @@ namespace BachelorManagement.ApiLayer.Controllers
             if (!ModelState.IsValid)
                 return BadRequest();
 
-            if (!_accountService.CheckTheTokenValidity(teacherDto.Email, new Guid(teacherDto.Token)))
+            if (!_accountService.CheckTheTokenValidity(teacherDto.AdminEmail, new Guid(teacherDto.Token)))
                 return BadRequest();
 
             _teacherService.EditTeacher(

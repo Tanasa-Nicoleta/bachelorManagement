@@ -6,6 +6,7 @@ import { Title } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Student } from '../../models/student.model';
+import { TokenService } from '../../services/token.service';
 
 @Component({
     selector: 'student-register-to-teacher',
@@ -22,11 +23,15 @@ export class StudentRegisterToTeacherComponent {
     teacherList: Array<Teacher> = new Array<Teacher>();
     teacherEmails: string[] = [];
     titleService: TitleService;
-    student: Student;
+    student: Student;  
+    tokenService: TokenService;
+    token: string;
 
     constructor(private title: Title, private http: HttpClient) {
         this.titleService = new TitleService(title);
         this.titleService.setTitle("BDMApp Student Register To Teacher");
+        this.tokenService = new TokenService();   
+        this.token = this.tokenService.buildToken();
     }
 
     ngOnInit() {
@@ -35,7 +40,7 @@ export class StudentRegisterToTeacherComponent {
     }
 
     getStudent(email: string){
-        const studentResponse = this.http.get('http://localhost:64250/api/student/' + email, { observe: 'response' });
+        const studentResponse = this.http.get('http://localhost:64250/api/student/' + email + '/' + this.token, { observe: 'response' });
 
         studentResponse.subscribe(
             data => {
@@ -62,7 +67,7 @@ export class StudentRegisterToTeacherComponent {
     }
 
     getTeachers() {
-        const teacherResponse = this.http.get('http://localhost:64250/api/teacher', { observe: 'response' });
+        const teacherResponse = this.http.get('http://localhost:64250/api/teachers/' + this.studentEmail  + '/' + this.token, { observe: 'response' });
 
         teacherResponse.subscribe(
             data => {
@@ -88,7 +93,7 @@ export class StudentRegisterToTeacherComponent {
         let j = 0;
 
         for (let email in this.teacherEmails) {
-            let themeResponse = this.http.get('http://localhost:64250/api/teacher/themes/' + this.teacherEmails[email], { observe: 'response' });
+            let themeResponse = this.http.get('http://localhost:64250/api/teacher/themes/' + this.studentEmail + '/' + this.teacherEmails[email] + '/' + this.token, { observe: 'response' });
 
             themeResponse.subscribe(data => {
                 if (data.body[i]) {

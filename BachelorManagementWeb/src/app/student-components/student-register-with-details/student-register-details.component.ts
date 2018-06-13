@@ -5,6 +5,7 @@ import { TitleService } from '../../services/title.service';
 import { Title } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { TokenService } from '../../services/token.service';
 
 @Component({
     selector: 'student-register-details',
@@ -20,17 +21,22 @@ export class StudentRegisterToTeacherDetailsComponent {
 
     teacher: Teacher;
     titleService: TitleService;
-
+    tokenService: TokenService;
+    token: string;
+    
     body: {
         Email: string;
         Description: string;
         Achievement: string;
         Title: string;
+        Token: string;
     };
 
     constructor(private title: Title, private http: HttpClient, private router: Router) {
         this.titleService = new TitleService(title);
         this.titleService.setTitle("BDMApp Student Register To Teacher Details");
+        this.tokenService = new TokenService();   
+        this.token = this.tokenService.buildToken();
     }
 
     ngOnInit() {
@@ -38,7 +44,7 @@ export class StudentRegisterToTeacherDetailsComponent {
     }
 
     getTeacherDetails(email: string) {
-        const theacherResponse = this.http.get('http://localhost:64250/api/teacher/' + this.email, { observe: 'response' });
+        const theacherResponse = this.http.get('http://localhost:64250/api/teacher/' + this.studentEmail+ '/' + this.email + '/' + this.token, { observe: 'response' });
 
         theacherResponse.subscribe(
             data => {
@@ -55,7 +61,7 @@ export class StudentRegisterToTeacherDetailsComponent {
     }
 
     setThemesToTeacher() {
-        let themeResponse = this.http.get('http://localhost:64250/api/teacher/themes/' + this.teacher.Email, { observe: 'response' });
+        let themeResponse = this.http.get('http://localhost:64250/api/teacher/themes/' + this.studentEmail+ '/' +  this.teacher.Email + '/' + this.token, { observe: 'response' });
 
         themeResponse.subscribe(
             data => {
@@ -78,7 +84,8 @@ export class StudentRegisterToTeacherDetailsComponent {
             Email: this.studentEmail,
             Achievement: achievement,
             Description: description,
-            Title: title
+            Title: title,
+            Token: this.token
         };
 
         const resp = this.http.post('http://localhost:64250/api/student/addTheme', this.body, { responseType: 'text' });

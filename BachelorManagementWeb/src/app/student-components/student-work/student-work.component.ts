@@ -14,7 +14,8 @@ import { TokenService } from '../../services/token.service';
 
 export class StudentWorkComponent {
     dueDate: Date = new Date(2018, 6, 15);
-    teacherEmail: string = "vlad.simion@info.uaic.ro";
+    teacherEmail: string;
+    studentEmail: string;
 
     students: Array<Student> = new Array<Student>();
     titleService: TitleService;
@@ -22,9 +23,11 @@ export class StudentWorkComponent {
     token: string;
 
     constructor(private title: Title, private http: HttpClient) {
+        this.teacherEmail = localStorage.getItem('teacherEmail');
+        this.studentEmail = localStorage.getItem('studentEmail');
         this.titleService = new TitleService(title);
         this.titleService.setTitle("BDMApp Student Work");
-        this.tokenService = new TokenService();   
+        this.tokenService = new TokenService();
         this.token = this.tokenService.buildToken();
     }
 
@@ -33,7 +36,13 @@ export class StudentWorkComponent {
     }
 
     getTeacherStudents(email: string) {
-        const teacherResponse = this.http.get('http://localhost:64250/api/teacher/students/' + email + '/' + this.token, { observe: 'response' });
+        if (localStorage.getItem('isTeacher') == 'True') {
+            var teacherResponse = this.http.get('http://localhost:64250/api/teacher/students/' + this.teacherEmail + '/' + email + '/' + this.token, { observe: 'response' });
+        }
+
+        if (localStorage.getItem('isTeacher') == 'False') {
+            teacherResponse = this.http.get('http://localhost:64250/api/teacher/students/' + this.studentEmail + '/' + email + '/' + this.token, { observe: 'response' });
+        }
 
         teacherResponse.subscribe(
             data => {
@@ -48,21 +57,27 @@ export class StudentWorkComponent {
                 }
             },
             err => {
-                console.log("Error");
+                console.log("Error getting teacher students");
                 console.log(err)
             }
         );
     }
 
     setBachelorThemeToStudents(email: string, key: string) {
-        const themeResponse = this.http.get('http://localhost:64250/api/student/themes/' + this.teacherEmail + '/' + email + '/' + this.token, { observe: 'response' });
+        if (localStorage.getItem('isTeacher') == 'True') {
+            var themeResponse = this.http.get('http://localhost:64250/api/student/themes/' + this.teacherEmail + '/' + email + '/' + this.token, { observe: 'response' });
+        }
+
+        if (localStorage.getItem('isTeacher') == 'False') {
+            themeResponse = this.http.get('http://localhost:64250/api/student/themes/' + this.studentEmail + '/' + email + '/' + this.token, { observe: 'response' });
+        }
 
         themeResponse.subscribe(
             data => {
                 this.students[key]['Theme'] = new Bachelor(data.body['title'], data.body['description']);
             },
             err => {
-                console.log("Error");
+                console.log("Error geeting bachelor themes");
                 console.log(err)
             }
         );

@@ -17,10 +17,10 @@ import { TokenService } from '../../services/token.service';
 export class StudentRegisterToTeacherComponent {
     dueDate: Date = new Date(2018, 6, 15);
     optionText: string = "Next step";
-    studentEmail: string = "mihai.ursache@info.uaic.ro";
     acceptedByTeacher: boolean = false;
 
     teacherList: Array<Teacher> = new Array<Teacher>();
+    studentEmail: string;
     teacherEmails: string[] = [];
     titleService: TitleService;
     student: Student;  
@@ -35,6 +35,7 @@ export class StudentRegisterToTeacherComponent {
     }
 
     ngOnInit() {
+        this.studentEmail = localStorage.getItem('email');
         this.getTeachers();
         this.getStudent(this.studentEmail);
     }
@@ -52,17 +53,17 @@ export class StudentRegisterToTeacherComponent {
                 console.log(err)
             }
         );
-
         if(this.student.Accepted == true){
-
-        }
+            this.acceptedByTeacher = true; 
+        }        
 
         if(this.student.Denied == true){
-
+            this.acceptedByTeacher = false;
         }
     }
 
     applyToTeacher(teacherFirstName: string, teacherLastName: string) {
+        localStorage.setItem('teacherEmail', teacherFirstName +'.'+teacherLastName+'@info.uaic.ro');
         this.student.Pending = true;
     }
 

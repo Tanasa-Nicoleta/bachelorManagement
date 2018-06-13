@@ -7,7 +7,16 @@ import { Component } from '@angular/core';
 })
 
 export class ProfileHeaderComponent {
-  Username: string = localStorage.getItem('email');
+  Username: string;
+
+  ngOnInit(){
+    if(localStorage.getItem('isTeacher') == 'True'){
+      this.Username= localStorage.getItem('teacherEmail')
+    }
+    if(localStorage.getItem('isTeacher') == 'False'){
+      this.Username= localStorage.getItem('studentEmail')
+    }
+  }
 
   logOut(){
     localStorage.clear();

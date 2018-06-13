@@ -77,13 +77,13 @@ namespace BachelorManagement.ApiLayer.Controllers
         }
 
         [HttpGet]
-        [Route("api/teacher/students/{email}/{token}")]
-        public IActionResult GetTeacherStudents(string email, string token)
+        [Route("api/teacher/students/{userEmail}/{email}/{token}")]
+        public IActionResult GetTeacherStudents(string userEmail, string email, string token)
         {
             if (!Token.CheckTokenFormat(token))
                 return BadRequest();
 
-            if (!_accountService.CheckTheTokenValidity(email, new Guid(token)))
+            if (!_accountService.CheckTheTokenValidity(userEmail, new Guid(token)))
                 return BadRequest();
 
             var students = _teacherService.GetTeacherStudents(email);
@@ -282,13 +282,13 @@ namespace BachelorManagement.ApiLayer.Controllers
 
 
         [HttpGet]
-        [Route("api/teacher/getConsultation/{email}/{token}")]
-        public IActionResult GetTeacherConsultation(string email, string token)
+        [Route("api/teacher/getConsultation/{userEmail}/{email}/{token}")]
+        public IActionResult GetTeacherConsultation(string userEmail, string email, string token)
         {
             if (!Token.CheckTokenFormat(token))
                 return BadRequest();
 
-            if (!_accountService.CheckTheTokenValidity(email, new Guid(token)))
+            if (!_accountService.CheckTheTokenValidity(userEmail, new Guid(token)))
                 return BadRequest();
 
             Consultation consultation = new Consultation();
@@ -340,7 +340,16 @@ namespace BachelorManagement.ApiLayer.Controllers
 
             if (teacher != null)
             {
-                _consultationService.AddConsultation(teacher.Id, (WeekDays)consultationDto.Day, consultationDto.Interval);
+                var cons = _consultationService.GetTeacherConsultation(teacher.Id);
+                if(cons == null)
+                    _consultationService.AddConsultation(teacher.Id, (WeekDays)consultationDto.Day, consultationDto.Interval);
+                else
+                    _consultationService.UpdateConsultation(new Consultation
+                        {
+                        Day = (WeekDays)consultationDto.Day,
+                        Interval = consultationDto.Interval                        
+                    });
+
             }
 
             return Ok(consultation);

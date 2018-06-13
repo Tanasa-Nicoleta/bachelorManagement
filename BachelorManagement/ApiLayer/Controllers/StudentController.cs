@@ -105,6 +105,14 @@ namespace BachelorManagement.ApiLayer.Controllers
             _bachelorThemeService.AddBachelorThemeToStudent(bachelorThemeDto.Email, bachelorThemeDto.Title,
                 bachelorThemeDto.Description);
 
+            _studentService.EditStudent(
+                    new Student
+                    {
+                        Email = bachelorThemeDto.Email,
+                        Pending = true
+                    }
+                );
+
             return Ok();
         }
 
@@ -244,13 +252,13 @@ namespace BachelorManagement.ApiLayer.Controllers
         }
 
         [HttpGet]
-        [Route("api/student/studentMeetingRequestStatus/{email}/{token}")]
-        public IActionResult GetStudentMeetingRequestStatus(string email, string token)
+        [Route("api/student/studentMeetingRequestStatus/{userEmail}/{email}/{token}")]
+        public IActionResult GetStudentMeetingRequestStatus(string userEmail, string email, string token)
         {
             if (!Token.CheckTokenFormat(token))
                 return BadRequest();
 
-            if (!_accountService.CheckTheTokenValidity(email, new Guid(token)))
+            if (!_accountService.CheckTheTokenValidity(userEmail, new Guid(token)))
                 return BadRequest();
 
             var student = _studentService.GetStudentByEmail(email);

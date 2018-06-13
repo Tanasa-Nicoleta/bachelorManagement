@@ -63,11 +63,13 @@ export class RegisterLayoutComponent {
     if (password.value !== Password) {
       password.classList.add('invalidPass');
       this.matchError = true;
+      
       return false;
     }
     else {
       password.classList.remove('invalidPass');
       this.deleteError();
+      
       return true;
     }
   }
@@ -96,7 +98,6 @@ export class RegisterLayoutComponent {
     );
   }
 
-
   getUserToken(email: string, isTeacher: string){
     this.body = {
       Username: email,
@@ -120,8 +121,6 @@ export class RegisterLayoutComponent {
     localStorage.setItem('email', email);
     localStorage.setItem('isTeacher', isTeacher);
     localStorage.setItem('token', token);
-
-    console.log(localStorage);
   }
 
   validateEmail(email: HTMLInputElement) {

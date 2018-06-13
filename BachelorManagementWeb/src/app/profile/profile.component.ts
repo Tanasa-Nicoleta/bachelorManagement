@@ -16,8 +16,8 @@ import { TokenService } from '../services/token.service';
 })
 
 export class ProfileComponent {
-  email: string = localStorage.getItem("email");
-  teacherEmail: string = "vlad.simion@info.uaic.ro";
+  studentEmail: string;
+  teacherEmail: string;
   editText: string = "edit profile";
   submitText: string = "submit";
   isTeacher: boolean = localStorage.getItem('isTeacher') == "True";
@@ -48,23 +48,26 @@ export class ProfileComponent {
   }
 
   constructor(private title: Title, private http: HttpClient) {
+    this.studentEmail = localStorage.getItem("studentEmail");
+    this.teacherEmail = localStorage.getItem("teacherEmail");
+
     this.titleService = new TitleService(title);
-    this.titleService.setTitle("BDMApp Profile"); 
-    this.tokenService = new TokenService();   
+    this.titleService.setTitle("BDMApp Profile");
+    this.tokenService = new TokenService();
     this.token = this.tokenService.buildToken();
   }
 
   ngOnInit() {
     if (this.isTeacher) {
-      this.getTeacherDetails(this.email);
+      this.getTeacherDetails(this.studentEmail);
     } else {
-      this.getStudentsDetails(this.email)
+      this.getStudentsDetails(this.studentEmail)
     }
   }
 
 
   private getTeacherDetails(email: string) {
-    const theacherResponse = this.http.get('http://localhost:64250/api/teacher/' + this.teacherEmail +'/' + this.teacherEmail + '/' + this.token, { observe: 'response' });
+    const theacherResponse = this.http.get('http://localhost:64250/api/teacher/' + this.teacherEmail + '/' + this.teacherEmail + '/' + this.token, { observe: 'response' });
 
     theacherResponse.subscribe(
       data => {
@@ -82,7 +85,7 @@ export class ProfileComponent {
 
 
   private getStudentsDetails(email: string) {
-    const studentResponse = this.http.get('http://localhost:64250/api/student/' + this.email + "/" + this.token, { observe: 'response' });
+    const studentResponse = this.http.get('http://localhost:64250/api/student/' + email + "/" + this.token, { observe: 'response' });
 
     studentResponse.subscribe(
       data => {
@@ -103,7 +106,14 @@ export class ProfileComponent {
   }
 
   setThemesToStudent(email: string, student: Student) {
-    let themeResponse = this.http.get('http://localhost:64250/api/student/themes/' + localStorage.getItem("email") + "/" + email + "/" + this.token, { observe: 'response' });
+      if (localStorage.getItem('isTeacher') == 'True') {
+        var themeResponse = this.http.get('http://localhost:64250/api/student/themes/' + this.teacherEmail + "/" + email + "/" + this.token, { observe: 'response' });
+      }
+  
+      if (localStorage.getItem('isTeacher') == 'False') {
+        themeResponse = this.http.get('http://localhost:64250/api/student/themes/' + this.studentEmail + "/" + email + "/" + this.token, { observe: 'response' });
+      }
+
 
     themeResponse.subscribe(data => {
       if (data.body) {
@@ -151,7 +161,7 @@ export class ProfileComponent {
 
   setThemesToTeacher() {
     this.teacher.Theme = new Array<Bachelor>();
-    let themeResponse = this.http.get('http://localhost:64250/api/teacher/themes/' + this.teacherEmail + '/' +this.teacher.Email + "/" + this.token, { observe: 'response' });
+    let themeResponse = this.http.get('http://localhost:64250/api/teacher/themes/' + this.teacherEmail + '/' + this.teacher.Email + "/" + this.token, { observe: 'response' });
 
     themeResponse.subscribe(data => {
       if (data.body) {
@@ -192,7 +202,14 @@ export class ProfileComponent {
   };
 
   setConsultationToTeacher() {
-    let consultationResponse = this.http.get('http://localhost:64250/api/teacher/getConsultation/' + this.teacher.Email + "/" + this.token, { observe: 'response' });
+    if (localStorage.getItem('isTeacher') == 'True') {
+      var consultationResponse = this.http.get('http://localhost:64250/api/teacher/getConsultation/' + this.teacherEmail +'/' + this.teacherEmail + "/" + this.token, { observe: 'response' });
+    }
+
+    if (localStorage.getItem('isTeacher') == 'False') {
+      consultationResponse = this.http.get('http://localhost:64250/api/teacher/getConsultation/'  + this.studentEmail +'/' +  this.teacherEmail + "/" + this.token, { observe: 'response' });
+    }
+
 
     consultationResponse.subscribe(data => {
       if (data.body) {

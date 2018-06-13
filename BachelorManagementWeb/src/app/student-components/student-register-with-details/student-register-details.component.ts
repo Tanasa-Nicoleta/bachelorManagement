@@ -16,8 +16,8 @@ import { TokenService } from '../../services/token.service';
 export class StudentRegisterToTeacherDetailsComponent {
 
     buttonText: string = "Subimt";
-    email: string = "vlad.simion@info.uaic.ro";
-    studentEmail: string = "mihai.ursache@info.uaic.ro";
+    teacherEmail: string;
+    studentEmail: string;
 
     teacher: Teacher;
     titleService: TitleService;
@@ -33,6 +33,8 @@ export class StudentRegisterToTeacherDetailsComponent {
     };
 
     constructor(private title: Title, private http: HttpClient, private router: Router) {
+        this.teacherEmail = localStorage.getItem('teacherEmail');
+        this.studentEmail = localStorage.getItem('studentEmail');
         this.titleService = new TitleService(title);
         this.titleService.setTitle("BDMApp Student Register To Teacher Details");
         this.tokenService = new TokenService();   
@@ -40,11 +42,11 @@ export class StudentRegisterToTeacherDetailsComponent {
     }
 
     ngOnInit() {
-        this.getTeacherDetails(this.email);
+        this.getTeacherDetails(this.teacherEmail);
     }
 
-    getTeacherDetails(email: string) {
-        const theacherResponse = this.http.get('http://localhost:64250/api/teacher/' + this.studentEmail+ '/' + this.email + '/' + this.token, { observe: 'response' });
+    getTeacherDetails(teacherEmail: string) {
+        const theacherResponse = this.http.get('http://localhost:64250/api/teacher/' + this.studentEmail + '/' + this.teacherEmail + '/' + this.token, { observe: 'response' });
 
         theacherResponse.subscribe(
             data => {
@@ -92,7 +94,7 @@ export class StudentRegisterToTeacherDetailsComponent {
 
         resp.subscribe(
             data => {
-                this.router.navigateByUrl('/teacherWall');
+                this.router.navigateByUrl('/studentRegisterToTeacher');
             },
             err => {
                 console.log("Error");

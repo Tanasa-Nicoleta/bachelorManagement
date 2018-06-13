@@ -123,10 +123,10 @@ namespace BachelorManagement.BusinessLayer.Services
 
             var oldBachelorTheme = GetBachelorThemeByStudentId(oldStudent.Id);
 
-            if(student.StudentBachelorTheme.Title != null)            
+            if(student?.StudentBachelorTheme?.Title != null)            
                 oldBachelorTheme.Title = student.StudentBachelorTheme.Title;
 
-            if (student.StudentBachelorTheme.Description != null)
+            if (student?.StudentBachelorTheme?.Description != null)
                 oldBachelorTheme.Description = student.StudentBachelorTheme.Description;            
     
             if(student.GitUrl != null)

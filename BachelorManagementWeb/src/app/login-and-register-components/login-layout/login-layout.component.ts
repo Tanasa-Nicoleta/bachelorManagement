@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { MenuItem } from '../../models/menu-items';
 import { TitleService } from '../../services/title.service';
 import { Title } from '@angular/platform-browser';
+import { TokenService } from '../../services/token.service';
 
 @Component({
   selector: 'login-layout',
@@ -39,7 +40,6 @@ export class LoginLayoutComponent {
 
     resp.subscribe(
       data => {
-        this.router.navigateByUrl('/welcome');
         this.getUserType(email);
       },
       err => {
@@ -49,7 +49,7 @@ export class LoginLayoutComponent {
     );
   }
 
-  getUserType(email: string){
+  getUserType(email: string) {
     this.body = {
       Username: email,
       Password: null
@@ -68,7 +68,7 @@ export class LoginLayoutComponent {
     );
   }
 
-  getUserToken(email: string, isTeacher: string){
+  getUserToken(email: string, isTeacher: string) {
     this.body = {
       Username: email,
       Password: null
@@ -78,8 +78,13 @@ export class LoginLayoutComponent {
 
     resp.subscribe(
       data => {
-        this.setLocalStorage(email, isTeacher, data)
-        console.log(localStorage);
+        if(isTeacher == "False")
+        {
+          this.getStudentTeacher(email, isTeacher, data);
+        }
+        else{          
+          this.setLocalStorage(email, email, isTeacher, data);
+        }
       },
       err => {
         console.log("Error");
@@ -88,10 +93,38 @@ export class LoginLayoutComponent {
     );
   }
 
-  setLocalStorage(email: string, isTeacher: string, token: string){    
-    localStorage.setItem('email', email);
+  getStudentTeacher(studentEmail: string, isTeacher: string, token: string) {
+    localStorage.setItem('token', token);
+    let tokenService = new TokenService();   
+    token = tokenService.buildToken();
+
+    const resp = this.http.get('http://localhost:64250/api/student/teacher/' + studentEmail + '/' + token, { observe: 'response' });
+
+    resp.subscribe(
+      data => {
+        console.log("data: ", data.body);
+        this.setLocalStorage(studentEmail, data.body['email'], isTeacher, token);
+      },
+      err => {
+        console.log("Error");
+        console.log(err);
+      }
+    );
+
+  }
+
+  setLocalStorage(email: string, teacherEmail: string, isTeacher: string, token: string) {
+    if (isTeacher == 'True') {
+      localStorage.setItem('teacherEmail', email);
+    }
+    if (isTeacher == 'False') {
+      localStorage.setItem('studentEmail', email);
+      localStorage.setItem('teacherEmail', teacherEmail);
+    }
     localStorage.setItem('isTeacher', isTeacher);
     localStorage.setItem('token', token);
+    
+    this.router.navigateByUrl('/welcome');    
   }
 
   validateEmail(email: HTMLInputElement) {

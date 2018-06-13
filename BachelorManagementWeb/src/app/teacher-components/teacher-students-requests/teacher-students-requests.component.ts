@@ -43,6 +43,7 @@ export class TeacherStudentsRequestsComponent {
     this.titleService = new TitleService(title);
     this.titleService.setTitle("BDMApp Teacher Students Requests");
     this.tokenService = new TokenService();   
+    console.log("build token ", localStorage.getItem('token'));
     this.token = this.tokenService.buildToken();
   }
 
@@ -78,7 +79,7 @@ export class TeacherStudentsRequestsComponent {
   }
 
   getMeetingRequestStatus(meetingRequest: MeetingRequest, email: string) {
-    const commentResponse = this.http.get('http://localhost:64250/api/student/studentMeetingRequestStatus/' + email + '/' + this.token, { observe: 'response' });
+    const commentResponse = this.http.get('http://localhost:64250/api/student/studentMeetingRequestStatus/' + this.email + '/' + email + '/' + this.token, { observe: 'response' });
 
     commentResponse.subscribe(
       data => {

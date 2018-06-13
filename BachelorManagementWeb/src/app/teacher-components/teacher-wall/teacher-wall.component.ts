@@ -18,11 +18,10 @@ import { TokenService } from '../../services/token.service';
 })
 
 export class TeacherWallComponent {
-  teacherName: string = "Vlad Simion";
-  studentName: string = "Mihai Ursache";
-  studentEmail: string = "mihai.ursache@info.uaic.ro";
-  availableDay: string = DayOfWeek[0];
-  availableHours: string = "12:00";
+  teacherEmail: string;
+  studentEmail: string;
+  availableDay: string;
+  availableHours: string;
   upcomingDeadlineDay: DateClass = new DateClass(1, Month[2], 2018, "14:00");
   requestAMeetingButton: string = "Request a meeting";
   request: string = "Request a meeting";
@@ -32,10 +31,9 @@ export class TeacherWallComponent {
   hideCommentsButton: string = "Hide comments";
   showCommentsButton: string = "Show comments";
   showComments: boolean = false;
-  teacherEmail: string = "vlad.simion@info.uaic.ro";
   teacherObs: [[TeacherObservation, [Comment | null], boolean]] = [
     [new TeacherObservation("Hello everybody! Welcome to my page.", new DateClass(1, Month[1], 2018, "12:00"), 0),
-    [new Comment(this.studentName, "Hello! Thank you!", new DateClass(20, Month[1], 2018, "14:40"))],
+    [new Comment("Mihai Ursache", "Hello! Thank you!", new DateClass(20, Month[1], 2018, "14:40"))],
     this.showComments]];
 
   titleService: TitleService; 
@@ -62,6 +60,9 @@ export class TeacherWallComponent {
   }
 
   constructor(private title: Title, private http: HttpClient) {
+    this.studentEmail = localStorage.getItem('studentEmail');
+    this.teacherEmail = localStorage.getItem('teacherEmail');
+
     this.titleService = new TitleService(title);
     this.titleService.setTitle("BDMApp Teacher Wall");
     this.tokenService = new TokenService();   
@@ -71,10 +72,11 @@ export class TeacherWallComponent {
   ngOnInit() {
     this.getTeacherWallComments();
     this.getMeetingRequestStatus();
+    this.getTeacherConsultationDay();
   }
 
   getMeetingRequestStatus(){
-    const commentResponse = this.http.get('http://localhost:64250/api/student/studentMeetingRequestStatus/' + this.studentEmail + '/' + this.token, { observe: 'response' });
+    const commentResponse = this.http.get('http://localhost:64250/api/student/studentMeetingRequestStatus/'+ this.studentEmail + '/' + this.studentEmail + '/' + this.token, { observe: 'response' });
 
     commentResponse.subscribe(
       data => {
@@ -86,6 +88,21 @@ export class TeacherWallComponent {
       },
       err => {
         console.log("Error getting status");
+        console.log(err)
+      }
+    );
+  }
+
+  getTeacherConsultationDay(){
+    const commentResponse = this.http.get('http://localhost:64250/api/teacher/getConsultation/'+ this.studentEmail + '/' + this.teacherEmail + '/' + this.token, { observe: 'response' });
+
+    commentResponse.subscribe(
+      data => {
+         this.availableDay = DayOfWeek[data.body['day']];
+         this.availableHours = data.body['interval'];
+      },
+      err => {
+        console.log("Error getting consultation");
         console.log(err)
       }
     );
@@ -106,7 +123,7 @@ export class TeacherWallComponent {
           if (data.body.hasOwnProperty(key)) {
             this.teacherObs.push(
               [new TeacherObservation(data.body[key]['commentContent'], new DateClass(20, Month[1], 2018, "14:40"), data.body[key]['id']),
-              [new Comment(this.teacherName, "some content", new DateClass(20, Month[1], 2018, "14:40"))],
+              [new Comment("Vlad Simion", "some content", new DateClass(20, Month[1], 2018, "14:40"))],
                 false]);
 
           }

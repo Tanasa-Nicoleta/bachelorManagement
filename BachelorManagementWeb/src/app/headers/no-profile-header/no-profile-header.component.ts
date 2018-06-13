@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 
 export class NoProfileHeaderComponent {
+  logOut(){
+    localStorage.clear();
+  }
 }

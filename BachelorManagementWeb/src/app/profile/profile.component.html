@@ -16,39 +16,74 @@
 
         <div *ngIf="isTeacher == false">
             <div *ngIf="!showEditForm">
-                <div class="profileDetails">
-                    Name: {{student.FirstName}} {{student.LastName}}
+                <div *ngIf="student != null">
+                    <div class="profileDetails">
+                        Name: {{student.FirstName}} {{student.LastName}}
+                    </div>
+                    <div class="profileDetails">
+                        Teacher Name: {{student.TeacherName}}
+                    </div>
+                    <div class="profileDetails">
+                        Theme name: {{student.Theme.Title}}
+                    </div>
+                    <div class="profileDetails">
+                        Theme description: {{student.Theme.Description}}
+                    </div>
+                    <div class="profileDetails">
+                        Repository address:
+                        <a href={{userGitUrl}}> {{student.GitUrl}}</a>
+                    </div>
+                    <div class="profileDetails">
+                        Serial Number: {{student.SerialNumber}}
+                    </div>
+                    <div class="profileDetails">
+                        Start year: {{student.StartYear}}
+                    </div>
+                    <div class="profileDetails">
+                        Means: {{student.Means.FirstSemester == 0 ? "" : student.Means.FirstSemester}}{{student.Means.SecondSemester == 0 ? "" :
+                        ", " + student.Means.SecondSemester}}{{student.Means.ThirdSemester == 0 ? "" : ", " + student.Means.ThirdSemester}}{{student.Means.FourthSemester
+                        == 0 ? "" : ", " + student.Means.FourthSemester}}{{student.Means.FifthSemester == 0 ? "" : ", " +
+                        student.Means.FifthSemester}}{{student.Means.SixthSemester == 0 ? "" : ", " + student.Means.SixthSemester}}
+                    </div>
+                    <div class="profileDetails">
+                        <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect editTeacherButton" (click)="enableEditProfile()">
+                            {{editText}}
+                        </button>
+                    </div>
                 </div>
-                <div class="profileDetails">
-                    Teacher Name: {{student.TeacherName}}
+
+                <div *ngIf="student == null">
+                    <div class="profileDetails">
+                        Name: No name
+                    </div>
+                    <div class="profileDetails">
+                        Teacher Name: No teacher
+                    </div>
+                    <div class="profileDetails">
+                        Theme name: No theme
+                    </div>
+                    <div class="profileDetails">
+                        Theme description: No description
+                    </div>
+                    <div class="profileDetails">
+                        Repository address: No git url
+                    </div>
+                    <div class="profileDetails">
+                        Serial Number: No serial number
+                    </div>
+                    <div class="profileDetails">
+                        Start year: No start year
+                    </div>
+                    <div class="profileDetails">
+                        Means: No means
+                    </div>
+                    <div class="profileDetails">
+                        <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect editTeacherButton" (click)="enableEditProfile()">
+                            {{editText}}
+                        </button>
+                    </div>
                 </div>
-                <div class="profileDetails">
-                    Theme name: {{student.Theme.Title}}
-                </div>
-                <div class="profileDetails">
-                    Theme description: {{student.Theme.Description}}
-                </div>
-                <div class="profileDetails">
-                    Repository address:
-                    <a href={{userGitUrl}}> {{student.GitUrl}}</a>
-                </div>
-                <div class="profileDetails">
-                    Serial Number: {{student.SerialNumber}}
-                </div>
-                <div class="profileDetails">
-                    Start year: {{student.StartYear}}
-                </div>
-                <div class="profileDetails">
-                    Means: {{student.Means.FirstSemester == 0 ? "" : student.Means.FirstSemester}}{{student.Means.SecondSemester == 0 ? "" :
-                    ", " + student.Means.SecondSemester}}{{student.Means.ThirdSemester == 0 ? "" : ", " + student.Means.ThirdSemester}}{{student.Means.FourthSemester
-                    == 0 ? "" : ", " + student.Means.FourthSemester}}{{student.Means.FifthSemester == 0 ? "" : ", " + student.Means.FifthSemester}}{{student.Means.SixthSemester
-                    == 0 ? "" : ", " + student.Means.SixthSemester}}
-                </div>
-                <div class="profileDetails">
-                    <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect editTeacherButton" (click)="enableEditProfile()">
-                        {{editText}}
-                    </button>
-                </div>
+
 
             </div>
 
@@ -60,35 +95,66 @@
                             Edit profile
                         </div>
 
-                        <div>
-                            <span class="teacherDetailsRow">First name: {{student.FirstName}}</span>
-                        </div>
-                        <div>
-                            <span class="teacherDetailsRow">Last name: {{student.LastName}}</span>
-                        </div>
-                        <div>
-                            <span class="teacherDetailsRow">Email: {{student.Email}}</span>
+                        <div *ngIf="student != null">
+                            <div>
+                                <span class="teacherDetailsRow">First name: {{student.FirstName}}</span>
+                            </div>
+                            <div>
+                                <span class="teacherDetailsRow">Last name: {{student.LastName}}</span>
+                            </div>                            
+                            <div>
+                                <span class="teacherDetailsRow">Email: {{student.Email}}</span>
+                            </div>
+
+                            <div>
+                                <span class="teacherDetailsRow">Git Url:</span>
+                                <span class="mdl-textfield mdl-js-textfield addTeacherAdmin editInput">
+                                    <input #GitUrl class="mdl-textfield__input" type="text" placeholder={{student.GitUrl}}>
+                                </span>
+                            </div>
+                            <div>
+                                <span class="teacherDetailsRow">Theme title:</span>
+                                <span class="mdl-textfield mdl-js-textfield addTeacherAdmin editInput">
+                                    <input #ThemeTitle class="mdl-textfield__input" type="text" placeholder={{student.Theme.Title}}>
+                                </span>
+                            </div>
+                            <div>
+                                <span class="teacherDetailsRow">Theme description:</span>
+                                <span class="mdl-textfield mdl-js-textfield addTeacherAdmin editInput">
+                                    <input #ThemeDescription class="mdl-textfield__input" type="text" placeholder={{student.Theme.Description}}>
+                                </span>
+                            </div>
                         </div>
 
-                        <div>
-                            <span class="teacherDetailsRow">Git Url:</span>
-                            <span class="mdl-textfield mdl-js-textfield addTeacherAdmin editInput">
-                                <input #GitUrl class="mdl-textfield__input" type="text" placeholder={{student.GitUrl}}>
-                            </span>
-                        </div>
+                        <div *ngIf="student == null">
+                            <div>
+                                <span class="teacherDetailsRow">First name: No first name set</span>
+                            </div>
+                            <div>
+                                <span class="teacherDetailsRow">Last name: No last name set</span>
+                            </div>
+                            <div>
+                                <span class="teacherDetailsRow">Email: {{email}}</span>
+                            </div>
 
-                        <div>
-                            <span class="teacherDetailsRow">Theme title:</span>
-                            <span class="mdl-textfield mdl-js-textfield addTeacherAdmin editInput">
-                                <input #ThemeTitle class="mdl-textfield__input" type="text" placeholder={{student.Theme.Title}}>
-                            </span>
-                        </div>
-
-                        <div>
-                            <span class="teacherDetailsRow">Theme description:</span>
-                            <span class="mdl-textfield mdl-js-textfield addTeacherAdmin editInput">
-                                <input #ThemeDescription class="mdl-textfield__input" type="text" placeholder={{student.Theme.Description}}>
-                            </span>
+                            <div>
+                                <span class="teacherDetailsRow">Git Url:</span>
+                                <span class="mdl-textfield mdl-js-textfield addTeacherAdmin editInput">
+                                    <input #GitUrl class="mdl-textfield__input" type="text" placeholder="A git url">
+                                </span>
+                            </div>
+                            <div>
+                                <span class="teacherDetailsRow">Theme title:</span>
+                                <span class="mdl-textfield mdl-js-textfield addTeacherAdmin editInput">
+                                    <input #ThemeTitle class="mdl-textfield__input" type="text" placeholder="A theme title">
+                                </span>
+                            </div>
+                            <div>
+                                <span class="teacherDetailsRow">Theme description:</span>
+                                <span class="mdl-textfield mdl-js-textfield addTeacherAdmin editInput">
+                                    <input #ThemeDescription class="mdl-textfield__input" type="text" placeholder="A theme description">
+                                </span>
+                            </div>
                         </div>
 
                         <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" (click)="editRecord(student.Email, GitUrl.value.length == 0 ? GitUrl.placeholder : GitUrl.value, ThemeTitle.value.length == 0 ? ThemeTitle.placeholder : ThemeTitle.value, ThemeDescription.value.length == 0 ? ThemeDescription.placeholder : ThemeDescription.value)">

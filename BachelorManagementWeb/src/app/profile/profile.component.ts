@@ -91,12 +91,9 @@ export class ProfileComponent {
 
     studentResponse.subscribe(
       data => {
-        console.log("data: ", data.body);
         this.student = new Student(data.body['firstName'], data.body['lastName'], data.body['email'], null,
           data.body['gitUrl'], data.body['startYear'], data.body['serialNumber'], null, data.body['achievements'], data.body['accepted'], data.body['denied']);
 
-        console.log(email);
-        console.log(this.student);
         this.setThemesToStudent(email, this.student);
         this.setTeacherToStudent(email, this.student);
         this.setMeansToStudent(email, this.student);

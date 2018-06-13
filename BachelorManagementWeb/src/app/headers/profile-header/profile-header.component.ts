@@ -7,5 +7,9 @@ import { Component } from '@angular/core';
 })
 
 export class ProfileHeaderComponent {
-  Username: string = "someone@info.uaic.ro";
+  Username: string = localStorage.getItem('email');
+
+  logOut(){
+    localStorage.clear();
+  }
 }

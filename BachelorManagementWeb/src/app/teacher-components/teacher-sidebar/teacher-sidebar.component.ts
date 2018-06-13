@@ -22,9 +22,7 @@ export class TeacherSidebarComponent {
     this.menuItems.push(new MenuItem("Student's work", "/studentWork"));
 
     if(this.isTeacher){
-      console.log("add requests");
       this.menuItems.push(new MenuItem("Student Requests", "/teacherStudentsRequests"));
-      console.log(this.menuItems);
     }
 
     if(!this.isTeacher){

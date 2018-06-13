@@ -36,9 +36,10 @@ export class TeacherWallComponent {
     [new Comment("Mihai Ursache", "Hello! Thank you!", new DateClass(20, Month[1], 2018, "14:40"))],
     this.showComments]];
 
-  titleService: TitleService; 
+  titleService: TitleService;
   tokenService: TokenService;
   token: string;
+  isTeacher: boolean;
 
   meetingRequestBody: {
     StudentEmail: string,
@@ -47,14 +48,14 @@ export class TeacherWallComponent {
     Token: string
   }
 
-  postBody:{
+  postBody: {
     StudentEmail: string;
     TeacherEmail: string;
     CommentContent: string;
     Token: string;
   }
 
-  commentBody:{
+  commentBody: {
     CommentId: number;
     CommentContent: string;
   }
@@ -62,29 +63,32 @@ export class TeacherWallComponent {
   constructor(private title: Title, private http: HttpClient) {
     this.studentEmail = localStorage.getItem('studentEmail');
     this.teacherEmail = localStorage.getItem('teacherEmail');
+    this.isTeacher = localStorage.getItem('isTeacher') == 'True';
 
     this.titleService = new TitleService(title);
     this.titleService.setTitle("BDMApp Teacher Wall");
-    this.tokenService = new TokenService();   
+    this.tokenService = new TokenService();
     this.token = this.tokenService.buildToken();
   }
 
   ngOnInit() {
     this.getTeacherWallComments();
-    this.getMeetingRequestStatus();
+    if (localStorage.getItem('isTeacher') == 'False') {
+      this.getMeetingRequestStatus();
+    }
     this.getTeacherConsultationDay();
   }
 
-  getMeetingRequestStatus(){
-    const commentResponse = this.http.get('http://localhost:64250/api/student/studentMeetingRequestStatus/'+ this.studentEmail + '/' + this.studentEmail + '/' + this.token, { observe: 'response' });
+  getMeetingRequestStatus() {
+    var commentResponse = this.http.get('http://localhost:64250/api/student/studentMeetingRequestStatus/' + this.studentEmail + '/' + this.studentEmail + '/' + this.token, { observe: 'response' });
 
     commentResponse.subscribe(
       data => {
-         this.meetingRequestStatus = MeetingRequestStatus[data.body['status']];
-         if(data.body['status'] == 1 || data.body['status'] == 2){
+        this.meetingRequestStatus = MeetingRequestStatus[data.body['status']];
+        if (data.body['status'] == 1 || data.body['status'] == 2) {
           this.requestAMeetingButton = this.cancel;
           this.meetingRequest = true;
-         }
+        }
       },
       err => {
         console.log("Error getting status");
@@ -93,13 +97,19 @@ export class TeacherWallComponent {
     );
   }
 
-  getTeacherConsultationDay(){
-    const commentResponse = this.http.get('http://localhost:64250/api/teacher/getConsultation/'+ this.studentEmail + '/' + this.teacherEmail + '/' + this.token, { observe: 'response' });
+  getTeacherConsultationDay() {
+    if (localStorage.getItem('isTeacher') == 'False') {
+      var commentResponse = this.http.get('http://localhost:64250/api/teacher/getConsultation/' + this.studentEmail + '/' + this.teacherEmail + '/' + this.token, { observe: 'response' });
+    }
+
+    if (localStorage.getItem('isTeacher') == 'True') {
+      commentResponse = this.http.get('http://localhost:64250/api/teacher/getConsultation/' + this.teacherEmail + '/' + this.teacherEmail + '/' + this.token, { observe: 'response' });
+    }
 
     commentResponse.subscribe(
       data => {
-         this.availableDay = DayOfWeek[data.body['day']];
-         this.availableHours = data.body['interval'];
+        this.availableDay = DayOfWeek[data.body['day']];
+        this.availableHours = data.body['interval'];
       },
       err => {
         console.log("Error getting consultation");
@@ -109,12 +119,12 @@ export class TeacherWallComponent {
   }
 
   getTeacherWallComments() {
-    if(localStorage.getItem('isTeacher') == 'False'){
-      var commentResponse = this.http.get('http://localhost:64250/api/teacher/comments/'+ this.studentEmail + '/' + this.teacherEmail + '/' + this.token, { observe: 'response' });
+    if (localStorage.getItem('isTeacher') == 'False') {
+      var commentResponse = this.http.get('http://localhost:64250/api/teacher/comments/' + this.studentEmail + '/' + this.teacherEmail + '/' + this.token, { observe: 'response' });
     }
 
-    if(localStorage.getItem('isTeacher') == 'True'){
-      var commentResponse = this.http.get('http://localhost:64250/api/teacher/comments/'+ this.teacherEmail + '/' + this.teacherEmail + '/' + this.token, { observe: 'response' });
+    if (localStorage.getItem('isTeacher') == 'True') {
+      var commentResponse = this.http.get('http://localhost:64250/api/teacher/comments/' + this.teacherEmail + '/' + this.teacherEmail + '/' + this.token, { observe: 'response' });
     }
 
     commentResponse.subscribe(
@@ -138,11 +148,11 @@ export class TeacherWallComponent {
   }
 
   getTeacherWallCommentReplies(commentId: number) {
-    if(localStorage.getItem('isTeacher') == 'False'){
+    if (localStorage.getItem('isTeacher') == 'False') {
       var commentReplyResponse = this.http.get('http://localhost:64250/api/teacher/comments/' + this.studentEmail + '/' + this.teacherEmail + "/" + commentId + '/' + this.token, { observe: 'response' });
     }
 
-    if(localStorage.getItem('isTeacher') == 'True'){
+    if (localStorage.getItem('isTeacher') == 'True') {
       var commentReplyResponse = this.http.get('http://localhost:64250/api/teacher/comments/' + this.teacherEmail + '/' + this.teacherEmail + "/" + commentId + '/' + this.token, { observe: 'response' });
     }
 
@@ -238,23 +248,23 @@ export class TeacherWallComponent {
   }
 
   addComment(commentContent: string, teacherObservation: [TeacherObservation, [Comment | null], boolean]) {
-      this.commentBody = {
-        CommentId: teacherObservation[0].Id,
-        CommentContent: commentContent
+    this.commentBody = {
+      CommentId: teacherObservation[0].Id,
+      CommentContent: commentContent
+    }
+
+    const commentReplyResponse = this.http.post('http://localhost:64250/api/teacher/addCommentReply', this.commentBody, { observe: 'response' });
+
+    commentReplyResponse.subscribe(
+      data => {
+        window.location.reload();
+      },
+      err => {
+        console.log("Error adding comment");
+        console.log(err)
       }
-  
-      const commentReplyResponse = this.http.post('http://localhost:64250/api/teacher/addCommentReply', this.commentBody, { observe: 'response' });
-  
-      commentReplyResponse.subscribe(
-        data => {
-          window.location.reload();
-        },
-        err => {
-          console.log("Error adding comment");
-          console.log(err)
-        }
-      );
-    
+    );
+
   }
 
   addPost(commentContent: string) {

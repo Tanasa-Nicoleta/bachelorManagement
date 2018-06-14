@@ -5,24 +5,30 @@ import { HttpClient } from '@angular/common/http';
 import { Student } from '../../models/student.model';
 import { Bachelor } from '../../models/bachelor-degree.model';
 import { TokenService } from '../../services/token.service';
+import { Commit } from '../../models/commit.model';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'student-work',
     templateUrl: './student-work.component.html',
-    styleUrls: ['../../app.component.scss']
+    styleUrls: ['../../app.component.scss', '../student.component.scss']
 })
 
 export class StudentWorkComponent {
+    gitUserName: string = "Tanasa-Nicoleta";
+    gitProjectName: string = "bachelorManagement";
     dueDate: Date = new Date(2018, 6, 15);
     teacherEmail: string;
     studentEmail: string;
 
     students: Array<Student> = new Array<Student>();
+    commitsArray: Array<Commit> = new Array<Commit>();
     titleService: TitleService;
     tokenService: TokenService;
     token: string;
+    commitsData: any;
 
-    constructor(private title: Title, private http: HttpClient) {
+    constructor(private title: Title, private http: HttpClient, private router: Router) {
         this.teacherEmail = localStorage.getItem('teacherEmail');
         this.studentEmail = localStorage.getItem('studentEmail');
         this.titleService = new TitleService(title);
@@ -33,6 +39,7 @@ export class StudentWorkComponent {
 
     ngOnInit() {
         this.getTeacherStudents(this.teacherEmail);
+        this.getCommitData();
     }
 
     getTeacherStudents(email: string) {
@@ -82,4 +89,35 @@ export class StudentWorkComponent {
             }
         );
     }
+
+    getCommitData() {
+        var resp = this.http.get('https://api.github.com/repos/' + this.gitUserName + '/' + this.gitProjectName + '/commits ');
+
+        resp.subscribe(
+            data => {
+                this.commitsData = data;
+                this.iterateForCommits();
+            },
+            err => {
+                console.log("Error");
+                console.log(err)
+            });
+    }
+
+    iterateForCommits() {
+        let i = 0;
+        for (var key in this.commitsData) {
+            if (i < 5) {
+                if (this.commitsData.hasOwnProperty(key)) {
+                    this.commitsArray.push(new Commit(this.commitsData[key].commit.message, new Date(this.commitsData[key].commit.author.date)));
+                }
+            }
+            i++;
+        }
+    }
+
+    goToDetails(email: string){
+        this.router.navigateByUrl('/gitDetails');
+    }
+
 }

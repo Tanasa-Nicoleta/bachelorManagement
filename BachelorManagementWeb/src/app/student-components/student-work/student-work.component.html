@@ -28,10 +28,38 @@
                         Achievements: {{student.Achievement}}
                     </div>
                     <div class="profileDetails">
-                        GitUrl: {{student.GitUrl}}
+                        GitUrl:
+                        <a href='#'>{{student.GitUrl}}</a>
                     </div>
+                    <div class="profileDetails">
+                        Latest 5 commits:
+                    </div>
+
+                    <div class="profileDetails">
+                        <div>
+                            <div class="mdl-cell mdl-cell--12-col">
+                                <table class="table">
+                                    <thead>
+                                        <th class="columnTitle commitDetails"> Date </th>
+                                        <th class="columnTitle commitDetails"> Description </th>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let commit of commitsArray; let i = index;">
+                                            <td class="columnGitContent commitDetails">{{commit.Date.getDate()}}.{{commit.Date.getMonth()}}.{{commit.Date.getFullYear()}}</td>
+                                            <td class="columnGitContent columnGitContentMessage commitDetails">{{commit.Message}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <h2 *ngIf="commitsArray.length == 0" class="no-data-to-display">No data to display</h2>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="profileDetails spacingBottom">
-                        --- INSERT CHARTS HERE ---
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect requestButton meetingRequestDetailsButton"
+                            (click)="goToDetails(student.Email)">
+                            Go to details
+                        </button>
                     </div>
                 </div>
 

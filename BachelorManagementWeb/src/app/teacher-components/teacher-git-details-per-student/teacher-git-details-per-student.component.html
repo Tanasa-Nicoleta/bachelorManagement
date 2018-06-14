@@ -23,7 +23,8 @@
                 Repository name: {{userData.Name}}
             </div>
             <div class="profileSecondaryDetails">
-                Repository url: {{userData.Url}}
+                Repository url:
+                <a href="#">{{userData.Url}}</a>
             </div>
 
             <div class="subtitle profileDetails">
@@ -35,11 +36,14 @@
             </div>
 
             <div class="subtitle profileDetails">
-                Additions and deletions for the last 10 weeks
+                Additions and deletions for the last 10 weeks*
             </div>
             <div class="profileSecondaryDetails">
                 <canvas class="canvasClass" baseChart [datasets]="addAndDelChartData" [labels]="addAndDelChartLabels" [colors]="addAndDelChartColors"
                     [legend]="addAndDelChartLegend" [chartType]="addAndDelChartType" [options]="addAndDelChartOptions" (chartHover)="chartHovered($event)"></canvas>
+            </div>
+            <div class="profileSecondaryDetails">
+                *The scale for added and deleted lines is 1:100
             </div>
 
             <div class="subtitle profileDetails">

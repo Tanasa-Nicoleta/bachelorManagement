@@ -63,7 +63,7 @@ export class TeacherGitDetailsPerStudentComponent implements OnInit {
       yAxes: [{
         id: 'y-axis-1', ticks: {
           min: 0,
-          max: 800
+          max: 160
         }}]
     }
   };
@@ -120,9 +120,9 @@ export class TeacherGitDetailsPerStudentComponent implements OnInit {
       data => {
         let i = 0;
         for (let key in data) {
-          if (data[key] && i < 10) {
-            this.addChartData.push(data[key][1]);
-            this.delChartData.push(data[key][2] * (-1));
+          if (data[key] && i > 26) {
+            this.addChartData.push(data[key][1] / 100);
+            this.delChartData.push(data[key][2] * (-1) / 100);
           }
           i++;
         }

@@ -160,6 +160,9 @@
                         <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" (click)="editRecord(student.Email, GitUrl.value.length == 0 ? GitUrl.placeholder : GitUrl.value, ThemeTitle.value.length == 0 ? ThemeTitle.placeholder : ThemeTitle.value, ThemeDescription.value.length == 0 ? ThemeDescription.placeholder : ThemeDescription.value)">
                             {{submitText}}
                         </button>
+                        <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" (click)="cancelEditProfile()">
+                            {{cancelButton}}
+                        </button>
                     </div>
 
                 </div>
@@ -199,6 +202,9 @@
                 </span>
                 <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect saveConsultationButton" (click)="editConsultation(teacher.Email, ConsultationDay.value.length == 0 ? ConsultationDay.placeholder : ConsultationDay.value, ConsultationInterval.value.length == 0 ? ConsultationInterval.placeholder : ConsultationInterval.value)">
                     {{saveConsultationButton}}
+                </button>
+                <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect cancelButton" (click)="cancelConsultation()">
+                    {{cancelButton}}
                 </button>
             </div>
 

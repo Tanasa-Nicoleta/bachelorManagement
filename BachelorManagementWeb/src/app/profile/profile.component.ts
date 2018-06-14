@@ -25,6 +25,7 @@ export class ProfileComponent {
   showEditConsultation: boolean = false;
   editConsultationButton: string = "edit";
   saveConsultationButton: string = "submit";
+  cancelButton: string = "cancel";
 
   student: Student;
   teacher: TeacherProfile = new TeacherProfile(null, null, null, null, null, null, null);
@@ -228,6 +229,10 @@ export class ProfileComponent {
     this.showEditForm = true;
   }
 
+  cancelEditProfile() {
+    this.showEditForm = false;
+  }
+
   editRecord(email: string, gitUrl: string, themeTitle: string, themeDescription: string) {
     this.editProfileBody = {
       Email: email,
@@ -251,6 +256,10 @@ export class ProfileComponent {
 
   allowEditConsultation() {
     this.showEditConsultation = true;
+  }
+
+  cancelConsultation() {
+    this.showEditConsultation = false;
   }
 
   editConsultation(email: string, day: string, interval: string) {

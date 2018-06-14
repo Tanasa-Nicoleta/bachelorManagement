@@ -16,6 +16,7 @@ import { TokenService } from '../../services/token.service';
 export class StudentRegisterToTeacherDetailsComponent {
 
     buttonText: string = "Subimt";
+    cancelText: string = "Cancel";
     teacherEmail: string;
     studentEmail: string;
 
@@ -102,5 +103,9 @@ export class StudentRegisterToTeacherDetailsComponent {
                 //if (err.status == 400)
             }
         );
+    }
+
+    cancelApplyToTeacherWithDetails(){
+        this.router.navigateByUrl('/studentRegisterToTeacher');
     }
 }

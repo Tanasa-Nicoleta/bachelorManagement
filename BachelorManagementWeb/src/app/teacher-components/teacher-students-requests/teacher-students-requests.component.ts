@@ -20,7 +20,7 @@ export class TeacherStudentsRequestsComponent {
   email: string = "vlad.simion@info.uaic.ro";
   acceptStudentsRequest: string = "Accept";
   declineStudentsRequest: string = "Decline";
-  dueDatePassed: boolean = true; //this.limitDate < this.today;
+  dueDatePassed: boolean = false; //this.limitDate < this.today;
   limitDate: Date = new Date(2018, 6, 15);
 
   numberOfSpots: number;

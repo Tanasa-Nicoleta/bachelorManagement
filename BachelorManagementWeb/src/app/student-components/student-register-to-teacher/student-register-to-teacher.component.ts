@@ -68,6 +68,7 @@ export class StudentRegisterToTeacherComponent {
     applyToTeacher(teacherFirstName: string, teacherLastName: string) {
         localStorage.setItem('teacherEmail', teacherFirstName + '.' + teacherLastName + '@info.uaic.ro');
         this.student.Pending = true;
+        this.router.navigateByUrl('/studentRegisterToTeacherDetails');
     }
 
     getTeachers() {

@@ -50,7 +50,7 @@
                         <td class="columnContent">{{teacher.NoOfAvailableSpots + " / " + teacher.NoOfSpots}}</td>
                         <td class="columnContent">
                             <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" (click)="applyToTeacher(teacher.FirstName, teacher.LastName)"
-                                [routerLink]="['/studentRegisterToTeacherDetails']" [disabled]="student.Pending">
+                                [disabled]="student.Pending">
                                 {{optionText}}
                             </button>
                         </td>

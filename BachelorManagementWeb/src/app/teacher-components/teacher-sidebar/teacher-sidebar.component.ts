@@ -9,7 +9,7 @@ import { MenuItem } from '../../models/menu-items';
 
 export class TeacherSidebarComponent {
   isTeacher: boolean = localStorage.getItem('isTeacher') == 'True';
-  menuItems: MenuItem[] = [];
+  menuItems: MenuItem[] = [];  
 
   ngOnInit(){
     this.buildMenuItems();
@@ -20,13 +20,10 @@ export class TeacherSidebarComponent {
     this.menuItems.push(new MenuItem("Wall", "/teacherWall"));
     this.menuItems.push(new MenuItem("Profile", "/profile"));
     this.menuItems.push(new MenuItem("Student's work", "/studentWork"));
+    this.menuItems.push(new MenuItem("Information", "/information"));
 
     if(this.isTeacher){
       this.menuItems.push(new MenuItem("Student Requests", "/teacherStudentsRequests"));
-    }
-
-    if(!this.isTeacher){
-      this.menuItems.push(new MenuItem("Teacher List", "/studentRegisterToTeacher"));      
     }
   }
 

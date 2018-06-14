@@ -105,6 +105,9 @@
             <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" (click)="editRecord(teacher.Email, FirstName.value.length == 0 ? FirstName.placeholder : FirstName.value, LastName.value.length == 0 ? LastName.placeholder : LastName.value, Discipline.value.length == 0 ? Discipline.placeholder : Discipline.value, MaxNoOfSpots.value.length == 0 ? MaxNoOfSpots.placeholder : MaxNoOfSpots.value, JobTitle.value.length == 0 ? JobTitle.placeholder : JobTitle.value)">
                 {{submitText}}
             </button>
+            <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" (click)="cancelEditRecord()">
+                {{cancelText}}
+            </button>
 
         </div>
 
@@ -163,6 +166,9 @@
 
             <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" (click)="addNewRecord(Email.value, FirstName.value, LastName.value, Discipline.value, MaxNoOfSpots.value, JobTitle.value)">
                 {{submitText}}
+            </button>
+            <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" (click)="cancelAddNewRecord()">
+                {{cancelText}}
             </button>
 
         </div>

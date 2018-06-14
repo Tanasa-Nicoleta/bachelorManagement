@@ -4,4 +4,5 @@
     <div class="sidebar_content" [routerLink]=[menuItems[2].Path]>{{menuItems[2].Name}}</div>
     <div class="sidebar_content" [routerLink]=[menuItems[3].Path]>{{menuItems[3].Name}}</div>
     <div class="sidebar_content" [routerLink]=[menuItems[4].Path]>{{menuItems[4].Name}}</div>
+    <div *ngIf="menuItems[5] != null" class="sidebar_content" [routerLink]=[menuItems[5].Path]>{{menuItems[5].Name}}</div>
 </div>

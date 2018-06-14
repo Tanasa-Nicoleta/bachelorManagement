@@ -40,7 +40,10 @@
                 </div>
 
                 <div>
-                    <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" (click)="applyToTeacherWithDetails(Title.value, Description.value, Achievement.value)">
+                    <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect cancelButton" (click)="cancelApplyToTeacherWithDetails()">
+                        {{cancelText}}
+                    </button>
+                    <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect cancelButton" (click)="applyToTeacherWithDetails(Title.value, Description.value, Achievement.value)">
                         {{buttonText}}
                     </button>
                 </div>

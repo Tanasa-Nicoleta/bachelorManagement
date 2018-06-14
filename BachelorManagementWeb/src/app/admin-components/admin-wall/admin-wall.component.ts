@@ -18,6 +18,7 @@ export class AdminWallComponent {
     editText: string = "Edit";
     addTeacherText: string = "Add new record";
     submitText: string = "Submit";
+    cancelText: string = "Cancel";
     showAddTeacherButton: boolean = true;
     showAddTeacherForm: boolean = false;
     showEditTeacherForm: boolean = false;
@@ -133,6 +134,7 @@ export class AdminWallComponent {
 
         this.showEditTeacherForm = true;
         this.showAddTeacherButton = false;
+        this.showAddTeacherForm = false;
     }
 
     editRecord(email: string, fName: string, lName: string, discipline: string, numberOfSpots: number, grade: string) {
@@ -162,6 +164,16 @@ export class AdminWallComponent {
                 console.log(err)
             });
 
+    }
+
+    cancelEditRecord(){
+        this.showEditTeacherForm = false;
+        this.showAddTeacherButton = true;
+    }
+
+    cancelAddNewRecord(){
+        this.showAddTeacherButton = true;
+        this.showAddTeacherForm = false;
     }
 }
 

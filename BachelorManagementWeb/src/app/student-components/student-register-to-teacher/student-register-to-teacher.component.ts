@@ -17,6 +17,8 @@ import { Router } from '@angular/router';
 
 export class StudentRegisterToTeacherComponent {
     dueDate: Date = new Date(2018, 6, 15);
+    today: Date = new Date();
+    dueDatePassed: boolean = this.dueDate < this.today;
     optionText: string = "Next step";
     acceptedByTeacher: boolean = false;
 

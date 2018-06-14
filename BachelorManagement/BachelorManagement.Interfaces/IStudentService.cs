@@ -17,5 +17,6 @@ namespace BachelorManagement.Interfaces
         void AddAchievementToStudent(string email, string achievement);
         void UpdateStudentRequest(string email, bool accepted, bool denied);        
         void EditStudent(Student student);
+        void AddStudent(Student student);
     }
 }

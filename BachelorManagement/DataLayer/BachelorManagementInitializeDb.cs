@@ -22,21 +22,42 @@ namespace BachelorManagement.DataLayer
                     FirstName = "Vlad",
                     LastName = "Simion",
                     NumberOfSpots = 10,
-                    NumberOfAvailableSpots = 10,
+                    NumberOfAvailableSpots = 8,
                     JobTitle = "Colab.",
                     Discipline = "Introduction to programming",
-                    Requirement = "None"
+                    Requirement = "No special requirements"
                 },
                 new Teacher
                 {
                     Email = "simona.petrescu@info.uaic.ro",
                     FirstName = "Simona",
                     LastName = "Petrescu",
-                    NumberOfSpots = 10,
+                    NumberOfSpots = 8,
                     NumberOfAvailableSpots = 8,
                     JobTitle = "Prof. Dr.",
-                    Discipline = "Data structures",
-                    Requirement = "No special requirement"
+                    Discipline = "Data structures"
+                },
+                new Teacher
+                {
+                    Email = "andrei.mihalache@info.uaic.ro",
+                    FirstName = "Andrei",
+                    LastName = "Mihalache",
+                    NumberOfSpots = 5,
+                    NumberOfAvailableSpots = 3,
+                    JobTitle = "Prof.",
+                    Discipline = "Object Oriented Programming",
+                    Requirement = "Positive attitude towards this degree"
+                },
+                new Teacher
+                {
+                    Email = "daniela.pavelescu@info.uaic.ro",
+                    FirstName = "Daniela",
+                    LastName = "Pavelescu",
+                    NumberOfSpots = 15,
+                    NumberOfAvailableSpots = 6,
+                    JobTitle = "Colab.",
+                    Discipline = "Introduction to programming",
+                    Requirement = "Grades greater than 8"
                 }
             };
             foreach (var teacher in teachers)
@@ -53,11 +74,11 @@ namespace BachelorManagement.DataLayer
                     SerialNumber = "31090104SL161234",
                     StartYear = "2016",
                     TeacherId = 1,
-                    Achievements = "some achievements",
-                    GitUrl = "another git url",
+                    Achievements = "No special achievements",
+                    GitUrl = "https://github.com/Tanasa-Nicoleta/bachelorManagement",
                     Accepted = false,
                     Denied = false,
-                    Pending = false
+                    Pending = true
                 },
                 new Student
                 {
@@ -68,8 +89,8 @@ namespace BachelorManagement.DataLayer
                     StartYear = "2014",
                     TeacherId = 1,
                     Achievements = "Onis participation",
-                    GitUrl = "a git url",
-                    Accepted = false,
+                    GitUrl = "https://github.com/Tanasa-Nicoleta/bachelorManagement",
+                    Accepted = true,
                     Denied = false,
                     Pending = false
                 },
@@ -78,13 +99,28 @@ namespace BachelorManagement.DataLayer
                     Email = "george.leu@info.uaic.ro",
                     FirstName = "George",
                     LastName = "Leu",
-                    SerialNumber = "31090104SL151234",
+                    SerialNumber = "31090104SL151236",
+                    StartYear = "2015",
+                    TeacherId = 1,
+                    Achievements = "none",
+                    GitUrl = "https://github.com/Tanasa-Nicoleta/bachelorManagement",
+                    Accepted = true,
+                    Denied = false,
+                    Pending = false,
+                },
+                new Student
+                {
+                    Email = "daniel.ion@info.uaic.ro",
+                    FirstName = "Daniel",
+                    LastName = "Ion",
+                    SerialNumber = "31090104SL151237",
                     StartYear = "2015",
                     TeacherId = 2,
                     Achievements = "none",
-                    GitUrl = "git url",
-                    Accepted = false,
-                    Denied = false
+                    GitUrl = "https://github.com/Tanasa-Nicoleta/bachelorManagement",
+                    Accepted = true,
+                    Denied = false,
+                    Pending = false,
                 }
             };
             foreach (var student in students)
@@ -95,39 +131,45 @@ namespace BachelorManagement.DataLayer
             {
                 new BachelorTheme
                 {
-                    Description = "VladDescription",
+                    Description = "Machine learning and deep learning study",
                     TeacherId = 1,
-                    Title = "VladTitle"
+                    Title = "Machine learning"
                 },
                 new BachelorTheme
                 {
-                    Description = "VladDescription123",
-                    TeacherId = 1,
-                    Title = "VladTitle123"
-                },
-                new BachelorTheme
-                {
-                    Description = "SimonaDescription",
+                    Description = "Web application to help students from FII to be organised",
                     TeacherId = 2,
-                    Title = "SimonaTitle"
+                    Title = "FII organised"
                 },
                 new BachelorTheme
                 {
-                    Description = "FloreaDescription",
-                    StudentId = 1,
-                    Title = "FloreaTitle"
+                    Description = "Research about time consuming application and how this applications could be imporved",
+                    TeacherId = 3,
+                    Title = "Time consuming application"
                 },
                 new BachelorTheme
                 {
-                    Description = "MihaiDescription",
+                    Description = "Apllication that teaches the usesrs all kind of tricks to stop polluting",
+                    TeacherId = 4,
+                    Title = "Save Earth"
+                },
+                new BachelorTheme
+                {
+                    Description = "Web application for students and coordinators that contains many ways to make the bachelor degree development easier",
                     StudentId = 2,
-                    Title = "MihaiTitle"
+                    Title = "Bachelor Degree Management"
                 },
                 new BachelorTheme
                 {
-                    Description = "GeorgeDescription",
+                    Description = "All kind of products can be purchased using this application",
+                    StudentId = 1,
+                    Title = "Online ordering"
+                },
+                new BachelorTheme
+                {
+                    Description = "Interactive multiplayer game",
                     StudentId = 3,
-                    Title = "GeorgeTitle"
+                    Title = "Gamer"
                 }
             };
             foreach (var theme in bachelorThemes)
@@ -138,33 +180,15 @@ namespace BachelorManagement.DataLayer
             {
                 new Comment
                 {
-                    StudentId = 1,
-                    CommentContent = "Heloo! student1",
-                    Date = DateTime.Now.AddDays(-2)
-                },
-                new Comment
-                {
-                    StudentId = 2,
-                    CommentContent = "Hello! student2",
-                    Date = DateTime.Now.AddDays(-1)
-                },
-                new Comment
-                {
-                    StudentId = 1,
-                    CommentContent = "Hello! student1v2",
-                    Date = DateTime.Now.AddDays(1)
-                },
-                new Comment
-                {
                     TeacherId = 1,
-                    CommentContent = "Hello! Teacher1",
+                    CommentContent = "Hello! I hope that very soon we will celebrate you as fresh graduates",
                     Date = DateTime.Now.AddDays(2)
                 },
                 new Comment
                 {
                     TeacherId = 1,
-                    CommentContent = "Hello! Teacher1v2",
-                    Date = DateTime.Now.AddDays(3)
+                    CommentContent = "Hello! Welcome to my page!",
+                    Date = DateTime.Now.AddDays(4)
                 }
             };
             foreach (var comment in comments)
@@ -175,14 +199,14 @@ namespace BachelorManagement.DataLayer
             {
                 new CommentReply
                 {
-                    CommentId = 4,
-                    CommentReplyContent = "Reply for comment 4, teacher 1",
+                    CommentId = 1,
+                    CommentReplyContent = "We hope this, too! See you soon.",
                     Date = DateTime.Now.AddDays(2.5)
                 },
                 new CommentReply
                 {
-                    CommentId = 5,
-                    CommentReplyContent = "Reply for comment 5, teacher 1",
+                    CommentId = 2,
+                    CommentReplyContent = "Hei! Thank you! Looking forward to get to work.",
                     Date = DateTime.Now.AddDays(3.5)
                 }
             };
@@ -221,13 +245,25 @@ namespace BachelorManagement.DataLayer
                 new Mean
                 {
                     StudentId = 2,
-                    FirstSemester = 6.00,
-                    SecondSemester = 6.20,
-                    ThirdSemester = 7.00
+                    FirstSemester = 9.20,
+                    SecondSemester = 9.00,
+                    ThirdSemester = 9.80,
+                    FourthSemester = 9.30,
+                    FifthSemester = 9.00,
+                    SixthSemester = 9.40
                 },
                 new Mean
                 {
                     StudentId = 3,
+                    FirstSemester = 9.20,
+                    SecondSemester = 9.00,
+                    ThirdSemester = 9.80,
+                    FourthSemester = 9.30,
+                    FifthSemester = 9.00
+                },
+                new Mean
+                {
+                    StudentId = 4,
                     FirstSemester = 9.20,
                     SecondSemester = 9.00,
                     ThirdSemester = 9.80,

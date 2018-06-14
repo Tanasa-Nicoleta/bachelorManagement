@@ -81,7 +81,6 @@ export class LoginLayoutComponent {
         if (isTeacher == "False") {
           if (email != 'admin.admin@info.uaic.ro') {
             this.getStudentTeacher(email, isTeacher, data);
-            this.navigateForStudent();
           }
           else {
             this.setLocalStorage(email, email, isTeacher, data);
@@ -116,7 +115,6 @@ export class LoginLayoutComponent {
 
     teacherResponse.subscribe(
       data => {
-        console.log(data.body);
         if (data.body['requirement'] != null) {
           this.router.navigateByUrl('/teacherStudentsRequests');
         }
@@ -145,6 +143,7 @@ export class LoginLayoutComponent {
     resp.subscribe(
       data => {
         this.setLocalStorage(studentEmail, data.body['email'], isTeacher, token);
+        this.navigateForStudent();
       },
       err => {
         console.log("Error");

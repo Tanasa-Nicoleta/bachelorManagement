@@ -10,10 +10,10 @@ export class ProfileHeaderComponent {
   Username: string;
 
   ngOnInit(){
-    if(localStorage.getItem('isTeacher') == 'True'){
+    if(localStorage.getItem('isTeacher') == 'true' || localStorage.getItem('isTeacher') == 'True'){
       this.Username= localStorage.getItem('teacherEmail')
     }
-    if(localStorage.getItem('isTeacher') == 'False'){
+    if(localStorage.getItem('isTeacher') == 'false' || localStorage.getItem('isTeacher') == 'False'){
       this.Username= localStorage.getItem('studentEmail')
     }
   }

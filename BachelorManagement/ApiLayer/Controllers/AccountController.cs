@@ -1,4 +1,5 @@
 ﻿using BachelorManagement.ApiLayer.Models;
+using BachelorManagement.DataLayer.Entities;
 using BachelorManagement.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -9,10 +10,12 @@ namespace BachelorManagement.ApiLayer.Controllers
     public class AccountController : Controller
     {
         private readonly IAccountService _accountService;
+        private readonly IStudentService _studentService;
 
-        public AccountController(IAccountService accountService)
+        public AccountController(IAccountService accountService, IStudentService studentService)
         {
             _accountService = accountService;
+            _studentService = studentService;
         }
 
         [HttpGet]
@@ -44,6 +47,15 @@ namespace BachelorManagement.ApiLayer.Controllers
 
             if (!_accountService.AddNewUser(accountDto.Username, accountDto.Password))
                 return BadRequest();
+            
+            _studentService.AddStudent(new Student 
+                { 
+                    Accepted = false,
+                    Denied = false,
+                    Pending = false,
+                    Email = accountDto.Username,
+                    TeacherId = 4
+                });
 
             return NoContent();
         }

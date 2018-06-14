@@ -144,5 +144,10 @@ namespace BachelorManagement.BusinessLayer.Services
         {
             return _bachelorThemeRepository.GetAll().FirstOrDefault(b => b.StudentId == studentId);
         }
+
+        public void AddStudent(Student student)
+        {
+            _studentRepository.Add(student);
+        }
     }
 }

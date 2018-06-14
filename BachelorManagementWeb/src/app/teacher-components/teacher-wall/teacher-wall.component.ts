@@ -22,6 +22,7 @@ export class TeacherWallComponent {
   studentEmail: string;
   availableDay: string;
   availableHours: string;
+  teacherName: string;
   upcomingDeadlineDay: DateClass = new DateClass(1, Month[2], 2018, "14:00");
   requestAMeetingButton: string = "Request a meeting";
   request: string = "Request a meeting";
@@ -32,7 +33,7 @@ export class TeacherWallComponent {
   showCommentsButton: string = "Show comments";
   showComments: boolean = false;
   teacherObs: [[TeacherObservation, [Comment | null], boolean]] = [
-    [new TeacherObservation("Hello everybody! Welcome to my page.", new DateClass(1, Month[1], 2018, "12:00"), 0),
+    [new TeacherObservation("Hello everybody! I've seen some of your papers. You did a very good job!", new DateClass(1, Month[1], 2018, "12:00"), 0),
     [new Comment("Mihai Ursache", "Hello! Thank you!", new DateClass(20, Month[1], 2018, "14:40"))],
     this.showComments]];
 
@@ -72,7 +73,7 @@ export class TeacherWallComponent {
   }
 
   ngOnInit() {
-    this.getTeacherWallComments();
+    this.getTeacherName();
     if (localStorage.getItem('isTeacher') == 'False') {
       this.getMeetingRequestStatus();
     }
@@ -133,7 +134,7 @@ export class TeacherWallComponent {
           if (data.body.hasOwnProperty(key)) {
             this.teacherObs.push(
               [new TeacherObservation(data.body[key]['commentContent'], new DateClass(20, Month[1], 2018, "14:40"), data.body[key]['id']),
-              [new Comment("Vlad Simion", "some content", new DateClass(20, Month[1], 2018, "14:40"))],
+              [new Comment(this.teacherName, "I know we will be a great team!", new DateClass(20, Month[1], 2018, "14:40"))],
                 false]);
 
           }
@@ -145,6 +146,29 @@ export class TeacherWallComponent {
         console.log(err)
       }
     );
+  }
+
+  getTeacherName() {
+    if (localStorage.getItem('isTeacher') == 'False') {
+      var teacherResponse = this.http.get('http://localhost:64250/api/teacher/' + this.studentEmail + '/' + this.teacherEmail + '/' + this.token, { observe: 'response' });
+    }
+
+    if (localStorage.getItem('isTeacher') == 'True') {
+      var teacherResponse = this.http.get('http://localhost:64250/api/teacher/' + this.teacherEmail + '/' + this.teacherEmail + '/' + this.token, { observe: 'response' });
+    }
+
+    teacherResponse.subscribe(
+      data => {
+        this.teacherName = data.body['firstName'] + " " +data.body['lastName'];
+        this.getTeacherWallComments();
+      },
+      err => {
+        console.log("Error comments");
+        console.log(err)
+      }
+    );
+
+
   }
 
   getTeacherWallCommentReplies(commentId: number) {

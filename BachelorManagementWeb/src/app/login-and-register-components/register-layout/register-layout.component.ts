@@ -107,7 +107,8 @@ export class RegisterLayoutComponent {
 
     resp.subscribe(
       data => {
-        this.setLocalStorage(email, isTeacher, data)
+        this.setLocalStorage(email, isTeacher, data);
+        this.router.navigateByUrl('/studentRegisterToTeacher');
       },
       err => {
         console.log("Error");
@@ -117,10 +118,10 @@ export class RegisterLayoutComponent {
   }
 
   setLocalStorage(email: string, isTeacher: string, token: string){    
+    localStorage.setItem('teacherEmail', 'andrei.mihalache@info.uaic.ro');
     localStorage.setItem('studentEmail', email);
     localStorage.setItem('isTeacher', isTeacher);
     localStorage.setItem('token', token);
-    this.router.navigateByUrl('/welcome');
   }
 
   validateEmail(email: HTMLInputElement) {

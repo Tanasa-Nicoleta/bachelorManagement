@@ -8,61 +8,76 @@
 
     <div class="contentContainer">
         <div class="mdl-cell mdl-cell--12-col">
-
-            <div class="columnTitle dueDate">
-                You have to choose one of the following teachers before: {{dueDate.getDate()}}.0{{dueDate.getMonth()}}.{{dueDate.getFullYear()}}
+            <div *ngIf="dueDatePassed" class="columnTitle">
+                The date before you had to choose a coordinator ({{dueDate.getDate()}}.0{{dueDate.getMonth()}}.{{dueDate.getFullYear()}})
+                has already passed.
             </div>
 
-            <table class="table">
-                <thead>
-                    <th class="columnTitle numberColumn"> Number </th>
-                    <th class="columnTitle"> Name </th>
-                    <th class="columnTitle"> Discipline </th>
-                    <th class="columnTitle"> Themes </th>
-                    <th class="columnTitle"> Requirements </th>
-                    <th class="columnTitle"> Number of spots </th>
-                    <th class="columnTitle"> Option </th>
-                </thead>
+            <div *ngIf="dueDatePassed" class="columnTitle">
+                Please go and announce that you need a coordinator to the secretary.
+            </div>
+            
+            <div *ngIf="dueDatePassed" class="columnTitle">
+                Thank you!
+            </div>
 
-                <tbody>
-                    <tr *ngFor="let teacher of teacherList; let i = index;">
-                        <td class="columnContent">{{i + 1}}</td>
-                        <td class="columnContent">{{teacher.Grade + " " + teacher.FirstName + " " + teacher.LastName}}</td>
-                        <td class="columnContent">{{teacher.Discipline}}</td>
-                        <td class="columnContent">
-                            <table>
-                                <tr>
-                                    <td>
-                                        <ul>
-                                            <li>
-                                                <input type="checkbox" checked>
-                                                <h2>{{teacher.Theme.Title}} &#8630;</h2>
-                                                <p>{{teacher.Theme.Description}}</p>
+            <div *ngIf="!dueDatePassed">
+                <div class="columnTitle dueDate">
+                    You have to choose one of the following teachers before: {{dueDate.getDate()}}.0{{dueDate.getMonth()}}.{{dueDate.getFullYear()}}
+                </div>
 
-                                            </li>
-                                            <li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                        <td class="columnContent">{{teacher.Requirement}}</td>
-                        <td class="columnContent">{{teacher.NoOfAvailableSpots + " / " + teacher.NoOfSpots}}</td>
-                        <td class="columnContent">
-                            <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" (click)="applyToTeacher(teacher.FirstName, teacher.LastName)"
-                                [disabled]="student.Pending">
-                                {{optionText}}
-                            </button>
-                        </td>
-                    </tr>
+                <table class="table">
+                    <thead>
+                        <th class="columnTitle numberColumn"> Number </th>
+                        <th class="columnTitle"> Name </th>
+                        <th class="columnTitle"> Discipline </th>
+                        <th class="columnTitle"> Themes </th>
+                        <th class="columnTitle"> Requirements </th>
+                        <th class="columnTitle"> Number of spots </th>
+                        <th class="columnTitle"> Option </th>
+                    </thead>
 
-                </tbody>
+                    <tbody>
+                        <tr *ngFor="let teacher of teacherList; let i = index;">
+                            <td class="columnContent">{{i + 1}}</td>
+                            <td class="columnContent">{{teacher.Grade + " " + teacher.FirstName + " " + teacher.LastName}}</td>
+                            <td class="columnContent">{{teacher.Discipline}}</td>
+                            <td class="columnContent">
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <ul>
+                                                <li>
+                                                    <input type="checkbox" checked>
+                                                    <h2>{{teacher.Theme.Title}} &#8630;</h2>
+                                                    <p>{{teacher.Theme.Description}}</p>
 
-            </table>
+                                                </li>
+                                                <li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td class="columnContent">{{teacher.Requirement}}</td>
+                            <td class="columnContent">{{teacher.NoOfAvailableSpots + " / " + teacher.NoOfSpots}}</td>
+                            <td class="columnContent">
+                                <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" (click)="applyToTeacher(teacher.FirstName, teacher.LastName)"
+                                    [disabled]="student.Pending">
+                                    {{optionText}}
+                                </button>
+                            </td>
+                        </tr>
 
-            <h2 *ngIf="teacherList.length == 0" class="no-data-to-display">
-                No data to display
-            </h2>
+                    </tbody>
+
+                </table>
+
+                <h2 *ngIf="teacherList.length == 0" class="no-data-to-display">
+                    No data to display
+                </h2>
+
+            </div>
 
         </div>
     </div>

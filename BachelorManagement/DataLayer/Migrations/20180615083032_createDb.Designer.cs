@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BachelorManagement.DataLayer.Migrations
 {
     [DbContext(typeof(BachelorManagementContext))]
-    [Migration("20180614164747_createDb")]
+    [Migration("20180615083032_createDb")]
     partial class createDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

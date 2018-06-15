@@ -33,8 +33,8 @@ export class TeacherWallComponent {
   showCommentsButton: string = "Show comments";
   showComments: boolean = false;
   teacherObs: [[TeacherObservation, [Comment | null], boolean]] = [
-    [new TeacherObservation("Hello everybody! I've seen some of your papers. You did a very good job!", new DateClass(1, Month[1], 2018, "12:00"), 0),
-    [new Comment("Mihai Ursache", "Hello! Thank you!", new DateClass(20, Month[1], 2018, "14:40"))],
+    [new TeacherObservation("Hello everybody! I've seen some of your papers. You did a very good job!", new DateClass(25, Month[5], 2018, "12:00"), 0),
+    [new Comment("Mihai Ursache", "Hello! Thank you!", new DateClass(25, Month[5], 2018, "19:40"))],
     this.showComments]];
 
   titleService: TitleService;
@@ -74,8 +74,10 @@ export class TeacherWallComponent {
 
   ngOnInit() {
     this.getTeacherName();
-    if (localStorage.getItem('isTeacher') == 'False') {
-      this.getMeetingRequestStatus();
+    if (localStorage.getItem('isTeacher') == 'False' || localStorage.getItem('isTeacher') == 'false') {
+      {
+        this.getMeetingRequestStatus();
+      }
     }
     this.getTeacherConsultationDay();
   }
@@ -86,9 +88,11 @@ export class TeacherWallComponent {
     commentResponse.subscribe(
       data => {
         this.meetingRequestStatus = MeetingRequestStatus[data.body['status']];
-        if (data.body['status'] == 1 || data.body['status'] == 2) {
-          this.requestAMeetingButton = this.cancel;
-          this.meetingRequest = true;
+        if (data.body['status'] == MeetingRequestStatus.Pending || data.body['status'] == MeetingRequestStatus.Accepted) {
+          {
+            this.requestAMeetingButton = this.cancel;
+            this.meetingRequest = true;
+          }
         }
       },
       err => {
@@ -132,9 +136,10 @@ export class TeacherWallComponent {
       data => {
         for (let key in data.body) {
           if (data.body.hasOwnProperty(key)) {
+            let date = new Date(data.body[key]['date']);
             this.teacherObs.push(
-              [new TeacherObservation(data.body[key]['commentContent'], new DateClass(20, Month[1], 2018, "14:40"), data.body[key]['id']),
-              [new Comment(this.teacherName, "I know we will be a great team!", new DateClass(20, Month[1], 2018, "14:40"))],
+              [new TeacherObservation(data.body[key]['commentContent'], new DateClass(date.getDate(), Month[date.getMonth()], date.getFullYear(), date.getHours() + ":" + date.getMinutes()), data.body[key]['id']),
+              [new Comment(this.teacherName, "I know we will be a great team!", new DateClass(4, Month[5], 2018, "14:40"))],
                 false]);
 
           }
@@ -159,7 +164,7 @@ export class TeacherWallComponent {
 
     teacherResponse.subscribe(
       data => {
-        this.teacherName = data.body['firstName'] + " " +data.body['lastName'];
+        this.teacherName = data.body['firstName'] + " " + data.body['lastName'];
         this.getTeacherWallComments();
       },
       err => {
@@ -184,9 +189,10 @@ export class TeacherWallComponent {
       data => {
         for (let key in data.body) {
           if (data.body.hasOwnProperty(key)) {
+            let date = new Date(data.body[key]['date']);
             for (let index in this.teacherObs) {
               if (this.teacherObs[index][0].Id == commentId) {
-                this.teacherObs[index][1].push(new Comment("Mihai Ursache", data.body[key]['commentReplyContent'], new DateClass(20, Month[1], 2018, "14:40")));
+                this.teacherObs[index][1].push(new Comment("Mihai Ursache", data.body[key]['commentReplyContent'], new DateClass(date.getDate(), Month[date.getMonth()], date.getFullYear(), date.getHours() + ":" + date.getMinutes())));
               }
             }
           }
@@ -223,7 +229,8 @@ export class TeacherWallComponent {
 
     commentReplyResponse.subscribe(
       data => {
-        this.meetingRequestStatus = MeetingRequestStatus[0];
+        this.meetingRequestStatus = MeetingRequestStatus[1];
+        this.meetingRequest = true;
       },
       err => {
         console.log("Error requesting meeting");
@@ -245,7 +252,7 @@ export class TeacherWallComponent {
 
     commentReplyResponse.subscribe(
       data => {
-
+        this.meetingRequest = false;
       },
       err => {
         console.log("Error canceling meeting");

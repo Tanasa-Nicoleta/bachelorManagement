@@ -181,14 +181,14 @@ namespace BachelorManagement.DataLayer
                 new Comment
                 {
                     TeacherId = 1,
-                    CommentContent = "Hello! I hope that very soon we will celebrate you as fresh graduates",
-                    Date = DateTime.Now.AddDays(2)
+                    CommentContent = "Hello! I hope that very soon we will celebrate you as fresh graduates. :)",
+                    Date = DateTime.Now.AddDays(-12)
                 },
                 new Comment
                 {
                     TeacherId = 1,
                     CommentContent = "Hello! Welcome to my page!",
-                    Date = DateTime.Now.AddDays(4)
+                    Date = DateTime.Now.AddDays(-24)
                 }
             };
             foreach (var comment in comments)
@@ -201,13 +201,13 @@ namespace BachelorManagement.DataLayer
                 {
                     CommentId = 1,
                     CommentReplyContent = "We hope this, too! See you soon.",
-                    Date = DateTime.Now.AddDays(2.5)
+                    Date = DateTime.Now.AddDays(-10.5)
                 },
                 new CommentReply
                 {
                     CommentId = 2,
                     CommentReplyContent = "Hei! Thank you! Looking forward to get to work.",
-                    Date = DateTime.Now.AddDays(3.5)
+                    Date = DateTime.Now.AddDays(-23.5)
                 }
             };
             foreach (var commentReply in commentReplies)
@@ -322,6 +322,13 @@ namespace BachelorManagement.DataLayer
                     Email = "simona.petrescu@info.uaic.ro",
                     Password = "Simona123!",
                     UserType = UserType.Teacher
+                }
+                ,
+                new User
+                {
+                    Email = "admin.admin@info.uaic.ro",
+                    Password = "Admin123!",
+                    UserType = UserType.Student
                 }
             };
             foreach (var user in users)

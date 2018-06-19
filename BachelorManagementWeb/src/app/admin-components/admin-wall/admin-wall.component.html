@@ -3,8 +3,8 @@
 
 <div class="layoutContainer">
 
-    <profile-header>
-    </profile-header>
+    <no-profile-header>
+    </no-profile-header>
 
     <div class="contentContainer">
 
@@ -58,21 +58,21 @@
 
         </div>
 
-        <div *ngIf="showEditTeacherForm">
+        <div *ngIf="showEditTeacherForm" class="centerContainer adminForms">
             <div class="teacherDetailsRowTitle">
                 Edit record
             </div>
 
             <span>
                 <div>
-                    <span class="teacherDetailsRow">First name:</span>
+                    <span class="teacherDetailsRow adminFormMargins">First name:</span>
                     <span class="mdl-textfield mdl-js-textfield addTeacherAdmin editInput">
                         <input #FirstName class="mdl-textfield__input" type="text" placeholder={{teacher.FirstName}}>
                     </span>
                 </div>
 
                 <div>
-                    <span class="teacherDetailsRow">Last name:</span>
+                    <span class="teacherDetailsRow adminFormMargins">Last name:</span>
                     <span class="mdl-textfield mdl-js-textfield addTeacherAdmin editInput">
                         <input #LastName class="mdl-textfield__input" type="text" placeholder={{teacher.LastName}}>
                     </span>
@@ -81,38 +81,39 @@
 
             <span>
                 <div>
-                    <span class="teacherDetailsRow">Discipline:</span>
+                    <span class="teacherDetailsRow adminFormMargins">Discipline:</span>
                     <span class="mdl-textfield mdl-js-textfield addTeacherAdmin editInput">
                         <input #Discipline class="mdl-textfield__input" type="text" placeholder={{teacher.Discipline}}>
                     </span>
                 </div>
 
                 <div>
-                    <span class="teacherDetailsRow">Job title:</span>
+                    <span class="teacherDetailsRow adminFormMargins">Job title:</span>
                     <span class="mdl-textfield mdl-js-textfield addTeacherAdmin editInput">
                         <input #JobTitle class="mdl-textfield__input" type="text" placeholder={{teacher.Grade}}>
                     </span>
                 </div>
 
                 <div>
-                    <span class="teacherDetailsRow">Maximum number of students:</span>
+                    <span class="teacherDetailsRow adminFormMargins">Maximum number of students:</span>
                     <span class="mdl-textfield mdl-js-textfield addTeacherAdmin editInput">
                         <input #MaxNoOfSpots class="mdl-textfield__input" type="text" placeholder={{teacher.NoOfSpots}}>
                     </span>
                 </div>
             </span>
-            
-            <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" (click)="editRecord(teacher.Email, FirstName.value.length == 0 ? FirstName.placeholder : FirstName.value, LastName.value.length == 0 ? LastName.placeholder : LastName.value, Discipline.value.length == 0 ? Discipline.placeholder : Discipline.value, MaxNoOfSpots.value.length == 0 ? MaxNoOfSpots.placeholder : MaxNoOfSpots.value, JobTitle.value.length == 0 ? JobTitle.placeholder : JobTitle.value)">
+
+            <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect adminButton" (click)="editRecord(teacher.Email, FirstName.value.length == 0 ? FirstName.placeholder : FirstName.value, LastName.value.length == 0 ? LastName.placeholder : LastName.value, Discipline.value.length == 0 ? Discipline.placeholder : Discipline.value, MaxNoOfSpots.value.length == 0 ? MaxNoOfSpots.placeholder : MaxNoOfSpots.value, JobTitle.value.length == 0 ? JobTitle.placeholder : JobTitle.value)">
                 {{submitText}}
             </button>
             <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" (click)="cancelEditRecord()">
                 {{cancelText}}
             </button>
 
+
         </div>
 
 
-        <div *ngIf="showAddTeacherForm" class="centerContainer">
+        <div *ngIf="showAddTeacherForm" class="centerContainer adminForms">
 
             <div class="teacherDetailsRowTitle">
                 Add new record
@@ -120,21 +121,21 @@
 
             <span>
                 <div>
-                    <span class="teacherDetailsRow">First name:</span>
+                    <span class="teacherDetailsRow adminFormMargins">First name:</span>
                     <span class="mdl-textfield mdl-js-textfield addTeacherAdmin">
                         <input #FirstName class="mdl-textfield__input" type="text" placeholder="First name">
                     </span>
                 </div>
 
                 <div>
-                    <span class="teacherDetailsRow">Last name:</span>
+                    <span class="teacherDetailsRow adminFormMargins">Last name:</span>
                     <span class="mdl-textfield mdl-js-textfield addTeacherAdmin">
                         <input #LastName class="mdl-textfield__input" type="text" placeholder="Last name">
                     </span>
                 </div>
 
                 <div>
-                    <span class="teacherDetailsRow">Email:</span>
+                    <span class="teacherDetailsRow adminFormMargins">Email:</span>
                     <span class="mdl-textfield mdl-js-textfield addTeacherAdmin">
                         <input #Email class="mdl-textfield__input" type="text" placeholder="someone@info.uaic.ro">
                     </span>
@@ -143,28 +144,28 @@
 
             <span>
                 <div>
-                    <span class="teacherDetailsRow">Discipline:</span>
+                    <span class="teacherDetailsRow adminFormMargins">Discipline:</span>
                     <span class="mdl-textfield mdl-js-textfield addTeacherAdmin">
                         <input #Discipline class="mdl-textfield__input" type="text" placeholder="Discipline name">
                     </span>
                 </div>
 
                 <div>
-                    <span class="teacherDetailsRow">Job title:</span>
+                    <span class="teacherDetailsRow adminFormMargins">Job title:</span>
                     <span class="mdl-textfield mdl-js-textfield addTeacherAdmin">
                         <input #JobTitle class="mdl-textfield__input" type="text" placeholder="Job title">
                     </span>
                 </div>
 
                 <div>
-                    <span class="teacherDetailsRow">Maximum number of students:</span>
+                    <span class="teacherDetailsRow adminFormMargins">Maximum number of students:</span>
                     <span class="mdl-textfield mdl-js-textfield addTeacherAdmin">
                         <input #MaxNoOfSpots class="mdl-textfield__input" type="text" placeholder="Maximum number of students">
                     </span>
                 </div>
             </span>
 
-            <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" (click)="addNewRecord(Email.value, FirstName.value, LastName.value, Discipline.value, MaxNoOfSpots.value, JobTitle.value)">
+            <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect adminButton" (click)="addNewRecord(Email.value, FirstName.value, LastName.value, Discipline.value, MaxNoOfSpots.value, JobTitle.value)">
                 {{submitText}}
             </button>
             <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" (click)="cancelAddNewRecord()">

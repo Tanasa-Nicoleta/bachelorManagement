@@ -174,11 +174,6 @@ td{
     font-size: $text-size-content-table;
 }
 
-table{
-    border: $input-border-color-default solid 1px;
-    height: 100%;
-    margin: 0%;
-}
 
 .mdl-button{
     color: $text-color;
@@ -294,4 +289,12 @@ h2{
 
 .sidebar_content_wall{
     margin-top: 13%;
+}
+
+.adminButton{
+    margin-left: 40%;
+}
+
+.adminFormMargins{
+    padding-left: 30%;
 }

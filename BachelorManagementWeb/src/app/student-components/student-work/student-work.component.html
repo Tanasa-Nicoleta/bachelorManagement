@@ -45,7 +45,14 @@
                                     </thead>
                                     <tbody>
                                         <tr *ngFor="let commit of commitsArray; let i = index;">
-                                            <td class="columnGitContent commitDetails">{{commit.Date.getDate()}}.{{commit.Date.getMonth()}}.{{commit.Date.getFullYear()}}</td>
+                                            <td class="columnGitContent commitDetails">
+                                                <span>
+                                                    <img src="https://i.imgur.com/qJyqngf.png" />
+                                                </span>
+                                                <span>
+                                                    {{commit.Date.getDate()}}.{{commit.Date.getMonth()}}.{{commit.Date.getFullYear()}}
+                                                </span>
+                                            </td>
                                             <td class="columnGitContent columnGitContentMessage commitDetails">{{commit.Message}}</td>
                                         </tr>
                                     </tbody>

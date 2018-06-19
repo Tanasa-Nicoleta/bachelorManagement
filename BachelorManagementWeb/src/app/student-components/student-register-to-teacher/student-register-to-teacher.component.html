@@ -39,10 +39,10 @@
 
                     <tbody>
                         <tr *ngFor="let teacher of teacherList; let i = index;">
-                            <td class="columnContent">{{i + 1}}</td>
-                            <td class="columnContent">{{teacher.Grade + " " + teacher.FirstName + " " + teacher.LastName}}</td>
-                            <td class="columnContent">{{teacher.Discipline}}</td>
-                            <td class="columnContent">
+                            <td [ngClass]="{ 'columnContent': true, 'selectedTeacher': i == 2 }">{{i + 1}}</td>
+                            <td [ngClass]="{ 'columnContent': true, 'selectedTeacher': i == 2 }">{{teacher.Grade + " " + teacher.FirstName + " " + teacher.LastName}}</td>
+                            <td [ngClass]="{ 'columnContent': true, 'selectedTeacher': i == 2 }">{{teacher.Discipline}}</td>
+                            <td [ngClass]="{ 'columnContent': true, 'selectedTeacher': i == 2 }">
                                 <table>
                                     <tr>
                                         <td>
@@ -59,11 +59,11 @@
                                     </tr>
                                 </table>
                             </td>
-                            <td class="columnContent">{{teacher.Requirement}}</td>
-                            <td class="columnContent">{{teacher.NoOfAvailableSpots + " / " + teacher.NoOfSpots}}</td>
-                            <td class="columnContent">
+                            <td [ngClass]="{ 'columnContent': true, 'selectedTeacher': i == 2 }">{{teacher.Requirement}}</td>
+                            <td [ngClass]="{ 'columnContent': true, 'selectedTeacher': i == 2 }">{{teacher.NoOfAvailableSpots + " / " + teacher.NoOfSpots}}</td>
+                            <td [ngClass]="{ 'columnContent': true, 'selectedTeacher': i == 2 }">
                                 <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" (click)="applyToTeacher(teacher.FirstName, teacher.LastName)"
-                                    [disabled]="student.Pending">
+                                    [disabled]="student.Pending || teacher.NoOfAvailableSpots =='0'">
                                     {{optionText}}
                                 </button>
                             </td>

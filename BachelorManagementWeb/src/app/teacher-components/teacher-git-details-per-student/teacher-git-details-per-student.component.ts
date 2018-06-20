@@ -16,6 +16,9 @@ import { delay } from 'q';
 })
 
 export class TeacherGitDetailsPerStudentComponent implements OnInit {
+  p: number = 1;
+  collection: any = ["1", "2", "3","1", "2", "3", "1", "2", "3", "1", "2", "3",  ];
+
   gitUserName: string = "Tanasa-Nicoleta";
   gitProjectName: string = "bachelorManagement";
 

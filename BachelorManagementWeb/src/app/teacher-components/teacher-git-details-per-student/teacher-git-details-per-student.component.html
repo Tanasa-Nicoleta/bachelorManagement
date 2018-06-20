@@ -16,6 +16,7 @@
                 Version Control System Details
             </div>
 
+
             <div class="subtitle profileDetails">
                 Repository information
             </div>
@@ -51,31 +52,45 @@
             </div>
             <div>
                 <div class="mdl-cell mdl-cell--12-col profileSecondaryDetails">
-                    <table class="table">
+
+                    <table class="table pagingTable">
                         <thead>
                             <th class="columnTitle"> Date </th>
                             <th class="columnTitle"> Description </th>
                         </thead>
+
                         <tbody>
-                            <tr *ngFor="let commit of commitsArray; let i = index;">
-                                <td class="columnGitContent">{{commit.Date.getDate()}}.{{commit.Date.getMonth()}}.{{commit.Date.getFullYear()}}</td>
+
+                            <tr *ngFor="let commit of commitsArray | paginate: { itemsPerPage: 5, currentPage: p }">
+                                <td class="columnGitContent commitGitContentWidth">
+                                    <span>
+                                        <img src="https://i.imgur.com/qJyqngf.png" />
+                                    </span>
+                                    <span>
+                                        {{commit.Date.getDate()}}.{{commit.Date.getMonth()}}.{{commit.Date.getFullYear()}}
+                                    </span>
+                                </td>
                                 <td class="columnGitContent columnGitContentMessage">{{commit.Message}}</td>
                             </tr>
+
                         </tbody>
                     </table>
+
+
                     <h2 *ngIf="commitsArray.length == 0" class="no-data-to-display">No data to display</h2>
+                    
+                    <div *ngFor="let commit of collection | paginate: { itemsPerPage: 5, currentPage: p }"></div>
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                    
+                    <!-- <pagination-controls  *ngIf="commitsArray.length != 0" class="paginationControls" (pageChange)="p = $event"></pagination-controls> -->
+
+
                 </div>
             </div>
+
 
         </div>
 
     </div>
-
-
-
-
-
-
-
 
 </div>

@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { ClickOutsideModule } from 'ng4-click-outside';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 import { AppComponent } from './app.component';
 import { LoginLayoutComponent } from './login-and-register-components/login-layout/login-layout.component';
@@ -54,6 +55,7 @@ import { AdminWallComponent } from './admin-components/admin-wall/admin-wall.com
     HttpClientModule,
     ClickOutsideModule,
     ChartsModule,
+    NgxPaginationModule,
     RouterModule.forRoot([
       { path: 'login', component: LoginLayoutComponent, pathMatch: 'full' },
       { path: 'register', component: RegisterLayoutComponent, pathMatch: 'full' },

@@ -111,12 +111,17 @@ ul li input[type=checkbox]:checked ~ p {
 
 *:focus {outline-color:$content-container-bg-color}
 
-.centerContainerAdminWall{
+.centerContainerAdminWall,.centerContainerProfile{
     text-align: center;
     margin-top: 3%;
     margin-left: 0%;
     margin-bottom: 0%;
     width: 100%;
+}
+
+.centerContainerProfile{
+    text-align: left;
+    margin-left: 16%;
 }
 
 .editTeacherButton{

@@ -144,6 +144,11 @@ $text-size-content-table: 14px;
     font-size: $text-size-header - 2;
 }
 
+.no-data-to-display{
+    margin-bottom: 10%;
+
+}
+
 .columnTitle{
     padding: 1% 0%;
 }
@@ -156,6 +161,10 @@ $text-size-content-table: 14px;
 .columnGitContent{
     text-align: left;
     padding-right: 0%;
+}
+
+.commitGitContentWidth{
+    width: 15%;
 }
 
 .columnGitContentMessage{
@@ -297,4 +306,21 @@ h2{
 
 .adminFormMargins{
     padding-left: 30%;
+}
+
+.pagingTable{
+    margin-bottom: 5%;
+}
+
+
+pagination-controls /deep/ .ngx-pagination {
+    margin-left: 20%;
+    margin-bottom: 10%;
+    color: $text-color;
+    font-family: $text-font;
+    font-size: $text-size-header;
+}
+
+pagination-controls /deep/ .ngx-pagination a {
+    color: $text-color;
 }

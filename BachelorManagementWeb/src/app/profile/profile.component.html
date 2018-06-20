@@ -17,31 +17,54 @@
         <div *ngIf="isTeacher == false">
             <div *ngIf="!showEditForm">
                 <div *ngIf="student != null">
-                    <div class="profileDetails">
-                        Name: {{student.FirstName}} {{student.LastName}}
+                    <div class="profileDetails profileMargin">
+                        <span class="profileDetailsText">
+                            Name:
+                        </span>
+                        {{student.FirstName}} {{student.LastName}}
                     </div>
                     <div class="profileDetails">
-                        Teacher Name: {{student.TeacherName}}
+                        <span class="profileDetailsText">
+                            Teacher Name:
+                        </span>
+                        {{student.TeacherName}}
                     </div>
                     <div class="profileDetails">
-                        Theme name: {{student.Theme.Title}}
+                        <span class="profileDetailsText">
+                            Theme name:
+                        </span>
+                        {{student.Theme.Title}}
+                    </div>
+                    <div class="profileDetails profileRightDetails">
+                        <span class="profileDetailsText">
+                            Theme description:
+                        </span>
+                        {{student.Theme.Description}}
                     </div>
                     <div class="profileDetails">
-                        Theme description: {{student.Theme.Description}}
-                    </div>
-                    <div class="profileDetails">
-                        Repository address:
+                        <span class="profileDetailsText">
+                            Repository address:
+                        </span>
                         <a href={{userGitUrl}}> {{student.GitUrl}}</a>
                     </div>
                     <div class="profileDetails">
-                        Serial Number: {{student.SerialNumber}}
+                        <span class="profileDetailsText">
+                            Serial Number:
+                        </span>
+                        {{student.SerialNumber}}
                     </div>
                     <div class="profileDetails">
-                        Start year: {{student.StartYear}}
+                        <span class="profileDetailsText">
+                            Start year:
+                        </span>
+                        {{student.StartYear}}
                     </div>
                     <div class="profileDetails">
-                        Means: {{student.Means.FirstSemester == 0 ? "" : student.Means.FirstSemester}}{{student.Means.SecondSemester == 0 ? "" :
-                        ", " + student.Means.SecondSemester}}{{student.Means.ThirdSemester == 0 ? "" : ", " + student.Means.ThirdSemester}}{{student.Means.FourthSemester
+                        <span class="profileDetailsText">
+                            Means:
+                        </span>
+                        {{student.Means.FirstSemester == 0 ? "" : student.Means.FirstSemester}}{{student.Means.SecondSemester == 0 ? "" : ", " +
+                        student.Means.SecondSemester}}{{student.Means.ThirdSemester == 0 ? "" : ", " + student.Means.ThirdSemester}}{{student.Means.FourthSemester
                         == 0 ? "" : ", " + student.Means.FourthSemester}}{{student.Means.FifthSemester == 0 ? "" : ", " +
                         student.Means.FifthSemester}}{{student.Means.SixthSemester == 0 ? "" : ", " + student.Means.SixthSemester}}
                     </div>
@@ -90,7 +113,7 @@
             <div *ngIf="showEditForm">
                 <div class="mdl-cell mdl-cell--12-col">
 
-                    <div class="centerContainerAdminWall">
+                    <div class="centerContainerProfile">
                         <div class="teacherDetailsRowTitle">
                             Edit profile
                         </div>
@@ -101,7 +124,7 @@
                             </div>
                             <div>
                                 <span class="teacherDetailsRow">Last name: {{student.LastName}}</span>
-                            </div>                            
+                            </div>
                             <div>
                                 <span class="teacherDetailsRow">Email: {{student.Email}}</span>
                             </div>
@@ -157,7 +180,7 @@
                             </div>
                         </div>
 
-                        <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" (click)="editRecord(student.Email, GitUrl.value.length == 0 ? GitUrl.placeholder : GitUrl.value, ThemeTitle.value.length == 0 ? ThemeTitle.placeholder : ThemeTitle.value, ThemeDescription.value.length == 0 ? ThemeDescription.placeholder : ThemeDescription.value)">
+                        <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect buttonMargin" (click)="editRecord(student.Email, GitUrl.value.length == 0 ? GitUrl.placeholder : GitUrl.value, ThemeTitle.value.length == 0 ? ThemeTitle.placeholder : ThemeTitle.value, ThemeDescription.value.length == 0 ? ThemeDescription.placeholder : ThemeDescription.value)">
                             {{submitText}}
                         </button>
                         <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" (click)="cancelEditProfile()">

@@ -3,6 +3,8 @@ $text-font: 'Lucida Sans';
 $text-color: rgba(94, 64, 56, 1);
 $text-size-header-table: 18px;
 $text-size-content-table: 14px;
+$text-color: rgba(94, 64, 56, 1);
+$text-size-header: 16px;
 $phone-break: 640px;
 $tablet-break: 1008px;
 $information-phone: "only screen and (max-width : $phone-break)";
@@ -14,7 +16,7 @@ $input-border-color-default: rgba(94, 64, 56, 0.4);
     margin: 10% 0%;
 }
 
-.no-data-to-display, .columnTitle, .columnContent{
+.no-data-to-display, .columnTitle, .columnContent, .columnContentForTheme{
     text-align: center;
     font-family: $text-font;
     color: $text-color;
@@ -143,4 +145,10 @@ ul li input[type=checkbox]:checked ~ p {
 
 .columnGitContentMessage{
     width: 80%;
+}
+
+.columnContentForTheme{
+    font-size: $text-size-header + 10;
+    text-align: left;
+    width: 18%;
 }

@@ -13,12 +13,15 @@ $input-border-color-default: rgba(94, 64, 56, 0.4);
     //background-image: url("https://i.imgur.com/RLacS2w.jpg") no-repeat center center fixed;
     //https://i.imgur.com/RLacS2w.jpg 
     //https://i.imgur.com/mbk0ETO.jpg -- all  white
-    width:100%;
-    height:100vh;
-    background: url("https://i.imgur.com/RLacS2w.jpg") no-repeat center center fixed; 
+    width: 100%;
+    height: 100%;
+    position: absolute; 
+    overflow: scroll;
+    background-image: url("https://i.imgur.com/RLacS2w.jpg"); 
     background-position: center;
+    background-attachment: scroll;
     background-size: 100% 100%;
-    background-repeat: no-repeat;    
+    background-repeat: no-repeat;   
 }
 
 .contentContainer{
@@ -228,4 +231,8 @@ div > a{
 
 .profileDetailsText{
     font-weight: bold;
+}
+
+.buttonAlign{
+    margin-left: 25%;
 }

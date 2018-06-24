@@ -21,6 +21,7 @@ export class StudentRegisterToTeacherComponent {
     dueDatePassed: boolean = this.dueDate < this.today;
     optionText: string = "Next step";
     acceptedByTeacher: boolean = false;
+    nr: number = 2;
 
     teacherList: Array<Teacher> = new Array<Teacher>();
     studentEmail: string;
@@ -59,6 +60,7 @@ export class StudentRegisterToTeacherComponent {
                 if (this.student.Denied == true) {
                     this.student.Pending = false;
                 }
+                this.student.ProfId = 0;
             },
             err => {
                 console.log("Error");
@@ -70,6 +72,7 @@ export class StudentRegisterToTeacherComponent {
     applyToTeacher(teacherFirstName: string, teacherLastName: string) {
         localStorage.setItem('teacherEmail', teacherFirstName + '.' + teacherLastName + '@info.uaic.ro');
         this.student.Pending = true;
+        this.student.ProfId = 2;
         this.router.navigateByUrl('/studentRegisterToTeacherDetails');
     }
 

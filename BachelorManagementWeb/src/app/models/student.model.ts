@@ -31,4 +31,5 @@ export class Student {
     Accepted: boolean;
     Denied: boolean;
     Pending: boolean;
+    ProfId: number = 0;
 }

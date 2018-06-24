@@ -147,6 +147,14 @@
                                     <input #ThemeDescription class="mdl-textfield__input" type="text" placeholder={{student.Theme.Description}}>
                                 </span>
                             </div>
+                            <div class="buttonAlign">
+                                <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect buttonMargin" (click)="editRecord(student.Email, GitUrl.value.length == 0 ? GitUrl.placeholder : GitUrl.value, ThemeTitle.value.length == 0 ? ThemeTitle.placeholder : ThemeTitle.value, ThemeDescription.value.length == 0 ? ThemeDescription.placeholder : ThemeDescription.value)">
+                                    {{submitText}}
+                                </button>
+                                <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" (click)="cancelEditProfile()">
+                                    {{cancelButton}}
+                                </button>
+                            </div>
                         </div>
 
                         <div *ngIf="student == null">
@@ -163,32 +171,24 @@
                             <div>
                                 <span class="teacherDetailsRow">Git Url:</span>
                                 <span class="mdl-textfield mdl-js-textfield addTeacherAdmin editInput">
-                                    <input #GitUrl class="mdl-textfield__input" type="text" placeholder="A git url">
+                                    <input #GitUrl1 class="mdl-textfield__input" type="text" placeholder="A git url">
                                 </span>
                             </div>
                             <div>
                                 <span class="teacherDetailsRow">Theme title:</span>
                                 <span class="mdl-textfield mdl-js-textfield addTeacherAdmin editInput">
-                                    <input #ThemeTitle class="mdl-textfield__input" type="text" placeholder="A theme title">
+                                    <input #ThemeTitle1 class="mdl-textfield__input" type="text" placeholder="A theme title">
                                 </span>
                             </div>
                             <div>
                                 <span class="teacherDetailsRow">Theme description:</span>
                                 <span class="mdl-textfield mdl-js-textfield addTeacherAdmin editInput">
-                                    <input #ThemeDescription class="mdl-textfield__input" type="text" placeholder="A theme description">
+                                    <input #ThemeDescription1 class="mdl-textfield__input" type="text" placeholder="A theme description">
                                 </span>
                             </div>
                         </div>
 
-                        <div class="buttonAlign">
-
-                            <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect buttonMargin" (click)="editRecord(student.Email, GitUrl.value.length == 0 ? GitUrl.placeholder : GitUrl.value, ThemeTitle.value.length == 0 ? ThemeTitle.placeholder : ThemeTitle.value, ThemeDescription.value.length == 0 ? ThemeDescription.placeholder : ThemeDescription.value)">
-                                {{submitText}}
-                            </button>
-                            <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" (click)="cancelEditProfile()">
-                                {{cancelButton}}
-                            </button>
-                        </div>
+                        
                     </div>
 
                 </div>

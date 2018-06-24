@@ -20,8 +20,8 @@ export class TeacherStudentsRequestsComponent {
   email: string = "vlad.simion@info.uaic.ro";
   acceptStudentsRequest: string = "Accept";
   declineStudentsRequest: string = "Decline";
-  dueDatePassed: boolean = false; //this.limitDate < this.today;
-  limitDate: Date = new Date(2018, 6, 15);
+  dueDatePassed: boolean = true; //this.limitDate < this.today;
+  limitDate: Date = new Date(2018, 6, 20);
 
   numberOfSpots: number;
   numberOfAvailableSpots: number;
@@ -83,8 +83,8 @@ export class TeacherStudentsRequestsComponent {
 
     commentResponse.subscribe(
       data => {
-        meetingRequest.Accepted = MeetingRequestStatus[data.body['status']] == MeetingRequestStatus[1];
-        meetingRequest.Declined = MeetingRequestStatus[data.body['status']] == MeetingRequestStatus[2];
+        meetingRequest.Accepted = MeetingRequestStatus[data.body['status']] == MeetingRequestStatus[2];
+        meetingRequest.Declined = MeetingRequestStatus[data.body['status']] == MeetingRequestStatus[3];
       },
       err => {
         console.log("Error");

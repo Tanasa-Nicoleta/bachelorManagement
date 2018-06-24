@@ -130,6 +130,11 @@ namespace BachelorManagement.BusinessLayer.Services
 
             if (teacher != null)
             {
+               var bachelorTheme = _bachelorThemeRepository.GetAll().FirstOrDefault(b => b.TeacherId == teacher.Id);
+               if (bachelorTheme != null){
+                    _bachelorThemeRepository.Delete(bachelorTheme);
+               }
+
                 _teacherRepository.Delete(teacher);
             }
         }

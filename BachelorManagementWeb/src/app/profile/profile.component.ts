@@ -36,8 +36,8 @@ export class ProfileComponent {
   editProfileBody: {
     Email: string;
     GitUrl: string;
-    ThemeTitle: string;
-    ThemeDescription: string;
+    BachelorThemeTitle: string;
+    BachelorThemeDescription: string;
     Token: string;
   }
 
@@ -234,10 +234,13 @@ export class ProfileComponent {
   }
 
   editRecord(email: string, gitUrl: string, themeTitle: string, themeDescription: string) {
+
+    console.log("HERE:", email, gitUrl, themeTitle, themeDescription);
+
     this.editProfileBody = {
       Email: email,
-      ThemeDescription: themeDescription,
-      ThemeTitle: themeTitle,
+      BachelorThemeDescription: themeDescription,
+      BachelorThemeTitle: themeTitle,
       GitUrl: gitUrl,
       Token: this.token
     }

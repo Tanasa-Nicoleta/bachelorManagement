@@ -39,10 +39,10 @@
 
                     <tbody>
                         <tr *ngFor="let teacher of teacherList; let i = index;">
-                            <td [ngClass]="{ 'columnContent': true, 'selectedTeacher': i == 2 }">{{i + 1}}</td>
-                            <td [ngClass]="{ 'columnContent': true, 'selectedTeacher': i == 2 }">{{teacher.Grade + " " + teacher.FirstName + " " + teacher.LastName}}</td>
-                            <td [ngClass]="{ 'columnContent': true, 'selectedTeacher': i == 2 }">{{teacher.Discipline}}</td>
-                            <td [ngClass]="{ 'columnContentForTheme': true, 'selectedTeacher': i == 2 }">
+                            <td [ngClass]="{ 'columnContent': true, 'selectedTeacher': i == nr }">{{i + 1}}</td>
+                            <td [ngClass]="{ 'columnContent': true, 'selectedTeacher': i == nr }">{{teacher.Grade + " " + teacher.FirstName + " " + teacher.LastName}}</td>
+                            <td [ngClass]="{ 'columnContent': true, 'selectedTeacher': i == nr }">{{teacher.Discipline}}</td>
+                            <td [ngClass]="{ 'columnContentForTheme': true, 'selectedTeacher': i == nr }">
                                 <table>
                                     <tr>
                                         <td>
@@ -59,9 +59,9 @@
                                     </tr>
                                 </table>
                             </td>
-                            <td [ngClass]="{ 'columnContent': true, 'selectedTeacher': i == 2 }">{{teacher.Requirement}}</td>
-                            <td [ngClass]="{ 'columnContent': true, 'selectedTeacher': i == 2 }">{{teacher.NoOfAvailableSpots + " / " + teacher.NoOfSpots}}</td>
-                            <td [ngClass]="{ 'columnContent': true, 'selectedTeacher': i == 2 }">
+                            <td [ngClass]="{ 'columnContent': true, 'selectedTeacher': i == nr }">{{teacher.Requirement}}</td>
+                            <td [ngClass]="{ 'columnContent': true, 'selectedTeacher': i == nr }">{{teacher.NoOfAvailableSpots + " / " + teacher.NoOfSpots}}</td>
+                            <td [ngClass]="{ 'columnContent': true, 'selectedTeacher': i == nr }">
                                 <button type="radio" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" (click)="applyToTeacher(teacher.FirstName, teacher.LastName)"
                                     [disabled]="student.Pending || teacher.NoOfAvailableSpots =='0'">
                                     {{optionText}}

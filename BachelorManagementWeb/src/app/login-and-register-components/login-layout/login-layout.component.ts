@@ -100,7 +100,7 @@ export class LoginLayoutComponent {
   }
 
   navigateForStudent() {
-    this.router.navigateByUrl('/studentRegisterToTeacher');
+    this.router.navigateByUrl('/teacherWall');
   }
 
   navigateForTeacher() {

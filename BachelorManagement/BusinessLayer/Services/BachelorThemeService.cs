@@ -33,5 +33,10 @@ namespace BachelorManagement.BusinessLayer.Services
                     });
             }
         }
+
+        public BachelorTheme GetBachelorThemeByTeacherId(int teacherId)
+        {
+            return _bachelorThemeRepository.GetAll().FirstOrDefault(b => b.TeacherId == teacherId);           
+        }
     }
 }

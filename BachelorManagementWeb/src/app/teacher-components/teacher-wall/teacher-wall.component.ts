@@ -23,6 +23,7 @@ export class TeacherWallComponent {
   availableDay: string;
   availableHours: string;
   teacherName: string;
+  nr: number = 1;
   upcomingDeadlineDay: DateClass = new DateClass(1, Month[2], 2018, "14:00");
   requestAMeetingButton: string = "Request a meeting";
   request: string = "Request a meeting";

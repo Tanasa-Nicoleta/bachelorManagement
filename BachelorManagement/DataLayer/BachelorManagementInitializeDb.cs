@@ -224,8 +224,8 @@ namespace BachelorManagement.DataLayer
                 },
                 new Consultation
                 {
-                    Day = WeekDays.Thursday,
-                    Interval = "10:00 - 12:00",
+                    Day = WeekDays.Monday,
+                    Interval = "09:00 - 11:00",
                     TeacherId = 2
                 }
             };
